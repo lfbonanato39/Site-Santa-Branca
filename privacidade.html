@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0F1F35" />
+  <meta name="robots" content="index, follow" />
+
+  <title>Política de Privacidade — Santa Branca Seguros</title>
+  <meta name="description" content="Como a Santa Branca Seguros coleta, usa e protege seus dados pessoais. Política em conformidade com a LGPD (Lei 13.709/2018)." />
+
+  <link rel="icon" type="image/png" href="assets/logo-santa-branca.png" />
+  <link rel="apple-touch-icon" href="assets/logo-santa-branca.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" />
+
+  <style>
+    :root {
+      --ink: #0F1F35;
+      --ink-soft: #1B2D49;
+      --ink-deep: #08111F;
+      --cream: #F5EFE6;
+      --cream-deep: #EDE4D3;
+      --cream-line: #E1D5BD;
+      --gold: #B8924D;
+      --gold-soft: #D4B074;
+      --gold-deep: #8E6E36;
+      --graphite: #3A3A3A;
+      --graphite-soft: #5C5C5C;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --container: 760px;
+      --gutter: 32px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--ink); border-bottom: 1px solid var(--gold); text-decoration: none; transition: color 200ms ease; }
+    a:hover { color: var(--gold-deep); }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+    .page-header {
+      background: var(--ink); color: var(--cream);
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(245,239,230,0.08);
+    }
+    .page-header__inner {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex; align-items: center; gap: 16px;
+      justify-content: space-between;
+    }
+    .page-header__brand {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--cream); border: 0;
+    }
+    .page-header__brand:hover { opacity: 0.85; }
+    .page-header__logo {
+      height: 56px; width: auto; display: block;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+    .page-header__back {
+      font-size: 13px; font-weight: 500;
+      color: rgba(245,239,230,0.75); border: 0;
+    }
+    .page-header__back:hover { color: var(--gold-soft); }
+
+    main {
+      max-width: var(--container); margin: 0 auto;
+      padding: 64px var(--gutter) 96px;
+    }
+
+    .doc-eyebrow {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); display: block;
+    }
+    .doc-rule { display: block; width: 32px; height: 2px; background: var(--gold); border: 0; margin: 16px 0; }
+    .doc-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 500; line-height: 1.1;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .doc-meta {
+      color: var(--graphite-soft);
+      font-size: 14px; margin-bottom: 48px;
+    }
+    .doc-meta b { color: var(--ink); font-weight: 600; }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 500; line-height: 1.2;
+      margin: 56px 0 16px;
+      color: var(--ink);
+    }
+    h3 {
+      font-family: var(--font-serif);
+      font-size: 22px; font-weight: 600;
+      margin: 32px 0 12px;
+      color: var(--ink);
+    }
+    p { margin: 0 0 16px; color: var(--graphite); }
+    ul, ol { margin: 0 0 16px; padding-left: 24px; color: var(--graphite); }
+    li { margin-bottom: 8px; }
+
+    .doc-callout {
+      background: var(--cream-deep);
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .doc-callout p:last-child { margin-bottom: 0; }
+    .doc-callout strong { color: var(--ink); }
+
+    .doc-toc {
+      background: var(--cream-deep);
+      border: 1px solid var(--cream-line);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0 48px;
+    }
+    .doc-toc__title {
+      font-family: var(--font-serif);
+      font-size: 18px; font-weight: 600;
+      margin: 0 0 12px;
+    }
+    .doc-toc ol { margin: 0; padding-left: 20px; counter-reset: toc; list-style: none; }
+    .doc-toc li {
+      counter-increment: toc; margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .doc-toc li::before {
+      content: counter(toc, decimal-leading-zero) ". ";
+      color: var(--gold); font-weight: 500;
+      font-family: var(--font-serif);
+    }
+    .doc-toc a { border-bottom: 0; color: var(--graphite); }
+    .doc-toc a:hover { color: var(--ink); border-bottom: 1px solid var(--gold); }
+
+    footer {
+      background: var(--ink-deep); color: rgba(245,239,230,0.7);
+      padding: 28px 0 24px;
+    }
+    footer .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+    footer p { color: rgba(245,239,230,0.7); font-size: 13px; margin: 0 0 8px; }
+    footer a { color: rgba(245,239,230,0.85); border-bottom: 1px solid rgba(212,176,116,0.4); }
+    footer a:hover { color: var(--gold-soft); }
+
+    @media (max-width: 600px) {
+      main { padding: 40px var(--gutter) 64px; }
+      .page-header__back { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header__inner">
+      <a href="index.html" class="page-header__brand" aria-label="Santa Branca Seguros — voltar à página inicial">
+        <img src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" class="page-header__logo" />
+      </a>
+      <a href="index.html" class="page-header__back">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main>
+    <span class="doc-eyebrow">Documento legal</span>
+    <hr class="doc-rule" />
+    <h1 class="doc-title">Política de Privacidade</h1>
+    <p class="doc-meta">
+      <b>Última atualização:</b> 06 de maio de 2026.
+    </p>
+
+    <p>
+      A Santa Branca Seguros respeita a sua privacidade e está comprometida com a proteção dos seus dados pessoais. Esta Política explica de forma clara quais dados coletamos, por que coletamos, como usamos, com quem compartilhamos e quais são os seus direitos como titular dos dados, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
+    </p>
+
+    <div class="doc-toc" aria-labelledby="toc-title">
+      <p class="doc-toc__title" id="toc-title">Sumário</p>
+      <ol>
+        <li><a href="#quem-somos">Quem somos</a></li>
+        <li><a href="#dados-coletados">Dados que coletamos</a></li>
+        <li><a href="#finalidade">Para que usamos seus dados</a></li>
+        <li><a href="#base-legal">Base legal do tratamento</a></li>
+        <li><a href="#compartilhamento">Com quem compartilhamos</a></li>
+        <li><a href="#cookies">Cookies e tecnologias de medição</a></li>
+        <li><a href="#retencao">Por quanto tempo guardamos</a></li>
+        <li><a href="#seguranca">Como protegemos</a></li>
+        <li><a href="#direitos">Seus direitos como titular</a></li>
+        <li><a href="#contato">Como nos contatar</a></li>
+        <li><a href="#alteracoes">Alterações desta política</a></li>
+      </ol>
+    </div>
+
+    <h2 id="quem-somos">1. Quem somos</h2>
+    <p>
+      A <strong>Santa Branca Seguros</strong> é uma corretora de seguros familiar, em atuação desde 1994, com escritório em Belo Horizonte/MG. Para fins desta Política, somos a <strong>Controladora</strong> dos dados pessoais coletados por meio do nosso site (<a href="index.html">santabranca.com.br</a>) e dos canais de atendimento associados (WhatsApp, telefone, e-mail e atendimento presencial).
+    </p>
+    <p>
+      <strong>Razão social:</strong> Santa Branca Corretora de Seguros<br/>
+      <strong>SUSEP nº:</strong> 10.0179680<br/>
+      <strong>Endereço:</strong> Av. Cônsul Antônio Cadar, 122 — Loja 89, Center São Bento, Belo Horizonte/MG<br/>
+      <strong>E-mail:</strong> <a href="mailto:santabranca@santabranca.com.br">santabranca@santabranca.com.br</a>
+    </p>
+
+    <h2 id="dados-coletados">2. Dados que coletamos</h2>
+    <p>Coletamos apenas os dados necessários para atender sua solicitação de cotação e contratar seguros para você. Especificamente:</p>
+
+    <h3>2.1. Dados que você nos fornece</h3>
+    <ul>
+      <li><strong>Identificação:</strong> nome completo, CPF/CNPJ, data de nascimento, estado civil, profissão.</li>
+      <li><strong>Contato:</strong> telefone, WhatsApp, e-mail, endereço residencial e/ou comercial.</li>
+      <li><strong>Dados específicos do seguro:</strong> dados do veículo (no Auto), do imóvel (no Residencial), perfil de saúde (no Vida e Saúde), informações da empresa (no Empresarial), entre outros pertinentes a cada modalidade.</li>
+      <li><strong>Dados financeiros:</strong> meio de pagamento e dados bancários quando necessário para emissão da apólice.</li>
+    </ul>
+
+    <h3>2.2. Dados coletados automaticamente</h3>
+    <p>Quando você visita nosso site, podemos coletar de forma automática:</p>
+    <ul>
+      <li>Endereço IP, tipo de dispositivo, sistema operacional e navegador.</li>
+      <li>Páginas visitadas, tempo de permanência e origem do acesso.</li>
+      <li>Cookies e identificadores de sessão (veja a seção 6).</li>
+    </ul>
+
+    <h2 id="finalidade">3. Para que usamos seus dados</h2>
+    <p>Tratamos seus dados pessoais exclusivamente para as seguintes finalidades:</p>
+    <ul>
+      <li>Atender sua solicitação de cotação e cotar seguros junto às seguradoras parceiras.</li>
+      <li>Emitir apólice e processar pagamentos.</li>
+      <li>Prestar atendimento durante a vigência (renovação, alteração de cobertura, sinistro).</li>
+      <li>Cumprir obrigações legais e regulatórias (SUSEP, Receita Federal, COAF quando aplicável).</li>
+      <li>Comunicar-nos com você sobre seus seguros e novidades relevantes.</li>
+      <li>Aprimorar nosso site e a experiência de atendimento (com base em dados agregados).</li>
+    </ul>
+
+    <h2 id="base-legal">4. Base legal do tratamento</h2>
+    <p>Todo tratamento de dados é fundamentado em uma das hipóteses legais previstas no art. 7º da LGPD, principalmente:</p>
+    <ul>
+      <li><strong>Execução de contrato</strong> (art. 7º, V): para emissão e gestão de apólices.</li>
+      <li><strong>Cumprimento de obrigação legal ou regulatória</strong> (art. 7º, II): para atender exigências da SUSEP, Receita e demais órgãos.</li>
+      <li><strong>Legítimo interesse</strong> (art. 7º, IX): para atendimento, prevenção a fraudes e melhoria contínua dos serviços.</li>
+      <li><strong>Consentimento</strong> (art. 7º, I): para cookies não essenciais e para comunicações de marketing, sempre que aplicável.</li>
+    </ul>
+
+    <h2 id="compartilhamento">5. Com quem compartilhamos</h2>
+    <p>Seus dados podem ser compartilhados com:</p>
+    <ul>
+      <li><strong>Seguradoras parceiras</strong> (Porto Seguro, Allianz, Zurich, Liberty, SulAmérica, HDI, Tokio Marine, Itaú, MetLife, Chubb e AIG) — exclusivamente para fins de cotação, emissão de apólice e atendimento de sinistros.</li>
+      <li><strong>Órgãos reguladores e autoridades públicas</strong>, quando exigido por lei (SUSEP, Receita Federal, Poder Judiciário etc.).</li>
+      <li><strong>Provedores de tecnologia</strong> que nos apoiam na operação do site, hospedagem e ferramentas de medição (sempre sob contrato de confidencialidade).</li>
+    </ul>
+    <p><strong>Não vendemos, alugamos ou cedemos seus dados</strong> para fins de marketing de terceiros.</p>
+
+    <h2 id="cookies">6. Cookies e tecnologias de medição</h2>
+    <p>Nosso site utiliza três categorias de cookies:</p>
+    <ul>
+      <li><strong>Essenciais:</strong> imprescindíveis para o funcionamento do site (sessão, preferências de navegação). Não podem ser desativados.</li>
+      <li><strong>Medição/Analytics:</strong> usamos Google Analytics 4 para entender como o site é usado e melhorar a experiência. Os dados são agregados e anônimos.</li>
+      <li><strong>Publicidade:</strong> Google Ads e Meta Pixel (Facebook/Instagram) para mensurar campanhas e reduzir desperdício em anúncios irrelevantes.</li>
+    </ul>
+    <p>Você pode <strong>aceitar, recusar ou personalizar</strong> sua escolha através do banner exibido no primeiro acesso, e pode revisar suas preferências a qualquer momento clicando em "Preferências de cookies" no rodapé do site.</p>
+
+    <h2 id="retencao">7. Por quanto tempo guardamos</h2>
+    <p>Mantemos seus dados pelo tempo necessário para cumprir as finalidades acima e os prazos legais aplicáveis:</p>
+    <ul>
+      <li><strong>Dados de cotação sem fechamento:</strong> até 12 meses.</li>
+      <li><strong>Dados de apólices contratadas:</strong> durante toda a vigência e por mais 5 anos após o término, conforme prazo prescricional do Código Civil.</li>
+      <li><strong>Dados fiscais e contábeis:</strong> conforme prazo legal específico (em geral, 5 anos).</li>
+      <li><strong>Dados de cookies de medição:</strong> conforme configuração das ferramentas (em geral, 14 a 26 meses).</li>
+    </ul>
+
+    <h2 id="seguranca">8. Como protegemos</h2>
+    <p>Adotamos medidas técnicas e organizacionais para proteger seus dados:</p>
+    <ul>
+      <li>Conexão criptografada (HTTPS/TLS) em todo o site.</li>
+      <li>Acesso aos dados restrito à equipe da corretora, mediante credenciais individuais.</li>
+      <li>Contratos de confidencialidade com fornecedores e parceiros.</li>
+      <li>Treinamento contínuo da equipe em proteção de dados.</li>
+    </ul>
+    <p>Em caso de incidente de segurança que possa afetar seus direitos, comunicaremos você e a Autoridade Nacional de Proteção de Dados (ANPD) nos termos da LGPD.</p>
+
+    <h2 id="direitos">9. Seus direitos como titular</h2>
+    <p>A LGPD garante a você, titular dos dados, os seguintes direitos (art. 18):</p>
+    <ul>
+      <li><strong>Confirmação</strong> da existência de tratamento de seus dados.</li>
+      <li><strong>Acesso</strong> aos dados que mantemos sobre você.</li>
+      <li><strong>Correção</strong> de dados incompletos, inexatos ou desatualizados.</li>
+      <li><strong>Anonimização, bloqueio ou eliminação</strong> de dados desnecessários ou tratados em desconformidade com a lei.</li>
+      <li><strong>Portabilidade</strong> dos dados a outro fornecedor de serviço.</li>
+      <li><strong>Eliminação</strong> dos dados tratados com base no consentimento, exceto nas hipóteses de guarda obrigatória.</li>
+      <li><strong>Informação</strong> sobre as entidades públicas e privadas com as quais compartilhamos seus dados.</li>
+      <li><strong>Informação</strong> sobre a possibilidade de não fornecer consentimento e suas consequências.</li>
+      <li><strong>Revogação do consentimento</strong>, quando aplicável.</li>
+      <li><strong>Oposição</strong> a tratamento realizado com fundamento em outras hipóteses legais, em caso de descumprimento da LGPD.</li>
+    </ul>
+
+    <div class="doc-callout">
+      <p><strong>Como exercer seus direitos:</strong> envie um e-mail para <a href="mailto:santabranca@santabranca.com.br">santabranca@santabranca.com.br</a> com o assunto "LGPD — solicitação de titular" identificando-se e descrevendo seu pedido. Responderemos em até 15 dias.</p>
+    </div>
+
+    <h2 id="contato">10. Como nos contatar</h2>
+    <p>Para qualquer dúvida ou solicitação relacionada a esta Política ou ao tratamento dos seus dados, entre em contato conosco:</p>
+    <ul>
+      <li><strong>E-mail:</strong> <a href="mailto:santabranca@santabranca.com.br">santabranca@santabranca.com.br</a></li>
+      <li><strong>WhatsApp:</strong> <a href="https://wa.me/5531987263411" target="_blank" rel="noopener">(31) 98726-3411</a></li>
+      <li><strong>Telefone:</strong> <a href="tel:+553133095558">(31) 3309-5558</a></li>
+      <li><strong>Endereço:</strong> Av. Cônsul Antônio Cadar, 122 — Loja 89, Center São Bento, Belo Horizonte/MG</li>
+    </ul>
+
+    <h2 id="alteracoes">11. Alterações desta política</h2>
+    <p>Esta Política pode ser atualizada periodicamente para refletir mudanças em nossas práticas ou na legislação. A versão mais recente estará sempre disponível nesta página, com a data da última atualização indicada no topo. Mudanças relevantes serão comunicadas pelos canais de atendimento.</p>
+
+    <p style="margin-top:48px; font-size:14px; color:var(--graphite-soft); font-style:italic;">
+      Esta Política foi redigida em linguagem clara para que qualquer pessoa possa entendê-la. Em caso de dúvida sobre qualquer ponto, fale com a gente — a privacidade dos nossos clientes é assunto sério aqui.
+    </p>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong style="color:var(--cream);">Santa Branca Seguros</strong> · Atuando desde 1994 · SUSEP nº 10.0179680</p>
+      <p>
+        <a href="index.html">Voltar ao site</a>
+        &nbsp;·&nbsp;
+        <a href="termos.html">Termos de Uso</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0F1F35" />
+  <meta name="robots" content="index, follow" />
+
+  <title>Termos de Uso — Santa Branca Seguros</title>
+  <meta name="description" content="Condições de uso do site da Santa Branca Seguros, corretora de seguros familiar em Belo Horizonte." />
+
+  <link rel="icon" type="image/png" href="assets/logo-santa-branca.png" />
+  <link rel="apple-touch-icon" href="assets/logo-santa-branca.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" />
+
+  <style>
+    :root {
+      --ink: #0F1F35;
+      --ink-soft: #1B2D49;
+      --ink-deep: #08111F;
+      --cream: #F5EFE6;
+      --cream-deep: #EDE4D3;
+      --cream-line: #E1D5BD;
+      --gold: #B8924D;
+      --gold-soft: #D4B074;
+      --gold-deep: #8E6E36;
+      --graphite: #3A3A3A;
+      --graphite-soft: #5C5C5C;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --container: 760px;
+      --gutter: 32px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--ink); border-bottom: 1px solid var(--gold); text-decoration: none; transition: color 200ms ease; }
+    a:hover { color: var(--gold-deep); }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+    .page-header {
+      background: var(--ink); color: var(--cream);
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(245,239,230,0.08);
+    }
+    .page-header__inner {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex; align-items: center; gap: 16px;
+      justify-content: space-between;
+    }
+    .page-header__brand {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--cream); border: 0;
+    }
+    .page-header__brand:hover { opacity: 0.85; }
+    .page-header__logo {
+      height: 56px; width: auto; display: block;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+    .page-header__back {
+      font-size: 13px; font-weight: 500;
+      color: rgba(245,239,230,0.75); border: 0;
+    }
+    .page-header__back:hover { color: var(--gold-soft); }
+
+    main {
+      max-width: var(--container); margin: 0 auto;
+      padding: 64px var(--gutter) 96px;
+    }
+
+    .doc-eyebrow {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); display: block;
+    }
+    .doc-rule { display: block; width: 32px; height: 2px; background: var(--gold); border: 0; margin: 16px 0; }
+    .doc-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 500; line-height: 1.1;
+      margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    .doc-meta {
+      color: var(--graphite-soft);
+      font-size: 14px; margin-bottom: 48px;
+    }
+    .doc-meta b { color: var(--ink); font-weight: 600; }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 500; line-height: 1.2;
+      margin: 56px 0 16px;
+      color: var(--ink);
+    }
+    h3 {
+      font-family: var(--font-serif);
+      font-size: 22px; font-weight: 600;
+      margin: 32px 0 12px;
+      color: var(--ink);
+    }
+    p { margin: 0 0 16px; color: var(--graphite); }
+    ul, ol { margin: 0 0 16px; padding-left: 24px; color: var(--graphite); }
+    li { margin-bottom: 8px; }
+
+    .doc-callout {
+      background: var(--cream-deep);
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .doc-callout p:last-child { margin-bottom: 0; }
+    .doc-callout strong { color: var(--ink); }
+
+    footer {
+      background: var(--ink-deep); color: rgba(245,239,230,0.7);
+      padding: 28px 0 24px;
+    }
+    footer .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+    footer p { color: rgba(245,239,230,0.7); font-size: 13px; margin: 0 0 8px; }
+    footer a { color: rgba(245,239,230,0.85); border-bottom: 1px solid rgba(212,176,116,0.4); }
+    footer a:hover { color: var(--gold-soft); }
+
+    @media (max-width: 600px) {
+      main { padding: 40px var(--gutter) 64px; }
+      .page-header__back { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header__inner">
+      <a href="index.html" class="page-header__brand" aria-label="Santa Branca Seguros — voltar à página inicial">
+        <img src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" class="page-header__logo" />
+      </a>
+      <a href="index.html" class="page-header__back">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main>
+    <span class="doc-eyebrow">Documento legal</span>
+    <hr class="doc-rule" />
+    <h1 class="doc-title">Termos de Uso</h1>
+    <p class="doc-meta">
+      <b>Última atualização:</b> 06 de maio de 2026.
+    </p>
+
+    <p>
+      Estes Termos de Uso regulam o acesso e a utilização do site <a href="index.html">santabranca.com.br</a>, mantido pela <strong>Santa Branca Seguros</strong>. Ao navegar pelo site, você concorda com as condições descritas abaixo. Se não concordar com algum ponto, recomendamos que não utilize o site.
+    </p>
+
+    <h2 id="sobre">1. Sobre a Santa Branca Seguros</h2>
+    <p>
+      A Santa Branca Seguros é uma corretora de seguros familiar, em atuação desde 1994, com escritório em Belo Horizonte/MG, devidamente registrada na Superintendência de Seguros Privados sob o nº SUSEP 10.0179680. Cotamos seguros junto a 11 seguradoras parceiras de mercado e oferecemos atendimento humano em todas as etapas do contrato.
+    </p>
+
+    <h2 id="finalidade">2. Finalidade do site</h2>
+    <p>O site tem caráter informativo e institucional. Suas principais funções são:</p>
+    <ul>
+      <li>Apresentar a corretora, sua história, valores e equipe.</li>
+      <li>Listar as modalidades de seguro intermediadas e as seguradoras parceiras.</li>
+      <li>Oferecer canais de contato (WhatsApp, telefone, e-mail e endereço presencial) para solicitação de cotação.</li>
+    </ul>
+    <p><strong>O site não realiza emissão de apólice nem fechamento de contratos online.</strong> Toda contratação é feita por meio do nosso atendimento humano.</p>
+
+    <h2 id="propriedade-intelectual">3. Propriedade intelectual</h2>
+    <p>Todo o conteúdo do site — incluindo textos, imagens, identidade visual, código-fonte, layout, ornamentos gráficos e marcas — é de propriedade da Santa Branca Seguros ou de seus respectivos licenciadores e está protegido pela legislação brasileira de direitos autorais (Lei nº 9.610/1998) e propriedade industrial (Lei nº 9.279/1996).</p>
+    <p>É vedado:</p>
+    <ul>
+      <li>Reproduzir, modificar, distribuir ou explorar comercialmente qualquer conteúdo do site sem autorização prévia por escrito.</li>
+      <li>Utilizar a marca "Santa Branca Seguros" ou o logotipo em sites, materiais ou comunicações de terceiros sem autorização.</li>
+      <li>Realizar engenharia reversa do código-fonte ou tentar contornar quaisquer medidas de segurança.</li>
+    </ul>
+    <p>Os logotipos e marcas das seguradoras parceiras pertencem aos respectivos titulares e são exibidos apenas para fins informativos sobre nossas parcerias.</p>
+
+    <h2 id="cotacao">4. Cotação e contratação de seguros</h2>
+    <p>As informações sobre coberturas, condições e prêmios apresentadas durante o atendimento são aproximações com base nas tabelas vigentes das seguradoras parceiras. Os valores e condições <strong>finais</strong> dependem de:</p>
+    <ul>
+      <li>Análise de risco realizada pela seguradora.</li>
+      <li>Vistoria prévia, quando aplicável.</li>
+      <li>Aceitação por parte da seguradora.</li>
+      <li>Pagamento integral ou parcelado conforme acordado.</li>
+    </ul>
+    <p>O contrato de seguro é firmado entre você (segurado) e a <strong>seguradora escolhida</strong>. A Santa Branca Seguros atua como corretora intermediária, regulada pela SUSEP, conforme art. 122 do Decreto-Lei nº 73/1966.</p>
+
+    <h2 id="responsabilidades">5. Responsabilidades</h2>
+
+    <h3>5.1. Da Santa Branca</h3>
+    <ul>
+      <li>Manter o site disponível, dentro do razoável, sem garantia de disponibilidade ininterrupta.</li>
+      <li>Apresentar informações atualizadas e verídicas sobre nossos serviços.</li>
+      <li>Prestar atendimento ético, técnico e qualificado em todas as etapas.</li>
+      <li>Tratar seus dados pessoais conforme nossa <a href="privacidade.html">Política de Privacidade</a> e a LGPD.</li>
+    </ul>
+
+    <h3>5.2. Do usuário</h3>
+    <ul>
+      <li>Fornecer informações verdadeiras e completas durante o atendimento e nas declarações de risco. Informações inverídicas podem acarretar negativa de cobertura pela seguradora.</li>
+      <li>Não utilizar o site para fins ilícitos, fraudulentos ou que possam causar danos a terceiros.</li>
+      <li>Manter atualizadas as informações cadastrais durante a vigência das apólices contratadas.</li>
+    </ul>
+
+    <h2 id="links-externos">6. Links externos</h2>
+    <p>Nosso site pode conter links para sites de seguradoras parceiras, ferramentas auxiliares e redes sociais. A Santa Branca Seguros não se responsabiliza pelo conteúdo, políticas de privacidade ou disponibilidade desses sites externos. Recomendamos a leitura das condições aplicáveis de cada um.</p>
+
+    <h2 id="modificacoes">7. Modificações destes Termos</h2>
+    <p>A Santa Branca Seguros pode atualizar estes Termos de Uso a qualquer momento, sem aviso prévio individual. A versão mais recente estará sempre publicada nesta página, com a data da última atualização indicada no topo. O uso contínuo do site após uma atualização configura aceitação dos novos termos.</p>
+
+    <h2 id="legislacao">8. Legislação aplicável e foro</h2>
+    <p>Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de Belo Horizonte/MG para dirimir quaisquer questões decorrentes destes Termos, com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+
+    <div class="doc-callout">
+      <p><strong>Em caso de dúvida</strong> sobre qualquer ponto destes Termos, fale com a gente antes de continuar usando o site. Estamos disponíveis pelo WhatsApp <a href="https://wa.me/5531987263411" target="_blank" rel="noopener">(31) 98726-3411</a>, pelo telefone <a href="tel:+553133095558">(31) 3309-5558</a>, ou pelo e-mail <a href="mailto:santabranca@santabranca.com.br">santabranca@santabranca.com.br</a>.</p>
+    </div>
+
+    <h2 id="contato">9. Contato</h2>
+    <p>Para questões relacionadas a estes Termos:</p>
+    <ul>
+      <li><strong>E-mail:</strong> <a href="mailto:santabranca@santabranca.com.br">santabranca@santabranca.com.br</a></li>
+      <li><strong>Endereço:</strong> Av. Cônsul Antônio Cadar, 122 — Loja 89, Center São Bento, Belo Horizonte/MG</li>
+      <li><strong>SUSEP nº:</strong> 10.0179680</li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong style="color:var(--cream);">Santa Branca Seguros</strong> · Atuando desde 1994 · SUSEP nº 10.0179680</p>
+      <p>
+        <a href="index.html">Voltar ao site</a>
+        &nbsp;·&nbsp;
+        <a href="privacidade.html">Política de Privacidade</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

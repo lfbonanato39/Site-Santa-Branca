@@ -1,0 +1,40 @@
+# Configurações locais de ferramentas de desenvolvimento
+.mcp.json
+.claude/
+.cursor/
+.aider*
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependências (futuro)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Builds e dist (futuro)
+dist/
+build/
+.next/
+.nuxt/
+.output/
+.vercel/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local

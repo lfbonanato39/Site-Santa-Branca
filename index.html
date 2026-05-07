@@ -1,0 +1,2795 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0F1F35" />
+
+  <title>Santa Branca Seguros — Corretora em Belo Horizonte desde 1994</title>
+  <meta name="description" content="Corretora de seguros em Belo Horizonte, atuando desde 1994. Cotamos com 11 seguradoras: auto, residencial, vida, empresarial e mais. Atendimento humano e completo." />
+
+  <!-- TODO: substituir por URL real do Vercel após deploy -->
+  <link rel="canonical" href="https://santa-branca-preview.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Santa Branca Seguros — Corretora em Belo Horizonte desde 1994" />
+  <meta property="og:description" content="Corretora de seguros em Belo Horizonte, atuando desde 1994. Cotamos com 11 seguradoras: auto, residencial, vida, empresarial e mais. Atendimento humano e completo." />
+  <!-- TODO: substituir por URL real do Vercel após deploy -->
+  <meta property="og:url" content="https://santa-branca-preview.vercel.app/" />
+  <meta property="og:image" content="https://santa-branca-preview.vercel.app/assets/og-image.jpg" />
+  <meta property="og:site_name" content="Santa Branca Seguros" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Santa Branca Seguros — Corretora em Belo Horizonte desde 1994" />
+  <meta name="twitter:description" content="Corretora de seguros em Belo Horizonte, atuando desde 1994. Cotamos com 11 seguradoras. Atendimento humano e completo." />
+  <meta name="twitter:image" content="https://santa-branca-preview.vercel.app/assets/og-image.jpg" />
+
+  <!-- Google Search Console (cole o conteúdo de verificação aqui quando tiver) -->
+  <!-- <meta name="google-site-verification" content="COLE_TOKEN_AQUI" /> -->
+
+  <!-- Favicon (gerar arquivos a partir do logo e colocar em /assets/) -->
+  <link rel="icon" type="image/png" href="assets/logo-santa-branca.png" />
+  <link rel="apple-touch-icon" href="assets/logo-santa-branca.png" />
+
+  <!-- Fontes — 3 famílias autorais
+       Display:  Italiana (Art Deco, presença única no H1 do hero)
+       Serif:    Cormorant Garamond (autoridade clássica)
+       Sans:     Geist (geometric moderno, fora da blocklist anti-AI-slop) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Italiana&family=Geist:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Italiana&family=Geist:wght@300;400;500;600;700&display=swap" />
+
+  <!-- GSAP + ScrollTrigger + Lenis via CDN — motion library premium -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+
+  <!--
+    Content Security Policy (placeholder/comentado).
+    Ative depois que GA4/Ads/Meta IDs estiverem colados, ajustando
+    os hosts conforme os pixels efetivamente carregados.
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' data: https://www.google-analytics.com https://www.facebook.com;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self' https://www.google-analytics.com https://www.facebook.com;
+      frame-src https://www.google.com;
+    ">
+  -->
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "InsuranceAgency"],
+    "name": "Santa Branca Seguros",
+    "description": "Corretora de seguros familiar em Belo Horizonte, atuando desde 1994. Três décadas de mercado, 11 seguradoras parceiras, atendimento humano.",
+    "url": "https://www.santabranca.com.br/",
+    "telephone": ["+55-31-98726-3411", "+55-31-3309-5558"],
+    "email": "santabranca@santabranca.com.br",
+    "image": "https://www.santabranca.com.br/assets/og-image.jpg",
+    "logo": "https://www.santabranca.com.br/assets/logo-santa-branca.png",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Cônsul Antônio Cadar, 122 — Loja 89, Center São Bento",
+      "addressLocality": "Belo Horizonte",
+      "addressRegion": "MG",
+      "postalCode": "30380-420",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -19.95497,
+      "longitude": -43.95046
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }],
+    "foundingDate": "1994",
+    "sameAs": []
+  }
+  </script>
+
+  <!--
+    ============================================================
+    ANALYTICS / PIXELS — gating de consentimento LGPD
+    ============================================================
+    Cole os IDs reais nos placeholders abaixo. Os scripts de
+    tracking SÓ são injetados no DOM quando o usuário consente
+    via banner de cookies (rodapé: "Preferências de cookies").
+
+    Níveis de consentimento:
+      essential : nada de tracking
+      measure   : GA4 ativo
+      all       : GA4 + Google Ads + Meta Pixel ativos
+
+    A lógica de injeção e gating fica em window.applyCookieConsent(),
+    declarada inline no fim do <body>.
+    ============================================================
+  -->
+  <script>
+    /* Placeholders dos IDs reais — substituir antes do go-live */
+    window.SB_TRACKING = {
+      GA4_ID:       '__GA4_ID__',        /* ex: 'G-XXXXXXXXXX'    */
+      GADS_ID:      '__GADS_ID__',       /* ex: 'AW-XXXXXXXXX'    */
+      META_PIXEL_ID:'__META_PIXEL_ID__'  /* ex: '123456789012345' */
+    };
+  </script>
+
+  <style>
+    /* ============================================================
+       TOKENS — Confiança Atemporal · Edição Ultra Premium
+       Inspiração: brand Mucha (vitral do escritório), refined-luxury
+       editorial, "calma adulta" que combina com seguro de família.
+       ============================================================ */
+    :root {
+      /* Navy hierarchy — autoridade silenciosa */
+      --ink:        #0F1F35;
+      --ink-soft:   #1B2D49;
+      --ink-deep:   #08111F;
+      --ink-700:    #2A3D5C;
+      --ink-500:    #4A5678;
+
+      /* Creams — fundo quente, nunca branco puro */
+      --cream:      #F5EFE6;
+      --cream-deep: #EDE4D3;
+      --cream-line: #E1D5BD;
+      --pearl:      #EBE5E0;
+      --white:      #FFFFFF;
+
+      /* Gold + Champanhe — 2 tons para hierarquia de acentos */
+      --gold:        #B8924D;     /* primário — gold rules, eyebrows */
+      --gold-soft:   #D4B074;     /* hover, sobre dark */
+      --gold-deep:   #8E6E36;     /* press states */
+      --champagne:   #D2B589;     /* warm accent — selo, ornamentos */
+      --champagne-soft: #DDC4A0;
+      --champagne-deep: #B8985F;
+
+      /* Foreground — warm brown-grey em vez de cinza neutro frio */
+      --fg-1: var(--ink);          /* texto principal */
+      --fg-2: #4A4535;             /* texto secundário (warm) */
+      --fg-3: #6B6450;             /* terciário, captions (warm) */
+      --fg-inverse: var(--cream);
+
+      /* Legados (mantidos para não quebrar referências existentes) */
+      --graphite:      #4A4535;
+      --graphite-soft: #6B6450;
+
+      /* WhatsApp green */
+      --whats:      #1F5E3F;
+      --whats-soft: #27764E;
+
+      /* Tipografia — 3 famílias autorais */
+      --font-display: 'Italiana', 'Cormorant Garamond', serif;
+      --font-serif:   'Cormorant Garamond', Georgia, serif;
+      --font-sans:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      /* Type scale — editorial, generosa */
+      --fs-display:  clamp(64px, 9vw, 132px);  /* H1 do hero */
+      --fs-h1:       clamp(40px, 5vw, 72px);
+      --fs-h2:       clamp(32px, 4vw, 56px);
+      --fs-h3:       2rem;
+      --fs-h4:       1.5rem;
+      --fs-lg:       1.25rem;
+      --fs-base:     1.0625rem;
+      --fs-sm:       0.9375rem;
+      --fs-xs:       0.8125rem;
+
+      --lh-display:  0.96;
+      --lh-heading:  1.1;
+      --lh-normal:   1.5;
+      --lh-relaxed:  1.65;
+
+      /* Tracking — generoso em eyebrows (nível Ana Laura) */
+      --ls-display:  -0.02em;
+      --ls-heading:  -0.01em;
+      --ls-eyebrow:  0.28em;
+      --ls-label:    0.14em;
+      --ls-meta:     0.16em;
+
+      /* Spacing 4px base */
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-6: 24px; --sp-8: 32px; --sp-12: 48px; --sp-16: 64px;
+      --sp-24: 96px; --sp-32: 128px; --sp-40: 160px;
+
+      --r-sm: 2px; --r-md: 4px; --r-lg: 8px; --r-xl: 16px; --r-pill: 999px;
+
+      /* Shadows — soft, warm, baixa elevação */
+      --sh-1: 0 1px 2px rgba(15,31,53,.04), 0 1px 3px rgba(15,31,53,.06);
+      --sh-2: 0 4px 12px rgba(15,31,53,.06), 0 2px 4px rgba(15,31,53,.04);
+      --sh-3: 0 12px 32px rgba(15,31,53,.08), 0 4px 8px rgba(15,31,53,.05);
+      --sh-4: 0 24px 60px rgba(15,31,53,.12), 0 8px 16px rgba(15,31,53,.06);
+      --sh-glow: 0 0 0 1px rgba(212,176,116,.2), 0 8px 24px rgba(184,146,77,.15);
+
+      --container: 1200px;
+      --gutter: 32px;
+      --header-h: 84px;
+
+      /* Easings — cinematic */
+      --ease:       cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur:        220ms;
+      --dur-slow:   420ms;
+      --dur-cinematic: 900ms;
+
+      /* Gradient mesh — assinaturas reutilizáveis */
+      --grad-hero-mesh:
+        radial-gradient(ellipse 80% 50% at 75% 30%, rgba(26,45,69,0.95) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 70%, rgba(184,146,77,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 80% at 100% 100%, rgba(8,17,31,0.95) 0%, transparent 70%),
+        linear-gradient(160deg, #1A2D45 0%, #0F1F35 40%, #08111F 100%);
+      --grad-cream-warm:
+        radial-gradient(ellipse at 20% 30%, rgba(210,181,137,0.16) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 75%, rgba(33,46,81,0.06) 0%, transparent 55%),
+        var(--cream);
+      --grad-cream-deep-warm:
+        radial-gradient(ellipse at 70% 40%, rgba(210,181,137,0.20) 0%, transparent 60%),
+        var(--cream-deep);
+      --grad-navy-band:
+        linear-gradient(135deg, #212e51 0%, #4a5276 50%, #b8985f 100%);
+      --grad-divider-fade:
+        linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+    }
+
+    /* ============================================================
+       RESET + BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    /* scroll-behavior tirado: usamos Lenis pra smooth scroll */
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: var(--fs-base);
+      line-height: var(--lh-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: 'kern' 1, 'liga' 1;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: var(--lh-heading);
+      letter-spacing: var(--ls-heading);
+      margin: 0;
+      text-wrap: balance;
+    }
+    h1 { font-size: var(--fs-h1); letter-spacing: var(--ls-display); }
+    h2 { font-size: var(--fs-h2); }
+    h3 { font-size: var(--fs-h3); }
+    h4 { font-size: var(--fs-h4); font-weight: 600; }
+    p { margin: 0; color: var(--fg-2); line-height: var(--lh-relaxed); text-wrap: pretty; }
+    a { color: var(--ink); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--gold-deep); }
+    ul, ol { margin: 0; padding: 0; list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    ::selection { background: var(--champagne); color: var(--ink-deep); }
+
+    .container { width: 100%; max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+
+    /* Eyebrow — generosamente espaçado, assinatura visual */
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs); font-weight: 500;
+      letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+      color: var(--gold);
+      display: inline-block;
+    }
+    .eyebrow--on-dark { color: var(--champagne); }
+    .gold-rule {
+      display: block;
+      width: 48px; height: 1px;
+      background: var(--gold); border: 0;
+      margin: var(--sp-4) 0;
+    }
+    .gold-rule--center { margin-inline: auto; }
+    .gold-rule--wide { width: 96px; }
+
+    /* Display class para H1 do hero — Italiana */
+    .display {
+      font-family: var(--font-display);
+      font-size: var(--fs-display);
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display);
+      font-weight: 400;
+    }
+
+    /* Grain overlay — textura de filme sobre tudo (1.5% opacity) */
+    .grain {
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0.5 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px;
+      background: var(--ink); color: var(--cream);
+      padding: 12px 16px; border-radius: var(--r-md);
+      z-index: 200; font-size: 14px; font-weight: 500;
+      transition: top var(--dur) var(--ease);
+    }
+    .skip-link:focus { top: 16px; color: var(--cream); }
+
+    /* Focus */
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: var(--r-sm); }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px;
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm); font-weight: 500;
+      padding: 14px 24px;
+      border-radius: var(--r-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease), transform 150ms var(--ease);
+      text-decoration: none;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--ink); color: var(--cream); }
+    .btn-primary:hover { background: var(--ink-soft); color: var(--cream); }
+    .btn-whats { background: var(--whats); color: var(--cream); }
+    .btn-whats:hover { background: var(--whats-soft); color: var(--cream); }
+    .btn-ghost-light {
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(245,239,230,0.4);
+    }
+    .btn-ghost-light:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .sb-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: transparent;
+      transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+    }
+    .sb-header.is-scrolled,
+    html.sb-scrolled-init .sb-header {
+      background: rgba(245,239,230,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--cream-line);
+    }
+    .sb-header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: var(--header-h); gap: 16px;
+    }
+    .sb-header__brand {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+      padding: 8px 14px;
+      background: rgba(245, 239, 230, 0.96);
+      border-radius: var(--r-md);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease), padding var(--dur) var(--ease);
+    }
+    .sb-header.is-scrolled .sb-header__brand,
+    html.sb-scrolled-init .sb-header__brand {
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+    }
+    .sb-header__logo {
+      height: 48px; width: auto; display: block;
+      transition: height var(--dur-slow) var(--ease), opacity var(--dur) var(--ease);
+    }
+    .sb-header.is-scrolled .sb-header__logo,
+    html.sb-scrolled-init .sb-header__logo {
+      height: 44px;
+    }
+    .sb-header__nav { display: flex; gap: 36px; align-items: center; }
+    .sb-nav-link {
+      font-size: var(--fs-sm); font-weight: 500;
+      color: var(--cream); position: relative;
+      transition: color var(--dur) var(--ease);
+      padding: 6px 0;
+    }
+    .sb-header.is-scrolled .sb-nav-link,
+    html.sb-scrolled-init .sb-nav-link { color: var(--ink); }
+    .sb-nav-link::after {
+      content:''; position:absolute; left:0; right:100%; bottom:-2px;
+      height:1px; background:var(--gold);
+      transition: right var(--dur) var(--ease);
+    }
+    .sb-nav-link:hover::after { right: 0; }
+    .sb-nav-link:hover { color: var(--gold-soft); }
+    .sb-header.is-scrolled .sb-nav-link:hover { color: var(--gold-deep); }
+    .sb-header__cta { padding: 12px 20px; }
+    .sb-header.is-scrolled .sb-header__cta { background: var(--ink); color: var(--cream); }
+
+    /* Mobile menu button */
+    .sb-burger {
+      display: none;
+      background: transparent; border: 0;
+      width: 44px; height: 44px;
+      align-items: center; justify-content: center;
+      color: var(--cream);
+    }
+    .sb-header.is-scrolled .sb-burger,
+    html.sb-scrolled-init .sb-burger { color: var(--ink); }
+    .sb-burger svg { width: 28px; height: 28px; }
+
+    /* Mobile drawer — visibility:hidden por padrão garante que NUNCA escape
+       acidentalmente para o topo da página, mesmo se outro CSS sobrescrever
+       o transform por engano. */
+    .sb-mobile {
+      position: fixed; inset: 0; z-index: 60;
+      background: var(--ink); color: var(--cream);
+      display: flex; flex-direction: column;
+      padding: 24px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      transform: translateY(-100%);
+      visibility: hidden;
+      transition: transform var(--dur-slow) var(--ease), visibility 0s linear var(--dur-slow);
+    }
+    .sb-mobile.is-open {
+      transform: translateY(0);
+      visibility: visible;
+      transition: transform var(--dur-slow) var(--ease), visibility 0s linear 0s;
+    }
+    .sb-mobile__top { display:flex; justify-content: space-between; align-items: center; height: 60px; }
+    .sb-mobile__logo {
+      height: 72px; width: auto; max-width: 65%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+    .sb-mobile__close { background: transparent; border: 0; color: var(--cream); width: 44px; height: 44px; }
+    .sb-mobile__nav {
+      display: flex; flex-direction: column; gap: 4px;
+      margin-top: 32px; padding-top: 32px;
+      border-top: 1px solid rgba(245,239,230,0.12);
+    }
+    .sb-mobile__link {
+      color: var(--cream);
+      font-family: var(--font-serif);
+      font-size: 32px; font-weight: 500;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(245,239,230,0.08);
+    }
+    .sb-mobile__cta { margin-top: auto; padding-bottom: 24px; }
+    .sb-mobile__cta .btn { width: 100%; padding: 18px; font-size: 16px; }
+
+    /* ============================================================
+       LOADER — primeira impressão signature
+       Linhas Art Nouveau se desenhando + logo aparecendo (1.2s)
+       ============================================================ */
+    .sb-loader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--ink-deep);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 700ms var(--ease-out), visibility 700ms;
+    }
+    .sb-loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .sb-loader__mark {
+      width: 220px; height: auto; max-height: 240px;
+      object-fit: contain;
+      animation: loaderFade 1.2s var(--ease-out) forwards;
+      filter: brightness(0) invert(1) drop-shadow(0 6px 20px rgba(0,0,0,0.35));
+      opacity: 0.95;
+    }
+    @keyframes loaderFade {
+      0% { opacity: 0; transform: scale(0.92); }
+      40% { opacity: 1; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    /* No-JS / reduced-motion: esconde loader imediatamente */
+    .no-js .sb-loader,
+    @media (prefers-reduced-motion: reduce) {
+      .sb-loader { display: none; }
+    }
+
+    /* Body locked durante loading */
+    body.is-loading { overflow: hidden; }
+
+    /* ============================================================
+       HERO — Aurora + canvas particles + vitral em arco gótico
+       ============================================================ */
+    .sb-hero {
+      position: relative; isolation: isolate;
+      min-height: 100vh;
+      padding: calc(var(--header-h) + var(--sp-12)) 0 var(--sp-16);
+      color: var(--cream);
+      overflow: hidden;
+      display: flex; align-items: center;
+    }
+
+    /* AURORA — 3 gradients radiais navegando devagar em loop infinito.
+       Sub-pixel movement com translate em escala 1.4x para evitar bordas. */
+    .sb-hero__bg {
+      position: absolute; inset: 0; z-index: -3;
+      background: linear-gradient(160deg, #1A2D45 0%, #0F1F35 40%, #08111F 100%);
+    }
+    .sb-hero__aurora {
+      position: absolute; inset: -20%; z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(184,146,77,0.22) 0%, transparent 38%),
+        radial-gradient(circle at 70% 40%, rgba(26,45,69,0.7) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(210,181,137,0.16) 0%, transparent 40%);
+      filter: blur(40px);
+      animation: auroraDrift 32s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes auroraDrift {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(3%, -2%) scale(1.05); }
+      66%  { transform: translate(-2%, 3%) scale(1.02); }
+      100% { transform: translate(2%, 1%) scale(1.04); }
+    }
+
+    /* Canvas de partículas douradas (champagne motes) */
+    .sb-hero__particles {
+      position: absolute; inset: 0; z-index: -1;
+      pointer-events: none;
+      width: 100%; height: 100%;
+    }
+
+    .sb-hero__inner {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) 0.9fr;
+      align-items: start;
+      gap: var(--sp-12);
+      position: relative; z-index: 1;
+    }
+    .sb-hero__copy { padding-block: var(--sp-6); }
+
+    /* ============================================================
+       ART PANEL — vitral em arco gótico, à direita
+       ============================================================ */
+    .sb-hero__art {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      max-width: 460px;
+      margin-left: auto;
+      margin-top: var(--sp-8);
+      opacity: 0;
+      animation: artFadeIn 1.4s 1.2s var(--ease-out) forwards;
+    }
+    @keyframes artFadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Glow champagne pulsando atrás do vitral */
+    .sb-hero__art-glow {
+      position: absolute; inset: -8%; z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 50%, rgba(210,181,137,0.55) 0%, transparent 65%);
+      filter: blur(44px);
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 0.85; transform: scale(1.06); }
+    }
+
+    /* Mandala SVG girando atrás do vitral */
+    .sb-hero__art-mandala {
+      position: absolute; inset: -8%; z-index: 1;
+      pointer-events: none;
+      color: var(--champagne); opacity: 0.32;
+      animation: mandalaSpin 90s linear infinite;
+    }
+    @keyframes mandalaSpin { to { transform: rotate(360deg); } }
+
+    /* Frame com clip-path arco gótico */
+    .sb-hero__art-frame {
+      position: relative; z-index: 3;
+      width: 100%; height: 100%;
+      /* Arco gótico: arco superior pontiagudo + retângulo embaixo */
+      clip-path: path('M 50,0 Q 100,0 100,50 L 100,100 L 0,100 L 0,50 Q 0,0 50,0 Z');
+      /* SVG path acima é em % via 0..100 — não funciona em todos browsers.
+         Usar versão em pixels via aspect-ratio é mais confiável: */
+      -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 133' preserveAspectRatio='none'><path d='M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z' fill='black'/></svg>");
+      mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 133' preserveAspectRatio='none'><path d='M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z' fill='black'/></svg>");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      clip-path: none;
+      overflow: hidden;
+    }
+    .sb-hero__art-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 35%;
+      filter: saturate(0.92) contrast(1.04) brightness(0.96);
+      transition: transform 12s var(--ease-out);
+    }
+    .sb-hero__art:hover .sb-hero__art-frame img { transform: scale(1.06); }
+
+    /* Borda dourada — 1px no shape do arco gótico via SVG outline */
+    .sb-hero__art-border {
+      position: absolute; inset: 0; z-index: 4;
+      pointer-events: none;
+      width: 100%; height: 100%;
+    }
+
+    /* Scan-line — gradient diagonal atravessando devagar (reflexo no vidro) */
+    .sb-hero__art-scan {
+      position: absolute; inset: 0; z-index: 5;
+      pointer-events: none;
+      -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 133' preserveAspectRatio='none'><path d='M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z' fill='black'/></svg>");
+      mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 133' preserveAspectRatio='none'><path d='M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z' fill='black'/></svg>");
+      -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+      overflow: hidden;
+    }
+    .sb-hero__art-scan::before {
+      content: ''; position: absolute;
+      top: -50%; left: -120%;
+      width: 60%; height: 200%;
+      background: linear-gradient(115deg,
+        transparent 0%,
+        rgba(245,239,230,0.0) 30%,
+        rgba(245,239,230,0.18) 50%,
+        rgba(245,239,230,0.0) 70%,
+        transparent 100%);
+      transform: rotate(0deg);
+      animation: scanSweep 8s linear infinite;
+      animation-delay: 2s;
+    }
+    @keyframes scanSweep {
+      0%   { transform: translateX(0); opacity: 0; }
+      8%   { opacity: 1; }
+      40%  { transform: translateX(380%); opacity: 1; }
+      48%  { opacity: 0; }
+      100% { transform: translateX(380%); opacity: 0; }
+    }
+
+    /* 4 ornamentos AN nos cantos do art panel */
+    .sb-hero__art-corner-tl,
+    .sb-hero__art-corner-tr,
+    .sb-hero__art-corner-bl,
+    .sb-hero__art-corner-br {
+      position: absolute; z-index: 6;
+      width: 48px; height: 48px;
+      color: var(--champagne); opacity: 0.85;
+      pointer-events: none;
+      animation: cornerBreathe 5s ease-in-out infinite;
+    }
+    .sb-hero__art-corner-tl { top: -10px; left: -10px; }
+    .sb-hero__art-corner-tr { top: -10px; right: -10px; transform: scaleX(-1); animation-delay: 1.25s; }
+    .sb-hero__art-corner-bl { bottom: -10px; left: -10px; transform: scaleY(-1); animation-delay: 2.5s; }
+    .sb-hero__art-corner-br { bottom: -10px; right: -10px; transform: scale(-1, -1); animation-delay: 3.75s; }
+    @keyframes cornerBreathe {
+      0%, 100% { opacity: 0.55; }
+      50%      { opacity: 0.95; }
+    }
+
+    /* TICKERS — stats animados (count-up via JS) */
+    .sb-hero__tickers {
+      display: grid; grid-template-columns: repeat(3, auto);
+      gap: var(--sp-8);
+      margin: var(--sp-8) 0 var(--sp-8);
+      opacity: 0;
+      animation: fadeUp 900ms 1700ms var(--ease-out) forwards;
+    }
+    .sb-hero__ticker { display: flex; flex-direction: column; gap: 4px; }
+    .sb-hero__ticker-num {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 4.5vw, 56px);
+      line-height: 1;
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--champagne-soft) 0%, var(--champagne) 60%, var(--champagne-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.01em;
+    }
+    .sb-hero__ticker-label {
+      font-family: var(--font-sans);
+      font-size: 11px; font-weight: 500;
+      letter-spacing: var(--ls-meta); text-transform: uppercase;
+      color: rgba(245,239,230,0.65);
+    }
+
+    /* Glow no <em> do título */
+    .sb-hero__title em {
+      text-shadow:
+        0 0 24px rgba(212,176,116,0.18),
+        0 0 64px rgba(212,176,116,0.08);
+    }
+
+    /* Cursor glow — radial dourado SOB o cursor padrão (não substitui) */
+    .sb-cursor-glow {
+      position: fixed; top: 0; left: 0;
+      width: 400px; height: 400px;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(circle, rgba(212,176,116,0.10) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 600ms var(--ease-out);
+      will-change: transform;
+    }
+    .sb-cursor-glow.is-active { opacity: 1; }
+    @media (hover: none), (max-width: 1024px), (prefers-reduced-motion: reduce) {
+      .sb-cursor-glow { display: none; }
+    }
+
+    /* Mobile: stack vertical, art menor */
+    @media (max-width: 900px) {
+      .sb-hero__inner { grid-template-columns: 1fr; }
+      .sb-hero__art { max-width: 320px; margin: var(--sp-8) auto 0; }
+      .sb-hero__tickers { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+      .sb-hero__ticker-num { font-size: clamp(32px, 8vw, 44px); }
+    }
+    @media (max-width: 480px) {
+      .sb-hero__tickers { grid-template-columns: 1fr; }
+    }
+
+    /* Ornamento AN acima do eyebrow */
+    .sb-hero__motif {
+      width: 80px; height: 22px;
+      color: var(--champagne); opacity: 0.9;
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 800ms 200ms var(--ease-out) forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sb-hero__eyebrow-wrap {
+      opacity: 0;
+      animation: fadeUp 800ms 350ms var(--ease-out) forwards;
+    }
+
+    /* H1 — Italiana display, escala generosa, stagger reveal por palavra */
+    .sb-hero__title {
+      font-family: var(--font-display);
+      font-size: var(--fs-display);
+      line-height: 0.96;
+      letter-spacing: var(--ls-display);
+      color: var(--cream);
+      margin: var(--sp-6) 0 var(--sp-8);
+      font-weight: 400;
+      max-width: 14ch;
+      text-wrap: balance;
+    }
+    .sb-hero__title .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: wordRise 1.1s var(--ease-out) forwards;
+    }
+    .sb-hero__title em {
+      font-style: italic; font-weight: 400;
+      background: linear-gradient(135deg, var(--champagne-soft) 0%, var(--champagne) 60%, var(--champagne-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    @keyframes wordRise { to { opacity: 1; transform: translateY(0); } }
+
+    .sb-hero__lead {
+      max-width: 560px; margin-bottom: var(--sp-8);
+      color: rgba(245,239,230,0.90);
+      font-size: var(--fs-lg); line-height: var(--lh-relaxed);
+      opacity: 0;
+      animation: fadeUp 900ms 1100ms var(--ease-out) forwards;
+    }
+    .sb-hero__ctas {
+      display: flex; gap: 14px; margin-bottom: var(--sp-12);
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 900ms 1300ms var(--ease-out) forwards;
+    }
+    .sb-hero__cta-whats {
+      padding: 18px 28px; font-size: 15px;
+      box-shadow: 0 8px 24px rgba(31,94,63,0.32);
+    }
+    .sb-hero__cta-quote { padding: 18px 24px; font-size: 15px; }
+
+    /* Selo SUSEP — glassmorphism + monograma rotacionando perpetuamente */
+    .sb-hero__seal {
+      display: inline-flex; align-items: center; gap: 16px;
+      padding: 16px 22px;
+      margin-top: var(--sp-8);
+      background: rgba(8,17,31,0.45);
+      border: 1px solid rgba(212,176,116,0.30);
+      border-radius: var(--r-md);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 900ms 1500ms var(--ease-out) forwards;
+      position: relative;
+    }
+    .sb-hero__seal-rule {
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--champagne);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .sb-hero__seal-text { display: flex; flex-direction: column; gap: 2px; }
+    .sb-hero__seal-eyebrow {
+      font-size: 11px; letter-spacing: var(--ls-meta); text-transform: uppercase;
+      color: var(--champagne);
+    }
+    .sb-hero__seal-line {
+      font-family: var(--font-serif); font-size: 17px;
+      color: var(--cream); letter-spacing: 0.02em;
+    }
+    .sb-hero__seal-line b { font-weight: 500; }
+
+    /* Reduced motion — tudo aparece instantaneamente */
+    @media (prefers-reduced-motion: reduce) {
+      .sb-hero__motif, .sb-hero__eyebrow-wrap,
+      .sb-hero__title .word, .sb-hero__lead,
+      .sb-hero__ctas, .sb-hero__seal {
+        opacity: 1 !important; transform: none !important; animation: none !important;
+      }
+      .sb-hero__corner { animation: none !important; }
+    }
+
+    /* Cantos Art Nouveau mais visíveis */
+    .an-corner-lg {
+      position: absolute; top: -8px; right: -8px;
+      width: 80px; height: 80px;
+      color: var(--gold); opacity: 0.5;
+      pointer-events: none;
+    }
+    /* AN corner para cards grandes (Auto/Resid/Vida) — presença real,
+       canto superior direito, mais visível mas ainda respirando */
+    .sb-offer__big { position: relative; overflow: hidden; }
+    .sb-offer__an-corner {
+      position: absolute; top: 14px; right: 14px;
+      width: 56px; height: 56px;
+      color: var(--gold); opacity: 0.55;
+      pointer-events: none;
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+    .sb-offer__big:hover .sb-offer__an-corner { opacity: 0.85; transform: rotate(-6deg); }
+
+    /* ============================================================
+       SECTIONS COMMON
+       ============================================================ */
+    section { scroll-margin-top: calc(var(--header-h) + 16px); }
+    .section-head { max-width: 720px; margin-bottom: var(--sp-12); }
+    .section-head--center { text-align: center; margin-inline: auto; }
+    .section-head--center .gold-rule { margin-inline: auto; }
+    .section-head h2 {
+      font-size: clamp(32px, 4vw, 56px);
+      margin-top: var(--sp-4);
+      font-weight: 500;
+    }
+
+    /* Art Nouveau divider entre seções — assinatura sutil mas visível */
+    .an-divider {
+      display: block;
+      width: 100%; max-width: 420px;
+      height: 32px;
+      margin: 0 auto;
+      color: var(--gold);
+      opacity: 0.85;
+    }
+    .an-divider--on-dark { color: var(--gold-soft); opacity: 0.7; }
+    .an-band { padding: var(--sp-2) 0; background: var(--cream); }
+    .an-band--deep { background: var(--cream-deep); }
+    .an-band--ink { background: var(--ink); }
+    /* Variante usada apenas na transição Hero→Sobre: padding reduzido e
+       fundo navy idêntico ao final do hero — evita faixa creme isolada. */
+    .an-band--joinHero {
+      padding: var(--sp-6) 0 var(--sp-8);
+      margin-top: -1px;
+      background:
+        linear-gradient(180deg, #08111F 0%, #0A1626 100%);
+    }
+
+    /* ============================================================
+       ABOUT
+       ============================================================ */
+    .sb-about { padding: var(--sp-24) 0; background: var(--cream-deep); }
+    .sb-about__inner {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: var(--sp-16); align-items: center;
+    }
+    .sb-about__visual { display: flex; flex-direction: column; gap: 12px; }
+    .sb-about__photo-wrap { position: relative; }
+    .an-corner {
+      position: absolute; top: 12px; left: 12px;
+      width: 40px; height: 40px;
+      color: var(--gold); opacity: 0.7;
+      pointer-events: none; z-index: 2;
+    }
+    .sb-about__photo {
+      position: relative;
+      width: 100%; aspect-ratio: 4/5;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh-2);
+      background: var(--ink);
+    }
+    .sb-about__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: 60% center;
+      filter: saturate(0.85) sepia(0.08) contrast(1.04);
+      border-radius: inherit;
+    }
+    .sb-about__photo-overlay {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 18px 22px;
+      background: linear-gradient(180deg, transparent, rgba(8,17,31,0.85));
+      color: var(--cream);
+      display: flex; flex-direction: column; gap: 4px;
+      font-size: 13px; line-height: 1.4;
+    }
+    .sb-about__caption { font-size: 13px; color: var(--graphite-soft); font-style: italic; }
+    .sb-about__title { font-size: clamp(32px, 3.6vw, 48px); margin: var(--sp-4) 0 var(--sp-6); font-weight: 500; }
+    .sb-about__copy p { margin-bottom: 16px; font-size: var(--fs-base); }
+    .sb-about__copy p:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       WHY US
+       ============================================================ */
+    .sb-why { padding: var(--sp-24) 0; position: relative; }
+    /* Linha luminosa vertical decorativa (esquerda) */
+    .sb-why::before {
+      content: ''; position: absolute;
+      top: 15%; bottom: 15%;
+      left: 4%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(184,146,77,0.4) 30%, rgba(184,146,77,0.4) 70%, transparent);
+      pointer-events: none;
+    }
+    @media (max-width: 1024px) { .sb-why::before { display: none; } }
+    .sb-why__list {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 32px 56px;
+    }
+    .sb-why__item {
+      padding-top: 20px;
+      border-top: 1px solid var(--cream-line);
+      position: relative;
+    }
+    .sb-why__item::before {
+      content:''; position:absolute; top:-1px; left:0;
+      width:32px; height:1px; background:var(--gold);
+    }
+    .sb-why__num {
+      font-family: var(--font-serif); font-size: 28px;
+      color: var(--gold); font-weight: 500;
+      margin-bottom: 8px; line-height: 1;
+    }
+    .sb-why__t { font-size: 22px; margin-bottom: 8px; font-family: var(--font-serif); font-weight: 500; color: var(--ink); line-height: 1.2; }
+    .sb-why__item p { font-size: var(--fs-base); }
+
+    /* ============================================================
+       OFFER
+       ============================================================ */
+    .sb-offer { padding: var(--sp-24) 0; background: var(--cream-deep); }
+    .sb-offer__featured {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-bottom: 24px;
+    }
+    .card {
+      background: var(--cream);
+      border: 1px solid var(--cream-line);
+      border-radius: var(--r-lg);
+      padding: var(--sp-8);
+      box-shadow: var(--sh-1);
+      transition: box-shadow var(--dur) var(--ease);
+    }
+    .card:hover { box-shadow: var(--sh-2); }
+    .sb-offer__big { display: flex; flex-direction: column; gap: 12px; min-height: 260px; }
+    .sb-offer__icon { color: var(--gold); margin-bottom: 8px; }
+    .sb-offer__icon svg { width: 44px; height: 36px; display: block; }
+    .sb-offer__bigTitle { font-size: 24px; font-weight: 600; font-family: var(--font-serif); color: var(--ink); }
+    .sb-offer__big p { font-size: var(--fs-base); }
+    .sb-offer__link {
+      margin-top: auto; padding-top: 14px;
+      font-size: 12px; font-weight: 500;
+      color: var(--ink);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      display: inline-flex; gap: 6px; align-items: center;
+    }
+    .sb-offer__link:hover { color: var(--gold-deep); }
+    .sb-offer__medium {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-bottom: var(--sp-12);
+    }
+    .sb-offer__med { display: flex; gap: 14px; align-items: flex-start; padding: 22px; }
+    .sb-offer__icon-sm { color: var(--gold); flex-shrink: 0; padding-top: 2px; }
+    .sb-offer__icon-sm svg { width: 24px; height: 24px; }
+    .sb-offer__medTitle { font-size: 18px; font-weight: 600; margin-bottom: 6px; font-family: var(--font-serif); color: var(--ink); }
+    .sb-offer__med p { font-size: 14px; }
+    .sb-offer__others { padding-top: var(--sp-8); border-top: 1px solid var(--cream-line); }
+    .sb-offer__othersHead { display: block; margin-bottom: 14px; }
+    .sb-offer__chips {
+      display: flex; flex-wrap: wrap;
+      gap: 0 14px; align-items: center;
+    }
+    .sb-offer__chips li { display: inline-flex; align-items: center; gap: 14px; padding: 4px 0; }
+    .sb-offer__chip { font-size: 14px; color: var(--ink); font-weight: 500; }
+    .sb-offer__chip:hover { color: var(--gold-deep); }
+    .sb-offer__sep { color: var(--cream-line); }
+
+    /* ============================================================
+       PROCESS
+       ============================================================ */
+    .sb-process { padding: var(--sp-24) 0; position: relative; }
+    /* Linha luminosa vertical decorativa (direita) */
+    .sb-process::after {
+      content: ''; position: absolute;
+      top: 15%; bottom: 15%;
+      right: 4%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(184,146,77,0.35) 30%, rgba(184,146,77,0.35) 70%, transparent);
+      pointer-events: none;
+    }
+    @media (max-width: 1024px) { .sb-process::after { display: none; } }
+    .sb-process__list {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .sb-process__item {
+      padding-top: 20px;
+      border-top: 1px solid var(--cream-line);
+      position: relative;
+    }
+    .sb-process__item::before {
+      content:''; position:absolute; top:-1px; left:0;
+      width:36px; height:1px; background:var(--gold);
+    }
+    .sb-process__num {
+      font-family: var(--font-serif); font-size: 44px;
+      color: var(--gold); font-weight: 500;
+      margin-bottom: 14px; line-height: 1;
+    }
+    .sb-process__t { font-size: 18px; margin-bottom: 8px; font-family: var(--font-serif); font-weight: 600; color: var(--ink); line-height: 1.25; }
+    .sb-process__item p { font-size: 14px; }
+
+    /* ============================================================
+       TESTIMONIALS
+       ============================================================ */
+    .sb-testi { padding: var(--sp-24) 0; background: var(--cream-deep); }
+    .sb-testi__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .sb-testi__card {
+      background: var(--cream);
+      border: 1px solid var(--cream-line);
+      border-radius: var(--r-lg);
+      padding: 32px;
+      display: flex; flex-direction: column; gap: 18px;
+      box-shadow: var(--sh-1);
+      position: relative;
+    }
+    .sb-testi__quote {
+      font-family: var(--font-serif);
+      font-size: 64px; line-height: 0.6;
+      color: var(--gold); opacity: 0.5;
+      height: 24px;
+    }
+    .sb-testi__text {
+      font-family: var(--font-serif);
+      font-size: 19px; line-height: 1.45;
+      color: var(--ink); font-style: italic;
+      font-weight: 400;
+      flex: 1;
+    }
+    .sb-testi__who {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 16px; border-top: 1px solid var(--cream-line);
+    }
+    .sb-testi__avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--cream-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-weight: 500;
+      color: var(--gold-deep); font-size: 16px;
+      border: 1px solid var(--cream-line);
+    }
+    .sb-testi__name { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .sb-testi__meta { font-size: 12px; color: var(--graphite-soft); }
+    .sb-testi__note {
+      margin-top: 32px; text-align: center;
+      font-size: 13px; color: var(--graphite-soft); font-style: italic;
+    }
+
+    /* ============================================================
+       INSURERS
+       ============================================================ */
+    .sb-insurers { padding: var(--sp-24) 0; }
+    .sb-insurers__head { text-align: center; max-width: 720px; margin: 0 auto var(--sp-12); }
+    .sb-insurers__title { font-size: clamp(28px, 3.4vw, 44px); margin-top: var(--sp-4); font-weight: 500; }
+    .sb-insurers__grid {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: 1px; background: var(--cream-line);
+      border: 1px solid var(--cream-line);
+      border-radius: var(--r-lg); overflow: hidden;
+    }
+    .sb-insurer {
+      background: var(--cream); height: 96px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--dur) var(--ease);
+      padding: 12px;
+    }
+    .sb-insurer:hover { background: var(--white); }
+    .sb-insurer__name {
+      font-family: var(--font-serif); font-size: 18px;
+      color: var(--graphite); text-align: center;
+    }
+
+    /* ============================================================
+       LOCATION
+       ============================================================ */
+    .sb-loc { padding: var(--sp-24) 0; background: var(--cream-deep); }
+    .sb-loc__inner {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: var(--sp-12); align-items: center;
+    }
+    .sb-loc__title { font-size: clamp(28px, 3.4vw, 44px); margin: var(--sp-4) 0 var(--sp-8); font-weight: 500; }
+    .sb-loc__list { display:flex; flex-direction:column; gap:18px; }
+    .sb-loc__list li { display: flex; gap: 14px; }
+    .sb-loc__list svg { color: var(--gold); flex-shrink: 0; margin-top: 4px; width: 20px; height: 20px; }
+    .sb-loc__list b { display:block; color: var(--ink); font-size: 15px; font-weight: 600; }
+    .sb-loc__list span { display:block; color: var(--graphite); font-size: 14px; margin-top:2px; }
+    .sb-loc__map {
+      aspect-ratio: 4/3; border-radius: var(--r-lg);
+      overflow:hidden; background:var(--ink);
+      border:1px solid var(--cream-line);
+      box-shadow: var(--sh-2);
+    }
+    .sb-loc__map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* ============================================================
+       CONTACT — WhatsApp-first, sem formulário
+       ============================================================ */
+    .sb-contact { background: var(--ink); padding: var(--sp-24) 0; color: var(--cream); position: relative; overflow: hidden; }
+    .sb-contact__bg {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+      background-image: radial-gradient(circle at 1px 1px, rgba(212,176,116,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .sb-contact__inner {
+      max-width: 720px; margin: 0 auto;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+    .sb-contact__title {
+      font-size: clamp(32px, 4vw, 56px);
+      margin: var(--sp-4) 0 var(--sp-6);
+      font-weight: 500; color: var(--cream);
+    }
+    .sb-contact__lead {
+      color: rgba(245,239,230,0.85);
+      font-size: var(--fs-lg); line-height: var(--lh-relaxed);
+      margin: 0 auto var(--sp-8); max-width: 560px;
+    }
+    .sb-contact__whats {
+      padding: 20px 32px; font-size: 17px;
+      box-shadow: 0 8px 24px rgba(31,94,63,0.32);
+    }
+    .sb-contact__note {
+      color: rgba(245,239,230,0.7); margin-top: 18px; font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+    .sb-contact__alt {
+      margin-top: var(--sp-12); padding-top: var(--sp-8);
+      border-top: 1px solid rgba(245,239,230,0.12);
+      display: flex; flex-direction: column; gap: 6px;
+      align-items: center;
+    }
+    .sb-contact__alt-eyebrow {
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold-soft);
+    }
+    .sb-contact__alt-phone {
+      font-family: var(--font-serif); font-size: 28px; font-weight: 500;
+      color: var(--cream); letter-spacing: 0.02em;
+    }
+    .sb-contact__alt-phone:hover { color: var(--gold-soft); }
+    .sb-contact__alt-meta { font-size: 13px; color: rgba(245,239,230,0.6); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .sb-footer { background: var(--ink-deep); color: rgba(245,239,230,0.7); }
+    .sb-footer__inner {
+      max-width: var(--container); margin: 0 auto;
+      padding: var(--sp-12) var(--gutter);
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 32px; flex-wrap: wrap;
+      font-size: 14px;
+    }
+    .sb-footer__line b { color: var(--cream); font-weight: 600; }
+    .sb-footer__legal-nav { display:flex; gap: 24px; flex-wrap: wrap; }
+    .sb-footer__legal-nav a { color: rgba(245,239,230,0.7); font-size: 13px; }
+    .sb-footer__legal-nav a:hover { color: var(--gold-soft); }
+    .sb-footer__base { border-top: 1px solid rgba(245,239,230,0.08); padding: 18px 0; }
+    .sb-footer__copy { font-size: 12px; color: rgba(245,239,230,0.4); text-align:center; }
+    /* Em mobile, dar espaço extra no fim para o botão flutuante WhatsApp não cobrir o copyright */
+    @media (max-width: 640px) {
+      .sb-footer__base { padding-bottom: 88px; }
+    }
+
+    /* ============================================================
+       FLOATING WHATSAPP
+       ============================================================ */
+    .sb-whats-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 70;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 20px 14px 16px;
+      border-radius: var(--r-pill);
+      background: var(--whats); color: var(--cream);
+      box-shadow: var(--sh-3);
+      font-family: var(--font-sans); font-weight: 500; font-size: 14px;
+      text-decoration: none;
+      transform: translateY(120px); opacity: 0;
+      pointer-events: none;
+      transition: background var(--dur) var(--ease),
+                  transform var(--dur-slow) var(--ease),
+                  opacity var(--dur-slow) var(--ease);
+    }
+    .sb-whats-float.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .sb-whats-float:hover { background: var(--whats-soft); color: var(--cream); }
+    .sb-whats-float svg { width: 22px; height: 22px; }
+
+    /* ============================================================
+       LGPD COOKIE BANNER
+       ============================================================ */
+    .sb-cookies {
+      position: fixed; bottom: 88px; right: 16px;
+      width: 360px; max-width: calc(100vw - 32px); z-index: 80;
+      background: var(--cream);
+      border: 1px solid var(--cream-line);
+      border-top: 2px solid var(--gold);
+      border-radius: var(--r-md);
+      box-shadow: var(--sh-3);
+      padding: 16px 16px 14px;
+      transform: translateY(20px); opacity: 0;
+      pointer-events: none;
+      transition: transform 600ms var(--ease), opacity 600ms var(--ease);
+    }
+    .sb-cookies.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .sb-cookies__title {
+      font-family: var(--font-serif); font-size: 16px;
+      font-weight: 600; color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .sb-cookies__text {
+      font-size: 12px; color: var(--graphite);
+      line-height: 1.5; margin-bottom: 10px;
+    }
+    .sb-cookies__text a { color: var(--ink); border-bottom: 1px solid var(--gold); }
+    .sb-cookies__actions {
+      display: flex; gap: 6px; flex-wrap: nowrap;
+    }
+    .sb-cookies__btn {
+      flex: 1; min-width: 0;
+      padding: 8px 6px;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.01em;
+      border-radius: var(--r-md);
+      border: 1px solid var(--cream-line);
+      background: transparent; color: var(--ink);
+      cursor: pointer; white-space: nowrap;
+      transition: all var(--dur) var(--ease);
+    }
+    .sb-cookies__btn:hover { border-color: var(--gold); color: var(--gold-deep); }
+    .sb-cookies__btn:focus-visible {
+      outline: 2px solid var(--gold); outline-offset: 2px;
+      border-color: var(--gold);
+    }
+    .sb-cookies__btn:active { transform: translateY(1px); }
+    .sb-cookies__btn--primary {
+      background: var(--ink); color: var(--cream);
+      border-color: var(--ink);
+    }
+    .sb-cookies__btn--primary:hover {
+      background: var(--ink-soft); color: var(--cream); border-color: var(--ink-soft);
+    }
+    .sb-cookies__btn--primary:focus-visible {
+      outline: 2px solid var(--gold-soft); outline-offset: 2px;
+    }
+
+    /* ============================================================
+       REVEAL ON SCROLL — fade-up universal
+       ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(6px);
+      transition: opacity 1100ms var(--ease-out), transform 1100ms var(--ease-out), filter 900ms var(--ease-out);
+      will-change: opacity, transform, filter;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+    /* Stagger reveal — quando aplicado em pais com children */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      filter: blur(4px);
+      transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out), filter 700ms var(--ease-out);
+    }
+    .reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); filter: blur(0); }
+    .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+    .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+    .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 160ms; }
+    .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+    .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 320ms; }
+    .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 400ms; }
+
+    /* Gold rule animado — line draw da esquerda */
+    .gold-rule.reveal {
+      width: 0; opacity: 1; transform: none;
+      transition: width 1100ms var(--ease-out);
+    }
+    .gold-rule.reveal.is-visible { width: 48px; }
+    .gold-rule.reveal--center.is-visible { width: 48px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-stagger > * {
+        opacity: 1 !important; transform: none !important; transition: none !important;
+      }
+      .gold-rule.reveal { width: 48px; }
+    }
+
+    /* ============================================================
+       HOVER MICRO-INTERACTIONS — refinamentos
+       ============================================================ */
+    /* Foto About: scale lento estilo Ana Laura */
+    .sb-about__photo img {
+      transition: transform 8s var(--ease-out), filter 1.4s var(--ease-out);
+    }
+    .sb-about__photo:hover img {
+      transform: scale(1.04);
+      filter: saturate(0.92) sepia(0.05) contrast(1.06);
+    }
+
+    /* Cards de produto: lift + glow champagne + ornamento rotacionando */
+    .sb-offer__big {
+      transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
+      position: relative;
+    }
+    .sb-offer__big::before {
+      content: ''; position: absolute; inset: -1px;
+      border-radius: inherit;
+      box-shadow: 0 0 0 0 rgba(212,176,116,0);
+      transition: box-shadow 500ms var(--ease-out);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .sb-offer__big:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sh-3);
+    }
+    .sb-offer__big:hover::before {
+      box-shadow: 0 0 0 1px rgba(212,176,116,0.45), 0 12px 40px rgba(212,176,116,0.18);
+    }
+
+    /* Botões — arrow translateX */
+    .btn .arrow, .btn::after {
+      transition: transform 400ms var(--ease-out);
+      display: inline-block;
+    }
+
+    /* Magnetic CTAs (.btn[data-magnetic]) — JS controla translate */
+    [data-magnetic] {
+      transition: transform 300ms var(--ease-out);
+      will-change: transform;
+    }
+
+    /* Insurer cards — lift sutil */
+    .sb-insurer { transition: background var(--dur) var(--ease), transform 400ms var(--ease-out); }
+    .sb-insurer:hover { transform: translateY(-2px); background: var(--white); }
+
+    /* Process num — gold rule cresce no hover */
+    .sb-process__item::before {
+      transition: width 600ms var(--ease-out);
+    }
+    .sb-process__item:hover::before { width: 64px; }
+
+    /* Why num — same pattern */
+    .sb-why__item::before {
+      transition: width 600ms var(--ease-out);
+    }
+    .sb-why__item:hover::before { width: 56px; }
+
+    /* ============================================================
+       CONTÍNUOS — íris dos cards breathing
+       ============================================================ */
+    @keyframes breathe {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 0.85; transform: scale(1.05); }
+    }
+    .sb-offer__an-corner {
+      animation: breathe 7s var(--ease-in-out) infinite;
+    }
+    .sb-offer__big:hover .sb-offer__an-corner {
+      opacity: 0.95;
+      animation-play-state: paused;
+      transform: rotate(-6deg) scale(1.08);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sb-offer__an-corner { animation: none; }
+    }
+
+    /* ============================================================
+       FOOTER COM LOGO — assinatura
+       ============================================================ */
+    .sb-footer__brand {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 20px;
+    }
+    /* Logo no footer (sobre fundo navy escuro) */
+    .sb-footer__logo {
+      height: 96px; width: auto; max-width: 100%;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
+    }
+    /* Footer com mais respiro e estrutura */
+    .sb-footer__top {
+      max-width: var(--container); margin: 0 auto;
+      padding: var(--sp-16) var(--gutter) var(--sp-12);
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+      gap: var(--sp-12);
+    }
+    .sb-footer__col h4 {
+      font-family: var(--font-sans);
+      font-size: 11px; font-weight: 500;
+      letter-spacing: var(--ls-meta); text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 14px;
+    }
+    .sb-footer__col ul { display: flex; flex-direction: column; gap: 8px; }
+    .sb-footer__col a {
+      color: rgba(245,239,230,0.75); font-size: 14px;
+      transition: color var(--dur) var(--ease);
+    }
+    .sb-footer__col a:hover { color: var(--champagne); }
+    .sb-footer__col-text { font-size: 13px; color: rgba(245,239,230,0.65); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .sb-footer__top { grid-template-columns: 1fr; gap: var(--sp-8); }
+    }
+    @media (max-width: 1024px) {
+      .sb-hero__inner, .sb-about__inner, .sb-loc__inner {
+        grid-template-columns: 1fr;
+      }
+      .sb-offer__featured, .sb-offer__medium { grid-template-columns: repeat(2, 1fr); }
+      .sb-process__list, .sb-why__list { grid-template-columns: repeat(2, 1fr); }
+      .sb-insurers__grid { grid-template-columns: repeat(4, 1fr); }
+      .sb-testi__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root {
+        --sp-32: 96px;
+        --sp-24: 72px;
+        --sp-16: 56px;
+        --sp-12: 40px;
+        --gutter: 20px;
+        --header-h: 72px;
+      }
+      .sb-header__nav { display: none; }
+      .sb-header__cta { display: none; }
+      .sb-burger { display: inline-flex; }
+      .sb-hero { min-height: 640px; }
+      .sb-hero__title { font-size: clamp(36px, 9vw, 52px); }
+      .sb-about__inner { gap: var(--sp-12); }
+      .sb-insurers__grid { grid-template-columns: repeat(3, 1fr); }
+      .sb-insurer { height: 80px; }
+      .sb-insurer__name { font-size: 15px; }
+      .sb-footer__inner { flex-direction: column; align-items: flex-start; }
+      .sb-cookies { left: 12px; right: 12px; bottom: 96px; width: auto; padding: 14px; }
+    }
+    @media (max-width: 640px) {
+      .sb-offer__featured, .sb-offer__medium { grid-template-columns: 1fr; }
+      .sb-process__list, .sb-why__list { grid-template-columns: 1fr; }
+      .sb-testi__grid { grid-template-columns: 1fr; }
+      .sb-insurers__grid { grid-template-columns: repeat(2, 1fr); }
+      .sb-whats-float { bottom: 16px; right: 16px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pre-DOM: aplica is-scrolled antes do paint quando a página carrega
+       já com scroll > 20. Também marca body como is-loading para o loader. -->
+  <script>
+    (function () {
+      try {
+        if ((window.scrollY || window.pageYOffset || 0) > 20) {
+          document.documentElement.classList.add('sb-scrolled-init');
+        }
+        document.documentElement.classList.add('js-on');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- ============================================================
+       LOADER — primeira impressão, 1.2s
+       Linhas Art Nouveau se desenhando + monograma aparecendo.
+       LOGO PLACEHOLDER #3 — quando logo oficial chegar, substituir
+       o SVG abaixo por uma versão única que se desenha.
+       ============================================================ -->
+  <div class="sb-loader" id="sb-loader" aria-hidden="true">
+    <img class="sb-loader__mark" src="assets/logo-santa-branca.png" alt="" />
+  </div>
+
+  <!-- Grain overlay — textura de filme global -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Cursor glow (radial dourado SOB o cursor padrão, sem substituí-lo) -->
+  <div class="sb-cursor-glow" id="sb-cursor-glow" aria-hidden="true"></div>
+
+  <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="sb-header" id="site-header">
+    <div class="container sb-header__inner">
+      <a href="#" class="sb-header__brand" aria-label="Santa Branca Seguros — página inicial">
+        <img class="sb-header__logo" src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" />
+      </a>
+      <nav class="sb-header__nav" aria-label="Navegação principal">
+        <a class="sb-nav-link" href="#sobre">Sobre</a>
+        <a class="sb-nav-link" href="#coberturas">Coberturas</a>
+        <a class="sb-nav-link" href="#processo">Como funciona</a>
+        <a class="sb-nav-link" href="#seguradoras">Seguradoras</a>
+        <a class="sb-nav-link" href="#localizacao">Onde estamos</a>
+        <a class="sb-nav-link" href="#contato">Contato</a>
+      </nav>
+      <a href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" class="btn btn-primary sb-header__cta" target="_blank" rel="noopener">Pedir cotação</a>
+      <button class="sb-burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="sb-mobile" id="mobile-menu" aria-hidden="true">
+    <div class="sb-mobile__top">
+      <img src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" class="sb-mobile__logo" />
+
+      <button class="sb-mobile__close" id="mobile-close" aria-label="Fechar menu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="sb-mobile__nav" aria-label="Navegação móvel">
+      <a class="sb-mobile__link" href="#sobre">Sobre</a>
+      <a class="sb-mobile__link" href="#coberturas">Coberturas</a>
+      <a class="sb-mobile__link" href="#processo">Como funciona</a>
+      <a class="sb-mobile__link" href="#seguradoras">Seguradoras</a>
+      <a class="sb-mobile__link" href="#localizacao">Onde estamos</a>
+      <a class="sb-mobile__link" href="#contato">Contato</a>
+    </nav>
+    <div class="sb-mobile__cta">
+      <a href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" class="btn btn-whats" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.88 11.9L4 20l4.21-1.1a7.93 7.93 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.39-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 12.23-3.5 6.59 6.59 0 0 1-6.63 6.59Z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="sb-hero" aria-label="Apresentação Santa Branca Seguros">
+      <!-- Background layers: gradient base + aurora animada + canvas de partículas -->
+      <div class="sb-hero__bg" aria-hidden="true"></div>
+      <div class="sb-hero__aurora" aria-hidden="true"></div>
+      <canvas class="sb-hero__particles" id="sb-particles" aria-hidden="true"></canvas>
+
+      <div class="container sb-hero__inner">
+        <!-- LADO ESQUERDO — copy + tickers + selo -->
+        <div class="sb-hero__copy">
+          <svg class="sb-hero__motif" viewBox="0 0 80 22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+            <path d="M0 11 H28"/>
+            <path d="M40 4 C 35 9, 35 13, 40 11 C 45 13, 45 9, 40 4 Z"/>
+            <path d="M40 18 C 35 13, 35 11, 40 11 C 45 11, 45 13, 40 18 Z"/>
+            <circle cx="40" cy="11" r="1.4" fill="currentColor" stroke="none"/>
+            <path d="M52 11 H80"/>
+          </svg>
+          <div class="sb-hero__eyebrow-wrap">
+            <span class="eyebrow eyebrow--on-dark">Desde 1994 · Belo Horizonte</span>
+            <hr class="gold-rule" />
+          </div>
+          <!-- Stagger reveal — cada palavra entra com delay de 80ms -->
+          <h1 class="sb-hero__title">
+            <span class="word" style="animation-delay:.50s">Seguro</span>
+            <span class="word" style="animation-delay:.58s">feito</span>
+            <span class="word" style="animation-delay:.66s">por</span>
+            <span class="word" style="animation-delay:.74s">gente</span>
+            <br/>
+            <span class="word" style="animation-delay:.86s"><em>que conhece</em></span>
+            <span class="word" style="animation-delay:.96s"><em>você</em></span>
+            <span class="word" style="animation-delay:1.04s"><em>pelo</em></span>
+            <span class="word" style="animation-delay:1.12s"><em>nome.</em></span>
+          </h1>
+          <p class="sb-hero__lead">A Santa Branca é uma corretora familiar de Belo Horizonte. Atende famílias e empresas com 11 seguradoras parceiras — e a mesma pessoa que te atende hoje vai te atender no sinistro.</p>
+          <div class="sb-hero__ctas">
+            <a class="btn btn-whats sb-hero__cta-whats" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.88 11.9L4 20l4.21-1.1a7.93 7.93 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.39-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 12.23-3.5 6.59 6.59 0 0 1-6.63 6.59Z"/></svg>
+              Falar no WhatsApp
+            </a>
+            <a class="btn btn-ghost-light sb-hero__cta-quote" href="#contato" data-magnetic>Pedir uma cotação →</a>
+          </div>
+
+          <!-- TICKERS — números animam de 0 ao alvo quando entram viewport -->
+          <div class="sb-hero__tickers" aria-label="Estatísticas da corretora">
+            <div class="sb-hero__ticker">
+              <span class="sb-hero__ticker-num" data-count="11" data-suffix="">0</span>
+              <span class="sb-hero__ticker-label">Seguradoras parceiras</span>
+            </div>
+            <div class="sb-hero__ticker">
+              <span class="sb-hero__ticker-num" data-count="30" data-suffix="+">0</span>
+              <span class="sb-hero__ticker-label">Anos de mercado</span>
+            </div>
+            <div class="sb-hero__ticker">
+              <span class="sb-hero__ticker-num" data-count="3" data-suffix="">0</span>
+              <span class="sb-hero__ticker-label">Gerações da família</span>
+            </div>
+          </div>
+
+          <!-- TODO: validar SUSEP completo (com dígito verificador) com cliente antes do lançamento -->
+          <div class="sb-hero__seal">
+            <span class="sb-hero__seal-rule" aria-hidden="true"></span>
+            <div class="sb-hero__seal-text">
+              <span class="sb-hero__seal-eyebrow">Atuando desde 1994</span>
+              <span class="sb-hero__seal-line">SUSEP <b>10.0179680</b></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LADO DIREITO — vitral em arco gótico com camadas animadas -->
+        <div class="sb-hero__art" aria-hidden="true">
+          <!-- Glow champagne pulsando atrás -->
+          <div class="sb-hero__art-glow"></div>
+
+          <!-- Mandala SVG girando atrás do vitral -->
+          <svg class="sb-hero__art-mandala" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+            <g>
+              <circle cx="200" cy="200" r="190"/>
+              <circle cx="200" cy="200" r="160" stroke-dasharray="2 6"/>
+              <circle cx="200" cy="200" r="130"/>
+              <path d="M200 30 C 160 100, 160 170, 200 210 C 240 170, 240 100, 200 30 Z"/>
+              <path d="M200 370 C 160 300, 160 230, 200 190 C 240 230, 240 300, 200 370 Z"/>
+              <path d="M30 200 C 100 160, 170 160, 210 200 C 170 240, 100 240, 30 200 Z"/>
+              <path d="M370 200 C 300 160, 230 160, 190 200 C 230 240, 300 240, 370 200 Z"/>
+              <circle cx="200" cy="200" r="8" fill="currentColor" stroke="none"/>
+              <path d="M105 95 L 295 295 M295 95 L 105 295" stroke-dasharray="1 4"/>
+            </g>
+          </svg>
+
+          <!-- Vitral mascarado em arco gótico -->
+          <div class="sb-hero__art-frame">
+            <picture>
+              <source srcset="assets/photo-office.webp" type="image/webp" />
+              <img src="assets/photo-office.jpg" alt="" loading="eager" decoding="async" width="1200" height="1500" />
+            </picture>
+          </div>
+
+          <!-- Borda dourada em SVG (segue o shape do arco) -->
+          <svg class="sb-hero__art-border" viewBox="0 0 100 133" preserveAspectRatio="none">
+            <path d="M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z"
+                  fill="none" stroke="rgba(212,176,116,0.55)" stroke-width="0.5"
+                  vector-effect="non-scaling-stroke"/>
+          </svg>
+
+          <!-- Scan-line de luz (reflexo) -->
+          <div class="sb-hero__art-scan"></div>
+
+          <!-- 4 ornamentos AN nos cantos (íris) -->
+          <svg class="sb-hero__art-corner-tl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+          </svg>
+          <svg class="sb-hero__art-corner-tr" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+          </svg>
+          <svg class="sb-hero__art-corner-bl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+          </svg>
+          <svg class="sb-hero__art-corner-br" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Art Nouveau divider entre Hero e Sobre — fica sobre fundo navy
+         (continuidade do hero, sem criar faixa creme isolada) -->
+    <div class="an-band an-band--ink an-band--joinHero" aria-hidden="true">
+      <svg class="an-divider an-divider--on-dark" viewBox="0 0 420 32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M0 16 H160"/>
+        <path d="M160 16 C 175 16, 185 8, 195 6"/>
+        <path d="M210 6 C 200 10, 200 16, 210 16 C 220 16, 220 10, 210 6 Z"/>
+        <path d="M210 26 C 200 22, 200 16, 210 16 C 220 16, 220 22, 210 26 Z"/>
+        <circle cx="210" cy="16" r="1.4" fill="currentColor" stroke="none"/>
+        <path d="M225 6 C 235 8, 245 16, 260 16"/>
+        <path d="M260 16 H420"/>
+      </svg>
+    </div>
+
+    <!-- ============================================================
+         ABOUT
+         ============================================================ -->
+    <section class="sb-about" id="sobre" aria-labelledby="sobre-title">
+      <div class="container sb-about__inner">
+        <div class="sb-about__visual reveal">
+          <div class="sb-about__photo-wrap">
+            <svg class="an-corner" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+              <path d="M56 4 H32"/><path d="M4 56 V32"/>
+              <path d="M32 4 C 22 4, 14 8, 10 14 C 6 20, 4 26, 4 32"/>
+              <path d="M14 14 C 18 16, 20 20, 18 24 C 16 26, 14 24, 14 22"/>
+              <circle cx="22" cy="10" r="1.6" fill="currentColor" stroke="none"/>
+              <path d="M22 10 C 24 6, 28 6, 30 8"/>
+            </svg>
+            <!--
+              TODO CRÍTICO: substituir por retrato em P&B da família + equipe (3 gerações).
+              A foto atual é da entrada do escritório — placeholder estrutural até a sessão de fotos.
+            -->
+            <div class="sb-about__photo">
+              <picture>
+                <source srcset="assets/photo-office.webp" type="image/webp" />
+                <img
+                  src="assets/photo-office.jpg"
+                  alt="Vista da entrada do escritório da Santa Branca Seguros, com vitral Art Nouveau característico"
+                  loading="lazy" decoding="async"
+                  width="1200" height="1500"
+                />
+              </picture>
+              <div class="sb-about__photo-overlay">
+                <span class="eyebrow" style="color:var(--gold-soft);">Foto provisória</span>
+                <span>Retrato da família + equipe<br/>a substituir antes do lançamento</span>
+              </div>
+            </div>
+          </div>
+          <div class="sb-about__caption">Três gerações da mesma família, lado a lado.</div>
+        </div>
+        <div class="sb-about__copy reveal">
+          <span class="eyebrow">Sobre a Santa Branca</span>
+          <hr class="gold-rule" />
+          <h2 id="sobre-title" class="sb-about__title">Nasceu em 1994.<br/>Cresceu por indicação.</h2>
+          <p>A Santa Branca Seguros nasceu em Belo Horizonte em 1994, e desde então cuida do que importa para os mineiros: família, casa, carro, negócio, futuro.</p>
+          <p>São três gerações da mesma família trabalhando lado a lado com uma equipe que conhece cada cliente pelo nome. Crescemos por indicação — o que diz mais sobre nosso trabalho do que qualquer slogan.</p>
+          <p>Operamos com as principais seguradoras do Brasil e somos referência em Belo Horizonte para quem busca atendimento humano com a estrutura técnica de uma grande corretora.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Art Nouveau band entre Sobre e Por que -->
+    <div class="an-band" aria-hidden="true">
+      <svg class="an-divider" viewBox="0 0 360 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M0 14 H140"/>
+        <path d="M140 14 C 150 14, 154 10, 158 7 C 162 4, 168 5, 170 9"/>
+        <path d="M180 4 C 174 9, 174 14, 180 14 C 186 14, 186 9, 180 4 Z"/>
+        <path d="M180 24 C 174 19, 174 14, 180 14 C 186 14, 186 19, 180 24 Z"/>
+        <circle cx="180" cy="14" r="1.6" fill="currentColor" stroke="none"/>
+        <path d="M190 9 C 192 5, 198 4, 202 7 C 206 10, 210 14, 220 14"/>
+        <path d="M220 14 H360"/>
+      </svg>
+    </div>
+
+    <!-- ============================================================
+         WHY US
+         ============================================================ -->
+    <section class="sb-why" id="por-que" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Por que a Santa Branca</span>
+          <hr class="gold-rule" />
+          <h2 id="why-title">Quatro motivos para confiar.</h2>
+        </div>
+        <ol class="sb-why__list reveal-stagger">
+          <li class="sb-why__item">
+            <div class="sb-why__num">01</div>
+            <h3 class="sb-why__t">Cotação em 11 seguradoras de uma vez</h3>
+            <p>Você fala uma vez, a gente cota com Porto Seguro, Allianz, Zurich, Liberty, SulAmerica, HDI, Tokio Marine, Itaú, MetLife, Chubb e AIG. Você compara as melhores opções, sem precisar ligar pra ninguém.</p>
+          </li>
+          <li class="sb-why__item">
+            <div class="sb-why__num">02</div>
+            <h3 class="sb-why__t">Atendimento humano, sem chatbot</h3>
+            <p>Aqui você fala com gente que conhece seguro e conhece você. Sem fluxo automático, sem URA, sem “aguarde na linha”.</p>
+          </li>
+          <li class="sb-why__item">
+            <div class="sb-why__num">03</div>
+            <h3 class="sb-why__t">Três décadas de mercado em Minas Gerais</h3>
+            <p>Conhecemos as particularidades de cada região, cada perfil, cada seguradora. Indicamos o que faz sentido pra você — não o que dá mais comissão.</p>
+          </li>
+          <li class="sb-why__item">
+            <div class="sb-why__num">04</div>
+            <h3 class="sb-why__t">Suporte real em sinistro</h3>
+            <p>A hora que você precisa de seguro de verdade é quando algo acontece. Aqui você tem a equipe da Santa Branca te acompanhando do registro à indenização.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="an-band an-band--deep" aria-hidden="true">
+      <svg class="an-divider" viewBox="0 0 360 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M0 14 H120"/>
+        <path d="M120 14 C 134 14, 144 6, 156 6 C 168 6, 174 12, 180 14"/>
+        <path d="M180 14 C 186 16, 192 22, 204 22 C 216 22, 226 14, 240 14"/>
+        <path d="M240 14 H360"/>
+        <circle cx="180" cy="14" r="2" fill="currentColor" stroke="none"/>
+        <circle cx="156" cy="6" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="204" cy="22" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+
+    <!-- ============================================================
+         OFFER / COBERTURAS
+         ============================================================ -->
+    <section class="sb-offer" id="coberturas" aria-labelledby="offer-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Coberturas</span>
+          <hr class="gold-rule" />
+          <h2 id="offer-title">Seguros que cuidamos.</h2>
+        </div>
+
+        <div class="sb-offer__featured reveal-stagger">
+          <article class="card sb-offer__big">
+            <svg class="sb-offer__an-corner" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+              <!-- Íris Art Nouveau (três pétalas + caule) — assinatura recorrente -->
+              <path d="M20 6 C 14 12, 14 20, 20 22 C 26 20, 26 12, 20 6 Z"/>
+              <path d="M14 14 C 8 14, 6 18, 8 22"/>
+              <path d="M26 14 C 32 14, 34 18, 32 22"/>
+              <path d="M20 22 L 20 34"/>
+              <path d="M20 28 C 22 26, 26 26, 28 28"/>
+              <path d="M20 32 C 18 30, 14 30, 12 32"/>
+              <circle cx="20" cy="14" r="1.6" fill="currentColor" stroke="none"/>
+            </svg>
+            <div class="sb-offer__icon" aria-hidden="true">
+              <!-- Auto: silhueta de carro com curvas Art Nouveau -->
+              <svg viewBox="0 0 36 28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18 Q 3 12, 7 11 L 10 6 Q 11 4, 14 4 L 22 4 Q 25 4, 26 6 L 29 11 Q 33 12, 33 18 L 33 21 L 28 21"/>
+                <path d="M8 21 L 3 21 L 3 18"/>
+                <path d="M3 18 L 33 18" stroke-width="0.9"/>
+                <path d="M10 11 Q 18 9, 26 11"/>
+                <circle cx="10" cy="21" r="3"/>
+                <circle cx="10" cy="21" r="1" fill="currentColor" stroke="none"/>
+                <circle cx="26" cy="21" r="3"/>
+                <circle cx="26" cy="21" r="1" fill="currentColor" stroke="none"/>
+                <path d="M5 14 Q 4 14, 4 15" stroke-width="1"/>
+                <path d="M31 14 Q 32 14, 32 15" stroke-width="1"/>
+              </svg>
+            </div>
+            <h3 class="sb-offer__bigTitle">Seguro Auto</h3>
+            <p>Proteja seu veículo, terceiros e quem viaja com você. Cobertura completa com as melhores condições do mercado.</p>
+            <a class="sb-offer__link" href="#contato">Ver detalhes <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="card sb-offer__big">
+            <svg class="sb-offer__an-corner" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+              <!-- Íris Art Nouveau (três pétalas + caule) — assinatura recorrente -->
+              <path d="M20 6 C 14 12, 14 20, 20 22 C 26 20, 26 12, 20 6 Z"/>
+              <path d="M14 14 C 8 14, 6 18, 8 22"/>
+              <path d="M26 14 C 32 14, 34 18, 32 22"/>
+              <path d="M20 22 L 20 34"/>
+              <path d="M20 28 C 22 26, 26 26, 28 28"/>
+              <path d="M20 32 C 18 30, 14 30, 12 32"/>
+              <circle cx="20" cy="14" r="1.6" fill="currentColor" stroke="none"/>
+            </svg>
+            <div class="sb-offer__icon" aria-hidden="true">
+              <!-- Residencial: casa com curvas Art Nouveau e íris no topo -->
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 16 Q 16 4, 28 16"/>
+                <path d="M6 14 L 6 27 L 26 27 L 26 14"/>
+                <path d="M6 27 L 26 27"/>
+                <path d="M13 27 L 13 19 Q 16 17, 19 19 L 19 27" stroke-width="1.2"/>
+                <path d="M16 4 L 16 8"/>
+                <path d="M14 6 Q 16 4, 18 6" stroke-width="0.9"/>
+                <circle cx="16" cy="3" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3 class="sb-offer__bigTitle">Seguro Residencial</h3>
+            <p>Sua casa protegida contra incêndio, roubo, danos elétricos, fenômenos da natureza e mais. Inclui assistência 24h.</p>
+            <a class="sb-offer__link" href="#contato">Ver detalhes <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="card sb-offer__big">
+            <svg class="sb-offer__an-corner" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+              <!-- Íris Art Nouveau (três pétalas + caule) — assinatura recorrente -->
+              <path d="M20 6 C 14 12, 14 20, 20 22 C 26 20, 26 12, 20 6 Z"/>
+              <path d="M14 14 C 8 14, 6 18, 8 22"/>
+              <path d="M26 14 C 32 14, 34 18, 32 22"/>
+              <path d="M20 22 L 20 34"/>
+              <path d="M20 28 C 22 26, 26 26, 28 28"/>
+              <path d="M20 32 C 18 30, 14 30, 12 32"/>
+              <circle cx="20" cy="14" r="1.6" fill="currentColor" stroke="none"/>
+            </svg>
+            <div class="sb-offer__icon" aria-hidden="true">
+              <!-- Vida: coração estilizado com curvas e folha Art Nouveau -->
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 27 Q 4 18, 6 11 Q 7 5, 12 5 Q 14 5, 16 8 Q 18 5, 20 5 Q 25 5, 26 11 Q 28 18, 16 27 Z"/>
+                <path d="M16 8 Q 14 12, 16 18" stroke-width="0.9"/>
+                <path d="M12 12 Q 16 14, 20 12" stroke-width="0.9"/>
+                <circle cx="16" cy="15" r="1" fill="currentColor" stroke="none"/>
+                <path d="M9 9 Q 8 7, 10 6" stroke-width="0.9"/>
+                <path d="M23 9 Q 24 7, 22 6" stroke-width="0.9"/>
+              </svg>
+            </div>
+            <h3 class="sb-offer__bigTitle">Seguro de Vida</h3>
+            <p>Tranquilidade para você e segurança para quem você ama, independentemente do que acontecer.</p>
+            <a class="sb-offer__link" href="#contato">Ver detalhes <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+
+        <div class="sb-offer__medium reveal-stagger">
+          <article class="card sb-offer__med">
+            <div class="sb-offer__icon-sm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M3 21h18"/><path d="M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+            </div>
+            <div>
+              <h3 class="sb-offer__medTitle">Seguro Empresarial</h3>
+              <p>Patrimônio, lucros cessantes e responsabilidade civil para o seu negócio.</p>
+            </div>
+          </article>
+          <article class="card sb-offer__med">
+            <div class="sb-offer__icon-sm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h.01M9 11h.01M9 15h.01M15 7h.01M15 11h.01M15 15h.01"/><path d="M11 21v-3h2v3"/></svg>
+            </div>
+            <div>
+              <h3 class="sb-offer__medTitle">Seguro de Condomínio</h3>
+              <p>Plano básico exigido por lei (Art. 1.346 CC) e coberturas estendidas para o prédio inteiro.</p>
+            </div>
+          </article>
+          <article class="card sb-offer__med">
+            <div class="sb-offer__icon-sm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c0-1.5-2-3-5-3-2 0-3.5 1-4 2H7a3 3 0 00-3 3v3l-2 1v3l2 1v2a2 2 0 002 2h2v2h2v-2h6v2h2v-2a2 2 0 002-2v-7c0-3 1-3 1-5z"/><circle cx="14" cy="10" r=".8" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <h3 class="sb-offer__medTitle">Previdência Privada</h3>
+              <p>Mantenha o padrão de vida no futuro. Auxiliamos na escolha entre PGBL e VGBL.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="sb-offer__others">
+          <span class="eyebrow sb-offer__othersHead">Também atendemos</span>
+          <ul class="sb-offer__chips">
+            <li><a class="sb-offer__chip" href="#contato">Seguro Viagem</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Seguro Saúde</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Saúde Animal</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Equipamentos Portáteis</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Responsabilidade Civil Profissional</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">D&amp;O (Diretores e Executivos)</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Risco de Engenharia</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Transporte Nacional e Internacional</a><span class="sb-offer__sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-offer__chip" href="#contato">Consórcio (Imóvel e Automóvel)</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="an-band" aria-hidden="true">
+      <svg class="an-divider" viewBox="0 0 360 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M0 14 H150"/>
+        <path d="M150 14 Q 165 4, 180 14 Q 195 24, 210 14"/>
+        <path d="M210 14 H360"/>
+        <path d="M180 8 V20" stroke-width="0.6"/>
+        <circle cx="180" cy="14" r="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- ============================================================
+         PROCESS
+         ============================================================ -->
+    <section class="sb-process" id="processo" aria-labelledby="proc-title">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">Como funciona</span>
+          <hr class="gold-rule" />
+          <h2 id="proc-title">Quatro passos. Uma pessoa.</h2>
+        </div>
+        <ol class="sb-process__list reveal-stagger">
+          <li class="sb-process__item">
+            <div class="sb-process__num">01</div>
+            <h3 class="sb-process__t">Você fala com a gente</h3>
+            <p>WhatsApp, telefone ou pessoalmente. Conta o que precisa proteger.</p>
+          </li>
+          <li class="sb-process__item">
+            <div class="sb-process__num">02</div>
+            <h3 class="sb-process__t">A gente cota com 11 seguradoras</h3>
+            <p>Em até 24h você recebe as melhores opções comparadas.</p>
+          </li>
+          <li class="sb-process__item">
+            <div class="sb-process__num">03</div>
+            <h3 class="sb-process__t">Você escolhe com calma</h3>
+            <p>A gente explica cada cobertura, cada cláusula, cada diferença. Sem pressão.</p>
+          </li>
+          <li class="sb-process__item">
+            <div class="sb-process__num">04</div>
+            <h3 class="sb-process__t">Acompanhamos durante toda a vigência</h3>
+            <p>Renovação, sinistro, dúvida — você tem com quem contar.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- HIDDEN: depoimentos serão reativados antes do lançamento (textos atuais
+         são exemplos fictícios — risco reputacional + CDC art. 36/37).
+         Para reativar: descomentar todo o bloco até o final da </section>.
+         ============================================================ -->
+    <!--
+    <section class="sb-testi" id="depoimentos" aria-labelledby="testi-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Quem é cliente</span>
+          <hr class="gold-rule" />
+          <h2 id="testi-title">Indicados por quem já confia.</h2>
+        </div>
+        <div class="sb-testi__grid">
+          <article class="sb-testi__card">
+            <div class="sb-testi__quote" aria-hidden="true">“</div>
+            <p class="sb-testi__text">Sou cliente há mais de quinze anos. Auto, casa, vida — tudo com a Santa Branca. O que me prende é simples: a mesma pessoa atende do começo ao fim.</p>
+            <div class="sb-testi__who">
+              <div class="sb-testi__avatar" aria-hidden="true">M</div>
+              <div>
+                <div class="sb-testi__name">Maria Eduarda R.</div>
+                <div class="sb-testi__meta">Cliente desde 2009 · Buritis, BH</div>
+              </div>
+            </div>
+          </article>
+          <article class="sb-testi__card">
+            <div class="sb-testi__quote" aria-hidden="true">“</div>
+            <p class="sb-testi__text">Bati o carro num sábado de manhã. Mandei mensagem, em quinze minutos já tinha guincho a caminho e a vistoria marcada. Foi o seguro mais tranquilo que já acionei.</p>
+            <div class="sb-testi__who">
+              <div class="sb-testi__avatar" aria-hidden="true">R</div>
+              <div>
+                <div class="sb-testi__name">Rafael Andrade</div>
+                <div class="sb-testi__meta">Cliente desde 2018 · Lourdes, BH</div>
+              </div>
+            </div>
+          </article>
+          <article class="sb-testi__card">
+            <div class="sb-testi__quote" aria-hidden="true">“</div>
+            <p class="sb-testi__text">Indicada por uma amiga e hoje toda a família está com eles. Pais, irmãos, escritório. É daqueles lugares onde a gente sabe que pode ligar e tem alguém do outro lado.</p>
+            <div class="sb-testi__who">
+              <div class="sb-testi__avatar" aria-hidden="true">C</div>
+              <div>
+                <div class="sb-testi__name">Camila Vasconcelos</div>
+                <div class="sb-testi__meta">Cliente desde 2020 · Savássi, BH</div>
+              </div>
+            </div>
+          </article>
+          <article class="sb-testi__card">
+            <div class="sb-testi__quote" aria-hidden="true">“</div>
+            <p class="sb-testi__text">Faço o seguro do escritório e da minha clientela com eles há oito anos. Cotam com todas as seguradoras sérias do mercado e explicam cada cláusula com paciência.</p>
+            <div class="sb-testi__who">
+              <div class="sb-testi__avatar" aria-hidden="true">P</div>
+              <div>
+                <div class="sb-testi__name">Dr. Paulo Henrique M.</div>
+                <div class="sb-testi__meta">Cliente PJ desde 2017 · Funcionários, BH</div>
+              </div>
+            </div>
+          </article>
+          <article class="sb-testi__card">
+            <div class="sb-testi__quote" aria-hidden="true">“</div>
+            <p class="sb-testi__text">Fui no escritório achando que ia ser balcão de seguradora. É uma sala calma, com café, e gente que ouve. Saí com previdência, vida e residencial fechados — e sentindo que entendi tudo.</p>
+            <div class="sb-testi__who">
+              <div class="sb-testi__avatar" aria-hidden="true">L</div>
+              <div>
+                <div class="sb-testi__name">Letícia Pereira</div>
+                <div class="sb-testi__meta">Cliente desde 2022 · Belvedere, BH</div>
+              </div>
+            </div>
+          </article>
+          <article class="sb-testi__card">
+            <div class="sb-testi__quote" aria-hidden="true">“</div>
+            <p class="sb-testi__text">Meu pai já era cliente. Quando casei, fui direto. Minha filha vai ser também. É trabalho de gerações atendendo gerações, e isso vale muito.</p>
+            <div class="sb-testi__who">
+              <div class="sb-testi__avatar" aria-hidden="true">B</div>
+              <div>
+                <div class="sb-testi__name">Bruno Tavares</div>
+                <div class="sb-testi__meta">Cliente desde 2011 · Pampulha, BH</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    -->
+    <!-- /HIDDEN testimonials -->
+
+    <!-- Art Nouveau divider entre Como funciona e Seguradoras -->
+    <div class="an-band" aria-hidden="true">
+      <svg class="an-divider" viewBox="0 0 420 32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M0 16 H150"/>
+        <path d="M150 16 Q 170 6, 195 12"/>
+        <path d="M210 4 Q 198 10, 200 16 Q 198 22, 210 28 Q 222 22, 220 16 Q 222 10, 210 4 Z"/>
+        <circle cx="210" cy="16" r="3" fill="none"/>
+        <circle cx="210" cy="16" r="1.2" fill="currentColor" stroke="none"/>
+        <path d="M225 12 Q 250 6, 270 16"/>
+        <path d="M270 16 H420"/>
+      </svg>
+    </div>
+
+    <!-- ============================================================
+         INSURERS
+         ============================================================ -->
+    <section class="sb-insurers" id="seguradoras" aria-labelledby="ins-title">
+      <div class="container">
+        <div class="sb-insurers__head">
+          <span class="eyebrow">Seguradoras parceiras</span>
+          <hr class="gold-rule gold-rule--center" />
+          <h2 id="ins-title" class="sb-insurers__title">As 11 principais do Brasil. Em uma cotação só.</h2>
+        </div>
+        <!-- TODO: substituir cada nome por logo oficial em SVG/PNG (em escala de cinza, ganha cor no hover). -->
+        <div class="sb-insurers__grid reveal">
+          <div class="sb-insurer"><span class="sb-insurer__name">Porto Seguro</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">Allianz</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">Zurich</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">Liberty</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">SulAmérica</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">HDI</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">Tokio Marine</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">Itaú</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">MetLife</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">Chubb</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name">AIG</span></div>
+          <div class="sb-insurer"><span class="sb-insurer__name" style="color:var(--gold-deep); font-style:italic;">+ você</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LOCATION
+         ============================================================ -->
+    <section class="sb-loc" id="localizacao" aria-labelledby="loc-title">
+      <div class="container sb-loc__inner">
+        <div class="sb-loc__copy reveal">
+          <span class="eyebrow">Localização</span>
+          <hr class="gold-rule" />
+          <h2 id="loc-title" class="sb-loc__title">Estamos em Belo Horizonte.<br/>Você é bem-vindo.</h2>
+          <ul class="sb-loc__list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <b>Av. Cônsul Antônio Cadar, 122 — Loja 89</b>
+                <span>Center São Bento · Belo Horizonte, MG</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <div>
+                <b>Atendimento presencial</b>
+                <span>Segunda a sexta, 9h às 18h</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+              <div>
+                <b><a href="tel:+553133095558">(31) 3309-5558</a></b>
+                <span><a href="tel:+5531987263411">(31) 98726-3411</a></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="sb-loc__map">
+          <iframe
+            src="https://maps.google.com/maps?q=Santa+Branca+Adm+e+Corretora+de+Seguros+Ltda%2C+Av.+C%C3%B4nsul+Ant%C3%B4nio+Cadar%2C+122%2C+Belo+Horizonte&hl=pt-BR&z=17&t=m&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa do escritório Santa Branca Seguros no Center São Bento, Belo Horizonte"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT — WhatsApp como única forma de conversão
+         ============================================================ -->
+    <section class="sb-contact" id="contato" aria-labelledby="contact-title">
+      <div class="sb-contact__bg" aria-hidden="true"></div>
+      <div class="container sb-contact__inner reveal">
+        <span class="eyebrow eyebrow--on-dark">Vamos conversar</span>
+        <hr class="gold-rule gold-rule--center" style="background: var(--gold-soft);" />
+        <h2 id="contact-title" class="sb-contact__title">A gente responde rápido.<br/>De gente pra gente.</h2>
+        <p class="sb-contact__lead">Conta o que você precisa proteger. Em poucos minutos a gente já está cotando com as 11 seguradoras parceiras.</p>
+        <a class="btn btn-whats sb-contact__whats" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.88 11.9L4 20l4.21-1.1a7.93 7.93 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.39-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 12.23-3.5 6.59 6.59 0 0 1-6.63 6.59Z"/></svg>
+          Conversar pelo WhatsApp
+        </a>
+        <p class="sb-contact__note">Resposta em até 1 hora útil · Segunda a sexta, 9h às 18h</p>
+
+        <div class="sb-contact__alt">
+          <span class="sb-contact__alt-eyebrow">Prefere ligar?</span>
+          <a class="sb-contact__alt-phone" href="tel:+553133095558">(31) 3309-5558</a>
+          <span class="sb-contact__alt-meta">Telefone fixo do escritório</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER — assinatura premium com logo destacada
+       ============================================================ -->
+  <footer class="sb-footer">
+    <div class="sb-footer__top">
+      <div class="sb-footer__col">
+        <div class="sb-footer__brand">
+          <img class="sb-footer__logo" src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" />
+        </div>
+        <p class="sb-footer__col-text">
+          Corretora familiar de Belo Horizonte. Três décadas atendendo famílias e empresas com 11 seguradoras parceiras.<br/><br/>
+          SUSEP nº 10.0179680
+        </p>
+      </div>
+
+      <div class="sb-footer__col">
+        <h4>Navegar</h4>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#coberturas">Coberturas</a></li>
+          <li><a href="#processo">Como funciona</a></li>
+          <li><a href="#seguradoras">Seguradoras</a></li>
+          <li><a href="#localizacao">Onde estamos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-footer__col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacidade.html">Política de Privacidade</a></li>
+          <li><a href="termos.html">Termos de Uso</a></li>
+          <li><a href="#" id="cookie-prefs-link">Preferências de cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sb-footer__base">
+      <div class="container sb-footer__copy">
+        © <span id="footer-year">2026</span> Santa Branca Seguros · Todos os direitos reservados
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       FLOATING WHATSAPP
+       ============================================================ -->
+  <a class="sb-whats-float" id="whats-float" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener" aria-label="Falar conosco pelo WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.88 11.9L4 20l4.21-1.1a7.93 7.93 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.39-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 12.23-3.5 6.59 6.59 0 0 1-6.63 6.59Zm3.62-4.93c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.6-.53-1-1.18-1.11-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.32-.34-.45-.34l-.39-.01c-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.66 0 .98.71 1.93.81 2.06.1.13 1.4 2.13 3.39 2.99.47.2.84.33 1.13.42.47.15.9.13 1.24.08.38-.06 1.18-.48 1.34-.95.16-.47.16-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
+    <span>Falar no WhatsApp</span>
+  </a>
+
+  <!-- ============================================================
+       LGPD COOKIE BANNER
+       ============================================================ -->
+  <aside class="sb-cookies" id="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-text">
+    <div class="sb-cookies__title" id="cookie-title">Sua privacidade importa</div>
+    <p class="sb-cookies__text" id="cookie-text">
+      A gente usa cookies para entender como o site é usado e melhorar a sua experiência. Você escolhe o que aceitar. Saiba mais na nossa <a href="privacidade.html">Política de Privacidade</a>.
+    </p>
+    <div class="sb-cookies__actions">
+      <button class="sb-cookies__btn" data-cookie="essential">Apenas essenciais</button>
+      <button class="sb-cookies__btn" data-cookie="measure">Permitir medição</button>
+      <button class="sb-cookies__btn sb-cookies__btn--primary" data-cookie="all">Aceitar tudo</button>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ============================================================
+         HEADER SCROLL STATE + WHATSAPP FLOAT
+         ============================================================ */
+      var header = document.getElementById('site-header');
+      var whatsFloat = document.getElementById('whats-float');
+      var hero = document.querySelector('.sb-hero');
+
+      function onScroll() {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 20) header.classList.add('is-scrolled');
+        else header.classList.remove('is-scrolled');
+
+        var heroH = hero ? hero.offsetHeight - 200 : 600;
+        if (y > heroH) whatsFloat.classList.add('is-visible');
+        else whatsFloat.classList.remove('is-visible');
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      /* Lenis dispara seu próprio scroll event que delega ao window — esse listener cobre ambos */
+      onScroll();
+      /* Pre-DOM init class só era necessária antes do JS rodar */
+      document.documentElement.classList.remove('sb-scrolled-init');
+
+      /* ============================================================
+         MOBILE MENU (com focus trap e aria-hidden no main)
+         ============================================================ */
+      var burger = document.getElementById('burger');
+      var mobile = document.getElementById('mobile-menu');
+      var mobileClose = document.getElementById('mobile-close');
+      var mobileLinks = mobile.querySelectorAll('a, button');
+      var mainEl = document.getElementById('main');
+      var lastFocused = null;
+
+      function openMenu() {
+        lastFocused = document.activeElement;
+        mobile.classList.add('is-open');
+        mobile.setAttribute('aria-hidden', 'false');
+        burger.setAttribute('aria-expanded', 'true');
+        if (mainEl) mainEl.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function () { mobileClose.focus(); }, 50);
+      }
+      function closeMenu() {
+        mobile.classList.remove('is-open');
+        mobile.setAttribute('aria-hidden', 'true');
+        burger.setAttribute('aria-expanded', 'false');
+        if (mainEl) mainEl.removeAttribute('aria-hidden');
+        document.body.style.overflow = '';
+        if (lastFocused && lastFocused.focus) lastFocused.focus();
+      }
+      burger.addEventListener('click', openMenu);
+      mobileClose.addEventListener('click', closeMenu);
+      mobileLinks.forEach(function (a) { a.addEventListener('click', closeMenu); });
+      document.addEventListener('keydown', function (e) {
+        if (!mobile.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeMenu(); return; }
+        /* Focus trap dentro do drawer */
+        if (e.key === 'Tab') {
+          var f = mobile.querySelectorAll('a, button');
+          if (!f.length) return;
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault(); last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault(); first.focus();
+          }
+        }
+      });
+
+      /* ============================================================
+         SMOOTH SCROLL (anchors)
+         ============================================================ */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var href = a.getAttribute('href');
+          if (!href || href === '#') return;
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', href);
+          }
+        });
+      });
+
+      /* ============================================================
+         LGPD CONSENT GATING — pixels só carregam após consentimento
+         ============================================================ */
+      var STORAGE_KEY = 'sb_cookie_consent_v1';
+      var banner = document.getElementById('cookie-banner');
+      var loaded = { ga4: false, gads: false, meta: false };
+
+      function injectScript(src, async) {
+        var s = document.createElement('script');
+        s.src = src; s.async = async !== false;
+        document.head.appendChild(s);
+        return s;
+      }
+
+      function loadGA4() {
+        if (loaded.ga4) return;
+        var id = window.SB_TRACKING && window.SB_TRACKING.GA4_ID;
+        if (!id || id.indexOf('__') === 0) return; /* placeholder */
+        injectScript('https://www.googletagmanager.com/gtag/js?id=' + id);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', id, { anonymize_ip: true });
+        loaded.ga4 = true;
+      }
+
+      function loadGoogleAds() {
+        if (loaded.gads) return;
+        var id = window.SB_TRACKING && window.SB_TRACKING.GADS_ID;
+        if (!id || id.indexOf('__') === 0) return;
+        if (!loaded.ga4) injectScript('https://www.googletagmanager.com/gtag/js?id=' + id);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag('config', id);
+        loaded.gads = true;
+      }
+
+      function loadMetaPixel() {
+        if (loaded.meta) return;
+        var id = window.SB_TRACKING && window.SB_TRACKING.META_PIXEL_ID;
+        if (!id || id.indexOf('__') === 0) return;
+        !function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+          if (!f._fbq) f._fbq = n;
+          n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+          t = b.createElement(e); t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', id);
+        window.fbq('track', 'PageView');
+        loaded.meta = true;
+      }
+
+      window.applyCookieConsent = function (level) {
+        if (level === 'measure') {
+          loadGA4();
+        } else if (level === 'all') {
+          loadGA4();
+          loadGoogleAds();
+          loadMetaPixel();
+        }
+        /* essential: nada injetado */
+      };
+
+      function readConsent() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return null;
+          var parsed = JSON.parse(raw);
+          return parsed && parsed.level ? parsed : null;
+        } catch (e) { return null; }
+      }
+
+      function saveConsent(level) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            level: level, ts: Date.now()
+          }));
+        } catch (e) {}
+      }
+
+      function showBanner() { banner.classList.add('is-visible'); }
+      function hideBanner() { banner.classList.remove('is-visible'); }
+
+      var stored = readConsent();
+      if (stored) {
+        window.applyCookieConsent(stored.level);
+      } else {
+        /* Mostra após 3s para não competir com o hero */
+        setTimeout(showBanner, 3000);
+      }
+
+      banner.querySelectorAll('[data-cookie]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var choice = btn.getAttribute('data-cookie');
+          saveConsent(choice);
+          window.applyCookieConsent(choice);
+          hideBanner();
+        });
+      });
+
+      /* Link "Preferências de cookies" no rodapé reabre o banner */
+      var prefsLink = document.getElementById('cookie-prefs-link');
+      if (prefsLink) {
+        prefsLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          showBanner();
+        });
+      }
+
+      /* ============================================================
+         FOOTER YEAR — dinâmico
+         ============================================================ */
+      var yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      /* ============================================================
+         REDUCED MOTION GUARD — usado por toda a orquestra abaixo
+         ============================================================ */
+      var REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var IS_TOUCH = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      var IS_DESKTOP = window.matchMedia('(min-width: 1025px)').matches && window.matchMedia('(hover: hover)').matches;
+
+      /* ============================================================
+         LOADER — esconde após 1.2s (ou imediato se reduced-motion)
+         ============================================================ */
+      document.body.classList.add('is-loading');
+      var loader = document.getElementById('sb-loader');
+      function hideLoader() {
+        if (loader) loader.classList.add('is-done');
+        document.body.classList.remove('is-loading');
+      }
+      if (REDUCED_MOTION) {
+        hideLoader();
+      } else {
+        window.addEventListener('load', function () {
+          setTimeout(hideLoader, 1200);
+        });
+        /* Failsafe: máximo 3s mesmo se assets travarem */
+        setTimeout(hideLoader, 3000);
+      }
+
+      /* ============================================================
+         LENIS — smooth scroll inertia (skip se reduced-motion)
+         ============================================================ */
+      var lenis = null;
+      if (!REDUCED_MOTION && typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.1,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          smoothWheel: true,
+          wheelMultiplier: 0.95
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        /* Integra com nossos smooth-scrolls de âncora */
+        lenis.on('scroll', function () {
+          if (window.ScrollTrigger) ScrollTrigger.update();
+        });
+      }
+
+      /* ============================================================
+         REVEAL ON SCROLL — IntersectionObserver universal
+         ============================================================ */
+      if (!REDUCED_MOTION && 'IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              revealObserver.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
+          revealObserver.observe(el);
+        });
+      } else {
+        /* Fallback: tudo já visível */
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+      }
+
+      /* ============================================================
+         CURSOR GLOW — radial dourado SOB o cursor padrão (apenas hero)
+         O cursor do SO permanece intacto.
+         ============================================================ */
+      if (IS_DESKTOP && !REDUCED_MOTION) {
+        var glow = document.getElementById('sb-cursor-glow');
+        var heroForGlow = document.querySelector('.sb-hero');
+        if (glow && heroForGlow) {
+          var glowOn = false;
+          heroForGlow.addEventListener('mouseenter', function () {
+            glow.classList.add('is-active');
+            glowOn = true;
+          });
+          heroForGlow.addEventListener('mouseleave', function () {
+            glow.classList.remove('is-active');
+            glowOn = false;
+          });
+          heroForGlow.addEventListener('mousemove', function (e) {
+            if (!glowOn) return;
+            glow.style.transform = 'translate(' + (e.clientX - 200) + 'px,' + (e.clientY - 200) + 'px)';
+          });
+        }
+      } else {
+        var glowRm = document.getElementById('sb-cursor-glow');
+        if (glowRm) glowRm.remove();
+      }
+
+      /* ============================================================
+         MAGNETIC CTAs — botões "puxam" o cursor
+         ============================================================ */
+      if (IS_DESKTOP && !REDUCED_MOTION) {
+        document.querySelectorAll('[data-magnetic]').forEach(function (el) {
+          el.addEventListener('mousemove', function (e) {
+            var rect = el.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            var dx = (e.clientX - cx) * 0.25;
+            var dy = (e.clientY - cy) * 0.25;
+            el.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+          });
+          el.addEventListener('mouseleave', function () {
+            el.style.transform = '';
+          });
+        });
+      }
+
+      /* ============================================================
+         PARTICLES CANVAS — champagne motes flutuando no hero
+         ~80 partículas douradas com leve repulsão ao mouse.
+         ============================================================ */
+      var particleCanvas = document.getElementById('sb-particles');
+      if (particleCanvas && !REDUCED_MOTION) {
+        var ctx = particleCanvas.getContext('2d');
+        var particles = [];
+        var pmx = -9999, pmy = -9999;
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        function sizeCanvas() {
+          var rect = particleCanvas.getBoundingClientRect();
+          particleCanvas.width = rect.width * dpr;
+          particleCanvas.height = rect.height * dpr;
+          ctx.scale(dpr, dpr);
+        }
+        sizeCanvas();
+
+        function spawn(n) {
+          var rect = particleCanvas.getBoundingClientRect();
+          for (var i = 0; i < n; i++) {
+            particles.push({
+              x: Math.random() * rect.width,
+              y: Math.random() * rect.height,
+              vx: (Math.random() - 0.5) * 0.18,
+              vy: -0.05 - Math.random() * 0.20,
+              r: 0.6 + Math.random() * 1.6,
+              o: 0.25 + Math.random() * 0.5,
+              tw: Math.random() * Math.PI * 2  /* twinkle phase */
+            });
+          }
+        }
+        spawn(80);
+
+        var heroEl2 = document.querySelector('.sb-hero');
+        if (heroEl2) {
+          heroEl2.addEventListener('mousemove', function (e) {
+            var rect = particleCanvas.getBoundingClientRect();
+            pmx = e.clientX - rect.left;
+            pmy = e.clientY - rect.top;
+          });
+          heroEl2.addEventListener('mouseleave', function () {
+            pmx = -9999; pmy = -9999;
+          });
+        }
+
+        function tick() {
+          var rect = particleCanvas.getBoundingClientRect();
+          ctx.clearRect(0, 0, rect.width, rect.height);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            /* Repulsão sutil ao mouse */
+            var dx = p.x - pmx, dy = p.y - pmy;
+            var d2 = dx * dx + dy * dy;
+            if (d2 < 12000) {
+              var f = (12000 - d2) / 12000 * 0.6;
+              var d = Math.sqrt(d2) || 1;
+              p.vx += (dx / d) * f * 0.04;
+              p.vy += (dy / d) * f * 0.04;
+            }
+            /* Damping */
+            p.vx *= 0.985; p.vy *= 0.985;
+            /* Drift base */
+            p.vy -= 0.0015;
+            p.x += p.vx; p.y += p.vy;
+            /* Wrap */
+            if (p.x < -10) p.x = rect.width + 10;
+            if (p.x > rect.width + 10) p.x = -10;
+            if (p.y < -10) { p.y = rect.height + 10; p.x = Math.random() * rect.width; }
+            if (p.y > rect.height + 10) p.y = -10;
+            /* Twinkle */
+            p.tw += 0.04;
+            var alpha = p.o * (0.6 + 0.4 * Math.sin(p.tw));
+            /* Draw */
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(212,176,116,' + alpha.toFixed(3) + ')';
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          requestAnimationFrame(tick);
+        }
+        tick();
+
+        var resizeT;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeT);
+          resizeT = setTimeout(function () {
+            ctx = particleCanvas.getContext('2d');
+            sizeCanvas();
+          }, 200);
+        });
+      }
+
+      /* ============================================================
+         TICKERS — count-up via IntersectionObserver
+         ============================================================ */
+      function animateNumber(el, target, duration, suffix) {
+        var start = performance.now();
+        function step(now) {
+          var t = Math.min(1, (now - start) / duration);
+          /* easeOutCubic */
+          var eased = 1 - Math.pow(1 - t, 3);
+          var val = Math.floor(target * eased);
+          el.textContent = val + (suffix || '');
+          if (t < 1) requestAnimationFrame(step);
+          else el.textContent = target + (suffix || '');
+        }
+        requestAnimationFrame(step);
+      }
+      var tickers = document.querySelectorAll('.sb-hero__ticker-num[data-count]');
+      if (tickers.length) {
+        if (!REDUCED_MOTION && 'IntersectionObserver' in window) {
+          var tickerObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              var el = e.target;
+              var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+              var suffix = el.getAttribute('data-suffix') || '';
+              animateNumber(el, target, 1700, suffix);
+              tickerObs.unobserve(el);
+            });
+          }, { threshold: 0.4 });
+          tickers.forEach(function (el) { tickerObs.observe(el); });
+        } else {
+          tickers.forEach(function (el) {
+            el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+          });
+        }
+      }
+
+      /* ============================================================
+         PAGE TRANSITION (out) — privacidade.html / termos.html
+         Mask navy diagonal antes de navegar
+         ============================================================ */
+      if (!REDUCED_MOTION) {
+        document.querySelectorAll('a[href$="privacidade.html"], a[href$="termos.html"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            if (a.target === '_blank' || e.metaKey || e.ctrlKey) return;
+            e.preventDefault();
+            var href = a.getAttribute('href');
+            var mask = document.createElement('div');
+            mask.style.cssText = 'position:fixed;inset:0;z-index:10001;background:#08111F;' +
+              'transform:translateY(100%);transition:transform 600ms cubic-bezier(0.65,0,0.35,1);' +
+              'pointer-events:none';
+            document.body.appendChild(mask);
+            requestAnimationFrame(function () { mask.style.transform = 'translateY(0)'; });
+            setTimeout(function () { window.location.href = href; }, 600);
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
