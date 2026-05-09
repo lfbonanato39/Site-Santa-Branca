@@ -4707,5 +4707,14 @@
       }
     })();
   </script>
+
+  <!-- ============================================================
+       SplitText (gratuito desde GSAP 3.13.0, abril/2025) + animations.js
+       Carrega DEPOIS da IIFE inline acima, em ordem garantida via defer.
+       Não substitui o splitter custom do hero/headlines — disponibiliza
+       a API completa do SplitText pra refinamentos futuros.
+       ============================================================ -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="assets/js/animations.js"></script>
 </body>
 </html>
