@@ -2011,9 +2011,11 @@
       transition: color 250ms var(--ease-out);
     }
 
-    /* Spotlight: usa :has() — escurece os outros quando algum está em hover */
+    /* Spotlight: usa :has() — escurece os outros quando algum está em hover.
+       :not(:hover) exclui o card sob hover da regra (que ganharia por
+       especificidade (0,4,0) > (0,2,0) e mataria o destaque). */
     @media (hover: hover) and (min-width: 769px) {
-      .sb-insurers__grid:has(.sb-insurer-card:hover) .sb-insurer-card { opacity: 0.4; }
+      .sb-insurers__grid:has(.sb-insurer-card:hover) .sb-insurer-card:not(:hover) { opacity: 0.4; }
       .sb-insurer-card:hover {
         background: rgba(255, 255, 255, 0.03);
         opacity: 1;
@@ -3653,8 +3655,15 @@
        SCRIPTS
        ============================================================ -->
   <script>
-    (function () {
-      'use strict';
+    'use strict';
+
+    /* ============================================================
+       Wrapper: aguarda DOMContentLoaded antes de inicializar.
+       Garante que os <script defer> do head (Lenis, GSAP, ScrollTrigger)
+       já carregaram. Sem isso, HAS_GSAP cai em false e todos os
+       scroll-driven são pulados pelo fallback REDUCED-MOTION-like.
+       ============================================================ */
+    function sbInit() {
 
       /* ============================================================
          HEADER SCROLL STATE + WHATSAPP FLOAT
@@ -4705,7 +4714,13 @@
           });
         });
       }
-    })();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', sbInit, { once: true });
+    } else {
+      sbInit();
+    }
   </script>
 
   <!-- ============================================================
