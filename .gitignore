@@ -38,3 +38,8 @@ yarn-debug.log*
 .env
 .env.local
 .env.*.local
+
+# Auditoria local (Playwright snapshots, Lighthouse reports, screenshots)
+.playwright-mcp/
+*.report.html
+timeline-pin-state.png
