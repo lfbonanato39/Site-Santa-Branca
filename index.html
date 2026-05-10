@@ -3880,10 +3880,17 @@
 
       /* ============================================================
          LOADER — esconde após 1.2s (ou imediato se reduced-motion)
+         A timeline cinematográfica do hero (atribuída por initHero abaixo)
+         começa pausada e dá play() simultaneamente ao loader iniciar fade.
+         Overlap intencional: durante os 700ms de fade-out do loader, a
+         timeline já roda ~700ms — quando o loader some, hero já está
+         "aceso e em movimento". Evita vácuo visual entre loader e hero.
          ============================================================ */
       document.body.classList.add('is-loading');
       var loader = document.getElementById('sb-loader');
+      var heroEntranceTimeline = null;  // initHero atribui depois (linha 4014)
       function hideLoader() {
+        if (heroEntranceTimeline) heroEntranceTimeline.play();
         if (loader) loader.classList.add('is-done');
         document.body.classList.remove('is-loading');
       }
@@ -4064,11 +4071,16 @@
           return;
         }
 
-        /* --- Timeline de entrada (~1.5s) --- */
+        /* --- Timeline de entrada (~1.74s) ---
+           Pausada na criação. hideLoader() chama heroEntranceTimeline.play()
+           simultâneo ao .is-done do loader → 700ms de overlap entre fade-out
+           do loader e a entrada do hero. Sem o overlap, há um vácuo de 700ms
+           onde o loader desaparece sobre um hero ainda invisível. */
         var tl = gsap.timeline({
           defaults: { ease: 'power3.out' },
-          delay: 0.1
+          paused: true
         });
+        heroEntranceTimeline = tl;
         if (heroEls.motif) {
           tl.to(heroEls.motif, { opacity: 0.9, y: 0, duration: 0.5 }, 0);
         }
