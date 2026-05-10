@@ -4454,12 +4454,15 @@
           '--conn-progress': 1,
           ease: 'none',
           scrollTrigger: {
-            trigger: section,
-            start: 'top 70%',
-            /* '+=350' relativo ao start: cascata termina enquanto a seção
-               ainda está bem visível (≥40% acima da dobra). 'bottom 50%'
-               anterior fazia o passo 4 acender já fora da viewport. */
-            end: '+=350',
+            /* Trigger nos próprios STEPS (não na section toda): assim o
+               progresso da cascata acompanha o trecho onde os steps estão
+               efetivamente visíveis pro usuário. */
+            trigger: stepsEl,
+            /* Passo 1 acende quando os steps começam a aparecer pelo bottom */
+            start: 'top 85%',
+            /* Passo 4 acende quando os steps estão chegando no topo da página
+               (100px abaixo, considerando header sticky). Distance ≈ 800px. */
+            end: 'top 100',
             scrub: 1,
             invalidateOnRefresh: true,
             onRefresh: positionConnector,
