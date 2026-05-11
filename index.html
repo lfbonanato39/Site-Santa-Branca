@@ -623,6 +623,9 @@
       margin-top: var(--sp-8);
       opacity: 0; transform: translateY(20px) scale(0.97);
       will-change: opacity, transform;
+      /* Perspective pro tilt 3D do .sb-hero__art-border (Efeito A — vitral
+         parallax 3D). 1200px ≈ campo "natural" sem distorção exagerada. */
+      perspective: 1200px;
     }
 
     /* Glow champagne pulsando atrás do vitral */
@@ -4695,25 +4698,76 @@
       }
 
       /* ============================================================
-         CURSOR GLOW — radial dourado SOB o cursor padrão (apenas hero)
-         O cursor do SO permanece intacto.
+         CURSOR GLOW + VITRAL PARALLAX 3D — desktop, apenas hero
+         O mousemove handler é compartilhado entre os dois efeitos pra
+         economizar 1 listener/frame. O glow segue o cursor; 3 camadas
+         do vitral se deslocam em amounts diferentes criando profundidade.
+         As outras 3 camadas (glow halo, mandala, corners) NÃO recebem
+         parallax porque já têm CSS animation no transform — conflito
+         resolvido isolando o parallax apenas em camadas sem animation CSS.
          ============================================================ */
       if (IS_DESKTOP && !REDUCED_MOTION) {
         var glow = document.getElementById('sb-cursor-glow');
         var heroForGlow = document.querySelector('.sb-hero');
         if (glow && heroForGlow) {
           var glowOn = false;
+
+          /* Camadas do vitral pro parallax 3D (amplitudes baixas, sutil) */
+          var artFrameImg = heroForGlow.querySelector('.sb-hero__art-frame img');
+          var artBorder   = heroForGlow.querySelector('.sb-hero__art-border');
+          var artScan     = heroForGlow.querySelector('.sb-hero__art-scan');
+
+          /* gsap.quickTo: compila a tween 1x e dispara setter otimizado por frame.
+             Padrão GSAP pra interações mousemove de alta frequência. */
+          var qto = function (el, prop, dur) {
+            return HAS_GSAP && el ? gsap.quickTo(el, prop, { duration: dur || 0.6, ease: 'power3.out' }) : function () {};
+          };
+          var frameX  = qto(artFrameImg, 'xPercent', 0.6);
+          var frameY  = qto(artFrameImg, 'yPercent', 0.6);
+          var bordX   = qto(artBorder,   'xPercent', 0.7);
+          var bordY   = qto(artBorder,   'yPercent', 0.7);
+          var bordRX  = qto(artBorder,   'rotationX', 0.7);
+          var bordRY  = qto(artBorder,   'rotationY', 0.7);
+          var scanX   = qto(artScan,     'xPercent', 0.8);
+
+          /* will-change só durante hover ativo (libera composite ao sair) */
+          function setWillChange(on) {
+            var v = on ? 'transform' : 'auto';
+            [artFrameImg, artBorder, artScan].forEach(function (el) {
+              if (el) el.style.willChange = v;
+            });
+          }
+
           heroForGlow.addEventListener('mouseenter', function () {
             glow.classList.add('is-active');
             glowOn = true;
+            setWillChange(true);
           });
           heroForGlow.addEventListener('mouseleave', function () {
             glow.classList.remove('is-active');
             glowOn = false;
+            /* Reseta camadas ao centro suavemente */
+            frameX(0); frameY(0);
+            bordX(0); bordY(0); bordRX(0); bordRY(0);
+            scanX(0);
+            /* libera composite após tweens terminarem */
+            setTimeout(function () { setWillChange(false); }, 700);
           });
           heroForGlow.addEventListener('mousemove', function (e) {
             if (!glowOn) return;
+            /* Glow do cursor (comportamento existente) */
             glow.style.transform = 'translate(' + (e.clientX - 200) + 'px,' + (e.clientY - 200) + 'px)';
+
+            /* Parallax 3D — normalizar cursor relativo ao hero, -0.5 a +0.5 */
+            var rect = heroForGlow.getBoundingClientRect();
+            var nx = (e.clientX - rect.left) / rect.width  - 0.5;
+            var ny = (e.clientY - rect.top)  / rect.height - 0.5;
+
+            /* Amplitudes baixas — visual sutil, não exibição */
+            frameX(nx * 4);    frameY(ny * 4);     /* foto: ±2% */
+            bordX(nx * 10);    bordY(ny * 10);     /* moldura: ±5% */
+            bordRX(ny * -6);   bordRY(nx * 6);     /* tilt 3D moldura: ±3deg */
+            scanX(nx * 3);                          /* reflexo: ±1.5% */
           });
         }
       } else {
