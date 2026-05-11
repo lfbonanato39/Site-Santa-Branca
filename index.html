@@ -1012,7 +1012,9 @@
       padding: clamp(6rem, 14vh, 12rem) 0 clamp(6rem, 12vh, 10rem);
       background: var(--color-midnight);
       color: var(--color-text-on-cream);
-      overflow: hidden;
+      /* overflow: hidden removido — quebrava position:sticky no figure interno.
+         O ::before do curtain já é constrangido pelo position:absolute + inset:0
+         (e adicionalmente pelo clip-path), então não vaza sem o overflow. */
       --curtain-bottom: 100%;
     }
     .sb-about::before {
@@ -1069,20 +1071,40 @@
       .sb-about__manifest[data-split-lines] { opacity: 1; }
     }
 
-    /* PARÁGRAFOS — grid 2 colunas com drop-cap na coluna de destaque */
-    .sb-about__paragraphs {
+    /* ============================================================
+       SPLIT — grid 2-col, texto à esquerda rolando + foto sticky direita
+       Mobile (<1024px) ou iOS (html.sb-no-sticky): coluna única, sticky topo
+       ============================================================ */
+    .sb-about__split {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 5vw, 5rem);
-      max-width: 1200px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: start;
     }
-    .sb-about__lead p {
-      font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+
+    /* Coluna texto — 3 blocos com ar entre eles pra dar tempo da foto crescer */
+    .sb-about__text {
+      display: flex; flex-direction: column;
+      gap: clamp(2.5rem, 5vh, 4rem);
+    }
+    .sb-about__block {
+      min-height: 60vh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .sb-about__block p {
+      font-family: var(--font-sans);
+      font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
       line-height: 1.7;
-      color: rgba(26, 38, 56, 0.85);
+      color: rgba(26, 38, 56, 0.82);
       margin: 0;
+      max-width: 42ch;
     }
-    .sb-about__lead p::first-letter {
+    .sb-about__block--lead p {
+      font-size: clamp(1.125rem, 1.4vw, 1.3125rem);
+      color: rgba(26, 38, 56, 0.88);
+    }
+    .sb-about__block--lead p::first-letter {
       font-family: var(--font-serif);
       font-size: 4.5em;
       line-height: 0.85;
@@ -1091,40 +1113,51 @@
       margin: 0.05em 0.12em -0.1em 0;
       color: var(--color-text-on-cream);
     }
-    .sb-about__rest p {
-      font-size: 1.0625rem;
-      line-height: 1.7;
-      color: rgba(26, 38, 56, 0.82);
-      margin: 0 0 1.25rem;
-    }
-    .sb-about__rest p:last-child { margin-bottom: 0; }
 
-    /* FIGURE — foto tratada (filtro editorial) + caption tipográfica */
+    /* FIGURE — STICKY na coluna direita, foto cresce 0.7 → 1.0 com scroll */
     .sb-about__figure {
       margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-      max-width: 720px;
-      align-self: center;
       width: 100%;
+      max-width: 520px;
+      justify-self: center;
+      position: sticky;
+      top: calc(var(--header-h, 84px) + 4rem);
+      align-self: start;
     }
+    /* Photo — porta-retrato com matboard cream + sombra 2 camadas
+       Camada 1 (definição/close): 0 2px 4px rgba(11,26,46,0.15)
+       Camada 2 (profundidade/long): 0 30px 60px -20px rgba(11,26,46,0.5)
+       Resultado: visual "porta-retrato pousado na mesa", não "card flutuando" */
     .sb-about__photo {
       position: relative;
       width: 100%;
       aspect-ratio: 4/5;
       overflow: hidden;
       border-radius: 6px;
-      border: 1px solid rgba(201, 169, 97, 0.20);
-      box-shadow: 0 30px 80px -30px rgba(11, 26, 46, 0.4);
-      background: var(--color-midnight);
+      border: 1px solid rgba(201, 169, 97, 0.40);
+      background: var(--color-cream);   /* matboard cream */
+      padding: 8px;                     /* matboard space */
+      box-shadow:
+        0 2px 4px rgba(11, 26, 46, 0.15),
+        0 30px 60px -20px rgba(11, 26, 46, 0.5);
+      transform: scale(0.7);
+      transform-origin: center center;
+      will-change: transform;
+    }
+    .sb-about__photo picture,
+    .sb-about__photo picture img {
+      display: block;
+      width: 100%; height: 100%;
+      border-radius: 4px;
+      overflow: hidden;
     }
     .sb-about__photo img {
-      width: 100%; height: 100%;
       object-fit: cover; object-position: 60% center;
       filter: grayscale(15%) contrast(1.05) sepia(8%);
-      will-change: transform;
     }
     .sb-about__caption {
       font-family: var(--font-sans);
@@ -1136,15 +1169,51 @@
       text-align: center;
     }
 
-    @media (max-width: 900px) {
-      .sb-about__paragraphs { grid-template-columns: 1fr; gap: 2rem; }
+    /* Mobile / tablet: vira coluna única, foto sticky no TOPO com height 35vh */
+    @media (max-width: 1023px) {
+      .sb-about__split {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .sb-about__figure {
+        order: -1;                                /* foto vai pra cima */
+        position: sticky;
+        top: var(--header-h, 72px);
+        max-width: 100%;
+        margin-bottom: 2rem;
+        z-index: 2;
+      }
+      .sb-about__photo {
+        aspect-ratio: auto;
+        height: 35vh;
+        max-height: 320px;
+        /* Mobile: scale animation NÃO faz sentido com layout 1-col +
+           foto no topo. Força tamanho 100% sem transform animado. */
+        transform: none !important;
+      }
+      .sb-about__block { min-height: auto; padding-block: 1.5rem; }
+      .sb-about__text { gap: 1.5rem; }
     }
+
+    /* iOS fallback: sticky + Lenis momentum scroll = jank. JS detecta UA
+       e adiciona html.sb-no-sticky. CSS reverte pra layout não-sticky. */
+    html.sb-no-sticky .sb-about__figure {
+      position: static;
+      top: auto;
+    }
+    html.sb-no-sticky .sb-about__block { min-height: auto; }
+    html.sb-no-sticky .sb-about__photo { transform: none !important; }
+
     @media (prefers-reduced-motion: reduce) {
       .sb-about { --curtain-bottom: 0%; }
       .sb-about__manifest .line-inner {
         transform: none !important;
         opacity: 1 !important;
       }
+      .sb-about__photo {
+        transform: scale(1) !important;
+      }
+      .sb-about__block { min-height: auto; }
     }
 
     /* ============================================================
@@ -2937,36 +3006,42 @@
           <h2 id="sobre-title" class="sb-about__manifest" data-split-lines>Nasceu em <em>1994</em>. Cresceu por indicação.</h2>
         </header>
 
-        <div class="sb-about__paragraphs" data-reveal-stagger>
-          <div class="sb-about__lead" data-reveal>
-            <p>A Santa Branca Seguros nasceu em Belo Horizonte em 1994, e desde então cuida do que importa para os mineiros: família, casa, carro, negócio, futuro.</p>
+        <!-- Split 2-col: texto rolando à esquerda, foto sticky à direita.
+             Mobile (<1024px) ou iOS (UA sniff via html.sb-no-sticky): vira coluna única. -->
+        <div class="sb-about__split">
+          <div class="sb-about__text" data-reveal-stagger>
+            <div class="sb-about__block sb-about__block--lead" data-reveal>
+              <p>A Santa Branca Seguros nasceu em Belo Horizonte em 1994. Desde o primeiro dia, com o Washington atendendo um cliente de cada vez, o princípio foi um só: cuidar do que importa para os mineiros — família, casa, carro, negócio, futuro.</p>
+            </div>
+            <div class="sb-about__block" data-reveal>
+              <p>São três gerações da mesma família trabalhando lado a lado com uma equipe que conhece cada cliente pelo nome. Crescemos por indicação — o que diz mais sobre nosso trabalho do que qualquer slogan.</p>
+            </div>
+            <div class="sb-about__block" data-reveal>
+              <p>Operamos com as principais seguradoras do Brasil e somos referência em Belo Horizonte para quem busca atendimento humano com a estrutura técnica de uma grande corretora. Aqui ninguém se aposenta da relação com o cliente — só ganha um cliente novo no nome do antigo.</p>
+            </div>
           </div>
-          <div class="sb-about__rest" data-reveal>
-            <p>São três gerações da mesma família trabalhando lado a lado com uma equipe que conhece cada cliente pelo nome. Crescemos por indicação — o que diz mais sobre nosso trabalho do que qualquer slogan.</p>
-            <p>Operamos com as principais seguradoras do Brasil e somos referência em Belo Horizonte para quem busca atendimento humano com a estrutura técnica de uma grande corretora.</p>
-          </div>
-        </div>
 
-        <!--
-          TODO CRÍTICO (substituir antes do go-live):
-          Foto provisória — usar retrato em P&B da família + equipe (3 gerações)
-          ou vista institucional do escritório com pessoas. Mínimo 2400px de largura
-          para suportar parallax sem pixelizar.
-        -->
-        <figure class="sb-about__figure" data-reveal>
-          <div class="sb-about__photo">
-            <picture>
-              <source srcset="assets/photo-office.webp" type="image/webp" />
-              <img
-                src="assets/photo-office.jpg"
-                alt="Escritório da Santa Branca Seguros — três gerações da família em Belo Horizonte"
-                loading="lazy" decoding="async"
-                width="1200" height="1500"
-              />
-            </picture>
-          </div>
-          <figcaption class="sb-about__caption">Três gerações · Belo Horizonte</figcaption>
-        </figure>
+          <!--
+            TODO CRÍTICO (substituir antes do go-live):
+            Foto provisória — usar retrato em P&B da família + equipe (3 gerações)
+            ou vista institucional do escritório com pessoas. Mínimo 2400px de largura
+            para suportar scale animado sem pixelizar.
+          -->
+          <figure class="sb-about__figure" data-reveal>
+            <div class="sb-about__photo">
+              <picture>
+                <source srcset="assets/photo-office.webp" type="image/webp" />
+                <img
+                  src="assets/photo-office.jpg"
+                  alt="Escritório da Santa Branca Seguros — três gerações da família em Belo Horizonte"
+                  loading="lazy" decoding="async"
+                  width="1200" height="1500"
+                />
+              </picture>
+            </div>
+            <figcaption class="sb-about__caption">Três gerações · Belo Horizonte</figcaption>
+          </figure>
+        </div>
 
       </div>
     </section>
@@ -3868,6 +3943,21 @@
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       /* ============================================================
+         iOS detection (UA sniff)
+         iOS Safari tem bug conhecido de position:sticky + momentum scroll
+         (especialmente combinado com Lenis). Quando detectado, html ganha
+         a classe .sb-no-sticky e o CSS desativa sticky no Sobre, voltando
+         a layout coluna única estável. Inclui iPad (que reporta MacIntel +
+         touch points em iPadOS 13+).
+         ============================================================ */
+      var isIOS = /iP(hone|od|ad)/.test(navigator.platform) ||
+                  /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isIOS) {
+        document.documentElement.classList.add('sb-no-sticky');
+      }
+
+      /* ============================================================
          REDUCED MOTION GUARD — usado por toda a orquestra abaixo
          ============================================================ */
       var REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4307,20 +4397,25 @@
             about.style.setProperty('--curtain-bottom', '0%');
           }
 
-          /* ---------- Photo parallax (desktop only, scrub) ---------- */
-          if (HAS_GSAP && !REDUCED_MOTION && IS_DESKTOP_PARALLAX) {
-            var photoImg = about.querySelector('.sb-about__photo img');
-            if (photoImg) {
-              gsap.fromTo(photoImg,
-                { y: 0 },
+          /* ---------- Photo SCALE 0.7 → 1.0 enquanto rolamos pelos 3 blocos
+             ---------- (substitui parallax translateY anterior).
+             Desabilitado em mobile/tablet (<1024px) e iOS — em layout 1-col
+             a foto fica fixa no topo, scale não tem sentido. */
+          var supportsSticky = !isIOS && window.matchMedia('(min-width: 1024px)').matches;
+          if (HAS_GSAP && !REDUCED_MOTION && supportsSticky) {
+            var photoEl = about.querySelector('.sb-about__photo');
+            var textCol = about.querySelector('.sb-about__text');
+            if (photoEl && textCol) {
+              gsap.fromTo(photoEl,
+                { scale: 0.7 },
                 {
-                  y: -30,
+                  scale: 1.0,
                   ease: 'none',
                   scrollTrigger: {
-                    trigger: about.querySelector('.sb-about__figure') || about,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true
+                    trigger: textCol,
+                    start: 'top center',
+                    end: 'bottom center',
+                    scrub: 1
                   }
                 }
               );
