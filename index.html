@@ -572,44 +572,67 @@
       will-change: opacity, transform;
     }
 
-    /* AURORA — 3 gradients radiais navegando devagar em loop infinito.
-       Sub-pixel movement com translate em escala 1.4x para evitar bordas. */
-    .sb-hero__bg {
+    /* VÍDEO DE FUNDO (Onda 4) — substitui aurora + bg sólido anterior */
+    .sb-hero__video-wrap {
       position: absolute; inset: 0; z-index: -3;
+      overflow: hidden;
+      /* Fallback bg caso vídeo + poster falhem — paleta midnight do site */
       background: linear-gradient(160deg, #14253D 0%, #0B1A2E 40%, #060F1C 100%);
     }
-    .sb-hero__aurora {
-      position: absolute; inset: -20%; z-index: -2;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 25% 30%, rgba(184,146,77,0.22) 0%, transparent 38%),
-        radial-gradient(circle at 70% 40%, rgba(26,45,69,0.7) 0%, transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(210,181,137,0.16) 0%, transparent 40%);
-      filter: blur(40px);
-      animation: auroraDrift 32s ease-in-out infinite alternate;
-      will-change: transform;
+    .sb-hero__video {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+      display: block;
+      /* Tratamento editorial — dessaturado + escurecido sutilmente */
+      filter: saturate(0.7) brightness(0.85);
     }
-    @keyframes auroraDrift {
-      0%   { transform: translate(0, 0) scale(1); }
-      33%  { transform: translate(3%, -2%) scale(1.05); }
-      66%  { transform: translate(-2%, 3%) scale(1.02); }
-      100% { transform: translate(2%, 1%) scale(1.04); }
+    .sb-hero__video-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(11,26,46,0.70) 0%, rgba(11,26,46,0.55) 100%);
+    }
+    .sb-hero__video-vignette {
+      position: absolute; inset: 0; z-index: 2;
+      pointer-events: none;
+      box-shadow: inset 0 0 200px rgba(11,26,46,0.6);
+    }
+    /* Mobile: vídeo é trocado por background com o poster */
+    @media (max-width: 768px) {
+      .sb-hero__video { display: none; }
+      .sb-hero__video-wrap {
+        background-image: url('assets/og-image.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+    }
+    /* Reduced motion: vídeo pausado/escondido, mostra só o poster */
+    @media (prefers-reduced-motion: reduce) {
+      .sb-hero__video { display: none; }
+      .sb-hero__video-wrap {
+        background-image: url('assets/og-image.jpg');
+        background-size: cover;
+        background-position: center;
+      }
     }
 
-    /* Canvas de partículas douradas (champagne motes) */
+    /* Canvas de partículas douradas (champagne motes) — mantida sobre o vídeo */
     .sb-hero__particles {
       position: absolute; inset: 0; z-index: -1;
       pointer-events: none;
       width: 100%; height: 100%;
     }
 
+    /* Layout do hero — coluna única depois que vitral migrou pro Sobre (Onda 4).
+       Texto à esquerda, max-width 720px. Lado direito mostra o vídeo limpo,
+       overlay e particles dão atmosfera. */
     .sb-hero__inner {
-      display: grid; grid-template-columns: minmax(0, 1.1fr) 0.9fr;
-      align-items: start;
-      gap: var(--sp-12);
+      display: block;
       position: relative; z-index: 1;
     }
-    .sb-hero__copy { padding-block: var(--sp-6); }
+    .sb-hero__copy {
+      padding-block: var(--sp-6);
+      max-width: 720px;
+    }
 
     /* ============================================================
        ART PANEL — vitral em arco gótico, à direita
@@ -749,10 +772,17 @@
 
     /* TICKERS — stats animados (count-up via GSAP+ScrollTrigger) */
     .sb-hero__tickers {
-      display: grid; grid-template-columns: repeat(3, auto);
+      display: grid; grid-template-columns: repeat(4, auto);
       gap: var(--sp-8);
       margin: var(--sp-8) 0 var(--sp-8);
       opacity: 0; transform: translateY(16px);
+    }
+    /* Prefix "+" antes do número (4º ticker: +1.000) — espelha o suffix existente */
+    .sb-hero__ticker-suffix--prefix {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      color: var(--color-champagne);
+      margin-right: 2px;
     }
     .sb-hero__ticker { display: flex; flex-direction: column; gap: 8px; }
     .sb-hero__ticker-num {
@@ -802,14 +832,15 @@
       .sb-cursor-glow { display: none; }
     }
 
-    /* Mobile: stack vertical, art menor */
+    /* Mobile: 4 tickers viram 2x2 (de repeat(4,auto) desktop).
+       2x2 vale até 380px — iPhone XR (414), 12/13 mini (375), Android médio
+       todos ficam 2x2. Apenas devices ultra-estreitos (≤375 do SE clássico)
+       caem pra coluna única. */
     @media (max-width: 900px) {
-      .sb-hero__inner { grid-template-columns: 1fr; }
-      .sb-hero__art { max-width: 320px; margin: var(--sp-8) auto 0; }
-      .sb-hero__tickers { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+      .sb-hero__tickers { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
       .sb-hero__ticker-num { font-size: clamp(32px, 8vw, 44px); }
     }
-    @media (max-width: 480px) {
+    @media (max-width: 380px) {
       .sb-hero__tickers { grid-template-columns: 1fr; }
     }
 
@@ -1133,59 +1164,45 @@
       color: var(--color-text-on-cream);
     }
 
-    /* FIGURE — STICKY na coluna direita, foto cresce 0.7 → 1.0 com scroll */
+    /* FIGURE — STICKY na coluna direita, vitral cresce 0.85 → 1.0 com scroll.
+       Substituiu a foto provisória — agora contém .sb-hero__art (6 layers). */
     .sb-about__figure {
       margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
       width: 100%;
-      max-width: 520px;
+      max-width: 460px;        /* vitral usa max-width 460px (mesma do hero anterior) */
       justify-self: center;
       position: sticky;
       top: calc(var(--header-h, 84px) + 4rem);
       align-self: start;
+      /* O scale 0.85→1.0 é animado pelo GSAP scrub no .sb-about__vitral abaixo. */
     }
-    /* Photo — porta-retrato com matboard cream + sombra 2 camadas
-       Camada 1 (definição/close): 0 2px 4px rgba(11,26,46,0.15)
-       Camada 2 (profundidade/long): 0 30px 60px -20px rgba(11,26,46,0.5)
-       Resultado: visual "porta-retrato pousado na mesa", não "card flutuando" */
-    .sb-about__photo {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      border-radius: 6px;
-      border: 1px solid rgba(201, 169, 97, 0.40);
-      background: var(--color-cream);   /* matboard cream */
-      padding: 8px;                     /* matboard space */
-      box-shadow:
-        0 2px 4px rgba(11, 26, 46, 0.15),
-        0 30px 60px -20px rgba(11, 26, 46, 0.5);
-      transform: scale(0.7);
+    /* Wrapper do vitral dentro do figure — recebe o scale do scrub.
+       Não tem matboard/sombra (vitral já tem moldura própria via borda SVG + corners).
+       Override: o CSS legacy de .sb-hero__art tem opacity:0 + translateY pré-animação
+       da timeline hero (vitral entrava com fade do hero). No Sobre não há timeline
+       hero animando ele — força opacity 1 e zera o translateY. */
+    .sb-about__vitral.sb-hero__art {
+      opacity: 1;
+      transform: scale(0.85);
       transform-origin: center center;
       will-change: transform;
+      margin-left: 0;     /* removendo margin-left:auto do CSS legacy do hero */
+      margin-top: 0;
     }
-    .sb-about__photo picture,
-    .sb-about__photo picture img {
-      display: block;
-      width: 100%; height: 100%;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .sb-about__photo img {
-      object-fit: cover; object-position: 60% center;
-      filter: grayscale(15%) contrast(1.05) sepia(8%);
-    }
-    .sb-about__caption {
+    /* Caption editorial — texto longo italic em vez do label uppercase anterior */
+    .sb-about__vitral-caption {
       font-family: var(--font-sans);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1.6;
       color: var(--color-text-secondary);
+      max-width: 38ch;
       text-align: center;
+      margin: 0;
     }
 
     /* Mobile / tablet: vira coluna única, foto sticky no TOPO com height 35vh */
@@ -1195,23 +1212,24 @@
         gap: 0;
       }
       .sb-about__figure {
-        order: -1;                                /* foto vai pra cima */
+        order: -1;                                /* vitral vai pra cima */
         position: sticky;
         top: var(--header-h, 72px);
-        max-width: 100%;
-        margin-bottom: 2rem;
+        max-width: 320px;
+        margin: 0 auto 2rem;
         z-index: 2;
       }
-      .sb-about__photo {
-        aspect-ratio: auto;
-        height: 35vh;
-        max-height: 320px;
-        /* Mobile: scale animation NÃO faz sentido com layout 1-col +
-           foto no topo. Força tamanho 100% sem transform animado. */
+      .sb-about__vitral {
+        /* Mobile: scale animation NÃO faz sentido com layout 1-col.
+           Vitral fica em tamanho fixo, animations CSS internas (glow, scan,
+           corners) continuam. Mandala spin desabilitada via regra abaixo. */
         transform: none !important;
       }
-      .sb-about__block { min-height: auto; padding-block: 1.5rem; }
-      .sb-about__text { gap: 1.5rem; }
+      /* Mandala spin é a animation mais cara (90s linear rotate 360deg em
+         SVG com 10+ paths). Desabilitada em mobile pra economizar GPU. */
+      .sb-about__vitral .sb-hero__art-mandala {
+        animation: none !important;
+      }
     }
 
     /* iOS fallback: sticky + Lenis momentum scroll = jank. JS detecta UA
@@ -1221,7 +1239,7 @@
       top: auto;
     }
     html.sb-no-sticky .sb-about__block { min-height: auto; }
-    html.sb-no-sticky .sb-about__photo { transform: none !important; }
+    html.sb-no-sticky .sb-about__vitral { transform: none !important; }
 
     @media (prefers-reduced-motion: reduce) {
       .sb-about { --curtain-bottom: 0%; }
@@ -1229,7 +1247,7 @@
         transform: none !important;
         opacity: 1 !important;
       }
-      .sb-about__photo {
+      .sb-about__vitral {
         transform: scale(1) !important;
       }
       .sb-about__block { min-height: auto; }
@@ -2544,35 +2562,37 @@
 
     /* Instagram link — fica acima do copyright, centralizado.
        Conjunto ícone + handle + tagline; clique no conjunto inteiro abre o link. */
-    .sb-footer__instagram {
-      display: flex;
+    /* Instagram link — agora vive em #contato perto do CTA WhatsApp.
+       Classe genérica .sb-instagram-link reaproveitável (era .sb-footer__*). */
+    .sb-instagram-link {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 14px 0 16px;
+      margin-top: 0.75rem;
       text-decoration: none;
       color: rgba(201, 169, 97, 0.7);
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.02em;
       transition: color 240ms var(--ease-out);
     }
-    .sb-footer__instagram:hover,
-    .sb-footer__instagram:focus-visible {
+    .sb-instagram-link:hover,
+    .sb-instagram-link:focus-visible {
       color: var(--color-champagne);
     }
-    .sb-footer__instagram svg {
+    .sb-instagram-link svg {
       width: 18px; height: 18px;
       flex-shrink: 0;
       display: block;
     }
-    .sb-footer__instagram-handle { font-weight: 600; }
-    .sb-footer__instagram-sep {
+    .sb-instagram-link__handle { font-weight: 600; }
+    .sb-instagram-link__sep {
       opacity: 0.6;
       margin: 0 2px;
     }
-    .sb-footer__instagram-tagline { font-weight: 400; }
+    .sb-instagram-link__tagline { font-weight: 400; }
     /* Em mobile, dar espaço extra no fim para o botão flutuante WhatsApp não cobrir o copyright */
     @media (max-width: 640px) {
       .sb-footer__base { padding-bottom: 88px; }
@@ -2917,9 +2937,23 @@
          HERO
          ============================================================ -->
     <section class="sb-hero" aria-label="Apresentação Santa Branca Seguros">
-      <!-- Background layers: gradient base + aurora animada + canvas de partículas -->
-      <div class="sb-hero__bg" aria-hidden="true"></div>
-      <div class="sb-hero__aurora" aria-hidden="true"></div>
+      <!-- BG STACK (z-index crescente):
+           video (-3) → overlay gradient navy (-2) → vinheta (-1) → particles → conteúdo -->
+      <div class="sb-hero__video-wrap" aria-hidden="true">
+        <!-- TODO: substituir assets/videos/hero-bg.{mp4,webm} pelos vídeos definitivos.
+             Poster temporário reusa og-image.jpg (1200×630) — substituir pelo poster
+             do vídeo (mesmo frame inicial, otimizado <150KB). -->
+        <video class="sb-hero__video"
+               autoplay muted loop playsinline
+               preload="metadata"
+               poster="assets/og-image.jpg"
+               aria-hidden="true">
+          <source src="assets/videos/hero-bg.webm" type='video/webm; codecs="vp9"'>
+          <source src="assets/videos/hero-bg.mp4" type="video/mp4">
+        </video>
+        <div class="sb-hero__video-overlay" aria-hidden="true"></div>
+        <div class="sb-hero__video-vignette" aria-hidden="true"></div>
+      </div>
       <canvas class="sb-hero__particles" id="sb-particles" aria-hidden="true"></canvas>
 
       <div class="container sb-hero__inner">
@@ -2961,6 +2995,10 @@
               <span><span class="sb-hero__ticker-num" data-count="3">0</span></span>
               <span class="sb-hero__ticker-label">Gerações da família</span>
             </div>
+            <div class="sb-hero__ticker">
+              <span><span class="sb-hero__ticker-suffix sb-hero__ticker-suffix--prefix">+</span><span class="sb-hero__ticker-num" data-count="1000">0</span></span>
+              <span class="sb-hero__ticker-label">Famílias atendidas</span>
+            </div>
           </div>
 
           <!-- TODO: validar SUSEP completo (com dígito verificador) com cliente antes do lançamento -->
@@ -2973,62 +3011,7 @@
           </div>
         </div>
 
-        <!-- LADO DIREITO — vitral em arco gótico com camadas animadas -->
-        <div class="sb-hero__art" aria-hidden="true">
-          <!-- Glow champagne pulsando atrás -->
-          <div class="sb-hero__art-glow"></div>
-
-          <!-- Mandala SVG girando atrás do vitral -->
-          <svg class="sb-hero__art-mandala" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
-            <g>
-              <circle cx="200" cy="200" r="190"/>
-              <circle cx="200" cy="200" r="160" stroke-dasharray="2 6"/>
-              <circle cx="200" cy="200" r="130"/>
-              <path d="M200 30 C 160 100, 160 170, 200 210 C 240 170, 240 100, 200 30 Z"/>
-              <path d="M200 370 C 160 300, 160 230, 200 190 C 240 230, 240 300, 200 370 Z"/>
-              <path d="M30 200 C 100 160, 170 160, 210 200 C 170 240, 100 240, 30 200 Z"/>
-              <path d="M370 200 C 300 160, 230 160, 190 200 C 230 240, 300 240, 370 200 Z"/>
-              <circle cx="200" cy="200" r="8" fill="currentColor" stroke="none"/>
-              <path d="M105 95 L 295 295 M295 95 L 105 295" stroke-dasharray="1 4"/>
-            </g>
-          </svg>
-
-          <!-- Vitral mascarado em arco gótico -->
-          <div class="sb-hero__art-frame">
-            <picture>
-              <source srcset="assets/photo-office.webp" type="image/webp" />
-              <img src="assets/photo-office.jpg" alt="" loading="eager" decoding="async" width="1200" height="1500" />
-            </picture>
-          </div>
-
-          <!-- Borda dourada em SVG (segue o shape do arco) -->
-          <svg class="sb-hero__art-border" viewBox="0 0 100 133" preserveAspectRatio="none">
-            <path d="M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z"
-                  fill="none" stroke="rgba(212,176,116,0.55)" stroke-width="0.5"
-                  vector-effect="non-scaling-stroke"/>
-          </svg>
-
-          <!-- Scan-line de luz (reflexo) -->
-          <div class="sb-hero__art-scan"></div>
-
-          <!-- 4 ornamentos AN nos cantos (íris) -->
-          <svg class="sb-hero__art-corner-tl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
-            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
-            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
-          </svg>
-          <svg class="sb-hero__art-corner-tr" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
-            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
-            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
-          </svg>
-          <svg class="sb-hero__art-corner-bl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
-            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
-            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
-          </svg>
-          <svg class="sb-hero__art-corner-br" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
-            <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
-            <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
-          </svg>
-        </div>
+        <!-- Vitral migrou pro #sobre (figure interna do split sticky) — Onda 4 -->
       </div>
     </section>
 
@@ -3072,25 +3055,58 @@
             </div>
           </div>
 
-          <!--
-            TODO CRÍTICO (substituir antes do go-live):
-            Foto provisória — usar retrato em P&B da família + equipe (3 gerações)
-            ou vista institucional do escritório com pessoas. Mínimo 2400px de largura
-            para suportar scale animado sem pixelizar.
-          -->
+          <!-- Vitral em arco gótico migrado do hero (Onda 4).
+               6 camadas: glow halo, mandala spin, frame mascarado, border SVG,
+               scan-line, 4 ornamentos AN. Parallax 3D no mousemove está
+               escopado pra .sb-about (definido em sbInit). -->
           <figure class="sb-about__figure" data-reveal>
-            <div class="sb-about__photo">
-              <picture>
-                <source srcset="assets/photo-office.webp" type="image/webp" />
-                <img
-                  src="assets/photo-office.jpg"
-                  alt="Escritório da Santa Branca Seguros — três gerações da família em Belo Horizonte"
-                  loading="lazy" decoding="async"
-                  width="1200" height="1500"
-                />
-              </picture>
+            <div class="sb-hero__art sb-about__vitral" aria-hidden="true">
+              <div class="sb-hero__art-glow"></div>
+              <svg class="sb-hero__art-mandala" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+                <g>
+                  <circle cx="200" cy="200" r="190"/>
+                  <circle cx="200" cy="200" r="160" stroke-dasharray="2 6"/>
+                  <circle cx="200" cy="200" r="130"/>
+                  <path d="M200 30 C 160 100, 160 170, 200 210 C 240 170, 240 100, 200 30 Z"/>
+                  <path d="M200 370 C 160 300, 160 230, 200 190 C 240 230, 240 300, 200 370 Z"/>
+                  <path d="M30 200 C 100 160, 170 160, 210 200 C 170 240, 100 240, 30 200 Z"/>
+                  <path d="M370 200 C 300 160, 230 160, 190 200 C 230 240, 300 240, 370 200 Z"/>
+                  <circle cx="200" cy="200" r="8" fill="currentColor" stroke="none"/>
+                  <path d="M105 95 L 295 295 M295 95 L 105 295" stroke-dasharray="1 4"/>
+                </g>
+              </svg>
+              <div class="sb-hero__art-frame">
+                <picture>
+                  <source srcset="assets/photo-office.webp" type="image/webp" />
+                  <img src="assets/photo-office.jpg" alt="" loading="lazy" decoding="async" width="1200" height="1500" />
+                </picture>
+              </div>
+              <svg class="sb-hero__art-border" viewBox="0 0 100 133" preserveAspectRatio="none">
+                <path d="M50 4 C 78 4 96 22 96 50 L 96 129 L 4 129 L 4 50 C 4 22 22 4 50 4 Z"
+                      fill="none" stroke="rgba(212,176,116,0.55)" stroke-width="0.5"
+                      vector-effect="non-scaling-stroke"/>
+              </svg>
+              <div class="sb-hero__art-scan"></div>
+              <svg class="sb-hero__art-corner-tl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+                <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+                <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+              </svg>
+              <svg class="sb-hero__art-corner-tr" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+                <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+                <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+              </svg>
+              <svg class="sb-hero__art-corner-bl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+                <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+                <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+              </svg>
+              <svg class="sb-hero__art-corner-br" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+                <path d="M2 14 Q 2 2, 14 2"/><path d="M2 22 Q 8 22, 12 18 Q 16 14, 22 14"/>
+                <path d="M14 2 C 12 6, 14 10, 18 10"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+              </svg>
             </div>
-            <figcaption class="sb-about__caption">Três gerações · Belo Horizonte</figcaption>
+            <figcaption class="sb-about__vitral-caption">
+              Este vitral recebe nossos clientes na porta do escritório há mais de uma década. Para nós, ele representa o cuidado e a tradição com que tratamos cada pessoa que cruza essa porta.
+            </figcaption>
           </figure>
         </div>
 
@@ -3708,6 +3724,20 @@
         <p class="sb-contact__alt" data-reveal data-reveal-delay="1050">
           Prefere ligar? <a href="tel:+553133095558">(31) 3309-5558</a>
         </p>
+        <a class="sb-instagram-link"
+           href="https://www.instagram.com/santabrancaseguros/"
+           target="_blank" rel="noopener"
+           aria-label="Instagram da Santa Branca — @santabrancaseguros"
+           data-reveal data-reveal-delay="1200">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span class="sb-instagram-link__handle">@santabrancaseguros</span>
+          <span class="sb-instagram-link__sep" aria-hidden="true">·</span>
+          <span class="sb-instagram-link__tagline">acompanhe a gente</span>
+        </a>
       </div>
     </section>
   </main>
@@ -3749,19 +3779,6 @@
       </div>
     </div>
     <div class="sb-footer__base">
-      <a class="sb-footer__instagram"
-         href="https://www.instagram.com/santabrancaseguros/"
-         target="_blank" rel="noopener"
-         aria-label="Instagram da Santa Branca — @santabrancaseguros">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-        <span class="sb-footer__instagram-handle">@santabrancaseguros</span>
-        <span class="sb-footer__instagram-sep" aria-hidden="true">·</span>
-        <span class="sb-footer__instagram-tagline">histórias do dia a dia</span>
-      </a>
       <div class="container sb-footer__copy">
         © <span id="footer-year">2026</span> Santa Branca Seguros · Todos os direitos reservados
       </div>
@@ -4020,6 +4037,24 @@
       if (isIOS) {
         document.documentElement.classList.add('sb-no-sticky');
       }
+
+      /* Hero video — pausa em reduced-motion (CSS já esconde, mas garantir
+         que não consome decode/bateria). Em mobile <768px CSS também esconde. */
+      (function () {
+        var hv = document.querySelector('.sb-hero__video');
+        if (!hv) return;
+        var rmReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var isMobileVw = window.matchMedia('(max-width: 768px)').matches;
+        if (rmReduce || isMobileVw) {
+          try { hv.pause(); hv.removeAttribute('autoplay'); } catch (e) {}
+          hv.preload = 'none';
+        } else {
+          /* iOS bloqueia autoplay em algumas situações — try/catch silencioso.
+             Se falhar, browser mostra o poster naturalmente. */
+          var p = hv.play && hv.play();
+          if (p && typeof p.catch === 'function') p.catch(function () {});
+        }
+      })();
 
       /* ============================================================
          REDUCED MOTION GUARD — usado por toda a orquestra abaixo
@@ -4461,17 +4496,17 @@
             about.style.setProperty('--curtain-bottom', '0%');
           }
 
-          /* ---------- Photo SCALE 0.7 → 1.0 enquanto rolamos pelos 3 blocos
-             ---------- (substitui parallax translateY anterior).
+          /* ---------- Vitral SCALE 0.85 → 1.0 enquanto rolamos pelos 3 blocos
+             ---------- (substituiu foto provisória — vitral migrou do hero).
              Desabilitado em mobile/tablet (<1024px) e iOS — em layout 1-col
-             a foto fica fixa no topo, scale não tem sentido. */
+             o vitral fica fixo no topo, scale não tem sentido. */
           var supportsSticky = !isIOS && window.matchMedia('(min-width: 1024px)').matches;
           if (HAS_GSAP && !REDUCED_MOTION && supportsSticky) {
-            var photoEl = about.querySelector('.sb-about__photo');
+            var vitralEl = about.querySelector('.sb-about__vitral');
             var textCol = about.querySelector('.sb-about__text');
-            if (photoEl && textCol) {
-              gsap.fromTo(photoEl,
-                { scale: 0.7 },
+            if (vitralEl && textCol) {
+              gsap.fromTo(vitralEl,
+                { scale: 0.85 },
                 {
                   scale: 1.0,
                   ease: 'none',
@@ -4759,27 +4794,50 @@
       }
 
       /* ============================================================
-         CURSOR GLOW + VITRAL PARALLAX 3D — desktop, apenas hero
-         O mousemove handler é compartilhado entre os dois efeitos pra
-         economizar 1 listener/frame. O glow segue o cursor; 3 camadas
-         do vitral se deslocam em amounts diferentes criando profundidade.
-         As outras 3 camadas (glow halo, mandala, corners) NÃO recebem
-         parallax porque já têm CSS animation no transform — conflito
-         resolvido isolando o parallax apenas em camadas sem animation CSS.
-         ============================================================ */
+         CURSOR GLOW — desktop, segue o cursor no hero
+         (vitral migrou pro Sobre na Onda 4 — parallax 3D dele agora vive
+         em outro bloco abaixo, escopado a .sb-about) */
       if (IS_DESKTOP && !REDUCED_MOTION) {
         var glow = document.getElementById('sb-cursor-glow');
         var heroForGlow = document.querySelector('.sb-hero');
         if (glow && heroForGlow) {
           var glowOn = false;
+          heroForGlow.addEventListener('mouseenter', function () {
+            glow.classList.add('is-active');
+            glowOn = true;
+          });
+          heroForGlow.addEventListener('mouseleave', function () {
+            glow.classList.remove('is-active');
+            glowOn = false;
+          });
+          heroForGlow.addEventListener('mousemove', function (e) {
+            if (!glowOn) return;
+            glow.style.transform = 'translate(' + (e.clientX - 200) + 'px,' + (e.clientY - 200) + 'px)';
+          });
+        }
+      } else {
+        var glowRm = document.getElementById('sb-cursor-glow');
+        if (glowRm) glowRm.remove();
+      }
 
-          /* Camadas do vitral pro parallax 3D (amplitudes baixas, sutil) */
-          var artFrameImg = heroForGlow.querySelector('.sb-hero__art-frame img');
-          var artBorder   = heroForGlow.querySelector('.sb-hero__art-border');
-          var artScan     = heroForGlow.querySelector('.sb-hero__art-scan');
+      /* ============================================================
+         VITRAL PARALLAX 3D — desktop, escopado a .sb-about (Onda 4)
+         3 camadas do vitral (foto/border/scan) se deslocam em amounts
+         diferentes criando profundidade quando o cursor passa sobre o Sobre.
+         As outras 3 camadas (glow halo, mandala spin, 4 corners breathe)
+         NÃO recebem parallax porque já têm CSS animation no transform —
+         conflito resolvido isolando o parallax apenas em camadas sem
+         animation CSS.
+         ============================================================ */
+      if (IS_DESKTOP && !REDUCED_MOTION) {
+        var aboutForParallax = document.querySelector('.sb-about');
+        var vitralLayers = aboutForParallax && aboutForParallax.querySelector('.sb-about__vitral');
+        if (vitralLayers) {
+          var artFrameImg = vitralLayers.querySelector('.sb-hero__art-frame img');
+          var artBorder   = vitralLayers.querySelector('.sb-hero__art-border');
+          var artScan     = vitralLayers.querySelector('.sb-hero__art-scan');
 
-          /* gsap.quickTo: compila a tween 1x e dispara setter otimizado por frame.
-             Padrão GSAP pra interações mousemove de alta frequência. */
+          /* gsap.quickTo: compila a tween 1x e dispara setter otimizado por frame */
           var qto = function (el, prop, dur) {
             return HAS_GSAP && el ? gsap.quickTo(el, prop, { duration: dur || 0.6, ease: 'power3.out' }) : function () {};
           };
@@ -4791,49 +4849,42 @@
           var bordRY  = qto(artBorder,   'rotationY', 0.7);
           var scanX   = qto(artScan,     'xPercent', 0.8);
 
-          /* will-change só durante hover ativo (libera composite ao sair) */
-          function setWillChange(on) {
+          function setWillChangeVitral(on) {
             var v = on ? 'transform' : 'auto';
             [artFrameImg, artBorder, artScan].forEach(function (el) {
               if (el) el.style.willChange = v;
             });
           }
 
-          heroForGlow.addEventListener('mouseenter', function () {
-            glow.classList.add('is-active');
-            glowOn = true;
-            setWillChange(true);
+          var vitralActive = false;
+          aboutForParallax.addEventListener('mouseenter', function () {
+            vitralActive = true;
+            setWillChangeVitral(true);
           });
-          heroForGlow.addEventListener('mouseleave', function () {
-            glow.classList.remove('is-active');
-            glowOn = false;
-            /* Reseta camadas ao centro suavemente */
+          aboutForParallax.addEventListener('mouseleave', function () {
+            vitralActive = false;
             frameX(0); frameY(0);
             bordX(0); bordY(0); bordRX(0); bordRY(0);
             scanX(0);
-            /* libera composite após tweens terminarem */
-            setTimeout(function () { setWillChange(false); }, 700);
+            setTimeout(function () { setWillChangeVitral(false); }, 700);
           });
-          heroForGlow.addEventListener('mousemove', function (e) {
-            if (!glowOn) return;
-            /* Glow do cursor (comportamento existente) */
-            glow.style.transform = 'translate(' + (e.clientX - 200) + 'px,' + (e.clientY - 200) + 'px)';
-
-            /* Parallax 3D — normalizar cursor relativo ao hero, -0.5 a +0.5 */
-            var rect = heroForGlow.getBoundingClientRect();
+          aboutForParallax.addEventListener('mousemove', function (e) {
+            if (!vitralActive) return;
+            /* Normalizar cursor relativo ao vitral, NÃO ao .sb-about (que é gigante).
+               Mais natural: efeito reage à proximidade do cursor com o vitral. */
+            var rect = vitralLayers.getBoundingClientRect();
             var nx = (e.clientX - rect.left) / rect.width  - 0.5;
             var ny = (e.clientY - rect.top)  / rect.height - 0.5;
+            /* Clamp -1..+1 pra não exagerar quando cursor longe do vitral */
+            nx = Math.max(-1, Math.min(1, nx));
+            ny = Math.max(-1, Math.min(1, ny));
 
-            /* Amplitudes baixas — visual sutil, não exibição */
             frameX(nx * 4);    frameY(ny * 4);     /* foto: ±2% */
             bordX(nx * 10);    bordY(ny * 10);     /* moldura: ±5% */
             bordRX(ny * -6);   bordRY(nx * 6);     /* tilt 3D moldura: ±3deg */
             scanX(nx * 3);                          /* reflexo: ±1.5% */
           });
         }
-      } else {
-        var glowRm = document.getElementById('sb-cursor-glow');
-        if (glowRm) glowRm.remove();
       }
 
       /* ============================================================

@@ -1,0 +1,17 @@
+# Pasta para vídeos do hero
+#
+# Arquivos esperados (substituir antes do go-live):
+# - hero-bg.mp4    (principal, fallback universal)
+# - hero-bg.webm   (otimizado, codecs vp9, browsers modernos)
+# - hero-bg-poster.jpg (frame inicial otimizado <150KB; até chegar,
+#                       o HTML reusa assets/og-image.jpg como poster)
+#
+# Critérios pro vídeo:
+# - Plano fixo ou pan lento (sem movimento súbito)
+# - Loop sem corte brusco, 8-15s
+# - Baixo contraste de luz/sombra (sem flashes)
+# - Sem texto/logos no vídeo
+# - Cores compatíveis com paleta navy/champagne
+# - Resolução ≥1920px largura
+# - Bitrate 2-4 Mbps MP4 + 1-2 Mbps WebM
+# - Sem áudio (autoplay requer muted)
