@@ -850,6 +850,16 @@
       background-clip: text;
       color: transparent;
     }
+    /* Fix Bug 1 — palavras dentro do <em> têm display:inline-block (criado
+       pelo splitter da Fase 2 pra GSAP animar transform), o que quebra o
+       background-clip:text herdado do <em>. Cada .word precisa carregar
+       seu próprio gradient pra clipar o texto que renderiza. */
+    .sb-hero__title em .word {
+      background: linear-gradient(135deg, var(--champagne-soft) 0%, var(--color-champagne) 60%, var(--champagne-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
     .sb-hero__lead {
       max-width: 560px; margin-bottom: 2.5rem;
@@ -1091,7 +1101,13 @@
       gap: clamp(2.5rem, 5vh, 4rem);
     }
     .sb-about__block {
-      min-height: 60vh;
+      /* 40vh: meio termo entre legibilidade e respiro cinematográfico.
+         60vh anterior criava ~450px de espaço entre parágrafos em 1080p
+         (sensação de "linhas absurdamente espaçadas"). 40vh dá ~432px por
+         bloco com parágrafos de ~150-200px → ~232px de respiro. Mantém
+         a "track" do scrub da foto longa o suficiente pro crescimento
+         continuar agradável. */
+      min-height: 40vh;
       display: flex; flex-direction: column;
       justify-content: center;
     }
@@ -2525,6 +2541,38 @@
     .sb-footer__legal-nav a:hover { color: var(--gold-soft); }
     .sb-footer__base { border-top: 1px solid rgba(245,239,230,0.08); padding: 18px 0; }
     .sb-footer__copy { font-size: 12px; color: rgba(245,239,230,0.4); text-align:center; }
+
+    /* Instagram link — fica acima do copyright, centralizado.
+       Conjunto ícone + handle + tagline; clique no conjunto inteiro abre o link. */
+    .sb-footer__instagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 0 16px;
+      text-decoration: none;
+      color: rgba(201, 169, 97, 0.7);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 240ms var(--ease-out);
+    }
+    .sb-footer__instagram:hover,
+    .sb-footer__instagram:focus-visible {
+      color: var(--color-champagne);
+    }
+    .sb-footer__instagram svg {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      display: block;
+    }
+    .sb-footer__instagram-handle { font-weight: 600; }
+    .sb-footer__instagram-sep {
+      opacity: 0.6;
+      margin: 0 2px;
+    }
+    .sb-footer__instagram-tagline { font-weight: 400; }
     /* Em mobile, dar espaço extra no fim para o botão flutuante WhatsApp não cobrir o copyright */
     @media (max-width: 640px) {
       .sb-footer__base { padding-bottom: 88px; }
@@ -3701,6 +3749,19 @@
       </div>
     </div>
     <div class="sb-footer__base">
+      <a class="sb-footer__instagram"
+         href="https://www.instagram.com/santabrancaseguros/"
+         target="_blank" rel="noopener"
+         aria-label="Instagram da Santa Branca — @santabrancaseguros">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        <span class="sb-footer__instagram-handle">@santabrancaseguros</span>
+        <span class="sb-footer__instagram-sep" aria-hidden="true">·</span>
+        <span class="sb-footer__instagram-tagline">histórias do dia a dia</span>
+      </a>
       <div class="container sb-footer__copy">
         © <span id="footer-year">2026</span> Santa Branca Seguros · Todos os direitos reservados
       </div>
