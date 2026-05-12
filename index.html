@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0B1A2E" />
 
   <title>Santa Branca Seguros — Corretora Familiar em Belo Horizonte desde 1994</title>
-  <meta name="description" content="Corretora de seguros em Belo Horizonte desde 1994. Cotamos com 11 seguradoras: auto, residencial, vida, empresarial, condomínio e mais. Atendimento humano, três gerações da mesma família." />
+  <meta name="description" content="Corretora de seguros em Belo Horizonte desde 1994. Cotamos com 12 seguradoras: auto, residencial, vida, empresarial, condomínio e mais. Atendimento humano, três gerações da mesma família." />
   <meta name="keywords" content="seguro auto belo horizonte, corretora de seguros bh, seguro residencial mg, seguro empresarial, seguradora porto seguro allianz, santa branca seguros" />
   <meta name="author" content="Santa Branca Seguros" />
   <meta name="robots" content="index, follow" />
@@ -17,7 +17,7 @@
   <!-- TODO: criar og-image.jpg 1200x630 antes do go-live (foto fachada com vitral + logo overlay + tagline) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Santa Branca Seguros — Corretora Familiar desde 1994" />
-  <meta property="og:description" content="Corretora de seguros em BH com atendimento humano. 11 seguradoras parceiras. Três gerações da mesma família." />
+  <meta property="og:description" content="Corretora de seguros em BH com atendimento humano. 12 seguradoras parceiras. Três gerações da mesma família." />
   <meta property="og:url" content="https://www.santabranca.com.br/" />
   <meta property="og:image" content="https://www.santabranca.com.br/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -28,7 +28,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Santa Branca Seguros — Corretora Familiar desde 1994" />
-  <meta name="twitter:description" content="Corretora de seguros em BH com atendimento humano. 11 seguradoras parceiras." />
+  <meta name="twitter:description" content="Corretora de seguros em BH com atendimento humano. 12 seguradoras parceiras." />
   <meta name="twitter:image" content="https://www.santabranca.com.br/assets/og-image.jpg" />
 
   <!-- Google Search Console (cole o conteúdo de verificação aqui quando tiver) -->
@@ -94,7 +94,7 @@
     "@id": "https://www.santabranca.com.br/#organization",
     "name": "Santa Branca Seguros",
     "alternateName": "Santa Branca Administração e Corretora de Seguros Ltda",
-    "description": "Corretora de seguros familiar em Belo Horizonte desde 1994. Três décadas de mercado, 11 seguradoras parceiras, atendimento humano.",
+    "description": "Corretora de seguros familiar em Belo Horizonte desde 1994. Três décadas de mercado, 12 seguradoras parceiras, atendimento humano.",
     "url": "https://www.santabranca.com.br/",
     "telephone": ["+55-31-3309-5558", "+55-31-98726-3411"],
     "email": "santabranca@santabranca.com.br",
@@ -2044,8 +2044,8 @@
        INSURERS
        ============================================================ */
     /* ============================================================
-       INSURERS — 11 seguradoras + slot "+ você", grid contíguo,
-       hover spotlight + tooltip flutuante (Fase 6)
+       INSURERS — 12 seguradoras em marquee horizontal infinita.
+       Substituiu o grid de cards com tooltips fichas técnicas (Fase 6 → Onda 5).
        ============================================================ */
     .sb-insurers {
       background: var(--color-midnight);
@@ -2088,151 +2088,73 @@
     .sb-insurers__title .line-inner { display: block; will-change: transform, opacity; }
     .sb-insurers__title[data-split-lines] { opacity: 0; }
 
-    /* Grid contíguo: 4 col desktop, 3 tablet, 2 mobile.
-       gap 1px sobre bg champagne 10% cria a "tabela" visual. */
-    .sb-insurers__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(201, 169, 97, 0.10);
-      border: 1px solid rgba(201, 169, 97, 0.10);
-      border-radius: 4px;
-      /* overflow visible pra tooltip aparecer fora do container */
+    /* Marquee horizontal infinito — track com 2 sets de 12 logos.
+       translateX(-50%) move 1 set inteiro, criando loop perfeito. */
+    .sb-marquee {
+      overflow: hidden;
+      width: 100%;
+      padding-block: clamp(1.5rem, 3vw, 2.5rem);
+      mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
     }
-    .sb-insurer-card {
-      position: relative;
-      padding: clamp(1.5rem, 2.5vw, 2rem);
-      min-height: 120px;
-      background: var(--color-midnight);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background 250ms var(--ease-out), opacity 250ms var(--ease-out);
+    .sb-marquee__track {
+      display: flex;
+      align-items: center;
+      gap: 70px;
+      width: max-content;
+      animation: sbMarqueeScroll 50s linear infinite;
+      will-change: transform;
     }
-    .sb-insurer-card__name {
-      font-family: var(--font-serif);
-      font-size: 1.125rem;
-      font-weight: 500;
-      color: rgba(245, 241, 234, 0.5);
-      text-align: center;
-      transition: color 250ms var(--ease-out);
+    .sb-marquee:hover .sb-marquee__track,
+    .sb-marquee:focus-within .sb-marquee__track {
+      animation-play-state: paused;
     }
-
-    /* Spotlight: usa :has() — escurece os outros quando algum está em hover.
-       :not(:hover) exclui o card sob hover da regra (que ganharia por
-       especificidade (0,4,0) > (0,2,0) e mataria o destaque). */
-    @media (hover: hover) and (min-width: 769px) {
-      .sb-insurers__grid:has(.sb-insurer-card:hover) .sb-insurer-card:not(:hover) { opacity: 0.4; }
-      .sb-insurer-card:hover {
-        background: rgba(255, 255, 255, 0.03);
-        opacity: 1;
-      }
-      .sb-insurer-card:hover .sb-insurer-card__name {
-        color: var(--color-text-primary);
-      }
+    @keyframes sbMarqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
-
-    /* Slot "+ você" — decorativo, sem tooltip, sem cursor pointer */
-    .sb-insurer-card--placeholder { cursor: default; }
-    .sb-insurer-card--placeholder .sb-insurer-card__name {
-      font-style: italic;
-      color: var(--color-champagne);
-      opacity: 0.85;
-    }
-    @media (hover: hover) and (min-width: 769px) {
-      .sb-insurer-card--placeholder:hover {
-        background: var(--color-midnight);
-      }
-      .sb-insurer-card--placeholder:hover .sb-insurer-card__name {
-        color: var(--color-champagne);
-      }
-    }
-
-    /* Tooltip flutuante — JS pode injetar --tooltip-shift se estourar viewport */
-    .sb-insurer-card__tooltip {
-      --tooltip-shift: 0px;
-      position: absolute;
-      top: 100%; left: 50%;
-      transform: translate(calc(-50% + var(--tooltip-shift)), 8px);
-      background: var(--color-midnight-deep);
-      border: 1px solid rgba(201, 169, 97, 0.20);
-      padding: 1.25rem 1.5rem;
-      min-width: 240px; max-width: 320px;
-      border-radius: 4px;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
-      z-index: 10;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
-      margin-top: 8px;
-    }
-    .sb-insurer-card.is-bottom-row .sb-insurer-card__tooltip {
-      top: auto; bottom: 100%;
-      transform: translate(calc(-50% + var(--tooltip-shift)), -8px);
-      margin-top: 0;
-      margin-bottom: 8px;
-    }
-    @media (hover: hover) and (min-width: 769px) {
-      .sb-insurer-card:not(.sb-insurer-card--placeholder):hover .sb-insurer-card__tooltip {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translate(calc(-50% + var(--tooltip-shift)), 0);
-      }
-    }
-    .sb-insurer-card.is-open .sb-insurer-card__tooltip {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translate(calc(-50% + var(--tooltip-shift)), 0);
-    }
-
-    .sb-insurer-card__tooltip-title {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--color-text-primary);
-      margin: 0;
-    }
-    .sb-insurer-card__tooltip-rule {
+    .sb-marquee__logo {
       display: block;
-      width: 32px; height: 1px;
-      background: rgba(201, 169, 97, 0.30);
-      margin: 0.75rem 0;
-      border: 0;
+      height: 75px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: grayscale(1) brightness(0.85) sepia(0.4) saturate(2.5) hue-rotate(5deg) opacity(0.55);
+      transition: filter 300ms var(--ease-out), opacity 300ms var(--ease-out);
+      cursor: pointer;
     }
-    .sb-insurer-card__tooltip-grid {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.4rem 1rem;
-      margin: 0;
-    }
-    .sb-insurer-card__tooltip-grid dt {
-      font-family: var(--font-sans);
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--color-champagne);
-      align-self: start;
-    }
-    .sb-insurer-card__tooltip-grid dd {
-      font-family: var(--font-sans);
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--color-text-secondary);
-      margin: 0;
+    .sb-marquee__logo:hover,
+    .sb-marquee__logo:focus-visible {
+      filter: none;
+      opacity: 1;
+      outline: none;
     }
 
     @media (max-width: 1024px) {
-      .sb-insurers__grid { grid-template-columns: repeat(3, 1fr); }
+      .sb-marquee__track { gap: 60px; }
+      .sb-marquee__logo { height: 60px; max-width: 140px; }
     }
     @media (max-width: 768px) {
-      .sb-insurers__grid { grid-template-columns: repeat(2, 1fr); }
-      /* Spotlight desativado no mobile (UX confusa sem hover) */
-      .sb-insurers__grid:has(.sb-insurer-card:hover) .sb-insurer-card { opacity: 1; }
+      .sb-marquee__track { gap: 50px; animation-duration: 40s; }
+      .sb-marquee__logo { height: 45px; max-width: 110px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .sb-insurers__title[data-split-lines] { opacity: 1; }
       .sb-insurers__title .line-inner { transform: none !important; opacity: 1 !important; }
-      .sb-insurer-card,
-      .sb-insurer-card__name,
-      .sb-insurer-card__tooltip { transition: none !important; }
+      .sb-marquee {
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+      .sb-marquee__track {
+        animation: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 40px 50px;
+      }
+      .sb-marquee__logo[aria-hidden="true"] { display: none; }
+      .sb-marquee__logo { transition: none !important; }
     }
 
     /* ============================================================
@@ -2972,7 +2894,7 @@
           </div>
           <!-- Stagger reveal — palavras envoltas em <span class="word"> via JS no init -->
           <h1 class="sb-hero__title" data-split-words>Seguro feito por gente <em>que conhece você pelo nome.</em></h1>
-          <p class="sb-hero__lead">A Santa Branca é uma corretora familiar de Belo Horizonte. Atende famílias e empresas com 11 seguradoras parceiras — e a mesma pessoa que te atende hoje vai te atender no sinistro.</p>
+          <p class="sb-hero__lead">A Santa Branca é uma corretora familiar de Belo Horizonte. Atende famílias e empresas com 12 seguradoras parceiras — e a mesma pessoa que te atende hoje vai te atender no sinistro.</p>
           <div class="sb-hero__ctas">
             <a class="btn btn-whats sb-hero__cta-whats" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.88 11.9L4 20l4.21-1.1a7.93 7.93 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.39-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 12.23-3.5 6.59 6.59 0 0 1-6.63 6.59Z"/></svg>
@@ -2984,7 +2906,7 @@
           <!-- TICKERS — números animam de 0 ao alvo quando entram viewport -->
           <div class="sb-hero__tickers" aria-label="Estatísticas da corretora">
             <div class="sb-hero__ticker">
-              <span><span class="sb-hero__ticker-num" data-count="11">0</span></span>
+              <span><span class="sb-hero__ticker-num" data-count="12">0</span></span>
               <span class="sb-hero__ticker-label">Seguradoras parceiras</span>
             </div>
             <div class="sb-hero__ticker">
@@ -3186,8 +3108,8 @@
           <li class="sb-why__item" data-reveal>
             <div class="sb-why__num" aria-hidden="true">01</div>
             <hr class="sb-why__rule" aria-hidden="true" />
-            <h3 class="sb-why__t">Cotação em 11 seguradoras de uma vez</h3>
-            <p>Você fala uma vez, a gente cota com Porto Seguro, Allianz, Zurich, Liberty, SulAmerica, HDI, Tokio Marine, Itaú, MetLife, Chubb e AIG. Você compara as melhores opções, sem precisar ligar pra ninguém.</p>
+            <h3 class="sb-why__t">Cotação em 12 seguradoras de uma vez</h3>
+            <p>Você fala uma vez, a gente cota com Porto Seguro, Allianz, Zurich, Liberty, SulAmérica, HDI, Tokio Marine, Itaú, MetLife, Chubb, AIG e Assist Card. Você compara as melhores opções, sem precisar ligar pra ninguém.</p>
           </li>
           <li class="sb-why__item" data-reveal>
             <div class="sb-why__num" aria-hidden="true">02</div>
@@ -3320,7 +3242,7 @@
           </li>
           <li class="sb-process__step" data-reveal>
             <span class="sb-process__circle" aria-hidden="true">2</span>
-            <h3 class="sb-process__step-title">A gente cota com 11 seguradoras</h3>
+            <h3 class="sb-process__step-title">A gente cota com 12 seguradoras</h3>
             <p class="sb-process__step-desc">Em até 24h você recebe as melhores opções comparadas.</p>
           </li>
           <li class="sb-process__step" data-reveal>
@@ -3357,138 +3279,36 @@
       <div class="sb-insurers__container">
         <header class="sb-insurers__head">
           <span class="sb-insurers__eyebrow">Seguradoras parceiras</span>
-          <h2 id="ins-title" class="sb-insurers__title" data-split-lines>As 11 principais do Brasil. Em <em>uma cotação só</em>.</h2>
+          <h2 id="ins-title" class="sb-insurers__title" data-split-lines>As 12 principais do Brasil. Em <em>uma cotação só</em>.</h2>
         </header>
-        <!--
-          TODO: validar especialidades de cada seguradora com o cliente —
-          descrições genéricas com base em conhecimento público, não copiadas
-          dos sites oficiais. Substituir nomes por logos oficiais (SVG) em
-          fase posterior se o cliente fornecer.
-        -->
-        <div class="sb-insurers__grid" data-reveal-stagger="50">
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Porto Seguro" data-year="1945" data-spec="Auto, residencial e vida — referência no Brasil">
-            <span class="sb-insurer-card__name">Porto Seguro</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Porto Seguro</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1945</dd>
-                <dt>Especialidade</dt><dd>Auto, residencial e vida — referência no Brasil</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Allianz" data-year="1890" data-spec="Multinacional alemã, forte em auto e empresarial">
-            <span class="sb-insurer-card__name">Allianz</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Allianz</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1890</dd>
-                <dt>Especialidade</dt><dd>Multinacional alemã, forte em auto e empresarial</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Zurich" data-year="1872" data-spec="Origem suíça, especializada em vida e patrimônio">
-            <span class="sb-insurer-card__name">Zurich</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Zurich</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1872</dd>
-                <dt>Especialidade</dt><dd>Origem suíça, especializada em vida e patrimônio</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Liberty" data-year="1912" data-spec="Americana, forte em auto premium">
-            <span class="sb-insurer-card__name">Liberty</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Liberty</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1912</dd>
-                <dt>Especialidade</dt><dd>Americana, forte em auto premium</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="SulAmérica" data-year="1895" data-spec="Brasileira, tradição em saúde e vida">
-            <span class="sb-insurer-card__name">SulAmérica</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">SulAmérica</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1895</dd>
-                <dt>Especialidade</dt><dd>Brasileira, tradição em saúde e vida</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="HDI" data-year="1903" data-spec="Alemã, especializada em auto e residencial">
-            <span class="sb-insurer-card__name">HDI</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">HDI</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1903</dd>
-                <dt>Especialidade</dt><dd>Alemã, especializada em auto e residencial</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Tokio Marine" data-year="1879" data-spec="Japonesa, atuação ampla no mercado brasileiro">
-            <span class="sb-insurer-card__name">Tokio Marine</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Tokio Marine</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1879</dd>
-                <dt>Especialidade</dt><dd>Japonesa, atuação ampla no mercado brasileiro</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Itaú" data-year="1921" data-spec="Vida, residencial e produtos do banco">
-            <span class="sb-insurer-card__name">Itaú</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Itaú</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1921</dd>
-                <dt>Especialidade</dt><dd>Vida, residencial e produtos do banco</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="MetLife" data-year="1868" data-spec="Americana, líder global em vida e previdência">
-            <span class="sb-insurer-card__name">MetLife</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">MetLife</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1868</dd>
-                <dt>Especialidade</dt><dd>Americana, líder global em vida e previdência</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="Chubb" data-year="1882" data-spec="Premium — patrimônio, D&O, riscos especiais">
-            <span class="sb-insurer-card__name">Chubb</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">Chubb</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1882</dd>
-                <dt>Especialidade</dt><dd>Premium — patrimônio, D&amp;O, riscos especiais</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card" data-reveal data-reveal-clear="opacity" data-name="AIG" data-year="1919" data-spec="Americana, especializada em risco corporativo">
-            <span class="sb-insurer-card__name">AIG</span>
-            <div class="sb-insurer-card__tooltip" role="tooltip">
-              <h3 class="sb-insurer-card__tooltip-title">AIG</h3>
-              <hr class="sb-insurer-card__tooltip-rule" />
-              <dl class="sb-insurer-card__tooltip-grid">
-                <dt>Fundada</dt><dd>1919</dd>
-                <dt>Especialidade</dt><dd>Americana, especializada em risco corporativo</dd>
-              </dl>
-            </div>
-          </div>
-          <div class="sb-insurer-card sb-insurer-card--placeholder" data-reveal aria-hidden="true">
-            <span class="sb-insurer-card__name">+ você</span>
+        <div class="sb-marquee" aria-label="Carrossel de seguradoras parceiras">
+          <div class="sb-marquee__track">
+            <!-- Set 1: 12 logos visíveis para leitores de tela -->
+            <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="Porto Seguro" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="Allianz" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="Liberty Seguros" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="Zurich" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="Itaú" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="HDI Seguros" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="Tokio Marine" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="MetLife" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="Chubb" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="AIG" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/assist-card.svg" alt="Assist Card" loading="lazy" decoding="async" />
+            <!-- Set 2: duplicatas para loop perfeito (ocultas de a11y) -->
+            <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/assist-card.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -3567,7 +3387,7 @@
 
           <article class="sb-testimonial-card" data-reveal>
             <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Eles cotaram com 11 seguradoras, me mandaram um quadro comparativo numa tarde, e ainda explicaram CADA cláusula no WhatsApp. Em uma corretora online eu nem sabia que existia franquia reduzida.</p>
+            <p class="sb-testimonial-card__text">Eles cotaram com várias seguradoras, me mandaram um quadro comparativo numa tarde, e ainda explicaram CADA cláusula no WhatsApp. Em uma corretora online eu nem sabia que existia franquia reduzida.</p>
             <hr class="sb-testimonial-card__rule" aria-hidden="true" />
             <footer class="sb-testimonial-card__footer">
               <span class="sb-testimonial-card__avatar" aria-hidden="true">P</span>
@@ -3712,7 +3532,7 @@
       <div class="sb-contact__inner">
         <span class="sb-contact__eyebrow" data-reveal>Vamos conversar</span>
         <h2 id="contact-title" class="sb-contact__title" data-split-lines>A gente responde rápido. <em>De gente pra gente</em>.</h2>
-        <p class="sb-contact__lead" data-reveal data-reveal-delay="600">Conta o que você precisa proteger. Em poucos minutos a gente já está cotando com as 11 seguradoras parceiras.</p>
+        <p class="sb-contact__lead" data-reveal data-reveal-delay="600">Conta o que você precisa proteger. Em poucos minutos a gente já está cotando com as 12 seguradoras parceiras.</p>
         <a class="sb-contact__cta" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener" data-reveal data-reveal-delay="750">
           <i class="ph-light ph-whatsapp-logo" aria-hidden="true"></i>
           Conversar pelo WhatsApp
@@ -3752,7 +3572,7 @@
           <img class="sb-footer__logo" src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" />
         </div>
         <p class="sb-footer__col-text">
-          Corretora familiar de Belo Horizonte. Três décadas atendendo famílias e empresas com 11 seguradoras parceiras.<br/><br/>
+          Corretora familiar de Belo Horizonte. Três décadas atendendo famílias e empresas com 12 seguradoras parceiras.<br/><br/>
           SUSEP nº 10.0179680
         </p>
       </div>
@@ -4676,98 +4496,6 @@
           positionConnector();
           if (window.ScrollTrigger) ScrollTrigger.refresh();
         });
-      })();
-
-      /* ============================================================
-         INSURERS — tooltip flutuante + bottom-row + tap-to-reveal mobile
-         (Fase 6)
-         ============================================================ */
-      (function initInsurers() {
-        var section = document.querySelector('.sb-insurers');
-        if (!section) return;
-        var grid = section.querySelector('.sb-insurers__grid');
-        var cards = grid ? grid.querySelectorAll('.sb-insurer-card') : [];
-        if (!cards.length) return;
-
-        function markBottomRow() {
-          /* Marca a última row pra tooltip aparecer ACIMA, sem sair da viewport */
-          var tops = [];
-          cards.forEach(function (c) { tops.push(c.offsetTop); });
-          var maxTop = Math.max.apply(null, tops);
-          cards.forEach(function (c) {
-            if (c.offsetTop === maxTop) c.classList.add('is-bottom-row');
-            else c.classList.remove('is-bottom-row');
-          });
-        }
-
-        /* Edge guard: ajusta translateX do tooltip se ele estourar a
-           viewport (mobile estreito + card colado na borda).
-           Pre-render: chamado no init + resize para que cada tooltip já
-           NASÇA com shift correto — sem "pulinho" no momento do hover/tap. */
-        function adjustTooltipPosition(card) {
-          var tooltip = card.querySelector('.sb-insurer-card__tooltip');
-          if (!tooltip) return;
-          tooltip.style.removeProperty('--tooltip-shift');
-          /* BCR é válido mesmo com tooltip em opacity:0 (tem layout). */
-          var rect = tooltip.getBoundingClientRect();
-          var vw = window.innerWidth;
-          var margin = 16;
-          var shift = 0;
-          if (rect.left < margin) shift = margin - rect.left;
-          else if (rect.right > vw - margin) shift = (vw - margin) - rect.right;
-          if (shift !== 0) {
-            tooltip.style.setProperty('--tooltip-shift', shift + 'px');
-          }
-        }
-        function adjustAllTooltips() {
-          cards.forEach(function (card) {
-            if (card.classList.contains('sb-insurer-card--placeholder')) return;
-            adjustTooltipPosition(card);
-          });
-        }
-
-        markBottomRow();
-        adjustAllTooltips();
-        /* Re-medir quando fontes carregarem (BCR muda com Fraunces vs fallback) */
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(function () {
-            markBottomRow();
-            adjustAllTooltips();
-          });
-        }
-        window.addEventListener('resize', function () {
-          markBottomRow();
-          adjustAllTooltips();
-        });
-
-        /* Tap-to-reveal em devices sem hover (mobile/touch) */
-        var hasHover = window.matchMedia('(hover: hover)').matches;
-        if (!hasHover) {
-          var openCard = null;
-          cards.forEach(function (card) {
-            if (card.classList.contains('sb-insurer-card--placeholder')) return;
-            card.addEventListener('click', function (e) {
-              e.stopPropagation();
-              if (openCard === card) {
-                card.classList.remove('is-open');
-                openCard = null;
-              } else {
-                if (openCard) openCard.classList.remove('is-open');
-                card.classList.add('is-open');
-                openCard = card;
-                /* shift já está pré-aplicado; só re-mede caso layout mudou
-                   após reveal das cards (transform pode ter alterado BCR) */
-                adjustTooltipPosition(card);
-              }
-            });
-          });
-          document.addEventListener('click', function () {
-            if (openCard) {
-              openCard.classList.remove('is-open');
-              openCard = null;
-            }
-          });
-        }
       })();
 
       /* ============================================================
