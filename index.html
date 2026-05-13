@@ -51,16 +51,16 @@
   </style>
 
   <!-- Fontes — Premium Editorial
-       Serif:    Fraunces  (headlines editoriais)
-       Sans:     Inter     (corpo de texto)
-       Legados (Italiana, Cormorant, Geist) mantidos só enquanto seções não migram. -->
+       Serif: Fraunces (headlines editoriais — pesos 300/400/500/600).
+       Sans:  Inter    (corpo de texto — pesos 400/500/600/700).
+       Cormorant, Italiana e Geist removidas (legacy não-usado, ~300KB economia). -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Italiana&family=Geist:wght@300;400;500;600;700&display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Italiana&family=Geist:wght@300;400;500;600;700&display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" />
 
   <!-- Phosphor Icons (light) — ícones editoriais, stroke 1.5px, fora do feel "lucide everywhere" -->
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
@@ -179,7 +179,8 @@
       --color-cream:           #F5F1EA;   /* light bg alternado */
       --color-champagne:       #C9A961;   /* accent — uso parcimonioso */
       --color-text-primary:    #F5F1EA;   /* sobre dark */
-      --color-text-secondary:  #8B95A7;   /* eyebrows, auxiliares */
+      --color-text-secondary:  #8B95A7;   /* auxiliares (não-crítico) */
+      --color-text-strong:     #5A6273;   /* auxiliares legíveis (AA-Normal sobre cream) */
       --color-text-on-cream:   #1A2638;   /* sobre cream */
 
       /* Navy hierarchy — alias dos tokens canônicos */
@@ -344,7 +345,6 @@
       color: var(--gold);
       display: inline-block;
     }
-    .eyebrow--on-dark { color: var(--champagne); }
     .gold-rule {
       display: block;
       width: 48px; height: 1px;
@@ -807,7 +807,7 @@
       font-family: var(--font-sans);
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--color-text-secondary);
+      color: var(--color-text-strong);
     }
 
     /* Glow no <em> do título */
@@ -979,13 +979,13 @@
       font-family: var(--font-sans);
       font-size: 12px; font-weight: 500;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--color-text-secondary);
+      color: var(--color-text-strong);
     }
     .sb-hero__seal-line {
       font-family: var(--font-sans);
       font-size: 13px; font-weight: 500;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--color-text-secondary);
+      color: var(--color-text-strong);
     }
     .sb-hero__seal-line b { font-weight: 600; color: rgba(245,241,234,0.78); }
 
@@ -2783,12 +2783,12 @@
       display: grid; grid-template-columns: 1.4fr 1fr 1fr;
       gap: var(--sp-12);
     }
-    .sb-footer__col h4 {
+    .sb-footer__col h3 {
       font-family: var(--font-sans);
       font-size: 11px; font-weight: 500;
       letter-spacing: var(--ls-meta); text-transform: uppercase;
       color: var(--champagne);
-      margin-bottom: 14px;
+      margin: 0 0 14px;
     }
     .sb-footer__col ul { display: flex; flex-direction: column; gap: 8px; }
     .sb-footer__col a {
@@ -2961,7 +2961,7 @@
             <path d="M52 11 H80"/>
           </svg>
           <div class="sb-hero__eyebrow-wrap">
-            <span class="eyebrow eyebrow--on-dark">Desde 1994 · Belo Horizonte</span>
+            <span class="eyebrow">Desde 1994 · Belo Horizonte</span>
             <hr class="gold-rule" />
           </div>
           <!-- Stagger reveal — palavras envoltas em <span class="word"> via JS no init -->
@@ -3147,7 +3147,7 @@
          ============================================================ -->
     <section class="sb-timeline" aria-labelledby="timeline-title">
       <div class="sb-timeline__head">
-        <span class="eyebrow eyebrow--on-dark">Três décadas · Uma história</span>
+        <span class="eyebrow">Três décadas · Uma história</span>
         <h2 id="timeline-title" class="sb-timeline__title">1994 <span class="sb-timeline__dash">—</span> 2026</h2>
       </div>
       <div class="sb-timeline-track" aria-label="Linha do tempo da Santa Branca Seguros">
@@ -3683,7 +3683,7 @@
       </div>
 
       <div class="sb-footer__col">
-        <h4>Navegar</h4>
+        <h3>Navegar</h3>
         <ul>
           <li><a href="#sobre">Sobre</a></li>
           <li><a href="#coberturas">Coberturas</a></li>
@@ -3695,7 +3695,7 @@
       </div>
 
       <div class="sb-footer__col">
-        <h4>Legal</h4>
+        <h3>Legal</h3>
         <ul>
           <li><a href="privacidade.html">Política de Privacidade</a></li>
           <li><a href="termos.html">Termos de Uso</a></li>
@@ -4926,13 +4926,7 @@
     }
   </script>
 
-  <!-- ============================================================
-       SplitText (gratuito desde GSAP 3.13.0, abril/2025) + animations.js
-       Carrega DEPOIS da IIFE inline acima, em ordem garantida via defer.
-       Não substitui o splitter custom do hero/headlines — disponibiliza
-       a API completa do SplitText pra refinamentos futuros.
-       ============================================================ -->
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <!-- animations.js: hook pra animações futuras (vazio por enquanto). -->
   <script defer src="assets/js/animations.js"></script>
 </body>
 </html>
