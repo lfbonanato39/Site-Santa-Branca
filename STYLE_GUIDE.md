@@ -1,28 +1,39 @@
 # Santa Branca Seguros — Style Guide
 
-**Padrão visual:** Premium Editorial Cinematográfico
-**Referências:** mercury.com · stripe.com · brex.com · aesop.com · basicagency.com
+**Padrão visual:** Institucional Verde Mineiro (reforma 2026-05 — pré: Premium Editorial Cinematográfico)
+**Referências:** wsj.com · ft.com · reuters.com · santabranca.com.br (marca histórica)
 **Stack:** HTML/CSS/JS puro · Lenis · GSAP + ScrollTrigger (todos via CDN)
 
-> Este arquivo é a fonte da verdade visual e técnica para todas as 8 fases de refatoração. Consulte antes de editar tokens, animações ou tipografia.
+> Este arquivo é a fonte da verdade visual e técnica. Consulte antes de editar tokens, animações ou tipografia.
 
 ---
 
-## 1. Paleta
+## 1. Paleta — Reforma Identidade Verde (2026-05)
 
-Tokens canônicos em `:root` — sempre prefira `--color-*` em código novo. Os aliases legados (`--ink`, `--cream`, `--gold`, `--champagne`, `--fg-*`) já estão rebound aos tokens canônicos e serão removidos em fase futura.
+Tokens canônicos em `:root` — sempre prefira `--color-*` em código novo. Os aliases legados (`--color-midnight`, `--color-cream`, `--color-champagne`, `--ink`, `--gold`, etc.) ficam rebound aos novos tokens para não quebrar o CSS pré-existente.
+
+### Cores principais
 
 | Token | Hex | Quando usar |
 |---|---|---|
-| `--color-midnight` | `#0B1A2E` | Background dark principal (hero, footer, seções alternadas) |
-| `--color-midnight-deep` | `#060F1C` | Hover/depth states, máscaras de transição, gradient stops escuros |
-| `--color-cream` | `#F5F1EA` | Background claro alternado (about, conteúdo editorial) |
-| `--color-champagne` | `#C9A961` | **Accent — uso parcimonioso.** Apenas em detalhes: divisores, eyebrows, micro-acentos. Não usar em superfícies grandes |
-| `--color-text-primary` | `#F5F1EA` | Texto sobre fundo `--color-midnight` |
-| `--color-text-secondary` | `#8B95A7` | Eyebrows, captions, metadata sobre fundo midnight |
-| `--color-text-on-cream` | `#1A2638` | Texto sobre `--color-cream` |
+| `--color-forest-deep` | `#1B4D44` | Background verde principal (hero, footer, seções alternadas) — substitui o antigo midnight/navy |
+| `--color-forest-medium` | `#2A5F55` | Hover de CTAs primárias, gradient stops, acentos médios |
+| `--color-forest-soft` | `#3D7268` | Variação suave para tints internos |
+| `--color-forest-darker` | `#143B34` | Hover/depth, máscaras de transição, gradient stops mais escuros |
+| `--color-sage` | `#7A9690` | Acento sage stone — usado em `<em>` sobre fundo forest, divisores sobre dark |
+| `--color-sage-light` | `#A3B8B3` | Texto secundário sobre forest, tickers do hero |
+| `--color-papiro` | `#F5F1E8` | Background claro alternado (about, conteúdo editorial) — substitui cream |
+| `--color-papiro-deep` | `#E8E1D0` | Cards lift, blocos editoriais, callouts |
+| `--color-papiro-line` | `#D9D0BA` | Bordas finas sobre papiro |
+| `--color-bronze` | `#A88B5A` | **Accent — uso parcimonioso.** Eyebrows sobre papiro, ornamentos íris (opacity 40%), `<em>` sobre papiro |
+| `--color-bronze-deep` | `#8F7438` | Eyebrows seguradoras, `<em>` semibold sobre papiro |
+| `--color-bronze-soft` | `#C4A87A` | Variação suave, gradient stops |
+| `--color-text-on-forest` | `#F5F1E8` | Texto sobre fundo forest |
+| `--color-text-on-forest-muted` | `#A3B8B3` | Eyebrows, captions, metadata sobre forest |
+| `--color-text-on-papiro` | `#1A2826` | Texto principal sobre papiro |
+| `--color-text-secondary` | `#4A5752` | Auxiliares neutros sobre papiro |
 
-**Regra de ouro:** se uma cor não está nessa tabela, ela é tint/utility (ex: `--ink-soft`, `--cream-deep`) e existe só pra hierarquia interna.
+**Regra de ouro:** se uma cor não está nessa tabela, ela é tint/utility e existe só pra hierarquia interna. A paleta antiga (navy/cream/champagne dourado) foi descontinuada na reforma 2026-05.
 
 ---
 
@@ -30,14 +41,17 @@ Tokens canônicos em `:root` — sempre prefira `--color-*` em código novo. Os 
 
 | Token | Família | Pesos |
 |---|---|---|
-| `--font-serif` | **Fraunces**, Georgia, serif | 400, 500, 600 |
+| `--font-serif` | **Newsreader**, Source Serif 4, Georgia, serif | 300, 400, 500, 600 (axis opsz 6..72) |
 | `--font-sans` | **Inter**, -apple-system, system-ui, sans-serif | 400, 500, 600, 700 |
 | `--font-display` | alias de `--font-serif` | — |
+
+> Migração 2026-05: Newsreader (serifa institucional moderna, estilo WSJ/FT) substituiu Fraunces (editorial floreado).
 
 **Aplicação:**
 - `body` → `--font-sans`
 - `h1, h2, h3, h4` → `--font-serif`
 - Eyebrows / labels / botões → `--font-sans` (geralmente weight 500/600 + tracking elevado)
+- `<em>` em headlines → **font-style: normal**, **font-weight: 600**, color bronze (sobre papiro) ou sage (sobre forest). Italic foi removido para reforço institucional. Letras-arquitetura (1994, III, XII) usam Newsreader Light 300 + bronze opacity 40%.
 
 **Escala (clamp para fluido entre mobile e desktop):**
 
@@ -75,7 +89,7 @@ Tokens canônicos em `:root` — sempre prefira `--color-*` em código novo. Os 
 ## 4. Princípios de design
 
 - **Minimalismo intencional.** Cada elemento na tela precisa pagar aluguel. Espaço em branco é conteúdo.
-- **Hierarquia editorial.** Tamanho > peso > cor. Headlines em serif Fraunces dão autoridade; corpo em Inter conforta.
+- **Hierarquia editorial.** Tamanho > peso > cor. Headlines em serif Newsreader dão autoridade institucional; corpo em Inter conforta.
 - **Espaço em branco generoso.** Padding mínimo de seção: `var(--sp-16)` (64px) mobile, `var(--sp-24)` (96px) desktop+. Containers respiram.
 - **Champanhe é raro.** O accent dourado só aparece em divisores finos, eyebrows, hover de link âncora, selo do logo. Nunca em botões CTA grandes nem em backgrounds.
 - **Fundo nunca é branco puro.** Sempre `--color-cream` ou `--color-midnight`. Branco puro (#FFF) é proibido em superfícies grandes.
