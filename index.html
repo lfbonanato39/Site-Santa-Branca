@@ -1127,21 +1127,24 @@
       align-items: start;
     }
 
-    /* Coluna texto — 3 blocos com ar entre eles pra dar tempo da foto crescer */
+    /* Coluna texto — 3 blocos com letra-arquitetura + ornamentos entre eles.
+       min-height 30vh (reduzido de 40vh) compensa altura adicionada pelos
+       numerais + ornamentos. Track do scrub do vitral continua proporcional. */
     .sb-about__text {
       display: flex; flex-direction: column;
       gap: clamp(2.5rem, 5vh, 4rem);
     }
     .sb-about__block {
-      /* 40vh: meio termo entre legibilidade e respiro cinematográfico.
-         60vh anterior criava ~450px de espaço entre parágrafos em 1080p
-         (sensação de "linhas absurdamente espaçadas"). 40vh dá ~432px por
-         bloco com parágrafos de ~150-200px → ~232px de respiro. Mantém
-         a "track" do scrub da foto longa o suficiente pro crescimento
-         continuar agradável. */
-      min-height: 40vh;
+      min-height: 30vh;
       display: flex; flex-direction: column;
       justify-content: center;
+    }
+    /* Layout B desktop: letra-arquitetura na coluna esquerda + parágrafo na direita */
+    .sb-about__block-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 32px;
+      align-items: start;
     }
     .sb-about__block p {
       font-family: var(--font-sans);
@@ -1150,19 +1153,58 @@
       color: rgba(26, 38, 56, 0.82);
       margin: 0;
       max-width: 42ch;
+      padding-top: 0.4em;
     }
     .sb-about__block--lead p {
       font-size: clamp(1.125rem, 1.4vw, 1.3125rem);
       color: rgba(26, 38, 56, 0.88);
     }
-    .sb-about__block--lead p::first-letter {
+
+    /* Letra-arquitetura — Fraunces Light 300, champagne, opacity 40% */
+    .sb-about__numeral {
       font-family: var(--font-serif);
-      font-size: 4.5em;
-      line-height: 0.85;
-      font-weight: 500;
-      float: left;
-      margin: 0.05em 0.12em -0.1em 0;
-      color: var(--color-text-on-cream);
+      font-weight: 300;
+      font-size: clamp(64px, 7vw, 96px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--color-champagne);
+      opacity: 0.4;
+      text-align: right;
+      font-feature-settings: "lnum" 1, "kern" 1;
+      margin: 0;
+      display: block;
+      /* alinhar com 1ª linha do parágrafo (compensa baseline) */
+      padding-top: 0.05em;
+      user-select: none;
+    }
+    /* Numerais romanos (III, XII) recebem small caps + tracking ampliado */
+    .sb-about__numeral--roman {
+      font-variant: small-caps;
+      font-feature-settings: "smcp" 1, "c2sc" 1, "lnum" 1, "kern" 1;
+      letter-spacing: 0.14em;
+    }
+
+    /* Ornamento Art Nouveau — íris espelhadas (Variante C) entre blocos.
+       Stroke-draw animation: paths começam com dashoffset = totalLength
+       (setado por JS), .is-drawn dispara a animação de "desenho". */
+    .sb-about__ornament {
+      display: block;
+      width: 280px;
+      height: 60px;
+      margin: 0 auto;
+      color: var(--color-champagne);
+      opacity: 0.55;
+      overflow: visible;
+    }
+    .sb-about__ornament path {
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+      transition: stroke-dashoffset 1.2s var(--ease-out);
+    }
+    .sb-about__ornament.is-drawn path {
+      stroke-dashoffset: 0 !important;
     }
 
     /* FIGURE — STICKY na coluna direita, vitral cresce 0.85 → 1.0 com scroll.
@@ -1233,6 +1275,26 @@
       }
     }
 
+    /* Mobile <768px — Hipótese A: letra ACIMA do parágrafo (full width).
+       Em viewports estreitos o Layout B comprimia o parágrafo pra ~30ch.
+       Layout A preserva monumentalidade da letra-arquitetura sem comprometer
+       a leitura. Custo vertical absorvido pela redução de min-height 40→30vh. */
+    @media (max-width: 767px) {
+      .sb-about__block-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .sb-about__numeral {
+        text-align: left;
+        font-size: clamp(56px, 16vw, 72px);
+        padding-top: 0;
+      }
+      .sb-about__ornament {
+        width: 200px;
+        height: 44px;
+      }
+    }
+
     /* iOS fallback: sticky + Lenis momentum scroll = jank. JS detecta UA
        e adiciona html.sb-no-sticky. CSS reverte pra layout não-sticky. */
     html.sb-no-sticky .sb-about__figure {
@@ -1252,6 +1314,8 @@
         transform: scale(1) !important;
       }
       .sb-about__block { min-height: auto; }
+      /* Ornamento aparece estático, sem animação de stroke-draw */
+      .sb-about__ornament path { transition: none !important; }
     }
 
     /* ============================================================
@@ -2975,13 +3039,46 @@
         <div class="sb-about__split">
           <div class="sb-about__text" data-reveal-stagger>
             <div class="sb-about__block sb-about__block--lead" data-reveal>
-              <p>A Santa Branca Seguros nasceu em Belo Horizonte em 1994. Desde o primeiro dia, com o Washington atendendo um cliente de cada vez, o princípio foi um só: cuidar do que importa para os mineiros — família, casa, carro, negócio, futuro.</p>
+              <div class="sb-about__block-row">
+                <span class="sb-about__numeral" aria-hidden="true">1994</span>
+                <p>A Santa Branca Seguros nasceu em Belo Horizonte em 1994. Desde o primeiro dia, com o Washington atendendo um cliente de cada vez, o princípio foi um só: cuidar do que importa para os mineiros — família, casa, carro, negócio, futuro.</p>
+              </div>
             </div>
+
+            <!-- Ornamento Art Nouveau — íris espelhadas (Variante C aprovada).
+                 Stroke-draw animation acionada por IntersectionObserver. -->
+            <svg class="sb-about__ornament" viewBox="0 0 280 60" role="presentation" aria-hidden="true">
+              <path d="M20 30 L100 30"/>
+              <path d="M180 30 L260 30"/>
+              <path d="M110 30 C 110 18, 116 8, 124 6 C 132 8, 138 18, 138 30 C 134 26, 130 24, 124 24 C 118 24, 114 26, 110 30 Z"/>
+              <path d="M124 6 L 124 30"/>
+              <path d="M140 26 L 144 30 L 140 34 L 136 30 Z"/>
+              <path d="M170 30 C 170 18, 164 8, 156 6 C 148 8, 142 18, 142 30 C 146 26, 150 24, 156 24 C 162 24, 166 26, 170 30 Z"/>
+              <path d="M156 6 L 156 30"/>
+            </svg>
+
             <div class="sb-about__block" data-reveal>
-              <p>São três gerações da mesma família trabalhando lado a lado com uma equipe que conhece cada cliente pelo nome. Crescemos por indicação — o que diz mais sobre nosso trabalho do que qualquer slogan.</p>
+              <div class="sb-about__block-row">
+                <span class="sb-about__numeral sb-about__numeral--roman" aria-hidden="true">III</span>
+                <p>São três gerações da mesma família trabalhando lado a lado com uma equipe que conhece cada cliente pelo nome. Crescemos por indicação — o que diz mais sobre nosso trabalho do que qualquer slogan.</p>
+              </div>
             </div>
+
+            <svg class="sb-about__ornament" viewBox="0 0 280 60" role="presentation" aria-hidden="true">
+              <path d="M20 30 L100 30"/>
+              <path d="M180 30 L260 30"/>
+              <path d="M110 30 C 110 18, 116 8, 124 6 C 132 8, 138 18, 138 30 C 134 26, 130 24, 124 24 C 118 24, 114 26, 110 30 Z"/>
+              <path d="M124 6 L 124 30"/>
+              <path d="M140 26 L 144 30 L 140 34 L 136 30 Z"/>
+              <path d="M170 30 C 170 18, 164 8, 156 6 C 148 8, 142 18, 142 30 C 146 26, 150 24, 156 24 C 162 24, 166 26, 170 30 Z"/>
+              <path d="M156 6 L 156 30"/>
+            </svg>
+
             <div class="sb-about__block" data-reveal>
-              <p>Operamos com as principais seguradoras do Brasil e somos referência em Belo Horizonte para quem busca atendimento humano com a estrutura técnica de uma grande corretora. Aqui ninguém se aposenta da relação com o cliente — só ganha um cliente novo no nome do antigo.</p>
+              <div class="sb-about__block-row">
+                <span class="sb-about__numeral sb-about__numeral--roman" aria-hidden="true">XII</span>
+                <p>Operamos com as principais seguradoras do Brasil e somos referência em Belo Horizonte para quem busca atendimento humano com a estrutura técnica de uma grande corretora. Aqui ninguém se aposenta da relação com o cliente — só ganha um cliente novo no nome do antigo.</p>
+              </div>
             </div>
           </div>
 
@@ -4346,6 +4443,39 @@
                   }
                 }
               );
+            }
+          }
+
+          /* ---------- Ornamentos Art Nouveau (stroke-draw) ----------
+             Pré-mede totalLength de cada <path>, seta dasharray/dashoffset.
+             IntersectionObserver com threshold 0.7 dispara .is-drawn que
+             zera o dashoffset via CSS transition (1.2s power2/ease-out).
+             Em reduced-motion, classe aplicada direto sem transition. */
+          var ornaments = about.querySelectorAll('.sb-about__ornament');
+          if (ornaments.length) {
+            ornaments.forEach(function (orn) {
+              orn.querySelectorAll('path').forEach(function (p) {
+                try {
+                  var len = p.getTotalLength();
+                  p.style.strokeDasharray = len;
+                  p.style.strokeDashoffset = len;
+                } catch (e) { /* navegador sem getTotalLength: ignora */ }
+              });
+            });
+            if (REDUCED_MOTION) {
+              ornaments.forEach(function (o) { o.classList.add('is-drawn'); });
+            } else if ('IntersectionObserver' in window) {
+              var ornObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                  if (e.isIntersecting) {
+                    e.target.classList.add('is-drawn');
+                    ornObserver.unobserve(e.target);
+                  }
+                });
+              }, { threshold: 0.7 });
+              ornaments.forEach(function (o) { ornObserver.observe(o); });
+            } else {
+              ornaments.forEach(function (o) { o.classList.add('is-drawn'); });
             }
           }
         }
