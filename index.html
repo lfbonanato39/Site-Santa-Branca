@@ -2458,6 +2458,108 @@
     }
 
     /* ============================================================
+       CTA INTERMEDIÁRIO — banner reutilizável (Onda B fase 6)
+       Variants:
+         .sb-cta-mid--on-papiro  → fundo papiro, texto forest, border-top forest
+         .sb-cta-mid--on-forest  → fundo forest deep, texto papiro
+       Mobile <769px: ocupa ~30vh, CTAs grandes pra conversão por Google Ads
+       Desktop: padding mais respirado, mesma estética editorial
+       ============================================================ */
+    .sb-cta-mid {
+      padding: clamp(3rem, 8vw, 5rem) 0;
+      text-align: center;
+    }
+    .sb-cta-mid__inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-inline: var(--gutter);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .sb-cta-mid__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin: 0;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+    .sb-cta-mid__lead {
+      font-family: var(--font-sans);
+      font-size: clamp(0.9375rem, 1.6vw, 1.0625rem);
+      line-height: 1.55;
+      max-width: 44ch;
+      margin: 0;
+    }
+    .sb-cta-mid__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 16px 32px;
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 0.5rem;
+      transition: transform 220ms var(--ease-out),
+                  box-shadow 220ms var(--ease-out),
+                  background 220ms var(--ease-out);
+    }
+    .sb-cta-mid__btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Variante papiro: usado após "Quatro motivos" (fundo cream + border-top forest) */
+    .sb-cta-mid--on-papiro {
+      background: var(--color-papiro);
+      color: var(--color-text-on-papiro);
+      border-top: 1px solid var(--color-forest-deep);
+      border-bottom: 1px solid rgba(27, 77, 68, 0.10);
+    }
+    .sb-cta-mid--on-papiro .sb-cta-mid__title { color: var(--color-text-on-papiro); }
+    .sb-cta-mid--on-papiro .sb-cta-mid__lead { color: var(--color-text-secondary); }
+    .sb-cta-mid--on-papiro .sb-cta-mid__btn {
+      background: var(--color-forest-medium);
+      color: var(--color-text-on-forest);
+      box-shadow: 0 8px 24px -8px rgba(27, 77, 68, 0.30);
+    }
+    .sb-cta-mid--on-papiro .sb-cta-mid__btn:hover {
+      background: var(--color-forest-deep);
+      box-shadow: 0 12px 28px -8px rgba(27, 77, 68, 0.40);
+    }
+
+    /* Variante forest: usado após "Coberturas" (fundo verde escuro) */
+    .sb-cta-mid--on-forest {
+      background: var(--color-forest-deep);
+      color: var(--color-text-on-forest);
+      border-top: 1px solid rgba(168, 139, 90, 0.20);
+      border-bottom: 1px solid rgba(168, 139, 90, 0.20);
+    }
+    .sb-cta-mid--on-forest .sb-cta-mid__title { color: var(--color-text-on-forest); }
+    .sb-cta-mid--on-forest .sb-cta-mid__lead { color: var(--color-text-on-forest-muted); }
+    .sb-cta-mid--on-forest .sb-cta-mid__btn {
+      background: transparent;
+      color: var(--color-text-on-forest);
+      border: 1px solid var(--color-sage-light);
+    }
+    .sb-cta-mid--on-forest .sb-cta-mid__btn:hover {
+      background: rgba(245, 241, 232, 0.08);
+      border-color: var(--color-text-on-forest);
+    }
+
+    .sb-cta-mid__btn .arrow {
+      display: inline-block;
+      transition: transform 240ms var(--ease-out);
+      will-change: transform;
+    }
+    .sb-cta-mid__btn:hover .arrow { transform: translateX(4px); }
+
+    /* ============================================================
        CONTACT — CTA final cinematográfico (Fase 7)
        Background midnight-deep, headline monumental,
        botão WhatsApp com shine sweep
@@ -2748,6 +2850,87 @@
     }
     .sb-cookies__btn--primary:focus-visible {
       outline: 2px solid var(--gold-soft); outline-offset: 2px;
+    }
+
+    /* ============================================================
+       CAROUSEL — utilitário reutilizável (Onda B)
+       Mobile-only (<769px) via scroll-snap. Em desktop a classe vira
+       no-op e as seções voltam aos seus próprios layouts (grid editorial).
+       JS init em initCarousel(): cria dots e sincroniza indicador ativo.
+       Dots ficam display:none em desktop.
+
+       Como aplicar a uma seção:
+       1. Adicionar class="sb-carousel" no container dos cards
+       2. Adicionar <div class="sb-carousel-dots"></div> após o container
+          (ou .sb-carousel-dots--on-forest para fundos verdes)
+       3. Chamar initCarousel(containerSel, dotsSel) no JS init
+       ============================================================ */
+    @media (max-width: 768px) {
+      .sb-carousel {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 16px !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding-inline: var(--gutter);
+        scrollbar-width: none;
+        overscroll-behavior-x: contain;
+      }
+      .sb-carousel::-webkit-scrollbar { display: none; }
+      .sb-carousel > * {
+        flex: 0 0 88% !important;       /* sneak peek 12% do próximo card */
+        width: auto !important;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+      }
+    }
+    .sb-carousel-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.75rem;
+      padding-inline: var(--gutter);
+      position: relative;
+      z-index: 5;                  /* sobre gradient ::after de seções com fade */
+    }
+    .sb-carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(168, 139, 90, 0.35);
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+      transition: background 240ms var(--ease-out),
+                  width 240ms var(--ease-out),
+                  border-radius 240ms var(--ease-out);
+    }
+    .sb-carousel-dot:focus-visible {
+      outline: 2px solid var(--color-bronze);
+      outline-offset: 4px;
+    }
+    .sb-carousel-dot.is-active {
+      background: var(--color-bronze-deep);
+      width: 24px;
+      border-radius: 4px;
+    }
+    /* Variante para fundos forest — dots em tons sage para contraste */
+    .sb-carousel-dots--on-forest .sb-carousel-dot {
+      background: rgba(163, 184, 179, 0.30);
+    }
+    .sb-carousel-dots--on-forest .sb-carousel-dot.is-active {
+      background: var(--color-sage-light);
+    }
+    /* Dots só em mobile — desktop usa o grid original. */
+    @media (min-width: 769px) {
+      .sb-carousel-dots { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sb-carousel { scroll-behavior: auto; }
+      .sb-carousel-dot { transition: none; }
     }
 
     /* ============================================================
@@ -3213,7 +3396,7 @@
       </div>
       <div class="sb-timeline-track" aria-label="Linha do tempo da Santa Branca Seguros">
         <div class="sb-timeline-progress" aria-hidden="true"></div>
-        <div class="sb-timeline-inner">
+        <div class="sb-timeline-inner sb-carousel" role="region" aria-roledescription="carousel" aria-label="Marcos históricos">
           <article class="sb-timeline-card">
             <div class="sb-timeline-card__year">1994</div>
             <h3 class="sb-timeline-card__title">Washington abre as portas em Belo Horizonte</h3>
@@ -3246,6 +3429,8 @@
           </article>
         </div>
       </div>
+      <!-- Dots do carrossel mobile — display:none em desktop -->
+      <div class="sb-carousel-dots sb-carousel-dots--on-forest" id="sb-timeline-dots" aria-hidden="true"></div>
     </section>
 
     <!-- Art Nouveau band entre Sobre e Por que -->
@@ -3270,7 +3455,7 @@
           <span class="sb-why__eyebrow">Por que a Santa Branca</span>
           <h2 id="why-title" class="sb-why__title" data-split-lines>Quatro motivos para <em>confiar</em>.</h2>
         </header>
-        <ol class="sb-why__list" data-reveal-stagger>
+        <ol class="sb-why__list sb-carousel" data-reveal-stagger role="region" aria-roledescription="carousel" aria-label="Motivos para confiar na Santa Branca">
           <li class="sb-why__item" data-reveal>
             <div class="sb-why__num" aria-hidden="true">01</div>
             <hr class="sb-why__rule" aria-hidden="true" />
@@ -3296,8 +3481,26 @@
             <p>A hora que você precisa de seguro de verdade é quando algo acontece. Aqui você tem a equipe da Santa Branca te acompanhando do registro à indenização.</p>
           </li>
         </ol>
+        <!-- Dots do carrossel mobile (papiro bg → variante default bronze) -->
+        <div class="sb-carousel-dots" id="sb-why-dots" aria-hidden="true"></div>
       </div>
     </section>
+
+    <!-- ============================================================
+         CTA INTERMEDIÁRIO 1 — após "Quatro motivos" (~30% scroll)
+         Captura usuários do Google Ads prontos pra converter.
+         Fundo papiro com border-top forest. Botão WhatsApp forest medium.
+         ============================================================ -->
+    <aside class="sb-cta-mid sb-cta-mid--on-papiro" aria-label="Cotação rápida">
+      <div class="sb-cta-mid__inner">
+        <h2 class="sb-cta-mid__title">Pronto pra cotar?</h2>
+        <p class="sb-cta-mid__lead">12 seguradoras. Uma só conversa. Resposta em até 1h útil.</p>
+        <a class="sb-cta-mid__btn" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
+          <i class="ph-light ph-whatsapp-logo" aria-hidden="true"></i>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </aside>
 
     <div class="an-band an-band--deep" aria-hidden="true">
       <svg class="an-divider" viewBox="0 0 360 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
@@ -3321,7 +3524,7 @@
           <h2 id="offer-title" class="sb-offer__title" data-split-lines>Seguros que <em>cuidamos</em>.</h2>
         </header>
 
-        <div class="sb-offer__grid" data-reveal-stagger>
+        <div class="sb-offer__grid sb-carousel" data-reveal-stagger role="region" aria-roledescription="carousel" aria-label="Coberturas oferecidas">
           <article class="sb-coverage-card" data-reveal>
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-car-simple"></i></span>
             <h3 class="sb-coverage-card__title">Seguro Auto</h3>
@@ -3359,6 +3562,8 @@
             <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Previdência Privada">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
           </article>
         </div>
+        <!-- Dots do carrossel mobile (forest bg → variante sage-light) -->
+        <div class="sb-carousel-dots sb-carousel-dots--on-forest" id="sb-offer-dots" aria-hidden="true"></div>
 
         <aside class="sb-offer__also">
           <span class="sb-offer__also-eyebrow">Também atendemos</span>
@@ -3377,6 +3582,21 @@
         </aside>
       </div>
     </section>
+
+    <!-- ============================================================
+         CTA INTERMEDIÁRIO 2 — após "Coberturas" (~50% scroll)
+         Captura usuários que viram a lista de seguros e podem ter
+         dúvida sobre cobertura específica. Fundo forest, outline btn.
+         ============================================================ -->
+    <aside class="sb-cta-mid sb-cta-mid--on-forest" aria-label="Cobertura sob medida">
+      <div class="sb-cta-mid__inner">
+        <h2 class="sb-cta-mid__title">Não encontrou seu seguro?</h2>
+        <p class="sb-cta-mid__lead">Tem alguma cobertura específica que precisa? Provavelmente cuidamos. Pergunte.</p>
+        <a class="sb-cta-mid__btn" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
+          Falar com a gente <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </aside>
 
     <div class="an-band" aria-hidden="true">
       <svg class="an-divider" viewBox="0 0 360 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
@@ -3494,7 +3714,7 @@
           <p class="sb-testimonials__lead">A maioria chegou aqui por indicação. A gente prefere assim.</p>
         </header>
 
-        <div class="sb-testimonials__wall" data-reveal-stagger="80">
+        <div class="sb-testimonials__wall sb-carousel" data-reveal-stagger="80" role="region" aria-roledescription="carousel" aria-label="Depoimentos de clientes">
           <article class="sb-testimonial-card" data-reveal>
             <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
             <p class="sb-testimonial-card__text">Bati o carro num domingo à noite, achei que tava perdido. Liguei pra Santa Branca e o Rodrigo me atendeu de casa. Sério. Quase chorei.</p>
@@ -3635,6 +3855,8 @@
             </footer>
           </article>
         </div>
+        <!-- Dots do carrossel mobile (papiro bg → variante default bronze) -->
+        <div class="sb-carousel-dots" id="sb-testimonials-dots" aria-hidden="true"></div>
 
         <div class="sb-testimonials__more">
           <a class="sb-testimonials__more-btn" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20refer%C3%AAncia%20de%20um%20cliente%20da%20Santa%20Branca" target="_blank" rel="noopener">
@@ -4173,6 +4395,92 @@
         });
       }
       revealOnScroll();
+
+      /* ============================================================
+         CAROUSEL — utilitário reutilizável (Onda B)
+         Recebe seletor do container .sb-carousel + seletor do
+         <div class="sb-carousel-dots"> e gera dots + sincroniza
+         indicador ativo com posição do scroll horizontal.
+         Suporta teclado (← →) e clique nos dots.
+         No-op em desktop (≥769px) — cada seção tem seu próprio
+         revert de layout via CSS, e dots ficam display:none.
+         ============================================================ */
+      function initCarousel(containerSel, dotsSel) {
+        var container = typeof containerSel === 'string'
+          ? document.querySelector(containerSel)
+          : containerSel;
+        var dotsWrap = typeof dotsSel === 'string'
+          ? document.querySelector(dotsSel)
+          : dotsSel;
+        if (!container || !dotsWrap) return;
+        var cards = Array.prototype.slice.call(container.children);
+        if (!cards.length) return;
+        /* Reset dots — idempotente caso reinicialize */
+        dotsWrap.innerHTML = '';
+        cards.forEach(function (_, i) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'sb-carousel-dot';
+          dot.setAttribute('aria-label', 'Ir para item ' + (i + 1) + ' de ' + cards.length);
+          dot.addEventListener('click', function () {
+            cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          });
+          dotsWrap.appendChild(dot);
+        });
+        /* Cardápio: largura do card + gap entre cards. Lê do primeiro card.
+           Gap detectado via computed style do container (não dá pra ler diretamente
+           de cada card pois flex gap é propriedade do parent). */
+        function getStep() {
+          var cs = window.getComputedStyle(container);
+          var gap = parseFloat(cs.columnGap || cs.gap || '0') || 0;
+          return cards[0].offsetWidth + gap;
+        }
+        var raf = 0;
+        function updateActive() {
+          raf = 0;
+          var step = getStep();
+          if (!step) return;
+          /* Compensa padding-inline do container: o primeiro card NÃO começa
+             em scrollLeft=0, fica deslocado pelo padding-left. Pegando a
+             posição relativa do primeiro card e descontando, idx fica preciso. */
+          var firstOffset = cards[0].offsetLeft;
+          var idx = Math.round((container.scrollLeft + container.clientWidth / 2 - firstOffset - cards[0].offsetWidth / 2) / step);
+          idx = Math.max(0, Math.min(cards.length - 1, idx));
+          var dots = dotsWrap.children;
+          for (var i = 0; i < dots.length; i++) {
+            dots[i].classList.toggle('is-active', i === idx);
+          }
+        }
+        container.addEventListener('scroll', function () {
+          if (raf) return;
+          raf = requestAnimationFrame(updateActive);
+        }, { passive: true });
+        /* Teclado: setas ← → navegam entre cards quando container tem foco */
+        container.setAttribute('tabindex', '0');
+        container.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+          e.preventDefault();
+          var step = getStep();
+          var firstOffset = cards[0].offsetLeft;
+          var idx = Math.round((container.scrollLeft + container.clientWidth / 2 - firstOffset - cards[0].offsetWidth / 2) / step);
+          idx = Math.max(0, Math.min(cards.length - 1, idx + (e.key === 'ArrowRight' ? 1 : -1)));
+          cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        });
+        /* Estado inicial: primeiro dot ativo */
+        if (dotsWrap.firstChild) dotsWrap.firstChild.classList.add('is-active');
+        /* Recalcula no resize (orientation change, devtools) */
+        window.addEventListener('resize', function () {
+          if (raf) return;
+          raf = requestAnimationFrame(updateActive);
+        }, { passive: true });
+      }
+
+      /* CAROUSEL INITS (Onda B) — instancia em todas as seções com
+         carrossel mobile. No-op em desktop por causa da media query CSS. */
+      initCarousel('.sb-timeline-inner',   '#sb-timeline-dots');
+      initCarousel('.sb-why__list',        '#sb-why-dots');
+      initCarousel('.sb-offer__grid',      '#sb-offer-dots');
+      initCarousel('.sb-testimonials__wall', '#sb-testimonials-dots');
 
       /* ============================================================
          HERO CINEMATOGRÁFICO — Fase 2
