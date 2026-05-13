@@ -4282,9 +4282,17 @@
         /* Wrap each "word atom" (texto puro ou inline-element sem
            whitespace interno, ex: <em>1994</em>) num span medível,
            mede offsetTop, agrupa em linhas, depois reconstrói com
-           line-mask + line-inner. */
+           line-mask + line-inner.
+
+           withinEm: bool propagado recursivamente. Se true, cada _w
+           criado ganha class "_em" → na reconstrução, _w._em consecutivos
+           são reagrupados num <em> wrapper, preservando o italic+champagne
+           do CSS .<*>__title em mesmo quando o <em> original tinha
+           múltiplas palavras (caso "uma cotação só", "Uma pessoa",
+           "De gente pra gente"). Single-word <em> continua sendo wrappado
+           inteiro pelo branch nodeType===1 + !/\s/.test(inner). */
         var atoms = [];
-        function processNode(parent) {
+        function processNode(parent, withinEm) {
           var nodes = Array.prototype.slice.call(parent.childNodes);
           nodes.forEach(function (node) {
             if (node.nodeType === 3) {
@@ -4298,7 +4306,7 @@
                   frag.appendChild(document.createTextNode(p));
                 } else {
                   var s = document.createElement('span');
-                  s.className = '_w';
+                  s.className = withinEm ? '_w _em' : '_w';
                   s.style.display = 'inline-block';
                   s.textContent = p;
                   frag.appendChild(s);
@@ -4307,6 +4315,8 @@
               });
               node.parentNode.replaceChild(frag, node);
             } else if (node.nodeType === 1) {
+              var isEm = node.tagName === 'EM';
+              var nextWithinEm = withinEm || isEm;
               var inner = node.textContent || '';
               if (!/\s/.test(inner)) {
                 var wrapper = document.createElement('span');
@@ -4316,12 +4326,12 @@
                 wrapper.appendChild(node);
                 atoms.push(wrapper);
               } else {
-                processNode(node);
+                processNode(node, nextWithinEm);
               }
             }
           });
         }
-        processNode(el);
+        processNode(el, false);
 
         var lines = [];
         var current = [];
@@ -4346,10 +4356,31 @@
           mask.className = 'line-mask';
           var inner = document.createElement('span');
           inner.className = 'line-inner';
+          /* Reagrupar _w._em consecutivos num <em> wrapper.
+             Espaço entre _w fora-do-grupo: text node em inner.
+             Espaço entre _w dentro-do-grupo: text node em <em>. */
+          var emWrap = null;
           lineWords.forEach(function (w, i) {
-            if (i > 0) inner.appendChild(document.createTextNode(' '));
             w.style.display = '';
-            inner.appendChild(w);
+            var thisIsEm = w.classList.contains('_em');
+            w.classList.remove('_em');
+            var prev = lineWords[i - 1];
+            var prevWasEm = prev && Array.prototype.indexOf.call(emWrap ? emWrap.children : [], prev) > -1;
+            if (thisIsEm) {
+              if (emWrap && prevWasEm) {
+                emWrap.appendChild(document.createTextNode(' '));
+                emWrap.appendChild(w);
+              } else {
+                if (i > 0) inner.appendChild(document.createTextNode(' '));
+                emWrap = document.createElement('em');
+                emWrap.appendChild(w);
+                inner.appendChild(emWrap);
+              }
+            } else {
+              if (i > 0) inner.appendChild(document.createTextNode(' '));
+              inner.appendChild(w);
+              emWrap = null;
+            }
           });
           mask.appendChild(inner);
           newFrag.appendChild(mask);

@@ -45,6 +45,7 @@ yarn-debug.log*
 # Screenshots de debug gerados durante auditoria visual (não vão pro repo)
 about-*.png
 diag-*.png
+fix-*.png
 hero-*.png
 ig-*.png
 marquee-*.png
