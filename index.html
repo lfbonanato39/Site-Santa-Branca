@@ -636,16 +636,10 @@
       pointer-events: none;
       box-shadow: inset 0 0 200px rgba(20,59,52,0.65);
     }
-    /* Mobile: vídeo é trocado por background com o poster */
-    @media (max-width: 768px) {
-      .sb-hero__video { display: none; }
-      .sb-hero__video-wrap {
-        background-image: url('assets/og-image.jpg');
-        background-size: cover;
-        background-position: center;
-      }
-    }
-    /* Reduced motion: vídeo pausado/escondido, mostra só o poster */
+    /* Reduced motion: vídeo escondido, mostra só o poster.
+       Onda A: removida a regra mobile que escondia o vídeo — cliente quer hero
+       impactante também em smartphones. Vídeo permanece em qualquer viewport,
+       só some quando o usuário pede prefers-reduced-motion. */
     @media (prefers-reduced-motion: reduce) {
       .sb-hero__video { display: none; }
       .sb-hero__video-wrap {
@@ -821,7 +815,7 @@
     .sb-hero__ticker-suffix--prefix {
       font-family: var(--font-serif);
       font-weight: 500;
-      color: var(--color-champagne);
+      color: var(--color-text-on-forest);
       margin-right: 2px;
     }
     .sb-hero__ticker { display: flex; flex-direction: column; gap: 8px; }
@@ -830,13 +824,16 @@
       font-size: clamp(2rem, 4vw, 3.5rem);
       line-height: 1;
       font-weight: 500;
-      color: var(--color-sage-light);
+      /* Onda A contraste 1: papiro 100% para máxima legibilidade sobre vídeo
+         verde (variação de luminância dos frames torna sage-light "apagado") */
+      color: var(--color-text-on-forest);
       letter-spacing: -0.01em;
     }
     .sb-hero__ticker-suffix {
       font-family: var(--font-serif);
       font-weight: 500;
-      color: var(--color-champagne);
+      /* Onda A contraste 1: alinhar com cor do número */
+      color: var(--color-text-on-forest);
       margin-left: 2px;
     }
     .sb-hero__ticker-label {
@@ -1005,19 +1002,22 @@
       flex-shrink: 0;
     }
     .sb-hero__seal-text { display: flex; flex-direction: column; gap: 3px; }
+    /* Onda A contraste 2: SUSEP é compliance regulatório, precisa ser legível.
+       Eyebrow em bronze-soft para destacar como label institucional,
+       linha SUSEP em papiro 0.9 alpha para máxima legibilidade. */
     .sb-hero__seal-eyebrow {
       font-family: var(--font-sans);
       font-size: 12px; font-weight: 500;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--color-text-strong);
+      color: var(--color-bronze-soft);
     }
     .sb-hero__seal-line {
       font-family: var(--font-sans);
       font-size: 13px; font-weight: 500;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--color-text-strong);
+      color: rgba(245, 241, 232, 0.90);
     }
-    .sb-hero__seal-line b { font-weight: 600; color: rgba(245,241,232,0.78); }
+    .sb-hero__seal-line b { font-weight: 600; color: var(--color-text-on-forest); }
 
     /* Reduced motion — tudo aparece instantaneamente */
     @media (prefers-reduced-motion: reduce) {
@@ -1169,10 +1169,12 @@
       display: flex; flex-direction: column;
       justify-content: center;
     }
-    /* Layout B desktop: letra-arquitetura na coluna esquerda + parágrafo na direita */
+    /* Layout B desktop: letra-arquitetura na coluna esquerda + parágrafo na direita.
+       Onda A bug 4: coluna do numeral subiu de 160px para 200px para acomodar
+       "1994" em Newsreader 96px (que tem ~200px de largura visual) sem extrapolar. */
     .sb-about__block-row {
       display: grid;
-      grid-template-columns: 160px 1fr;
+      grid-template-columns: 200px 1fr;
       gap: 32px;
       align-items: start;
     }
@@ -1206,6 +1208,10 @@
       /* alinhar com 1ª linha do parágrafo (compensa baseline) */
       padding-top: 0.05em;
       user-select: none;
+      /* Onda A bug 4: nowrap garante single line e overflow:hidden corta
+         transbordo lateral caso o viewport diminua ainda mais. */
+      white-space: nowrap;
+      overflow: hidden;
     }
     /* Numerais romanos (III, XII) recebem small caps + tracking ampliado */
     .sb-about__numeral--roman {
@@ -1278,7 +1284,9 @@
       margin: 0;
     }
 
-    /* Mobile / tablet: vira coluna única, foto sticky no TOPO com height 35vh */
+    /* Mobile / tablet: vira coluna única. Vitral aparece UMA vez no topo, no
+       fluxo normal (sem sticky), some quando o scroll passa pelos blocos.
+       Onda A bug 2: removido position:sticky que sobrepunha os 3 blocos de texto. */
     @media (max-width: 1023px) {
       .sb-about__split {
         grid-template-columns: 1fr;
@@ -1286,11 +1294,10 @@
       }
       .sb-about__figure {
         order: -1;                                /* vitral vai pra cima */
-        position: sticky;
-        top: var(--header-h, 72px);
+        position: static;
         max-width: 320px;
         margin: 0 auto 2rem;
-        z-index: 2;
+        z-index: auto;
       }
       .sb-about__vitral {
         /* Mobile: scale animation NÃO faz sentido com layout 1-col.
@@ -1942,6 +1949,27 @@
       .sb-process__steps {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+      }
+      /* Onda A bug 3: layout horizontal em mobile — círculo à esquerda + texto
+         à direita, com o título alinhado verticalmente ao círculo. Linha
+         conectora bronze passa pela coluna do círculo (não atrás do texto). */
+      .sb-process__step {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        column-gap: 1.25rem;
+        align-items: start;
+      }
+      .sb-process__circle {
+        margin-bottom: 0;
+        grid-row: 1 / 3;
+        align-self: start;
+      }
+      .sb-process__step-title {
+        margin-top: 0.5rem;     /* alinha baseline do título com o centro do círculo */
+      }
+      .sb-process__step-desc {
+        grid-column: 2;
+        max-width: 100%;
       }
       /* Linha vertical: JS ajusta posicionamento, transform-origin muda */
       .sb-process__connector-fill {
@@ -2806,18 +2834,21 @@
       filter: brightness(0) invert(1);
       opacity: 0.92;
     }
-    /* Footer com mais respiro e estrutura */
+    /* Footer com mais respiro e estrutura.
+       Onda A: colunas mais balanceadas para reduzir espaço vazio entre
+       Navegar e Legal (era 1.4fr 1fr 1fr com gap sp-12; agora 1.2fr 1fr 1fr
+       com gap sp-8 — colunas mais próximas, descrição ainda dominante). */
     .sb-footer__top {
       max-width: var(--container); margin: 0 auto;
       padding: var(--sp-16) var(--gutter) var(--sp-12);
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
-      gap: var(--sp-12);
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr;
+      gap: var(--sp-8);
     }
     .sb-footer__col h3 {
       font-family: var(--font-sans);
       font-size: 11px; font-weight: 500;
       letter-spacing: var(--ls-meta); text-transform: uppercase;
-      color: var(--champagne);
+      color: var(--color-bronze-soft);
       margin: 0 0 14px;
     }
     .sb-footer__col ul { display: flex; flex-direction: column; gap: 8px; }
@@ -2825,7 +2856,7 @@
       color: rgba(245,241,232,0.75); font-size: 14px;
       transition: color var(--dur) var(--ease);
     }
-    .sb-footer__col a:hover { color: var(--champagne); }
+    .sb-footer__col a:hover { color: var(--color-text-on-forest); }
     .sb-footer__col-text { font-size: 13px; color: rgba(245,241,232,0.65); line-height: 1.6; }
 
     @media (max-width: 768px) {
@@ -3993,19 +4024,18 @@
         document.documentElement.classList.add('sb-no-sticky');
       }
 
-      /* Hero video — pausa em reduced-motion (CSS já esconde, mas garantir
-         que não consome decode/bateria). Em mobile <768px CSS também esconde. */
+      /* Hero video — pausa só em prefers-reduced-motion.
+         Onda A: removida pausa por viewport mobile — cliente quer vídeo em todo
+         viewport. iOS bloqueia autoplay em low-power mode; play() em try/catch
+         silencioso, fallback pro poster (já preservado no CSS reduced-motion). */
       (function () {
         var hv = document.querySelector('.sb-hero__video');
         if (!hv) return;
         var rmReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var isMobileVw = window.matchMedia('(max-width: 768px)').matches;
-        if (rmReduce || isMobileVw) {
+        if (rmReduce) {
           try { hv.pause(); hv.removeAttribute('autoplay'); } catch (e) {}
           hv.preload = 'none';
         } else {
-          /* iOS bloqueia autoplay em algumas situações — try/catch silencioso.
-             Se falhar, browser mostra o poster naturalmente. */
           var p = hv.play && hv.play();
           if (p && typeof p.catch === 'function') p.catch(function () {});
         }
