@@ -44,6 +44,7 @@ yarn-debug.log*
 *.report.html
 # Screenshots de debug gerados durante auditoria visual (não vão pro repo)
 about-*.png
+diag-*.png
 hero-*.png
 ig-*.png
 marquee-*.png

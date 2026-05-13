@@ -298,7 +298,8 @@
        RESET + BASE
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; overscroll-behavior-x: contain; overflow-x: clip; }
+    body { overflow-x: clip; }
     /* scroll-behavior tirado: usamos Lenis pra smooth scroll */
     body {
       margin: 0;
@@ -2048,8 +2049,8 @@
        Substituiu o grid de cards com tooltips fichas técnicas (Fase 6 → Onda 5).
        ============================================================ */
     .sb-insurers {
-      background: var(--color-midnight);
-      color: var(--color-text-primary);
+      background: var(--color-cream);
+      color: var(--color-text-on-cream);
       padding: clamp(6rem, 12vh, 10rem) 0;
     }
     .sb-insurers__container {
@@ -2065,7 +2066,8 @@
       font-family: var(--font-sans);
       font-size: 12px; font-weight: 500;
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--color-champagne);
+      /* Bronze antiqued — champagne darkened pra legibilidade sobre cream */
+      color: #8F7438;
       display: inline-block;
     }
     .sb-insurers__title {
@@ -2074,7 +2076,7 @@
       line-height: 1.05;
       letter-spacing: -0.02em;
       font-weight: 400;
-      color: var(--color-text-primary);
+      color: var(--color-text-on-cream);
       margin: 0;
       font-feature-settings: "ss01", "kern" 1, "liga" 1;
       text-wrap: balance;
@@ -2082,14 +2084,15 @@
     .sb-insurers__title em {
       font-style: italic;
       font-weight: 400;
-      color: var(--color-champagne);
+      color: #8F7438;
     }
     .sb-insurers__title .line-mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
     .sb-insurers__title .line-inner { display: block; will-change: transform, opacity; }
     .sb-insurers__title[data-split-lines] { opacity: 0; }
 
     /* Marquee horizontal infinito — track com 2 sets de 12 logos.
-       translateX(-50%) move 1 set inteiro, criando loop perfeito. */
+       translateX(-50%) move 1 set inteiro, criando loop perfeito.
+       Fundo cream → logos coloridas em opacity reduzida, hover restaura. */
     .sb-marquee {
       overflow: hidden;
       width: 100%;
@@ -2120,13 +2123,18 @@
       max-width: 180px;
       object-fit: contain;
       flex-shrink: 0;
-      filter: grayscale(1) brightness(0.85) sepia(0.4) saturate(2.5) hue-rotate(5deg) opacity(0.55);
-      transition: filter 300ms var(--ease-out), opacity 300ms var(--ease-out);
+      /* Coloridas em opacity reduzida — hover restaura plenitude */
+      opacity: 0.55;
+      transition: opacity 300ms var(--ease-out);
       cursor: pointer;
+      /* BUG 2 fix: bloqueia drag nativo de <img> que dá sensação de "site se desloca" */
+      -webkit-user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
     }
     .sb-marquee__logo:hover,
     .sb-marquee__logo:focus-visible {
-      filter: none;
       opacity: 1;
       outline: none;
     }
@@ -3284,31 +3292,31 @@
         <div class="sb-marquee" aria-label="Carrossel de seguradoras parceiras">
           <div class="sb-marquee__track">
             <!-- Set 1: 12 logos visíveis para leitores de tela -->
-            <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="Porto Seguro" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="Allianz" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="Liberty Seguros" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="Zurich" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="Itaú" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="HDI Seguros" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="Tokio Marine" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="MetLife" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="Chubb" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="AIG" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/assist-card.svg" alt="Assist Card" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="Porto Seguro" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="Allianz" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="Liberty Seguros" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="Zurich" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="Itaú" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="HDI Seguros" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="Tokio Marine" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="MetLife" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="Chubb" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="AIG" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/assist-card.svg" alt="Assist Card" loading="lazy" decoding="async" draggable="false" />
             <!-- Set 2: duplicatas para loop perfeito (ocultas de a11y) -->
-            <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/assist-card.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <img class="sb-marquee__logo" src="assets/seguradoras/assist-card.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
           </div>
         </div>
       </div>
