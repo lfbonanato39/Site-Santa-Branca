@@ -626,13 +626,19 @@
          para harmonizar com o overlay verde institucional sem dissonância */
       filter: saturate(0.75) brightness(0.82) hue-rotate(-20deg);
     }
-    /* Onda C item 2: vídeo 16:9 enquadrado pra viewport vertical mobile.
-       Puxa pra esquerda para revelar mão escrevendo + carimbo + ampulheta. */
+    /* Onda C item 2 + Onda D: vídeo 16:9 enquadrado pra viewport vertical mobile.
+       Tablet usa um único object-position (35%) que funciona bem nas 3 cenas.
+       Mobile <768px usa object-position DINÂMICO via JS sincronizado com cada
+       cena (mão direita / carimbo esquerda / ampulheta esquerda-centro).
+       Transition de 1200ms alinha com o crossfade do vídeo (1.5s no CapCut). */
     @media (max-width: 1023px) {
       .sb-hero__video { object-position: 35% center; }
     }
     @media (max-width: 767px) {
-      .sb-hero__video { object-position: 30% center; }
+      .sb-hero__video {
+        object-position: 65% center;          /* default cena 1 — JS sobrescreve por cena */
+        transition: object-position 1200ms ease;
+      }
     }
     .sb-hero__video-overlay {
       position: absolute; inset: 0; z-index: 1;
@@ -4346,7 +4352,11 @@
       /* Hero video — pausa só em prefers-reduced-motion.
          Onda A: removida pausa por viewport mobile — cliente quer vídeo em todo
          viewport. iOS bloqueia autoplay em low-power mode; play() em try/catch
-         silencioso, fallback pro poster (já preservado no CSS reduced-motion). */
+         silencioso, fallback pro poster (já preservado no CSS reduced-motion).
+         Onda D: object-position dinâmico em mobile <768px sincronizado com as
+         3 cenas do vídeo (caneta direita, carimbo esquerda, ampulheta centro).
+         Triggers antecipam 1.2s o início real para que quando a próxima cena
+         ficar nítida no crossfade, o enquadramento já esteja correto. */
       (function () {
         var hv = document.querySelector('.sb-hero__video');
         if (!hv) return;
@@ -4357,6 +4367,21 @@
         } else {
           var p = hv.play && hv.play();
           if (p && typeof p.catch === 'function') p.catch(function () {});
+        }
+        /* Onda D: object-position dinâmico por cena (mobile only) */
+        if (window.matchMedia('(max-width: 767px)').matches && !rmReduce) {
+          var lastPos = '';
+          hv.addEventListener('timeupdate', function () {
+            var t = hv.currentTime;
+            var pos;
+            if (t < 6.8)        pos = '65% center';   /* cena 1: caneta+mão (direita) */
+            else if (t < 12.8)  pos = '30% center';   /* cena 2: carimbo (esquerda) */
+            else                pos = '35% center';   /* cena 3: ampulheta (esq-centro) */
+            if (pos !== lastPos) {
+              hv.style.objectPosition = pos;
+              lastPos = pos;
+            }
+          });
         }
       })();
 
