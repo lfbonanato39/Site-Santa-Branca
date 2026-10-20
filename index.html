@@ -1773,9 +1773,19 @@
       max-width: 38ch;
       margin: 0;
     }
-    .sb-coverage-card__link {
+    /* Grupo de ações preso na base do card. Duas linhas fixas (Ver detalhes +
+       slot de 44px da Cotação online), reservadas mesmo quando o card não tem
+       cotação — assim "Ver detalhes" fica na mesma altura em cards lado a lado.
+       Sem position: o ::after do link precisa esticar sobre o card inteiro. */
+    .sb-coverage-card__actions {
       margin-top: auto;
       padding-top: 1.5rem;
+      display: grid;
+      grid-template-rows: auto 44px;
+      row-gap: 0.25rem;
+      justify-items: start;
+    }
+    .sb-coverage-card__link {
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 500;
@@ -1784,7 +1794,6 @@
       color: var(--color-sage-light);
       display: inline-flex; align-items: center; gap: 0.5rem;
       text-decoration: none;
-      align-self: flex-start;
     }
     .sb-coverage-card__link::after {
       /* Stretch sobre o card inteiro — torna o card clicável mantendo
@@ -1799,6 +1808,29 @@
       transition: transform 400ms var(--ease-out);
       will-change: transform;
     }
+    /* Cotação online (SuperCálculo) — só em Auto/Residencial/Vida.
+       Ação secundária: sem caixa-alta e peso menor para não competir com
+       "Ver detalhes" (→ #contato/WhatsApp). z-index acima do ::after
+       esticado do link principal; min-height 44px = área de toque. */
+    .sb-coverage-card__quote {
+      position: relative;
+      z-index: 1;
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      min-height: 44px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-text-on-forest-muted);
+      text-decoration: none;
+      transition: color 240ms var(--ease-out);
+    }
+    .sb-coverage-card__quote:hover { color: var(--color-text-on-forest); }
+    .sb-coverage-card__quote i {
+      font-size: 1.1em;
+      line-height: 1;
+      transition: transform 240ms var(--ease-out);
+    }
+    .sb-coverage-card__quote:hover i { transform: translate(2px, -2px); }
 
     @media (hover: hover) and (min-width: 769px) {
       .sb-coverage-card { cursor: pointer; }
@@ -1934,7 +1966,10 @@
     .sb-process__title .line-inner { display: block; will-change: transform, opacity; }
     .sb-process__title[data-split-lines] { opacity: 0; }
 
-    /* Steps grid + linha conectora horizontal */
+    /* Steps grid + linha conectora horizontal.
+       O track é o containing block do conector; o <ol> segue relative
+       porque é a referência de offsetParent que o JS usa para medir. */
+    .sb-process__track { position: relative; }
     .sb-process__steps {
       list-style: none;
       margin: 0; padding: 0;
@@ -2748,6 +2783,61 @@
     }
     .sb-contact__alt a:hover { color: var(--color-champagne); }
 
+    /* "Prefere preencher?" — cotação online (SuperCálculo) como alternativa
+       discreta ao WhatsApp. Links inline com separador · (mesmo padrão do
+       "Também atendemos"), min-height 44px = área de toque. */
+    .sb-contact__quote {
+      margin-top: 2.5rem;
+      max-width: 44ch;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .sb-contact__quote-title {
+      font-family: var(--font-serif);
+      font-size: 1.375rem;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--color-text-on-forest);
+      margin: 0.5rem 0 0;
+    }
+    .sb-contact__quote-text {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--color-text-on-forest-muted);
+      margin: 0.5rem 0 0;
+    }
+    .sb-contact__quote-links {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; align-items: center;
+      gap: 0 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .sb-contact__quote-links li { display: inline-flex; align-items: center; }
+    .sb-contact__quote-link {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      min-height: 44px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-text-on-forest);
+      text-decoration: none;
+      transition: color 240ms var(--ease-out);
+    }
+    .sb-contact__quote-link:hover { color: var(--color-champagne); }
+    .sb-contact__quote-link i {
+      font-size: 1.1em;
+      line-height: 1;
+      transition: transform 240ms var(--ease-out);
+    }
+    .sb-contact__quote-link:hover i { transform: translate(2px, -2px); }
+    .sb-contact__quote-sep {
+      color: var(--color-champagne);
+      font-family: var(--font-serif);
+      font-size: 1.2em;
+      margin-left: 0.75rem;
+      user-select: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .sb-contact__title[data-split-lines] { opacity: 1; }
       .sb-contact__title .line-inner { transform: none !important; opacity: 1 !important; }
@@ -3321,7 +3411,7 @@
           </div>
 
           <!-- TICKERS — números animam de 0 ao alvo quando entram viewport -->
-          <div class="sb-hero__tickers" aria-label="Estatísticas da corretora">
+          <div class="sb-hero__tickers" role="group" aria-label="Estatísticas da corretora">
             <div class="sb-hero__ticker">
               <span><span class="sb-hero__ticker-num" data-count="12">0</span></span>
               <span class="sb-hero__ticker-label">Seguradoras parceiras</span>
@@ -3495,7 +3585,7 @@
         <span class="eyebrow">Três décadas · Uma história</span>
         <h2 id="timeline-title" class="sb-timeline__title">1994 <span class="sb-timeline__dash">—</span> 2026</h2>
       </div>
-      <div class="sb-timeline-track" aria-label="Linha do tempo da Santa Branca Seguros">
+      <div class="sb-timeline-track" role="group" aria-label="Linha do tempo da Santa Branca Seguros">
         <div class="sb-timeline-progress" aria-hidden="true"></div>
         <div class="sb-timeline-inner sb-carousel" role="region" aria-roledescription="carousel" aria-label="Marcos históricos">
           <article class="sb-timeline-card" data-year-ghost="1994">
@@ -3630,37 +3720,52 @@
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-car-simple"></i></span>
             <h3 class="sb-coverage-card__title">Seguro Auto</h3>
             <p class="sb-coverage-card__desc">Proteja seu veículo, terceiros e quem viaja com você. Cobertura completa com as melhores condições do mercado.</p>
-            <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Auto">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="sb-coverage-card__actions">
+              <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Auto">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+            </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-house-line"></i></span>
             <h3 class="sb-coverage-card__title">Seguro Residencial</h3>
             <p class="sb-coverage-card__desc">Sua casa protegida contra incêndio, roubo, danos elétricos, fenômenos da natureza e mais. Inclui assistência 24h.</p>
-            <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Residencial">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="sb-coverage-card__actions">
+              <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Residencial">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/b47c6SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro residencial (abre em nova aba)" data-cotacao-ramo="residencia" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+            </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-heart-straight"></i></span>
             <h3 class="sb-coverage-card__title">Seguro de Vida</h3>
             <p class="sb-coverage-card__desc">Tranquilidade para você e segurança para quem você ama, independentemente do que acontecer.</p>
-            <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro de Vida">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="sb-coverage-card__actions">
+              <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro de Vida">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/9bbccSANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro de vida (abre em nova aba)" data-cotacao-ramo="vida" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+            </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-buildings"></i></span>
             <h3 class="sb-coverage-card__title">Seguro Empresarial</h3>
             <p class="sb-coverage-card__desc">Patrimônio, lucros cessantes e responsabilidade civil para o seu negócio.</p>
-            <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Empresarial">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="sb-coverage-card__actions">
+              <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Empresarial">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-building-apartment"></i></span>
             <h3 class="sb-coverage-card__title">Seguro de Condomínio</h3>
             <p class="sb-coverage-card__desc">Plano básico exigido por lei (Art. 1.346 CC) e coberturas estendidas para o prédio inteiro.</p>
-            <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro de Condomínio">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="sb-coverage-card__actions">
+              <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro de Condomínio">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-tree-palm"></i></span>
             <h3 class="sb-coverage-card__title">Previdência Privada</h3>
             <p class="sb-coverage-card__desc">Mantenha o padrão de vida no futuro. Auxiliamos na escolha entre PGBL e VGBL.</p>
-            <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Previdência Privada">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="sb-coverage-card__actions">
+              <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Previdência Privada">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <!-- Dots do carrossel mobile (forest bg → variante sage-light) -->
@@ -3720,31 +3825,36 @@
           <span class="sb-process__eyebrow">Da primeira conversa ao sinistro</span>
           <h2 id="proc-title" class="sb-process__title" data-split-lines>Quatro passos. <em>Uma pessoa</em>.</h2>
         </header>
-        <ol class="sb-process__steps" data-reveal-stagger="120">
+        <!-- Conector fica fora do <ol> (só <li> é conteúdo válido de lista).
+             O <ol> está na origem do track, então as coordenadas que o JS
+             mede relativas ao <ol> valem igual para o conector. -->
+        <div class="sb-process__track">
           <span class="sb-process__connector" aria-hidden="true">
             <span class="sb-process__connector-fill"></span>
           </span>
-          <li class="sb-process__step" data-reveal>
-            <span class="sb-process__circle" aria-hidden="true">1</span>
-            <h3 class="sb-process__step-title">Você fala com a gente</h3>
-            <p class="sb-process__step-desc">WhatsApp, telefone ou pessoalmente. Conta o que precisa proteger.</p>
-          </li>
-          <li class="sb-process__step" data-reveal>
-            <span class="sb-process__circle" aria-hidden="true">2</span>
-            <h3 class="sb-process__step-title">A gente cota com 12 seguradoras</h3>
-            <p class="sb-process__step-desc">Em até 24h você recebe as melhores opções comparadas.</p>
-          </li>
-          <li class="sb-process__step" data-reveal>
-            <span class="sb-process__circle" aria-hidden="true">3</span>
-            <h3 class="sb-process__step-title">Você escolhe com calma</h3>
-            <p class="sb-process__step-desc">A gente explica cada cobertura, cada cláusula, cada diferença. Sem pressão.</p>
-          </li>
-          <li class="sb-process__step" data-reveal>
-            <span class="sb-process__circle" aria-hidden="true">4</span>
-            <h3 class="sb-process__step-title">Acompanhamos durante toda a vigência</h3>
-            <p class="sb-process__step-desc">Renovação, sinistro, dúvida — você tem com quem contar.</p>
-          </li>
-        </ol>
+          <ol class="sb-process__steps" data-reveal-stagger="120">
+            <li class="sb-process__step" data-reveal>
+              <span class="sb-process__circle" aria-hidden="true">1</span>
+              <h3 class="sb-process__step-title">Você fala com a gente</h3>
+              <p class="sb-process__step-desc">WhatsApp, telefone ou pessoalmente. Conta o que precisa proteger.</p>
+            </li>
+            <li class="sb-process__step" data-reveal>
+              <span class="sb-process__circle" aria-hidden="true">2</span>
+              <h3 class="sb-process__step-title">A gente cota com 12 seguradoras</h3>
+              <p class="sb-process__step-desc">Em até 24h você recebe as melhores opções comparadas.</p>
+            </li>
+            <li class="sb-process__step" data-reveal>
+              <span class="sb-process__circle" aria-hidden="true">3</span>
+              <h3 class="sb-process__step-title">Você escolhe com calma</h3>
+              <p class="sb-process__step-desc">A gente explica cada cobertura, cada cláusula, cada diferença. Sem pressão.</p>
+            </li>
+            <li class="sb-process__step" data-reveal>
+              <span class="sb-process__circle" aria-hidden="true">4</span>
+              <h3 class="sb-process__step-title">Acompanhamos durante toda a vigência</h3>
+              <p class="sb-process__step-desc">Renovação, sinistro, dúvida — você tem com quem contar.</p>
+            </li>
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -3770,7 +3880,7 @@
           <span class="sb-insurers__eyebrow">Seguradoras parceiras</span>
           <h2 id="ins-title" class="sb-insurers__title" data-split-lines>As 12 principais do Brasil. Em <em>uma cotação só</em>.</h2>
         </header>
-        <div class="sb-marquee" aria-label="Carrossel de seguradoras parceiras">
+        <div class="sb-marquee" role="group" aria-label="Carrossel de seguradoras parceiras">
           <div class="sb-marquee__track">
             <!-- Set 1: 12 logos visíveis para leitores de tela -->
             <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="Porto Seguro" loading="lazy" decoding="async" draggable="false" />
@@ -4035,6 +4145,16 @@
         <p class="sb-contact__alt" data-reveal data-reveal-delay="1050">
           Prefere ligar? <a href="tel:+553133095558">(31) 3309-5558</a>
         </p>
+        <div class="sb-contact__quote" data-reveal data-reveal-delay="1200">
+          <hr class="gold-rule" />
+          <h3 class="sb-contact__quote-title">Prefere preencher?</h3>
+          <p class="sb-contact__quote-text">Envie seus dados para cotação de seguro auto, residência ou vida. Nossa equipe retorna com as opções.</p>
+          <ul class="sb-contact__quote-links">
+            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="contato">Auto <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a><span class="sb-contact__quote-sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/b47c6SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro residencial (abre em nova aba)" data-cotacao-ramo="residencia" data-cotacao-origem="contato">Residência <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a><span class="sb-contact__quote-sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/9bbccSANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro de vida (abre em nova aba)" data-cotacao-ramo="vida" data-cotacao-origem="contato">Vida <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
         <a class="sb-instagram-link"
            href="https://www.instagram.com/santabrancaseguros/"
            target="_blank" rel="noopener"
@@ -4327,6 +4447,28 @@
           showBanner();
         });
       }
+
+      /* ============================================================
+         COTAÇÃO ONLINE (SuperCálculo) — evento GA4 cotacao_online_click
+         Links marcados com data-cotacao-ramo + data-cotacao-origem.
+         Só envia com consentimento measure/all e gtag carregado;
+         caso contrário é no-op silencioso (sem erro no console).
+         ============================================================ */
+      function trackEvent(name, params) {
+        var consent = readConsent();
+        if (!consent || (consent.level !== 'measure' && consent.level !== 'all')) return;
+        if (typeof window.gtag !== 'function') return;
+        try { window.gtag('event', name, params); } catch (e) {}
+      }
+
+      document.addEventListener('click', function (e) {
+        var link = e.target && e.target.closest ? e.target.closest('[data-cotacao-ramo]') : null;
+        if (!link) return;
+        trackEvent('cotacao_online_click', {
+          ramo: link.getAttribute('data-cotacao-ramo'),
+          origem: link.getAttribute('data-cotacao-origem')
+        });
+      });
 
       /* ============================================================
          FOOTER YEAR — dinâmico
