@@ -44,3 +44,12 @@ Todos abrem em nova aba (`target="_blank" rel="noopener noreferrer"`). Não usar
 - Para `ramo` e `origem` aparecerem nos relatórios do GA4, registrar os dois como dimensões personalizadas (escopo: evento).
 
 Ao trocar um link, atualizar os dois lugares (card e contato) e esta tabela.
+
+## Outros links externos
+
+| Link | Onde aparece |
+|---|---|
+| Tabela FIPE: https://veiculos.fipe.org.br/ | Card Seguro Auto (`.sb-coverage-card__fipe`, fora do grupo de ações) e rodapé ("Links úteis") |
+| Estrada Real: https://institutoestradareal.com.br/ | Rodapé, coluna da marca (`.sb-footer__seal`, imagem `assets/estradareal.png` 50×65, não exibir maior) |
+
+Todos abrem em nova aba (`target="_blank" rel="noopener noreferrer"`).

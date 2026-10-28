@@ -1812,7 +1812,8 @@
        Ação secundária: sem caixa-alta e peso menor para não competir com
        "Ver detalhes" (→ #contato/WhatsApp). z-index acima do ::after
        esticado do link principal; min-height 44px = área de toque. */
-    .sb-coverage-card__quote {
+    .sb-coverage-card__quote,
+    .sb-coverage-card__fipe {
       position: relative;
       z-index: 1;
       display: inline-flex; align-items: center; gap: 0.375rem;
@@ -1824,13 +1825,22 @@
       text-decoration: none;
       transition: color 240ms var(--ease-out);
     }
-    .sb-coverage-card__quote:hover { color: var(--color-text-on-forest); }
-    .sb-coverage-card__quote i {
+    .sb-coverage-card__quote:hover,
+    .sb-coverage-card__fipe:hover { color: var(--color-text-on-forest); }
+    .sb-coverage-card__quote i,
+    .sb-coverage-card__fipe i {
       font-size: 1.1em;
       line-height: 1;
       transition: transform 240ms var(--ease-out);
     }
-    .sb-coverage-card__quote:hover i { transform: translate(2px, -2px); }
+    .sb-coverage-card__quote:hover i,
+    .sb-coverage-card__fipe:hover i { transform: translate(2px, -2px); }
+    /* Tabela FIPE — só no card Auto, junto da descrição (fora do grupo de
+       ações, para não quebrar o alinhamento de "Ver detalhes"). */
+    .sb-coverage-card__fipe {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
 
     @media (hover: hover) and (min-width: 769px) {
       .sb-coverage-card { cursor: pointer; }
@@ -3217,6 +3227,7 @@
       margin: 0 0 14px;
     }
     .sb-footer__col ul { display: flex; flex-direction: column; gap: 8px; }
+    .sb-footer__col ul + h3 { margin-top: 28px; }   /* 2º grupo na mesma coluna (Links úteis) */
     .sb-footer__col a {
       color: rgba(245,241,232,0.75); font-size: 14px;
       transition: color var(--dur) var(--ease);
@@ -3728,6 +3739,7 @@
             <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-car-simple"></i></span>
             <h3 class="sb-coverage-card__title">Seguro Auto</h3>
             <p class="sb-coverage-card__desc">Proteja seu veículo, terceiros e quem viaja com você. Cobertura completa com as melhores condições do mercado.</p>
+            <a class="sb-coverage-card__fipe" href="https://veiculos.fipe.org.br/" target="_blank" rel="noopener noreferrer" aria-label="Consultar Tabela FIPE (abre em nova aba)">Consultar Tabela FIPE <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
             <div class="sb-coverage-card__actions">
               <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes — Seguro Auto">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
               <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
@@ -4218,6 +4230,10 @@
           <li><a href="privacidade.html">Política de Privacidade</a></li>
           <li><a href="termos.html">Termos de Uso</a></li>
           <li><a href="#" id="cookie-prefs-link">Preferências de cookies</a></li>
+        </ul>
+        <h3>Links úteis</h3>
+        <ul>
+          <li><a href="https://veiculos.fipe.org.br/" target="_blank" rel="noopener noreferrer" aria-label="Consultar Tabela FIPE (abre em nova aba)">Consultar Tabela FIPE <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a></li>
         </ul>
       </div>
     </div>
