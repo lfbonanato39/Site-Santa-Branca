@@ -3223,6 +3223,14 @@
     }
     .sb-footer__col a:hover { color: var(--color-text-on-forest); }
     .sb-footer__col-text { font-size: 13px; color: rgba(245,241,232,0.65); line-height: 1.6; }
+    /* Selo Estrada Real (como no site antigo). PNG original tem 50×65 —
+       nunca exibir maior que isso, senão borra. */
+    .sb-footer__col .sb-footer__seal {
+      display: inline-flex; align-items: center; gap: 14px;
+      margin-top: 20px;
+      font-size: 13px; line-height: 1.5;
+    }
+    .sb-footer__seal img { width: 50px; height: auto; flex-shrink: 0; }
 
     /* Onda C item 4: mobile — logo full width acima, Navegar+Legal lado a
        lado em 2 cols pra aproveitar largura. Copyright sempre full width. */
@@ -4186,6 +4194,10 @@
           Corretora familiar de Belo Horizonte. Três décadas atendendo famílias e empresas com 12 seguradoras parceiras.<br/><br/>
           SUSEP nº 10.0179680
         </p>
+        <a class="sb-footer__seal" href="https://institutoestradareal.com.br/" target="_blank" rel="noopener noreferrer" aria-label="A Santa Branca Seguros apoia a Estrada Real (abre em nova aba)">
+          <img src="assets/estradareal.png" width="50" height="65" alt="" loading="lazy" decoding="async" />
+          <span>A Santa Branca Seguros apoia a Estrada Real.</span>
+        </a>
       </div>
 
       <div class="sb-footer__col">
