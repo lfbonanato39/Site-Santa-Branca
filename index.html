@@ -335,8 +335,10 @@
        RESET + BASE
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; overscroll-behavior-x: contain; overflow-x: clip; }
-    body { overflow-x: clip; }
+    /* hidden = fallback para iOS < 16 (sem suporte a clip): o brilho/mandala
+       do vitral passam alguns px da borda e gerariam rolagem lateral. */
+    html { -webkit-text-size-adjust: 100%; overscroll-behavior-x: contain; overflow-x: hidden; overflow-x: clip; }
+    body { overflow-x: hidden; overflow-x: clip; }
     /* scroll-behavior tirado: usamos Lenis pra smooth scroll */
     body {
       margin: 0;
@@ -3112,20 +3114,17 @@
       position: relative;
       z-index: 5;                  /* sobre gradient ::after de seções com fade */
     }
+    /* Dots são só indicadores de posição (não clicáveis): com 6px eram
+       impossíveis de tocar, e ficavam focáveis dentro de aria-hidden.
+       Navegação: arrastar no celular, setas ← → no teclado. */
     .sb-carousel-dot {
+      display: block;
       width: 6px; height: 6px;
       border-radius: 50%;
       background: rgba(168, 139, 90, 0.35);
-      border: 0;
-      cursor: pointer;
-      padding: 0;
       transition: background 240ms var(--ease-out),
                   width 240ms var(--ease-out),
                   border-radius 240ms var(--ease-out);
-    }
-    .sb-carousel-dot:focus-visible {
-      outline: 2px solid var(--color-bronze);
-      outline-offset: 4px;
     }
     .sb-carousel-dot.is-active {
       background: var(--color-bronze-deep);
@@ -3262,6 +3261,7 @@
     .sb-footer__col .sb-footer__seal {
       display: inline-flex; align-items: center; gap: 14px;
       margin-top: 20px;
+      padding-block: 0;           /* já tem 65px de altura; dispensa o padding de toque */
       font-size: 13px; line-height: 1.5;
     }
     .sb-footer__seal img { width: 50px; height: auto; flex-shrink: 0; }
@@ -3305,6 +3305,58 @@
     @media (max-width: 640px) {
       .sb-why__list { grid-template-columns: 1fr; }
       .sb-whats-float { bottom: 16px; right: 16px; }
+    }
+
+    /* ============================================================
+       REVISÃO MOBILE 2026-10 — problemas da auditoria em 360/375/390/412px.
+       Layout: só ≤767px. Áreas de toque ≥ 44px: só em telas de toque
+       (pointer: coarse), então o desktop com mouse não muda.
+       ============================================================ */
+    @media (max-width: 767px) {
+      /* Banner de cookies: 3 botões lado a lado não cabiam (texto vazava) */
+      .sb-cookies__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .sb-cookies__btn { min-height: 44px; font-size: 13px; white-space: normal; }
+      .sb-cookies__btn--primary { grid-column: 1 / -1; }
+
+      /* "Também atendemos": lista vertical, sem "·" pendurado no fim da linha */
+      .sb-offer__also-list { flex-direction: column; gap: 0; }
+      .sb-offer__also-sep { display: none; }
+      .sb-offer__also-link { display: inline-flex; align-items: center; min-height: 44px; }
+      .sb-offer__also-link::after { bottom: 6px; }
+
+      /* Depoimentos: selo do seguro desce para a linha de baixo e o
+         "Cliente desde… · cidade" deixa de quebrar palavra por palavra */
+      .sb-testimonial-card__footer {
+        display: grid; grid-template-columns: 40px 1fr;
+        column-gap: 0.875rem; row-gap: 0.625rem;
+      }
+      .sb-testimonial-card__tag { grid-column: 2; justify-self: start; margin-left: 0; }
+
+      /* CTA final: "Conversar pelo WhatsApp" quebrava em 2 linhas em 360px */
+      .sb-contact__cta { padding-inline: 24px; }
+
+      /* Instagram: tagline em linha própria em vez de quebrar torta */
+      .sb-instagram-link { flex-wrap: wrap; row-gap: 2px; }
+      .sb-instagram-link__sep { display: none; }
+      .sb-instagram-link__tagline { flex-basis: 100%; text-align: center; }
+    }
+
+    /* Menu mobile em telas baixas (ex.: 375×667): o botão do WhatsApp ficava
+       abaixo da dobra. Itens mais compactos, ainda bem acima de 44px. */
+    @media (max-width: 768px) and (max-height: 760px) {
+      .sb-mobile__nav { margin-top: 16px; padding-top: 16px; }
+      .sb-mobile__link { font-size: 26px; padding: 10px 0; }
+    }
+
+    @media (pointer: coarse) {
+      .sb-loc__phones { gap: 0; }
+      .sb-loc__phone { display: inline-flex; align-items: center; min-height: 44px; }
+      /* "Prefere ligar?": área de toque maior sem alterar a linha do texto */
+      .sb-contact__alt a { display: inline-block; padding: 14px 6px; margin: -14px -6px; }
+      .sb-instagram-link { min-height: 44px; }
+      .sb-footer__col ul { gap: 0; }
+      /* inline-block (não flex): ícone ↗ continua grudado no texto quando quebra linha */
+      .sb-footer__col a { display: inline-block; padding-block: 11px; min-width: 44px; }
     }
 
     /* Reduced motion */
@@ -4717,7 +4769,7 @@
          Recebe seletor do container .sb-carousel + seletor do
          <div class="sb-carousel-dots"> e gera dots + sincroniza
          indicador ativo com posição do scroll horizontal.
-         Suporta teclado (← →) e clique nos dots.
+         Suporta teclado (← →); dots são só indicadores (sem clique).
          No-op em desktop (≥769px) — cada seção tem seu próprio
          revert de layout via CSS, e dots ficam display:none.
          ============================================================ */
@@ -4733,14 +4785,9 @@
         if (!cards.length) return;
         /* Reset dots — idempotente caso reinicialize */
         dotsWrap.innerHTML = '';
-        cards.forEach(function (_, i) {
-          var dot = document.createElement('button');
-          dot.type = 'button';
+        cards.forEach(function () {
+          var dot = document.createElement('span');
           dot.className = 'sb-carousel-dot';
-          dot.setAttribute('aria-label', 'Ir para item ' + (i + 1) + ' de ' + cards.length);
-          dot.addEventListener('click', function () {
-            cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          });
           dotsWrap.appendChild(dot);
         });
         /* Cardápio: largura do card + gap entre cards. Lê do primeiro card.
