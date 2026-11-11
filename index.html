@@ -3520,7 +3520,7 @@
             </div>
             <div class="sb-hero__ticker">
               <span><span class="sb-hero__ticker-suffix sb-hero__ticker-suffix--prefix">+</span><span class="sb-hero__ticker-num" data-count="1000">0</span></span>
-              <span class="sb-hero__ticker-label">Famílias atendidas</span>
+              <span class="sb-hero__ticker-label">Clientes atendidos</span>
             </div>
           </div>
 
@@ -4918,7 +4918,7 @@
           heroEls.ctas.forEach(function (c) { c.style.opacity = '1'; c.style.transform = 'none'; });
           /* Ainda assim, contadores precisam mostrar o valor final */
           hero.querySelectorAll('.sb-hero__ticker-num[data-count]').forEach(function (el) {
-            el.textContent = el.getAttribute('data-count');
+            el.textContent = (parseInt(el.getAttribute('data-count'), 10) || 0).toLocaleString('pt-BR');
           });
           return;
         }
@@ -4971,7 +4971,8 @@
             val: target,
             duration: 1.8,
             ease: 'power2.out',
-            onUpdate: function () { el.textContent = Math.round(counter.val); }
+            /* pt-BR: 1000 aparece como "1.000" */
+            onUpdate: function () { el.textContent = Math.round(counter.val).toLocaleString('pt-BR'); }
           }, 1.4);
         });
 
