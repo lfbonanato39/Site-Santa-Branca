@@ -2878,7 +2878,7 @@
     .sb-footer__legal-nav a { color: rgba(245,241,232,0.7); font-size: 13px; }
     .sb-footer__legal-nav a:hover { color: var(--gold-soft); }
     .sb-footer__base { border-top: 1px solid rgba(245,241,232,0.08); padding: 18px 0; }
-    .sb-footer__copy { font-size: 12px; color: rgba(245,241,232,0.4); text-align:center; }
+    .sb-footer__copy { font-size: 12px; color: rgba(245,241,232,0.62); text-align:center; }   /* 5,2:1 sobre #143B34 (era 40% = 3,1:1) */
 
     /* Instagram link — fica acima do copyright, centralizado.
        Conjunto ícone + handle + tagline; clique no conjunto inteiro abre o link. */
@@ -3781,7 +3781,9 @@
           <span class="sb-why__eyebrow">Por que a Santa Branca</span>
           <h2 id="why-title" class="sb-why__title" data-split-lines>Quatro motivos para <em>confiar</em>.</h2>
         </header>
-        <ol class="sb-why__list sb-carousel" data-reveal-stagger role="region" aria-roledescription="carousel" aria-label="Motivos para confiar na Santa Branca">
+        <!-- role="region" fica no div: no <ol> ele anulava a semântica de lista -->
+        <div role="region" aria-roledescription="carousel" aria-label="Motivos para confiar na Santa Branca">
+        <ol class="sb-why__list sb-carousel" data-reveal-stagger>
           <li class="sb-why__item" data-reveal>
             <div class="sb-why__num" aria-hidden="true">01</div>
             <hr class="sb-why__rule" aria-hidden="true" />
@@ -3807,6 +3809,7 @@
             <p>Quando acontece um sinistro, a nossa equipe acompanha você do registro até a indenização.</p>
           </li>
         </ol>
+        </div>
         <!-- Dots do carrossel mobile (papiro bg → variante default bronze) -->
         <div class="sb-carousel-dots" id="sb-why-dots" aria-hidden="true"></div>
       </div>
@@ -3907,7 +3910,7 @@
         <!-- Dots do carrossel mobile (forest bg → variante sage-light) -->
         <div class="sb-carousel-dots sb-carousel-dots--on-forest" id="sb-offer-dots" aria-hidden="true"></div>
 
-        <aside class="sb-offer__also">
+        <div class="sb-offer__also">
           <span class="sb-offer__also-eyebrow">Também atendemos</span>
           <ul class="sb-offer__also-list">
             <li><a class="sb-offer__also-link" href="#contato">Seguro Viagem</a><span class="sb-offer__also-sep" aria-hidden="true">·</span></li>
@@ -3923,7 +3926,7 @@
           <!-- Onda C item 12: prompt sutil "Não viu o que precisa?" removido —
                duplicava o CTA banner forest logo abaixo. O CTA banner cumpre
                melhor o papel de captura (botão grande + bg distintivo). -->
-        </aside>
+        </div>
       </div>
     </section>
 
@@ -4408,7 +4411,7 @@
   <!-- ============================================================
        LGPD COOKIE BANNER
        ============================================================ -->
-  <aside class="sb-cookies" id="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-text">
+  <div class="sb-cookies" id="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-text">
     <div class="sb-cookies__title" id="cookie-title">Sua privacidade importa</div>
     <p class="sb-cookies__text" id="cookie-text">
       A gente usa cookies para entender como o site é usado e melhorar a sua experiência. Você escolhe o que aceitar. Saiba mais na nossa <a href="privacidade.html">Política de Privacidade</a>.
@@ -4418,7 +4421,7 @@
       <button class="sb-cookies__btn" data-cookie="measure">Permitir medição</button>
       <button class="sb-cookies__btn sb-cookies__btn--primary" data-cookie="all">Aceitar tudo</button>
     </div>
-  </aside>
+  </div>
 
   <!-- ============================================================
        SCRIPTS
