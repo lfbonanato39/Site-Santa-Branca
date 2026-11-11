@@ -574,13 +574,13 @@
       position: fixed; inset: 0; z-index: 10000;
       background: var(--ink-deep);
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 700ms var(--ease-out), visibility 700ms;
+      transition: opacity 300ms var(--ease-out), visibility 300ms;
     }
     .sb-loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
     .sb-loader__mark {
       width: 220px; height: auto; max-height: 240px;
       object-fit: contain;
-      animation: loaderFade 1.2s var(--ease-out) forwards;
+      animation: loaderFade 0.3s var(--ease-out) forwards;
       filter: brightness(0) invert(1) drop-shadow(0 6px 20px rgba(0,0,0,0.35));
       opacity: 0.95;
     }
@@ -593,12 +593,9 @@
        com movimento reduzido também não. */
     .sb-loader { display: none; }
     .js-on .sb-loader { display: flex; }
-    @media (prefers-reduced-motion: reduce) {
+    @media (max-width: 767px), (prefers-reduced-motion: reduce) {
       .js-on .sb-loader { display: none; }
     }
-
-    /* Body locked durante loading */
-    body.is-loading { overflow: hidden; }
 
     /* ============================================================
        HERO — Aurora + canvas particles + vitral em arco gótico
@@ -3339,7 +3336,7 @@
 <body>
 
   <!-- Pre-DOM: aplica is-scrolled antes do paint quando a página carrega
-       já com scroll > 20. Também marca body como is-loading para o loader. -->
+       já com scroll > 20, e marca html.js-on (usado pelo CSS de animação). -->
   <script>
     (function () {
       try {
@@ -3352,14 +3349,30 @@
   </script>
 
   <!-- ============================================================
-       LOADER — primeira impressão, 1.2s
-       Linhas Art Nouveau se desenhando + monograma aparecendo.
-       LOGO PLACEHOLDER #3 — quando logo oficial chegar, substituir
-       o SVG abaixo por uma versão única que se desenha.
+       LOADER — só no desktop (≥768px), no máximo 600ms (300 visível +
+       300 de fade). O conteúdo carrega por trás; no celular não existe.
+       O tempo é controlado aqui, inline: não espera CDN nem window.load.
        ============================================================ -->
-  <div class="sb-loader" id="sb-loader" aria-hidden="true">
-    <img class="sb-loader__mark" src="assets/logo-santa-branca.png" alt="" />
-  </div>
+  <div class="sb-loader" id="sb-loader" aria-hidden="true"></div>
+  <script>
+    (function () {
+      var l = document.getElementById('sb-loader');
+      if (!l) return;
+      function done() {
+        l.classList.add('is-done');
+        document.documentElement.classList.add('sb-loader-done');
+        document.dispatchEvent(new Event('sb:loader-done'));
+      }
+      if (!window.matchMedia('(min-width: 768px)').matches ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
+      var img = new Image(250, 120);           /* logo só é baixada no desktop */
+      img.className = 'sb-loader__mark';
+      img.alt = '';
+      img.src = 'assets/logo-santa-branca.png';
+      l.appendChild(img);
+      setTimeout(done, 300);
+    })();
+  </script>
 
   <!-- Grain overlay — textura de filme global -->
   <div class="grain" aria-hidden="true"></div>
@@ -4670,29 +4683,19 @@
       var IS_DESKTOP = window.matchMedia('(min-width: 1025px)').matches && window.matchMedia('(hover: hover)').matches;
 
       /* ============================================================
-         LOADER — esconde após 1.2s (ou imediato se reduced-motion)
-         A timeline cinematográfica do hero (atribuída por initHero abaixo)
-         começa pausada e dá play() simultaneamente ao loader iniciar fade.
-         Overlap intencional: durante os 700ms de fade-out do loader, a
-         timeline já roda ~700ms — quando o loader some, hero já está
-         "aceso e em movimento". Evita vácuo visual entre loader e hero.
+         LOADER — controlado pelo script inline logo após o #sb-loader
+         (desktop, no máximo 600ms). A timeline do hero (initHero abaixo)
+         toca assim que o loader sai; se ele já saiu (ou não existe, como
+         no celular), toca na hora.
          ============================================================ */
-      document.body.classList.add('is-loading');
-      var loader = document.getElementById('sb-loader');
-      var heroEntranceTimeline = null;  // initHero atribui depois (linha 4014)
-      function hideLoader() {
-        if (heroEntranceTimeline) heroEntranceTimeline.play();
-        if (loader) loader.classList.add('is-done');
-        document.body.classList.remove('is-loading');
-      }
-      if (REDUCED_MOTION) {
-        hideLoader();
-      } else {
-        window.addEventListener('load', function () {
-          setTimeout(hideLoader, 1200);
-        });
-        /* Failsafe: máximo 3s mesmo se assets travarem */
-        setTimeout(hideLoader, 3000);
+      var heroEntranceTimeline = null;  // initHero atribui depois
+      function playHeroWhenLoaderDone() {
+        if (!heroEntranceTimeline) return;
+        if (document.documentElement.classList.contains('sb-loader-done')) {
+          heroEntranceTimeline.play();
+        } else {
+          document.addEventListener('sb:loader-done', function () { heroEntranceTimeline.play(); }, { once: true });
+        }
       }
 
       /* ============================================================
@@ -4956,15 +4959,14 @@
         }
 
         /* --- Timeline de entrada (~1.74s) ---
-           Pausada na criação. hideLoader() chama heroEntranceTimeline.play()
-           simultâneo ao .is-done do loader → 700ms de overlap entre fade-out
-           do loader e a entrada do hero. Sem o overlap, há um vácuo de 700ms
-           onde o loader desaparece sobre um hero ainda invisível. */
+           Pausada na criação; toca quando o loader sai (desktop) ou na hora
+           (celular). Só movimento: o texto já está visível. */
         var tl = gsap.timeline({
           defaults: { ease: 'power3.out' },
           paused: true
         });
         heroEntranceTimeline = tl;
+        playHeroWhenLoaderDone();
         /* Só movimento (y → 0): o texto já está visível desde o primeiro quadro */
         if (heroEls.motif) {
           tl.to(heroEls.motif, { y: 0, duration: 0.5 }, 0);
