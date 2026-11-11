@@ -46,19 +46,30 @@
   <style>
     :root { --color-forest-deep: #1B4D44; --color-papiro: #F5F1E8; color-scheme: only light; }
     html, body { background: var(--color-forest-deep); margin: 0; }
+    /* Fontes hospedadas no próprio site (assets/fonts): woff2 variáveis,
+       só o subconjunto latin. Newsreader 300–600 (eixo opsz) e Inter 400–700. */
+    @font-face {
+      font-family: 'Newsreader';
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: swap;
+      src: url(assets/fonts/newsreader-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url(assets/fonts/inter-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
   </style>
 
-  <!-- Fontes — Institucional Moderno (WSJ/FT/Reuters)
-       Serif: Newsreader (headlines institucionais — pesos 300/400/500/600, axis opsz 6..72).
-       Sans:  Inter      (corpo de texto — pesos 400/500/600/700).
-       Migração 2026-05: substituiu Fraunces por Newsreader (serifa institucional moderna). -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Fontes: Newsreader (títulos) e Inter (texto), hospedadas no site.
+       Preload só da Newsreader, a fonte do título do hero. -->
+  <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" />
-  <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap" />
 
   <!-- Phosphor Icons (light) — ícones editoriais, stroke 1.5px, fora do feel "lucide everywhere" -->
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
@@ -76,9 +87,9 @@
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      style-src 'self' 'unsafe-inline';
       img-src 'self' data: https://www.google-analytics.com https://www.facebook.com;
-      font-src 'self' https://fonts.gstatic.com;
+      font-src 'self';
       connect-src 'self' https://www.google-analytics.com https://www.facebook.com;
       frame-src https://www.google.com;
     ">
