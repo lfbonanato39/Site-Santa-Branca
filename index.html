@@ -669,7 +669,7 @@
     @media (prefers-reduced-motion: reduce) {
       .sb-hero__video { display: none; }
       .sb-hero__video-wrap {
-        background-image: url('assets/og-image.jpg');
+        background-image: url('assets/videos/hero-poster.webp');
         background-size: cover;
         background-position: center;
       }
@@ -3476,17 +3476,37 @@
       <!-- BG STACK (z-index crescente):
            video (-3) → overlay gradient navy (-2) → vinheta (-1) → particles → conteúdo -->
       <div class="sb-hero__video-wrap" aria-hidden="true">
-        <!-- TODO: substituir assets/videos/hero-bg.{mp4,webm} pelos vídeos definitivos.
-             Poster temporário reusa og-image.jpg (1200×630) — substituir pelo poster
-             do vídeo (mesmo frame inicial, otimizado <150KB). -->
-        <video class="sb-hero__video"
-               autoplay muted loop playsinline
-               preload="metadata"
-               poster="assets/og-image.jpg"
-               aria-hidden="true">
-          <source src="assets/videos/hero-bg.webm" type='video/webm; codecs="vp9"'>
-          <source src="assets/videos/hero-bg.mp4" type="video/mp4">
-        </video>
+        <!-- Vídeo do hero. Pôster WebP (quadro da cena 1) escolhido pela largura;
+             as fontes entram só depois do evento load, para não disputar banda
+             com o LCP. Celular (≤767px): hero-bg-mobile (960×540, até 800 KB).
+             Save-Data ou conexão 2g/3g: sem vídeo, fica o pôster. Sem JS: fundo verde.
+             O enquadramento por cena (object-position) segue no script do fim. -->
+        <video class="sb-hero__video" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <script>
+          (function () {
+            var v = document.querySelector('.sb-hero__video');
+            var mobile = window.matchMedia('(max-width: 767px)').matches;
+            v.poster = mobile ? 'assets/videos/hero-poster-mobile.webp' : 'assets/videos/hero-poster.webp';
+            var c = navigator.connection || {};
+            var slow = c.saveData === true || /2g|3g/.test(c.effectiveType || '');
+            if (slow || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var base = mobile ? 'assets/videos/hero-bg-mobile' : 'assets/videos/hero-bg';
+            function start() {
+              [['webm', 'video/webm; codecs="vp9"'], ['mp4', 'video/mp4']].forEach(function (f) {
+                var src = document.createElement('source');
+                src.src = base + '.' + f[0];
+                src.type = f[1];
+                v.appendChild(src);
+              });
+              v.autoplay = true;
+              v.load();
+              var pl = v.play();
+              if (pl && pl.catch) pl.catch(function () {});
+            }
+            if (document.readyState === 'complete') start();
+            else window.addEventListener('load', start, { once: true });
+          })();
+        </script>
         <div class="sb-hero__video-overlay" aria-hidden="true"></div>
         <div class="sb-hero__video-vignette" aria-hidden="true"></div>
       </div>
