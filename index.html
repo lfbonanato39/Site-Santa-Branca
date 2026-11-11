@@ -2195,90 +2195,69 @@
       gap: 1.25rem;
       box-shadow: 0 2px 8px -2px rgba(27, 77, 68, 0.04);
     }
-    .sb-testimonial-card__quote {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      line-height: 0.5;
-      font-weight: 400;
-      color: var(--color-bronze-deep);
-      margin: 0 0 -0.75rem;
-      display: block;
-    }
-    .sb-testimonial-card__text {
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.65;
-      color: rgba(26, 40, 38, 0.88);
-      margin: 0;
-    }
-    .sb-testimonial-card__rule {
-      display: block;
-      width: 32px; height: 1px;
-      background: rgba(26, 40, 38, 0.08);
-      border: 0;
-      margin: auto 0 0;
-    }
-    .sb-testimonial-card__footer {
-      display: flex; align-items: center; gap: 0.875rem;
-    }
-    .sb-testimonial-card__avatar {
+    /* Card de avaliação do Google: avatar com a inicial (cor fixa por
+       pessoa), nome, 5 estrelas (#FBBC04) e selo "Avaliação no Google". */
+    .sb-review__head { display: flex; align-items: center; gap: 0.875rem; }
+    .sb-review__avatar {
+      position: relative;
+      overflow: hidden;
       width: 40px; height: 40px;
       border-radius: 50%;
-      background: var(--color-midnight);
-      color: var(--color-cream);
+      background: var(--avatar-bg, #1B4D44);
+      color: #FFFFFF;
       display: inline-flex; align-items: center; justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 500;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 600;
       flex-shrink: 0;
     }
-    .sb-testimonial-card__id {
-      display: flex; flex-direction: column;
-      gap: 0.125rem;
-      min-width: 0;
-    }
-    .sb-testimonial-card__name {
+    /* Foto local opcional (assets/depoimentos/<nome>.webp) cobre a inicial */
+    .sb-review__avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Paleta fixa (contraste com branco ≥ 5,9:1) */
+    .sb-review--c1 { --avatar-bg: #1B4D44; }
+    .sb-review--c2 { --avatar-bg: #2A5F55; }
+    .sb-review--c3 { --avatar-bg: #7A5F2F; }
+    .sb-review--c4 { --avatar-bg: #4A5752; }
+    .sb-review--c5 { --avatar-bg: #5B4A6E; }
+    .sb-review--c6 { --avatar-bg: #36557A; }
+    .sb-review--c7 { --avatar-bg: #8A4B3C; }
+    .sb-review--c8 { --avatar-bg: #4E6435; }
+    .sb-review__id { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .sb-review__name {
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--color-text-on-cream);
       line-height: 1.2;
     }
-    .sb-testimonial-card__context {
+    .sb-review__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+    .sb-review__stars { display: block; width: 70px; height: 14px; fill: #FBBC04; }
+    .sb-review__source {
+      display: inline-flex; align-items: center; gap: 5px;
       font-family: var(--font-sans);
       font-size: 12px;
-      color: rgba(26, 40, 38, 0.78);
-      line-height: 1.3;
+      color: rgba(26, 40, 38, 0.72);
     }
-    .sb-testimonial-card__tag {
-      margin-left: auto;
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-bronze-text);
-      padding: 4px 10px;
-      border: 1px solid rgba(168, 139, 90, 0.45);
-      border-radius: 100px;
-      flex-shrink: 0;
-      white-space: nowrap;
-    }
+    .sb-review__source svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .sb-testimonials__more-g { width: 18px; height: 18px; vertical-align: -4px; margin-right: 0.5rem; }
+    .sb-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
     .sb-testimonials__more {
       text-align: center;
       margin-top: clamp(3rem, 5vw, 4rem);
     }
+    /* inline-block (não flex): o "G" e a seta acompanham o texto quando quebra linha */
     .sb-testimonials__more-btn {
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.1em;
+      line-height: 1.6;
       text-transform: uppercase;
       color: var(--color-bronze-text);
       text-decoration: none;
-      display: inline-flex; align-items: center;
-      gap: 0.5rem;
+      display: inline-block;
+      padding-block: 10px;
     }
     .sb-testimonials__more-btn .arrow {
       display: inline-block;
@@ -3319,19 +3298,14 @@
       .sb-cookies__btn { min-height: 44px; font-size: 13px; white-space: normal; }
       .sb-cookies__btn--primary { grid-column: 1 / -1; }
 
+      /* Depoimentos: no carrossel cada card fica com a altura do próprio texto */
+      .sb-testimonials__wall { align-items: flex-start; transition: height 300ms var(--ease-out); }
+
       /* "Também atendemos": lista vertical, sem "·" pendurado no fim da linha */
       .sb-offer__also-list { flex-direction: column; gap: 0; }
       .sb-offer__also-sep { display: none; }
       .sb-offer__also-link { display: inline-flex; align-items: center; min-height: 44px; }
       .sb-offer__also-link::after { bottom: 6px; }
-
-      /* Depoimentos: selo do seguro desce para a linha de baixo e o
-         "Cliente desde… · cidade" deixa de quebrar palavra por palavra */
-      .sb-testimonial-card__footer {
-        display: grid; grid-template-columns: 40px 1fr;
-        column-gap: 0.875rem; row-gap: 0.625rem;
-      }
-      .sb-testimonial-card__tag { grid-column: 2; justify-self: start; margin-left: 0; }
 
       /* CTA final: "Conversar pelo WhatsApp" quebrava em 2 linhas em 360px */
       .sb-contact__cta { padding-inline: 24px; }
@@ -3400,6 +3374,12 @@
 
   <!-- Cursor glow (radial dourado SOB o cursor padrão, sem substituí-lo) -->
   <div class="sb-cursor-glow" id="sb-cursor-glow" aria-hidden="true"></div>
+
+  <!-- Sprite de ícones (referenciados com <use href="#...">) -->
+  <svg class="sb-sprite" aria-hidden="true" focusable="false">
+    <symbol id="sb-star" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
+    <symbol id="sb-google-g" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol>
+  </svg>
 
   <a href="#main" class="skip-link">Pular para o conteúdo</a>
 
@@ -4016,166 +3996,197 @@
     </section>
 
     <!-- ============================================================
-         TESTIMONIALS — wall of love masonry (Fase 7)
-         DEPOIMENTOS PROVISÓRIOS — substituir por reais antes do
-         go-live. Pedir autorização de cada cliente para uso de
-         nome real (LGPD + boa prática reputacional).
+         DEPOIMENTOS — 13 avaliações reais do Google (todas 5 estrelas)
+         Texto literal: não corrigir nem reescrever; "[…]" marca corte.
+         Cor do avatar: fixa por pessoa (soma das letras do nome, mod 8).
+         Foto opcional: ver bloco DEPOIMENTOS no script e o CLAUDE.md.
          ============================================================ -->
     <section class="sb-testimonials" id="depoimentos" aria-labelledby="testi-title">
       <div class="sb-testimonials__container">
         <header class="sb-testimonials__head">
           <span class="sb-testimonials__eyebrow">Quem já é da casa</span>
-          <h2 id="testi-title" class="sb-testimonials__title" data-split-lines>Mais de 1.000 famílias e empresas <em>confiam</em> na Santa Branca.</h2>
-          <p class="sb-testimonials__lead">A maioria chegou aqui por indicação. A gente prefere assim.</p>
+          <h2 id="testi-title" class="sb-testimonials__title" data-split-lines>Mais de 1.000 clientes <em>confiam</em> na Santa Branca.</h2>
+          <p class="sb-testimonials__lead">Avaliações que nossos clientes deixaram no Google.</p>
         </header>
 
-        <div class="sb-testimonials__wall sb-carousel" data-reveal-stagger="80" role="region" aria-roledescription="carousel" aria-label="Depoimentos de clientes">
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Bati o carro num domingo à noite, achei que tava perdido. Liguei pra Santa Branca e o Rodrigo me atendeu de casa. Sério. Quase chorei.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">M</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Marcelo Andrade</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2011 · Belo Horizonte</span>
+        <div class="sb-testimonials__wall sb-carousel" data-reveal-stagger="80" role="region" aria-roledescription="carousel" aria-label="Avaliações de clientes no Google">
+          <article class="sb-testimonial-card sb-review sb-review--c6" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">A</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Andressa D.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Seguro Auto</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Meu carro deu problema na bomba de alta no meio da estrada em um domingo. Liguei pro Rodrigo e ele acompanhou o atendimento até que eu estivesse em casa! Atendimento super humanizado!</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Já passei por três corretoras grandes antes. Aqui é diferente — o atendente sabe meu nome, sabe que tenho dois carros e sabe que minha filha tirou habilitação ano passado. Atendimento de bairro, com competência de cidade grande.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">F</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Fernanda Soares</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2017 · Nova Lima</span>
+          <article class="sb-testimonial-card sb-review sb-review--c4" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">L</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Leonardo O.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Seguro Auto</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Muito bem atendido pelo Rodrigo Teixeira, não só vendeu para ter comissão, me deu uma aula de como funciona o mercado de seguros e como montar/escolher coberturas de acordo com meu perfil e contexto.</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Indicaram a Santa Branca pra mim em 1998. Hoje meus filhos também são clientes. A gente cresce com eles.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">J</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">José Carlos Rezende</span>
-                <span class="sb-testimonial-card__context">Cliente desde 1998 · BH</span>
+          <article class="sb-testimonial-card sb-review sb-review--c8" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">L</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Luciana B.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Seguro Vida</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">[…] Desde um pneu furado, acionamento de guincho até solicitações mais complexas, eles resolveram. Quando chega a época de renovar o seguro, eles me avisam. Enviam uma planilha comparativa […] apontando qual é a melhor opção para o meu carro.</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Loja pegou fogo em 2022. Pesadelo. Em 48h tinha gente da Santa Branca no local me ajudando a organizar a documentação. Reabri em 4 meses. Sem eles, não sei se reabria.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">A</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Ana Lúcia Pacheco</span>
-                <span class="sb-testimonial-card__context">Empresária · Centro de BH</span>
+          <article class="sb-testimonial-card sb-review sb-review--c6" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">A</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Alexandre Q.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Empresarial</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">[…] A cada renovação, eles não se limitam a simplesmente renovar a apólice. Fazem uma verdadeira pesquisa entre várias seguradoras e apresentam opções, comparando preços, coberturas, franquias, carro reserva e serviços adicionais. […] Não é apenas vender um seguro, é cuidar do cliente!</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Eles cotaram com várias seguradoras, me mandaram um quadro comparativo numa tarde, e ainda explicaram CADA cláusula no WhatsApp. Em uma corretora online eu nem sabia que existia franquia reduzida.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">P</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Patrícia Vilela</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2023 · Lagoa Santa</span>
+          <article class="sb-testimonial-card sb-review sb-review--c1" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">R</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Rafael M.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Seguro Auto</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Já faz mais de 15 anos que a Santa Branca cuida dos seguros dos carros, das casas e também do seguro de vida da minha família […] O que mais valorizo é saber que posso contar com eles, sempre cuidam de tudo sem eu precisar me preocupar!</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Meu pai fez seguro com o Washington em 1995. Quando comprei meu primeiro apartamento, fui na Santa Branca. Não tem outra.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">B</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Bruno Coelho</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2019 · BH</span>
+          <article class="sb-testimonial-card sb-review sb-review--c5" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">J</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Joanna M.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Residencial</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Já passei por alguns imprevistos com problemas no meu carro, e a Santa Branca e em especial o Rodrigo sempre me ajudaram com muita rapidez e seriedade. Realmente atendimento diferenciado, já trabalhei com outras corretoras de seguro, e nenhuma até hoje me ofereceu a qualidade deles.</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Sou síndica do meu prédio há 8 anos. A Santa Branca cuida do nosso seguro condomínio desde 2016 e nunca me deixou na mão. Quando teve infiltração no 7º andar, resolveram com a seguradora num dia.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">C</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Cláudia Mendes</span>
-                <span class="sb-testimonial-card__context">Síndica · Buritis</span>
+          <article class="sb-testimonial-card sb-review sb-review--c2" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">R</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Raphael L.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Condomínio</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Conheço o Rodrigo desde pequeno, já fomos vizinhos de rua. Quando comprei meu primeiro carro, não entendia nada sobre seguro. Fui perguntar para minha mãe e a resposta foi: toma aqui o contato do Rodrigo, manda msg pra ele e confia. Fiz exatamente isso e nunca me arrependi. Já me ajudou milhões de vezes, em dias e horários que mais ninguém ia me atender.</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Confesso que entrei meio desconfiado de corretora familiar — pensei "devem ser amadores". Cliente há 6 anos. Nunca mais cogitei sair.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">H</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Henrique Tavares</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2020 · Savassi</span>
+          <article class="sb-testimonial-card sb-review sb-review--c4" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">R</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Reicler M.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Seguro Auto</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">[…] O atendimento é impecável e extremamente humanizado. […] Percebo fortemente que o interesse não é apenas vender um seguro, mas também valorizar o relacionamento com o cliente. São pessoas sérias, honestas e que realmente zelam por nós. Estão sempre disponíveis (quase que 24/7) seja para dúvida ou orientação. […]</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Fiz previdência com eles aos 38 anos. Hoje tenho 51 e olho o saldo todo mês com tranquilidade. A escolha entre PGBL e VGBL eles explicaram numa conversa de 20 minutos — entendi mais ali do que em três anos lendo blog.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">R</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Ricardo Nogueira</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2013 · Pampulha</span>
+          <article class="sb-testimonial-card sb-review sb-review--c8" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">R</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Rodrigo I.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Previdência</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Sou cliente há mais de 10 anos, atendimento profissional e dedicado. Inclusive nos momentos mais difíceis em que precisei sempre foram extremamente eficazes.</p>
           </article>
-
-          <article class="sb-testimonial-card" data-reveal>
-            <span class="sb-testimonial-card__quote" aria-hidden="true">“</span>
-            <p class="sb-testimonial-card__text">Atendimento humano de verdade. Sem chatbot, sem URA, sem "aguarde na linha". É a Sandra que atende todo ano na renovação. A gente já se conhece de nome.</p>
-            <hr class="sb-testimonial-card__rule" aria-hidden="true" />
-            <footer class="sb-testimonial-card__footer">
-              <span class="sb-testimonial-card__avatar" aria-hidden="true">L</span>
-              <span class="sb-testimonial-card__id">
-                <span class="sb-testimonial-card__name">Letícia Borges</span>
-                <span class="sb-testimonial-card__context">Cliente desde 2015 · Belvedere</span>
+          <article class="sb-testimonial-card sb-review sb-review--c5" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">M</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Marcus A.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
               </span>
-              <span class="sb-testimonial-card__tag">Residencial</span>
-            </footer>
+            </div>
+            <p class="sb-testimonial-card__text">Recomendo a Santa Branca, não só pela seriedade da empresa, mas pelo empenho em oferecer o melhor serviço, com o melhor custo benefício. Aqui vai uma menção especial ao Rodrigo Teixeira, que sempre me atendeu, a qualquer momento, em todas as minhas solicitações.</p>
+          </article>
+          <article class="sb-testimonial-card sb-review sb-review--c1" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">R</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Regina B.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
+              </span>
+            </div>
+            <p class="sb-testimonial-card__text">[…] Uma empresa que transmite confiança, seriedade e tranquilidade. […] Mais do que contratar um seguro para o meu carro, é a tranquilidade que tenho de saber que posso contar com profissionais competentes e dedicados. […]</p>
+          </article>
+          <article class="sb-testimonial-card sb-review sb-review--c8" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">C</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Celso A.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
+              </span>
+            </div>
+            <p class="sb-testimonial-card__text">[…] Todo o apoio, melhores opções para todos os tipos de seguro que eu já precisei, auto, residencial, viagem, etc. Recomendamos</p>
+          </article>
+          <article class="sb-testimonial-card sb-review sb-review--c7" data-reveal>
+            <div class="sb-review__head">
+              <span class="sb-review__avatar" aria-hidden="true">A</span>
+              <span class="sb-review__id">
+                <span class="sb-review__name">Azemar F.</span>
+                <span class="sb-review__meta">
+                  <svg class="sb-review__stars" viewBox="0 0 120 24" role="img" aria-label="5 de 5 estrelas"><use href="#sb-star" x="0" width="24" height="24"/><use href="#sb-star" x="24" width="24" height="24"/><use href="#sb-star" x="48" width="24" height="24"/><use href="#sb-star" x="72" width="24" height="24"/><use href="#sb-star" x="96" width="24" height="24"/></svg>
+                  <span class="sb-review__source"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>Avaliação no Google</span>
+                </span>
+              </span>
+            </div>
+            <p class="sb-testimonial-card__text">Empresa super confiável. O atendimento é excelente, todas as vezes que precisei fui prontamente atendido, os profissionais sempre com total cordialidade e disposição para ajudar o cliente.</p>
           </article>
         </div>
         <!-- Dots do carrossel mobile (papiro bg → variante default bronze) -->
         <div class="sb-carousel-dots" id="sb-testimonials-dots" aria-hidden="true"></div>
 
         <div class="sb-testimonials__more">
-          <a class="sb-testimonials__more-btn" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20refer%C3%AAncia%20de%20um%20cliente%20da%20Santa%20Branca" target="_blank" rel="noopener">
-            Falar com quem já é cliente — pedir referência <span class="arrow" aria-hidden="true">→</span>
+          <a class="sb-testimonials__more-btn" href="https://maps.google.com/?cid=14581381387190124280" target="_blank" rel="noopener noreferrer" aria-label="Nota 5,0 no Google. Ver todas as avaliações (abre em nova aba)">
+            <svg class="sb-testimonials__more-g" viewBox="0 0 48 48" aria-hidden="true"><use href="#sb-google-g"/></svg>
+            Nota 5,0 no Google · Ver todas as avaliações <span class="arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -4588,6 +4599,21 @@
       });
 
       /* ============================================================
+         DEPOIMENTOS — foto local opcional no avatar
+         Para usar: salve assets/depoimentos/<nome>.webp (ex.: andressa-d.webp)
+         e adicione data-foto="assets/depoimentos/andressa-d.webp" no
+         .sb-review__avatar. Sem o atributo fica a inicial (nada é baixado,
+         então não há 404 no console). Se a foto falhar, a inicial continua.
+         ============================================================ */
+      document.querySelectorAll('.sb-review__avatar[data-foto]').forEach(function (av) {
+        var img = new Image();
+        img.alt = '';
+        img.decoding = 'async';
+        img.onload = function () { av.appendChild(img); };
+        img.src = av.getAttribute('data-foto');
+      });
+
+      /* ============================================================
          FOOTER YEAR — dinâmico
          ============================================================ */
       var yearEl = document.getElementById('footer-year');
@@ -4786,7 +4812,11 @@
          No-op em desktop (≥769px) — cada seção tem seu próprio
          revert de layout via CSS, e dots ficam display:none.
          ============================================================ */
-      function initCarousel(containerSel, dotsSel) {
+      /* opts.autoHeight: no celular, a altura do carrossel acompanha o card
+         visível (depoimentos têm textos de tamanhos muito diferentes). */
+      function initCarousel(containerSel, dotsSel, opts) {
+        var autoHeight = !!(opts && opts.autoHeight);
+        var mqCarousel = window.matchMedia('(max-width: 768px)');
         var container = typeof containerSel === 'string'
           ? document.querySelector(containerSel)
           : containerSel;
@@ -4826,6 +4856,13 @@
           for (var i = 0; i < dots.length; i++) {
             dots[i].classList.toggle('is-active', i === idx);
           }
+          if (autoHeight) {
+            container.style.height = mqCarousel.matches ? cards[idx].offsetHeight + 'px' : '';
+          }
+        }
+        function scheduleUpdate() {
+          if (raf) return;
+          raf = requestAnimationFrame(updateActive);
         }
         container.addEventListener('scroll', function () {
           if (raf) return;
@@ -4845,10 +4882,15 @@
         /* Estado inicial: primeiro dot ativo */
         if (dotsWrap.firstChild) dotsWrap.firstChild.classList.add('is-active');
         /* Recalcula no resize (orientation change, devtools) */
-        window.addEventListener('resize', function () {
-          if (raf) return;
-          raf = requestAnimationFrame(updateActive);
-        }, { passive: true });
+        window.addEventListener('resize', scheduleUpdate, { passive: true });
+        if (autoHeight) {
+          /* Altura dos cards muda quando as fontes carregam */
+          if (typeof ResizeObserver === 'function') {
+            var roCards = new ResizeObserver(scheduleUpdate);
+            cards.forEach(function (c) { roCards.observe(c); });
+          }
+          scheduleUpdate();
+        }
       }
 
       /* CAROUSEL INITS (Onda B) — instancia em todas as seções com
@@ -4856,7 +4898,7 @@
       initCarousel('.sb-timeline-inner',   '#sb-timeline-dots');
       initCarousel('.sb-why__list',        '#sb-why-dots');
       initCarousel('.sb-offer__grid',      '#sb-offer-dots');
-      initCarousel('.sb-testimonials__wall', '#sb-testimonials-dots');
+      initCarousel('.sb-testimonials__wall', '#sb-testimonials-dots', { autoHeight: true });
 
       /* ============================================================
          HERO CINEMATOGRÁFICO — Fase 2

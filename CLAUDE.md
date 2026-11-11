@@ -53,3 +53,13 @@ Ao trocar um link, atualizar os dois lugares (card e contato) e esta tabela.
 | Estrada Real: https://institutoestradareal.com.br/ | Rodapé, coluna da marca (`.sb-footer__seal`, imagem `assets/estradareal.png` 50×65, não exibir maior) |
 
 Todos abrem em nova aba (`target="_blank" rel="noopener noreferrer"`).
+
+## Depoimentos (avaliações do Google)
+
+Seção `#depoimentos` com 13 avaliações reais do Google, todas 5 estrelas. Perfil: https://maps.google.com/?cid=14581381387190124280 (link "Nota 5,0 no Google · Ver todas as avaliações" no fim da seção).
+
+- **Texto literal.** Não corrigir nem reescrever; "[…]" marca corte. Única exceção autorizada: a do Raphael L. (correção de digitação já aplicada). Sem "cliente desde", tipo de seguro ou data.
+- **Nome:** primeiro nome + inicial do sobrenome (ex.: "Andressa D.").
+- **Cor do avatar:** fixa por pessoa. Classe `sb-review--cN`, com N = (soma dos códigos das letras do nome em minúsculas, sem acento) mod 8 + 1. Paleta em `.sb-review--c1` a `--c8` (contraste com branco ≥ 5,9:1).
+- **Foto opcional:** salvar `assets/depoimentos/<nome>.webp` (ex.: `andressa-d.webp`, 80×80) e adicionar `data-foto="assets/depoimentos/andressa-d.webp"` no `.sb-review__avatar`. Sem o atributo, aparece a inicial. Não baixar nem linkar fotos de perfil do Google.
+- Celular: carrossel com altura acompanhando o card visível (`initCarousel(..., { autoHeight: true })`). Desktop: mural em colunas.
