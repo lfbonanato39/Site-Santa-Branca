@@ -2347,6 +2347,8 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
+    /* <picture> dos logos em PNG (srcset WebP) não vira item da faixa: o <img> continua sendo */
+    .sb-marquee__track > picture { display: contents; }
     .sb-marquee__logo {
       display: block;
       height: 75px;
@@ -3666,8 +3668,13 @@
               </svg>
               <div class="sb-hero__art-frame">
                 <picture>
-                  <source srcset="assets/photo-office.webp" type="image/webp" />
-                  <img src="assets/photo-office.jpg" alt="" loading="lazy" decoding="async" width="1200" height="1500" />
+                  <source type="image/webp"
+                          srcset="assets/photo-office-480.webp 480w, assets/photo-office-800.webp 800w, assets/photo-office.webp 1200w"
+                          sizes="(max-width: 1023px) 320px, 460px" />
+                  <img src="assets/photo-office-800.jpg"
+                       srcset="assets/photo-office-480.jpg 480w, assets/photo-office-800.jpg 800w, assets/photo-office.jpg 1200w"
+                       sizes="(max-width: 1023px) 320px, 460px"
+                       alt="" loading="lazy" decoding="async" width="1200" height="1500" />
                 </picture>
               </div>
               <svg class="sb-hero__art-border" viewBox="0 0 100 133" preserveAspectRatio="none">
@@ -4014,12 +4021,12 @@
             <!-- Set 1: 12 logos visíveis para leitores de tela -->
             <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="Porto Seguro" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="Allianz" loading="lazy" decoding="async" draggable="false" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="SulAmérica" loading="lazy" decoding="async" draggable="false" />
+            <picture><source type="image/webp" srcset="assets/seguradoras/sulamerica-360.webp 360w, assets/seguradoras/sulamerica-720.webp 720w" sizes="(max-width: 768px) 110px, 180px" /><img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" width="2000" height="505" alt="SulAmérica" loading="lazy" decoding="async" draggable="false" /></picture>
             <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="Liberty Seguros" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="Zurich" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="Itaú" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="HDI Seguros" loading="lazy" decoding="async" draggable="false" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="Tokio Marine" loading="lazy" decoding="async" draggable="false" />
+            <picture><source type="image/webp" srcset="assets/seguradoras/tokio-marine-240.webp 240w, assets/seguradoras/tokio-marine-480.webp 480w" sizes="(max-width: 768px) 50px, 83px" /><img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine-480.png" width="480" height="435" alt="Tokio Marine" loading="lazy" decoding="async" draggable="false" /></picture>
             <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="MetLife" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="Chubb" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="AIG" loading="lazy" decoding="async" draggable="false" />
@@ -4027,12 +4034,12 @@
             <!-- Set 2: duplicatas para loop perfeito (ocultas de a11y) -->
             <img class="sb-marquee__logo" src="assets/seguradoras/porto-seguro.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/allianz.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <picture><source type="image/webp" srcset="assets/seguradoras/sulamerica-360.webp 360w, assets/seguradoras/sulamerica-720.webp 720w" sizes="(max-width: 768px) 110px, 180px" /><img class="sb-marquee__logo" src="assets/seguradoras/sulamerica.png" width="2000" height="505" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" /></picture>
             <img class="sb-marquee__logo" src="assets/seguradoras/liberty.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/zurich.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/itau.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/hdi.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
-            <img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine.png" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+            <picture><source type="image/webp" srcset="assets/seguradoras/tokio-marine-240.webp 240w, assets/seguradoras/tokio-marine-480.webp 480w" sizes="(max-width: 768px) 50px, 83px" /><img class="sb-marquee__logo" src="assets/seguradoras/tokio-marine-480.png" width="480" height="435" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" /></picture>
             <img class="sb-marquee__logo" src="assets/seguradoras/metlife.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/chubb.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
             <img class="sb-marquee__logo" src="assets/seguradoras/aig.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
