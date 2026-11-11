@@ -69,10 +69,6 @@
   <!-- Fontes: Newsreader (títulos) e Inter (texto), hospedadas no site.
        Preload só da Newsreader, a fonte do título do hero. -->
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preconnect" href="https://unpkg.com" />
-
-  <!-- Phosphor Icons (light) — ícones editoriais, stroke 1.5px, fora do feel "lucide everywhere" -->
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
 
   <!-- Lenis + GSAP + ScrollTrigger — motion stack premium
        Lenis carrega antes do GSAP para o ticker integrar limpo. -->
@@ -433,6 +429,11 @@
 
     /* Focus */
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: var(--r-sm); }
+
+    /* Ícones Phosphor Light em SVG (sprite no topo do <body>). O <i> segue
+       como invólucro: tamanho = font-size, cor = currentColor. */
+    .ph { display: inline-block; width: 1em; height: 1em; line-height: 1; vertical-align: -0.125em; flex-shrink: 0; }
+    .ph svg { display: block; width: 100%; height: 100%; fill: currentColor; }
 
     /* ============================================================
        BUTTONS
@@ -3393,6 +3394,16 @@
 
   <!-- Sprite de ícones (referenciados com <use href="#...">) -->
   <svg class="sb-sprite" aria-hidden="true" focusable="false">
+    <!-- Phosphor Light (MIT), só os ícones usados -->
+    <symbol id="ph-arrow-up-right" viewBox="0 0 256 256"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"/></symbol>
+    <symbol id="ph-building-apartment" viewBox="0 0 256 256"><path d="M240,210H230V72a6,6,0,0,0-6-6H182V40a6,6,0,0,0-6-6H80a6,6,0,0,0-6,6V98H32a6,6,0,0,0-6,6V210H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM38,110H80a6,6,0,0,0,6-6V46h84V72a6,6,0,0,0,6,6h42V210H150V168a6,6,0,0,0-6-6H112a6,6,0,0,0-6,6v42H38ZM138,210H118V174h20ZM114,72a6,6,0,0,1,6-6h16a6,6,0,0,1,0,12H120A6,6,0,0,1,114,72Zm0,32a6,6,0,0,1,6-6h16a6,6,0,0,1,0,12H120A6,6,0,0,1,114,104Zm56,0a6,6,0,0,1,6-6h16a6,6,0,0,1,0,12H176A6,6,0,0,1,170,104ZM86,136a6,6,0,0,1-6,6H64a6,6,0,0,1,0-12H80A6,6,0,0,1,86,136Zm0,32a6,6,0,0,1-6,6H64a6,6,0,0,1,0-12H80A6,6,0,0,1,86,168Zm28-32a6,6,0,0,1,6-6h16a6,6,0,0,1,0,12H120A6,6,0,0,1,114,136Zm56,0a6,6,0,0,1,6-6h16a6,6,0,0,1,0,12H176A6,6,0,0,1,170,136Zm0,32a6,6,0,0,1,6-6h16a6,6,0,0,1,0,12H176A6,6,0,0,1,170,168Z"/></symbol>
+    <symbol id="ph-buildings" viewBox="0 0 256 256"><path d="M240,210H222V96a14,14,0,0,0-14-14H142V32a14,14,0,0,0-21.77-11.64l-80,53.33A14,14,0,0,0,34,85.34V210H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM208,94a2,2,0,0,1,2,2V210H142V94ZM46,85.34a2,2,0,0,1,.89-1.66l80-53.34A2,2,0,0,1,130,32V210H46ZM110,112v16a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm-32,0v16a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm0,56v16a6,6,0,0,1-12,0V168a6,6,0,0,1,12,0Zm32,0v16a6,6,0,0,1-12,0V168a6,6,0,0,1,12,0Z"/></symbol>
+    <symbol id="ph-car-simple" viewBox="0 0 256 256"><path d="M240,106H227.9L199.59,42.31A14,14,0,0,0,186.8,34H69.2a14,14,0,0,0-12.79,8.31L28.1,106H16a6,6,0,0,0,0,12H26v82a14,14,0,0,0,14,14H64a14,14,0,0,0,14-14V182H178v18a14,14,0,0,0,14,14h24a14,14,0,0,0,14-14V118h10a6,6,0,0,0,0-12ZM67.37,47.19A2,2,0,0,1,69.2,46H186.8a2,2,0,0,1,1.83,1.19L214.77,106H41.23ZM218,200a2,2,0,0,1-2,2H192a2,2,0,0,1-2-2V176a6,6,0,0,0-6-6H72a6,6,0,0,0-6,6v24a2,2,0,0,1-2,2H40a2,2,0,0,1-2-2V118H218Z"/></symbol>
+    <symbol id="ph-clock" viewBox="0 0 256 256"><path d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm0,192a90,90,0,1,1,90-90A90.1,90.1,0,0,1,128,218Zm62-90a6,6,0,0,1-6,6H128a6,6,0,0,1-6-6V72a6,6,0,0,1,12,0v50h50A6,6,0,0,1,190,128Z"/></symbol>
+    <symbol id="ph-heart-straight" viewBox="0 0 256 256"><path d="M221.6,58.38a56.06,56.06,0,0,0-79.12-.08L128,71.78,113.52,58.3a56,56,0,0,0-79.15,79.25l89.36,90.66a6,6,0,0,0,8.54,0l89.33-90.62a56,56,0,0,0,0-79.21Zm-8.52,70.75L128,215.45,42.89,129.1a44,44,0,0,1,62.22-62.23,1.07,1.07,0,0,0,.16.14l18.64,17.36a6,6,0,0,0,8.18,0L150.73,67a1.07,1.07,0,0,0,.16-.14,44,44,0,1,1,62.19,62.26Z"/></symbol>
+    <symbol id="ph-house-line" viewBox="0 0 256 256"><path d="M240,210H222V131.17l5.76,5.76a6,6,0,0,0,8.48-8.49L137.9,30.09a14,14,0,0,0-19.8,0L19.76,128.44a6,6,0,0,0,8.48,8.49L34,131.17V210H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM46,119.17l80.58-80.59a2,2,0,0,1,2.84,0L210,119.17V210H158V152a6,6,0,0,0-6-6H104a6,6,0,0,0-6,6v58H46ZM146,210H110V158h36Z"/></symbol>
+    <symbol id="ph-tree-palm" viewBox="0 0 256 256"><path d="M236.35,54.61a64.87,64.87,0,0,0-94.85,0A70,70,0,0,0,128,75a70,70,0,0,0-13.5-20.37,64.87,64.87,0,0,0-94.85,0,6,6,0,0,0,2,9.64l61.83,26.9c-1.85.34-3.7.74-5.54,1.23a69.42,69.42,0,0,0-42.5,32.39,68.65,68.65,0,0,0-7,52.79,6,6,0,0,0,3.86,4.12,6.1,6.1,0,0,0,1.93.32,6,6,0,0,0,3.64-1.23L122,116.64V224a6,6,0,0,0,12,0V116.64l84.17,64.13a6,6,0,0,0,3.64,1.23,6.1,6.1,0,0,0,1.93-.32,6,6,0,0,0,3.86-4.12,68.65,68.65,0,0,0-7-52.79,69.42,69.42,0,0,0-42.5-32.39c-1.84-.49-3.69-.89-5.54-1.23l61.83-26.9a6,6,0,0,0,2-9.64ZM67.08,46a53.16,53.16,0,0,1,38.73,16.88,58.77,58.77,0,0,1,15.47,31.65L34.93,57A52.59,52.59,0,0,1,67.08,46ZM38.29,165.33a56.77,56.77,0,0,1,7.48-34.53A57.58,57.58,0,0,1,81,104a58.79,58.79,0,0,1,15.12-2,57.67,57.67,0,0,1,20.43,3.73ZM210.23,130.8a56.77,56.77,0,0,1,7.48,34.53l-78.24-59.61a58.24,58.24,0,0,1,70.76,25.08ZM134.72,94.53a58.77,58.77,0,0,1,15.47-31.65A53.16,53.16,0,0,1,188.92,46a52.59,52.59,0,0,1,32.15,11Z"/></symbol>
+    <symbol id="ph-whatsapp-logo" viewBox="0 0 256 256"><path d="M186.68,146.63l-32-16a6,6,0,0,0-6,.38L133,141.46A42.49,42.49,0,0,1,114.54,123L125,107.33a6,6,0,0,0,.38-6l-16-32A6,6,0,0,0,104,66a38,38,0,0,0-38,38,86.1,86.1,0,0,0,86,86,38,38,0,0,0,38-38A6,6,0,0,0,186.68,146.63ZM152,178a74.09,74.09,0,0,1-74-74,26,26,0,0,1,22.42-25.75l12.66,25.32-10.39,15.58a6,6,0,0,0-.54,5.63,54.43,54.43,0,0,0,29.07,29.07,6,6,0,0,0,5.63-.54l15.58-10.39,25.32,12.66A26,26,0,0,1,152,178ZM128,26A102,102,0,0,0,38.35,176.69L26.73,211.56a14,14,0,0,0,17.71,17.71l34.87-11.62A102,102,0,1,0,128,26Zm0,192a90,90,0,0,1-45.06-12.08,6.09,6.09,0,0,0-3-.81,6.2,6.2,0,0,0-1.9.31L40.65,217.88a2,2,0,0,1-2.53-2.53L50.58,178a6,6,0,0,0-.5-4.91A90,90,0,1,1,128,218Z"/></symbol>
     <symbol id="sb-star" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
     <symbol id="sb-google-g" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol>
   </svg>
@@ -3784,7 +3795,7 @@
         <h2 class="sb-cta-mid__title">Pronto pra cotar?</h2>
         <p class="sb-cta-mid__lead">A gente cota com as 12 seguradoras numa conversa só e responde em até 1 hora útil.</p>
         <a class="sb-cta-mid__btn" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
-          <i class="ph-light ph-whatsapp-logo" aria-hidden="true"></i>
+          <i class="ph" aria-hidden="true"><svg><use href="#ph-whatsapp-logo"/></svg></i>
           Falar no WhatsApp
         </a>
       </div>
@@ -3814,35 +3825,35 @@
 
         <div class="sb-offer__grid sb-carousel" data-reveal-stagger role="region" aria-roledescription="carousel" aria-label="Tipos de seguro oferecidos">
           <article class="sb-coverage-card" data-reveal>
-            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-car-simple"></i></span>
+            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph"><svg><use href="#ph-car-simple"/></svg></i></span>
             <h3 class="sb-coverage-card__title">Seguro Auto</h3>
             <p class="sb-coverage-card__desc">Cobre o seu carro, danos a terceiros e quem viaja com você. A gente compara as condições das seguradoras para o seu perfil.</p>
-            <a class="sb-coverage-card__fipe" href="https://veiculos.fipe.org.br/" target="_blank" rel="noopener noreferrer" aria-label="Consultar Tabela FIPE (abre em nova aba)">Consultar Tabela FIPE <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+            <a class="sb-coverage-card__fipe" href="https://veiculos.fipe.org.br/" target="_blank" rel="noopener noreferrer" aria-label="Consultar Tabela FIPE (abre em nova aba)">Consultar Tabela FIPE <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a>
             <div class="sb-coverage-card__actions">
               <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes do Seguro Auto">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="card">Cotação online <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a>
             </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
-            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-house-line"></i></span>
+            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph"><svg><use href="#ph-house-line"/></svg></i></span>
             <h3 class="sb-coverage-card__title">Seguro Residencial</h3>
             <p class="sb-coverage-card__desc">Cobre incêndio, roubo, danos elétricos e eventos da natureza na sua casa. Inclui assistência 24h.</p>
             <div class="sb-coverage-card__actions">
               <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes do Seguro Residencial">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/b47c6SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro residencial (abre em nova aba)" data-cotacao-ramo="residencia" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/b47c6SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro residencial (abre em nova aba)" data-cotacao-ramo="residencia" data-cotacao-origem="card">Cotação online <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a>
             </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
-            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-heart-straight"></i></span>
+            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph"><svg><use href="#ph-heart-straight"/></svg></i></span>
             <h3 class="sb-coverage-card__title">Seguro de Vida</h3>
             <p class="sb-coverage-card__desc">Garante uma indenização para quem você escolher. Também pode cobrir invalidez e doenças graves.</p>
             <div class="sb-coverage-card__actions">
               <a class="sb-coverage-card__link" href="#contato" aria-label="Ver detalhes do Seguro de Vida">Ver detalhes <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/9bbccSANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro de vida (abre em nova aba)" data-cotacao-ramo="vida" data-cotacao-origem="card">Cotação online <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a>
+              <a class="sb-coverage-card__quote" href="https://formularioweb.com.br/9bbccSANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro de vida (abre em nova aba)" data-cotacao-ramo="vida" data-cotacao-origem="card">Cotação online <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a>
             </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
-            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-buildings"></i></span>
+            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph"><svg><use href="#ph-buildings"/></svg></i></span>
             <h3 class="sb-coverage-card__title">Seguro Empresarial</h3>
             <p class="sb-coverage-card__desc">Cobre o patrimônio da empresa, lucros cessantes e responsabilidade civil.</p>
             <div class="sb-coverage-card__actions">
@@ -3850,7 +3861,7 @@
             </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
-            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-building-apartment"></i></span>
+            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph"><svg><use href="#ph-building-apartment"/></svg></i></span>
             <h3 class="sb-coverage-card__title">Seguro de Condomínio</h3>
             <p class="sb-coverage-card__desc">O seguro básico é obrigatório por lei (art. 1.346 do Código Civil). Dá para ampliar a cobertura para o prédio inteiro.</p>
             <div class="sb-coverage-card__actions">
@@ -3858,7 +3869,7 @@
             </div>
           </article>
           <article class="sb-coverage-card" data-reveal>
-            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph-light ph-tree-palm"></i></span>
+            <span class="sb-coverage-card__icon" aria-hidden="true"><i class="ph"><svg><use href="#ph-tree-palm"/></svg></i></span>
             <h3 class="sb-coverage-card__title">Previdência Privada</h3>
             <p class="sb-coverage-card__desc">Para guardar dinheiro para a aposentadoria. A gente ajuda você a escolher entre PGBL e VGBL.</p>
             <div class="sb-coverage-card__actions">
@@ -4271,11 +4282,11 @@
         <h2 id="contact-title" class="sb-contact__title" data-split-lines>A gente responde <em>rápido</em>.</h2>
         <p class="sb-contact__lead" data-reveal data-reveal-delay="600">Conta o que você precisa proteger. Em poucos minutos a gente começa a cotar com as 12 seguradoras parceiras.</p>
         <a class="sb-contact__cta" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener" data-reveal data-reveal-delay="750">
-          <i class="ph-light ph-whatsapp-logo" aria-hidden="true"></i>
+          <i class="ph" aria-hidden="true"><svg><use href="#ph-whatsapp-logo"/></svg></i>
           Conversar pelo WhatsApp
         </a>
         <p class="sb-contact__note" data-reveal data-reveal-delay="900">
-          <i class="ph-light ph-clock" aria-hidden="true"></i>
+          <i class="ph" aria-hidden="true"><svg><use href="#ph-clock"/></svg></i>
           Resposta em até 1 hora útil · Segunda a sexta, 9h às 18h
         </p>
         <p class="sb-contact__alt" data-reveal data-reveal-delay="1050">
@@ -4286,9 +4297,9 @@
           <h3 class="sb-contact__quote-title">Prefere preencher?</h3>
           <p class="sb-contact__quote-text">Envie seus dados para cotação de seguro auto, residência ou vida. Nossa equipe retorna com as opções.</p>
           <ul class="sb-contact__quote-links">
-            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="contato">Auto <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a><span class="sb-contact__quote-sep" aria-hidden="true">·</span></li>
-            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/b47c6SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro residencial (abre em nova aba)" data-cotacao-ramo="residencia" data-cotacao-origem="contato">Residência <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a><span class="sb-contact__quote-sep" aria-hidden="true">·</span></li>
-            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/9bbccSANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro de vida (abre em nova aba)" data-cotacao-ramo="vida" data-cotacao-origem="contato">Vida <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a></li>
+            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/34b07SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro auto (abre em nova aba)" data-cotacao-ramo="auto" data-cotacao-origem="contato">Auto <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a><span class="sb-contact__quote-sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/b47c6SANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro residencial (abre em nova aba)" data-cotacao-ramo="residencia" data-cotacao-origem="contato">Residência <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a><span class="sb-contact__quote-sep" aria-hidden="true">·</span></li>
+            <li><a class="sb-contact__quote-link" href="https://formularioweb.com.br/9bbccSANTA" target="_blank" rel="noopener noreferrer" aria-label="Pedir cotação online de seguro de vida (abre em nova aba)" data-cotacao-ramo="vida" data-cotacao-origem="contato">Vida <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a></li>
           </ul>
         </div>
         <a class="sb-instagram-link"
@@ -4349,7 +4360,7 @@
         </ul>
         <h3>Links úteis</h3>
         <ul>
-          <li><a href="https://veiculos.fipe.org.br/" target="_blank" rel="noopener noreferrer" aria-label="Consultar Tabela FIPE (abre em nova aba)">Consultar Tabela FIPE <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a></li>
+          <li><a href="https://veiculos.fipe.org.br/" target="_blank" rel="noopener noreferrer" aria-label="Consultar Tabela FIPE (abre em nova aba)">Consultar Tabela FIPE <i class="ph" aria-hidden="true"><svg><use href="#ph-arrow-up-right"/></svg></i></a></li>
         </ul>
       </div>
     </div>
@@ -4364,7 +4375,7 @@
        FLOATING WHATSAPP
        ============================================================ -->
   <a class="sb-whats-float" id="whats-float" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp com a Santa Branca Seguros">
-    <i class="ph-light ph-whatsapp-logo" aria-hidden="true"></i>
+    <i class="ph" aria-hidden="true"><svg><use href="#ph-whatsapp-logo"/></svg></i>
   </a>
 
   <!-- ============================================================
