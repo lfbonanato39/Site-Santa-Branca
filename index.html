@@ -465,7 +465,9 @@
     }
     .sb-header.is-scrolled,
     html.sb-scrolled-init .sb-header {
-      background: rgba(245,241,232,0.92);
+      /* Creme sólido = mesma cor da placa da logo (assets/logo-header), que
+         assim fica invisível no header rolado. Era 92% de opacidade. */
+      background: var(--color-papiro);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 1px 0 var(--cream-line);
@@ -474,27 +476,26 @@
       display: flex; align-items: center; justify-content: space-between;
       height: var(--header-h); gap: 16px;
     }
+    /* A placa creme (fundo, padding 8/14 e raio 4px) está dentro de
+       assets/logo-header.{webp,png}; aqui fica só a sombra do topo. */
     .sb-header__brand {
-      display: flex; align-items: center; gap: 12px; text-decoration: none;
-      padding: 8px 14px;
-      background: rgba(245, 241, 232, 0.96);
+      display: flex; align-items: center; text-decoration: none;
       border-radius: var(--r-md);
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-      transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease), padding var(--dur) var(--ease);
+      transition: box-shadow var(--dur) var(--ease);
     }
     .sb-header.is-scrolled .sb-header__brand,
     html.sb-scrolled-init .sb-header__brand {
-      background: transparent;
       box-shadow: none;
-      padding: 0;
+      margin-left: calc(-14px * 44 / 48);              /* compensa o padding da placa: logo no mesmo x de antes */
     }
     .sb-header__logo {
-      height: 48px; width: auto; display: block;
+      height: 64px; width: auto; max-width: none; display: block;   /* logo 48px + padding 8px */
       transition: height var(--dur-slow) var(--ease), opacity var(--dur) var(--ease);
     }
     .sb-header.is-scrolled .sb-header__logo,
     html.sb-scrolled-init .sb-header__logo {
-      height: 44px;
+      height: calc(44px * 64 / 48);                    /* logo continua com 44px */
     }
     .sb-header__nav { display: flex; gap: 36px; align-items: center; }
     .sb-nav-link {
@@ -3408,7 +3409,12 @@
   <header class="sb-header" id="site-header">
     <div class="container sb-header__inner">
       <a href="#" class="sb-header__brand" aria-label="Santa Branca Seguros, página inicial">
-        <img class="sb-header__logo" src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" />
+        <!-- Logo com a placa creme e os cantos já embutidos na imagem: o modo
+             escuro do Samsung Internet escurecia o fundo creme feito em CSS. -->
+        <picture>
+          <source srcset="assets/logo-header.webp" type="image/webp" />
+          <img class="sb-header__logo" src="assets/logo-header.png" width="128" height="64" alt="Santa Branca Seguros" />
+        </picture>
       </a>
       <nav class="sb-header__nav" aria-label="Navegação principal">
         <a class="sb-nav-link" href="#sobre">Sobre</a>
