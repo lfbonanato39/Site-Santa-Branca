@@ -41,16 +41,11 @@
   <link rel="icon" type="image/png" href="assets/logo-santa-branca.png" />
   <link rel="apple-touch-icon" href="assets/logo-santa-branca.png" />
 
-  <!-- Critical CSS inline — anti-FOUC + cor de fundo certa antes do CSS principal carregar.
-       O JS adiciona body.is-ready no DOMContentLoaded pra fade-in suave. -->
+  <!-- Critical CSS inline: cor de fundo certa antes do CSS principal carregar.
+       A página nunca fica invisível esperando JS (sem fade-in no <body>). -->
   <style>
     :root { --color-forest-deep: #1B4D44; --color-papiro: #F5F1E8; color-scheme: only light; }
     html, body { background: var(--color-forest-deep); margin: 0; }
-    body { opacity: 0; transition: opacity 0.4s ease-out; }
-    body.is-ready { opacity: 1; }
-    @media (prefers-reduced-motion: reduce) {
-      body { opacity: 1; transition: none; }
-    }
   </style>
 
   <!-- Fontes — Institucional Moderno (WSJ/FT/Reuters)
@@ -594,10 +589,12 @@
       40% { opacity: 1; transform: scale(1); }
       100% { opacity: 1; transform: scale(1); }
     }
-    /* No-JS / reduced-motion: esconde loader imediatamente */
-    .no-js .sb-loader,
+    /* Sem JS o loader não aparece (nada o esconderia depois);
+       com movimento reduzido também não. */
+    .sb-loader { display: none; }
+    .js-on .sb-loader { display: flex; }
     @media (prefers-reduced-motion: reduce) {
-      .sb-loader { display: none; }
+      .js-on .sb-loader { display: none; }
     }
 
     /* Body locked durante loading */
@@ -829,7 +826,6 @@
       display: grid; grid-template-columns: repeat(4, auto);
       gap: var(--sp-8);
       margin: var(--sp-8) 0 var(--sp-8);
-      opacity: 0; transform: translateY(16px);
     }
     /* Prefix "+" antes do número (4º ticker: +1.000) — espelha o suffix existente */
     .sb-hero__ticker-suffix--prefix {
@@ -898,10 +894,7 @@
       width: 80px; height: 22px;
       color: var(--color-champagne);
       margin-bottom: 18px;
-      opacity: 0; transform: translateY(8px);
-    }
-    .sb-hero__eyebrow-wrap {
-      opacity: 0; transform: translateY(8px);
+      opacity: 0.9;
     }
 
     /* H1 — Editorial Newsreader, escala fluida, stagger reveal por palavra (via JS) */
@@ -917,12 +910,7 @@
       text-wrap: balance;
       font-feature-settings: "ss01", "kern" 1, "liga" 1;
     }
-    .sb-hero__title .word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(20px);
-      will-change: opacity, transform;
-    }
+    .sb-hero__title .word { display: inline-block; }
     .sb-hero__title em {
       font-style: normal;
       font-weight: 600;
@@ -944,13 +932,17 @@
       max-width: 560px; margin-bottom: 2.5rem;
       color: rgba(245,241,232,0.88);
       font-size: var(--fs-lg); line-height: var(--lh-relaxed);
-      opacity: 0; transform: translateY(8px);
     }
     .sb-hero__ctas {
       display: flex; gap: 14px; margin-bottom: var(--sp-12);
       flex-wrap: wrap;
     }
-    .sb-hero__ctas > * { opacity: 0; transform: translateY(8px); }
+    /* Hero visível desde o primeiro quadro (o texto do hero é o LCP).
+       Com JS (html.js-on, aplicado antes da primeira pintura) os blocos
+       nascem levemente deslocados e a timeline anima só o movimento. */
+    .js-on .sb-hero__motif, .js-on .sb-hero__eyebrow-wrap, .js-on .sb-hero__lead,
+    .js-on .sb-hero__ctas > *, .js-on .sb-hero__seal { transform: translateY(8px); }
+    .js-on .sb-hero__title, .js-on .sb-hero__tickers { transform: translateY(16px); }
 
     /* CTA primário — editorial cream, com shine sweep no hover */
     .sb-hero__cta-whats {
@@ -1011,7 +1003,6 @@
       padding: 0;
       margin-top: var(--sp-8);
       flex-wrap: wrap;
-      opacity: 0; transform: translateY(8px);
       position: relative;
     }
     .sb-hero__seal-rule {
@@ -1042,7 +1033,7 @@
     /* Reduced motion — tudo aparece instantaneamente */
     @media (prefers-reduced-motion: reduce) {
       .sb-hero__motif, .sb-hero__eyebrow-wrap,
-      .sb-hero__title .word, .sb-hero__lead,
+      .sb-hero__title, .sb-hero__title .word, .sb-hero__lead,
       .sb-hero__ctas, .sb-hero__ctas > *,
       .sb-hero__tickers, .sb-hero__seal, .sb-hero__art {
         opacity: 1 !important; transform: none !important; animation: none !important;
@@ -1110,8 +1101,9 @@
       /* overflow: hidden removido — quebrava position:sticky no figure interno.
          O ::before do curtain já é constrangido pelo position:absolute + inset:0
          (e adicionalmente pelo clip-path), então não vaza sem o overflow. */
-      --curtain-bottom: 100%;
+      --curtain-bottom: 0%;           /* sem JS: creme aberto, texto legível */
     }
+    .js-on .sb-about { --curtain-bottom: 100%; }   /* com JS: cortina desce no scroll */
     .sb-about::before {
       content: '';
       position: absolute; inset: 0;
@@ -1161,9 +1153,9 @@
     }
     /* Esconde a headline enquanto o split por linhas não roda — evita flash
        entre o load das fontes e a aplicação do gsap.set inicial. */
-    .sb-about__manifest[data-split-lines] { opacity: 0; }
+    .js-on .sb-about__manifest[data-split-lines] { opacity: 0; }
     @media (prefers-reduced-motion: reduce) {
-      .sb-about__manifest[data-split-lines] { opacity: 1; }
+      .js-on .sb-about__manifest[data-split-lines] { opacity: 1; }
     }
 
     /* ============================================================
@@ -1612,7 +1604,7 @@
       display: block;
       will-change: transform, opacity;
     }
-    .sb-why__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-why__title[data-split-lines] { opacity: 0; }
 
     .sb-why__list {
       list-style: none;
@@ -1685,7 +1677,7 @@
       .sb-why__list { grid-template-columns: 1fr; row-gap: 3rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .sb-why__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-why__title[data-split-lines] { opacity: 1; }
       .sb-why__title .line-inner {
         transform: none !important;
         opacity: 1 !important;
@@ -1747,7 +1739,7 @@
       display: block;
       will-change: transform, opacity;
     }
-    .sb-offer__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-offer__title[data-split-lines] { opacity: 0; }
 
     /* Grid 3x2 (desktop) → 2 col (tablet) → 1 col (mobile) */
     .sb-offer__grid {
@@ -1950,7 +1942,7 @@
     .sb-offer__also-prompt:hover { color: var(--color-text-on-forest); }
 
     @media (prefers-reduced-motion: reduce) {
-      .sb-offer__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-offer__title[data-split-lines] { opacity: 1; }
       .sb-offer__title .line-inner {
         transform: none !important;
         opacity: 1 !important;
@@ -2000,7 +1992,7 @@
     }
     .sb-process__title .line-mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
     .sb-process__title .line-inner { display: block; will-change: transform, opacity; }
-    .sb-process__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-process__title[data-split-lines] { opacity: 0; }
 
     /* Steps grid + linha conectora horizontal.
        O track é o containing block do conector; o <ol> segue relative
@@ -2108,7 +2100,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .sb-process__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-process__title[data-split-lines] { opacity: 1; }
       .sb-process__title .line-inner { transform: none !important; opacity: 1 !important; }
       .sb-process__connector-fill { transform: none !important; }
       .sb-process__step.is-active .sb-process__circle,
@@ -2160,7 +2152,7 @@
     }
     .sb-testimonials__title .line-mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
     .sb-testimonials__title .line-inner { display: block; will-change: transform, opacity; }
-    .sb-testimonials__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-testimonials__title[data-split-lines] { opacity: 0; }
     .sb-testimonials__lead {
       font-family: var(--font-sans);
       font-size: 17px;
@@ -2267,7 +2259,7 @@
     .sb-testimonials__more-btn:hover .arrow { transform: translateX(4px); }
 
     @media (prefers-reduced-motion: reduce) {
-      .sb-testimonials__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-testimonials__title[data-split-lines] { opacity: 1; }
       .sb-testimonials__title .line-inner { transform: none !important; opacity: 1 !important; }
     }
 
@@ -2318,7 +2310,7 @@
     }
     .sb-insurers__title .line-mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
     .sb-insurers__title .line-inner { display: block; will-change: transform, opacity; }
-    .sb-insurers__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-insurers__title[data-split-lines] { opacity: 0; }
 
     /* Marquee horizontal infinito — track com 2 sets de 12 logos.
        translateX(-50%) move 1 set inteiro, criando loop perfeito.
@@ -2378,7 +2370,7 @@
       .sb-marquee__logo { height: 45px; max-width: 110px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .sb-insurers__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-insurers__title[data-split-lines] { opacity: 1; }
       .sb-insurers__title .line-inner { transform: none !important; opacity: 1 !important; }
       .sb-marquee {
         mask-image: none;
@@ -2437,7 +2429,7 @@
     }
     .sb-loc__title .line-mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
     .sb-loc__title .line-inner { display: block; will-change: transform, opacity; }
-    .sb-loc__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-loc__title[data-split-lines] { opacity: 0; }
 
     .sb-loc__inner {
       display: grid;
@@ -2561,7 +2553,7 @@
       .sb-loc__inner { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .sb-loc__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-loc__title[data-split-lines] { opacity: 1; }
       .sb-loc__title .line-inner { transform: none !important; opacity: 1 !important; }
     }
 
@@ -2726,7 +2718,7 @@
     }
     .sb-contact__title .line-mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
     .sb-contact__title .line-inner { display: block; will-change: transform, opacity; }
-    .sb-contact__title[data-split-lines] { opacity: 0; }
+    .js-on .sb-contact__title[data-split-lines] { opacity: 0; }
 
     .sb-contact__lead {
       font-family: var(--font-sans);
@@ -2854,7 +2846,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .sb-contact__title[data-split-lines] { opacity: 1; }
+      .js-on .sb-contact__title[data-split-lines] { opacity: 1; }
       .sb-contact__title .line-inner { transform: none !important; opacity: 1 !important; }
       .sb-contact__cta::before { display: none; }
     }
@@ -3493,19 +3485,19 @@
           <!-- TICKERS — números animam de 0 ao alvo quando entram viewport -->
           <div class="sb-hero__tickers" role="group" aria-label="Estatísticas da corretora">
             <div class="sb-hero__ticker">
-              <span><span class="sb-hero__ticker-num" data-count="12">0</span></span>
+              <span><span class="sb-hero__ticker-num" data-count="12">12</span></span>
               <span class="sb-hero__ticker-label">Seguradoras parceiras</span>
             </div>
             <div class="sb-hero__ticker">
-              <span><span class="sb-hero__ticker-num" data-count="30">0</span><span class="sb-hero__ticker-suffix">+</span></span>
+              <span><span class="sb-hero__ticker-num" data-count="30">30</span><span class="sb-hero__ticker-suffix">+</span></span>
               <span class="sb-hero__ticker-label">Anos de mercado</span>
             </div>
             <div class="sb-hero__ticker">
-              <span><span class="sb-hero__ticker-num" data-count="3">0</span></span>
+              <span><span class="sb-hero__ticker-num" data-count="3">3</span></span>
               <span class="sb-hero__ticker-label">Gerações da família</span>
             </div>
             <div class="sb-hero__ticker">
-              <span><span class="sb-hero__ticker-suffix sb-hero__ticker-suffix--prefix">+</span><span class="sb-hero__ticker-num" data-count="1000">0</span></span>
+              <span><span class="sb-hero__ticker-suffix sb-hero__ticker-suffix--prefix">+</span><span class="sb-hero__ticker-num" data-count="1000">1.000</span></span>
               <span class="sb-hero__ticker-label">Clientes atendidos</span>
             </div>
           </div>
@@ -4677,10 +4669,6 @@
       var IS_TOUCH = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       var IS_DESKTOP = window.matchMedia('(min-width: 1025px)').matches && window.matchMedia('(hover: hover)').matches;
 
-      /* Critical CSS desbloqueio: revela <body> com fade-in 0.4s
-         Evita flash branco entre HTML e CSS principal carregar. */
-      document.body.classList.add('is-ready');
-
       /* ============================================================
          LOADER — esconde após 1.2s (ou imediato se reduced-motion)
          A timeline cinematográfica do hero (atribuída por initHero abaixo)
@@ -4947,6 +4935,7 @@
         var heroEls = {
           motif:   hero.querySelector('.sb-hero__motif'),
           eyebrow: hero.querySelector('.sb-hero__eyebrow-wrap'),
+          title:   hero.querySelector('.sb-hero__title'),
           words:   hero.querySelectorAll('.sb-hero__title .word'),
           lead:    hero.querySelector('.sb-hero__lead'),
           ctas:    hero.querySelectorAll('.sb-hero__ctas > *'),
@@ -4959,15 +4948,10 @@
 
         /* Reduced motion: tudo aparece instantâneo, sem ScrollTrigger. */
         if (REDUCED_MOTION || !HAS_GSAP) {
-          [heroEls.motif, heroEls.eyebrow, heroEls.lead, heroEls.tickers, heroEls.seal, heroEls.art].forEach(function (el) {
-            if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+          [heroEls.motif, heroEls.eyebrow, heroEls.title, heroEls.lead, heroEls.tickers, heroEls.seal, heroEls.art].forEach(function (el) {
+            if (el) { el.style.opacity = ''; el.style.transform = 'none'; }
           });
-          heroEls.words.forEach(function (w) { w.style.opacity = '1'; w.style.transform = 'none'; });
-          heroEls.ctas.forEach(function (c) { c.style.opacity = '1'; c.style.transform = 'none'; });
-          /* Ainda assim, contadores precisam mostrar o valor final */
-          hero.querySelectorAll('.sb-hero__ticker-num[data-count]').forEach(function (el) {
-            el.textContent = (parseInt(el.getAttribute('data-count'), 10) || 0).toLocaleString('pt-BR');
-          });
+          heroEls.ctas.forEach(function (c) { c.style.transform = 'none'; });
           return;
         }
 
@@ -4981,48 +4965,34 @@
           paused: true
         });
         heroEntranceTimeline = tl;
+        /* Só movimento (y → 0): o texto já está visível desde o primeiro quadro */
         if (heroEls.motif) {
-          tl.to(heroEls.motif, { opacity: 0.9, y: 0, duration: 0.5 }, 0);
+          tl.to(heroEls.motif, { y: 0, duration: 0.5 }, 0);
         }
         if (heroEls.eyebrow) {
-          tl.to(heroEls.eyebrow, { opacity: 1, y: 0, duration: 0.6 }, 0.15);
+          tl.to(heroEls.eyebrow, { y: 0, duration: 0.6 }, 0.05);
         }
-        if (heroEls.words.length) {
-          tl.to(heroEls.words, { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.30);
+        if (heroEls.title) {
+          tl.to(heroEls.title, { y: 0, duration: 0.7 }, 0.1);
         }
         if (heroEls.lead) {
-          tl.to(heroEls.lead, { opacity: 1, y: 0, duration: 0.5 }, 0.85);
+          tl.to(heroEls.lead, { y: 0, duration: 0.6 }, 0.15);
         }
         if (heroEls.ctas.length) {
-          tl.to(heroEls.ctas, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, 1.0);
+          tl.to(heroEls.ctas, { y: 0, duration: 0.5, stagger: 0.08 }, 0.2);
         }
         if (heroEls.tickers) {
-          tl.to(heroEls.tickers, { opacity: 1, y: 0, duration: 0.5 }, 1.1);
+          tl.to(heroEls.tickers, { y: 0, duration: 0.5 }, 0.25);
         }
         if (heroEls.seal) {
-          tl.to(heroEls.seal, { opacity: 1, y: 0, duration: 0.5 }, 1.2);
+          tl.to(heroEls.seal, { y: 0, duration: 0.5 }, 0.3);
         }
         if (heroEls.art) {
           tl.to(heroEls.art, { opacity: 1, y: 0, scale: 1, duration: 1.0 }, 0.2);
         }
 
-        /* --- Count-up dos tickers (Onda C item 3) ---
-           Removido ScrollTrigger: hero é o topo da página, tickers SEMPRE
-           visíveis no load. Antes o ST esperava scroll event pra computar
-           visibilidade, criando flash de "0" estático. Agora a animação
-           encaixa na entrance timeline (tickers fadeam em t=1.1s) — count
-           dispara em t=1.4s pra ser percebido como parte do mesmo gesto. */
-        hero.querySelectorAll('.sb-hero__ticker-num[data-count]').forEach(function (el) {
-          var target = parseInt(el.getAttribute('data-count'), 10) || 0;
-          var counter = { val: 0 };
-          tl.to(counter, {
-            val: target,
-            duration: 1.8,
-            ease: 'power2.out',
-            /* pt-BR: 1000 aparece como "1.000" */
-            onUpdate: function () { el.textContent = Math.round(counter.val).toLocaleString('pt-BR'); }
-          }, 1.4);
-        });
+        /* Contadores: os números finais já vêm no HTML (sem count-up a partir
+           de 0, para ficarem corretos desde o primeiro quadro e sem JS). */
 
         /* --- Parallax scrub (image) + fade-out da seção (apenas ≥768px) --- */
         var IS_DESKTOP_PARALLAX = window.matchMedia('(min-width: 768px)').matches;
