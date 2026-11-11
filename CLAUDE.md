@@ -63,3 +63,14 @@ Seção `#depoimentos` com 13 avaliações reais do Google, todas 5 estrelas. Pe
 - **Cor do avatar:** fixa por pessoa. Classe `sb-review--cN`, com N = (soma dos códigos das letras do nome em minúsculas, sem acento) mod 8 + 1. Paleta em `.sb-review--c1` a `--c8` (contraste com branco ≥ 5,9:1).
 - **Foto opcional:** salvar `assets/depoimentos/<nome>.webp` (ex.: `andressa-d.webp`, 80×80) e adicionar `data-foto="assets/depoimentos/andressa-d.webp"` no `.sb-review__avatar`. Sem o atributo, aparece a inicial. Não baixar nem linkar fotos de perfil do Google.
 - Celular: carrossel com altura acompanhando o card visível (`initCarousel(..., { autoHeight: true })`). Desktop: mural em colunas.
+
+## Performance (não desfazer sem medir)
+
+Meta no celular: PageSpeed Performance ≥ 90, LCP < 2,5 s, página < 1,5 MB. Medir com 3 rodadas e usar a mediana (o PageSpeed reaproveita a análise da mesma URL por alguns minutos: use `?psi=<algo>` para forçar análise nova).
+
+- **Nada fica invisível esperando JS.** O hero (texto = LCP) aparece no primeiro quadro; com `html.js-on` ele nasce deslocado e o GSAP anima só o `y`. Títulos `[data-split-lines]`, a cortina do Sobre e o loader só se escondem com `.js-on`. Sem JS o site fica 100% legível.
+- **Loader:** só no desktop, 300 ms + 300 ms de fade, controlado por script inline logo após `#sb-loader`.
+- **Fontes:** `assets/fonts/` (woff2 variável, só latin); preload só da Newsreader. Sem Google Fonts.
+- **Ícones:** Phosphor Light em `<symbol>` no sprite do topo do `<body>` (`<i class="ph"><svg><use href="#ph-nome"/></svg></i>`). Ícone novo: copiar o SVG de `@phosphor-icons/core/assets/light/<nome>-light.svg` para o sprite.
+- **Vídeo do hero:** fontes entram depois do `load`; celular usa `hero-bg-mobile.{webm,mp4}` (≤ 800 KB); Save-Data ou 2g/3g fica só o pôster WebP.
+- **Imagens:** foto do escritório e logos PNG grandes com `srcset`/`sizes` em WebP.
