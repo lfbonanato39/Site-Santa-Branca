@@ -70,6 +70,7 @@ Meta no celular: PageSpeed Performance ≥ 90, LCP < 2,5 s, página < 1,5 MB. Me
 
 - **Nada fica invisível esperando JS.** O hero (texto = LCP) aparece no primeiro quadro; com `html.js-on` ele nasce deslocado e o GSAP anima só o `y`. Títulos `[data-split-lines]`, a cortina do Sobre e o loader só se escondem com `.js-on`. Sem JS o site fica 100% legível.
 - **Loader:** só no desktop, 300 ms + 300 ms de fade, controlado por script inline logo após `#sb-loader`.
+- **Bibliotecas JS:** GSAP 3.12.5, ScrollTrigger 3.12.5 e Lenis 1.1.20 em `assets/js/vendor/`, com a versão no nome do arquivo (cache `immutable` de 1 ano pela regra `/assets/` do `vercel.json`). Nenhuma CDN. Ao atualizar, baixar o arquivo do npm, conferir o hash e trocar o nome.
 - **Fontes:** `assets/fonts/` (woff2 variável, só latin); preload só da Newsreader. Sem Google Fonts.
 - **Ícones:** Phosphor Light em `<symbol>` no sprite do topo do `<body>` (`<i class="ph"><svg><use href="#ph-nome"/></svg></i>`). Ícone novo: copiar o SVG de `@phosphor-icons/core/assets/light/<nome>-light.svg` para o sprite.
 - **Vídeo do hero:** fontes entram depois do `load`; celular usa `hero-bg-mobile.{webm,mp4}` (≤ 800 KB); Save-Data ou 2g/3g fica só o pôster WebP.

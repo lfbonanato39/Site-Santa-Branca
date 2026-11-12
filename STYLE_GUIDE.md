@@ -2,7 +2,7 @@
 
 **Padrão visual:** Institucional Verde Mineiro (reforma 2026-05 — pré: Premium Editorial Cinematográfico)
 **Referências:** wsj.com · ft.com · reuters.com · santabranca.com.br (marca histórica)
-**Stack:** HTML/CSS/JS puro · Lenis · GSAP + ScrollTrigger (todos via CDN)
+**Stack:** HTML/CSS/JS puro · Lenis · GSAP + ScrollTrigger (hospedados em `assets/js/vendor/`, sem CDN)
 
 > Este arquivo é a fonte da verdade visual e técnica. Consulte antes de editar tokens, animações ou tipografia.
 
