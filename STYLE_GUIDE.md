@@ -124,7 +124,7 @@ Itens que dependem de input/decisão do cliente antes do site ir pra produção:
 - [ ] **Confirmar marcos da timeline** (datas e descrições de 1998, 2012, 2019; nomes Washington e Rodrigo já confirmados)
 - [ ] **Substituir 10 depoimentos fictícios** por reais — pedir autorização LGPD de cada cliente para uso de nome real
 - [ ] **Validar especialidades das 11 seguradoras** nos tooltips (descrições atuais são genéricas baseadas em conhecimento público)
-- [ ] **Criar `og-image.jpg` 1200×630** (foto fachada com vitral + logo overlay + tagline)
+- [x] **Imagem de compartilhamento 1200×630**: `assets/og-image-v2.jpg` (paleta verde, logo, frase do hero e "Desde 1994 · Atendimento em todo o Brasil")
 - [ ] **Logos oficiais SVG das 11 seguradoras** (substituir nomes em texto pelos logos com `filter: grayscale` no estado base)
 - [ ] **Revisar `privacidade.html` e `termos.html`** com advogado antes do go-live
 - [ ] **GA4_ID, GADS_ID, META_PIXEL_ID** — colar IDs reais (atualmente placeholders `__GA4_ID__` etc.)
