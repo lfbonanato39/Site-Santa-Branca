@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1B4D44" />
+  <meta name="color-scheme" content="only light" /><!-- bloqueia modo escuro forçado -->
+  <!-- Página de erro: fora do Google -->
+  <meta name="robots" content="noindex" />
+
+  <title>Página não encontrada | Santa Branca Seguros</title>
+  <meta name="description" content="O endereço que você abriu não existe no site da Santa Branca Seguros." />
+
+  <!-- Caminhos absolutos (/assets/...): esta página é servida em qualquer
+       URL inexistente, inclusive em "subpastas" que não existem. -->
+  <link rel="icon" type="image/png" href="/assets/logo-santa-branca.png" />
+  <link rel="apple-touch-icon" href="/assets/logo-santa-branca.png" />
+  <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    /* Mesma base visual das páginas legais (privacidade/termos). */
+    @font-face {
+      font-family: 'Newsreader';
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: swap;
+      src: url(/assets/fonts/newsreader-latin.woff2) format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url(/assets/fonts/inter-latin.woff2) format('woff2');
+    }
+    :root {
+      color-scheme: only light;
+      --color-forest-deep:   #1B4D44;
+      --color-forest-medium: #2A5F55;
+      --color-forest-darker: #143B34;
+      --color-papiro:        #F5F1E8;
+      --color-papiro-deep:   #E8E1D0;
+      --color-bronze:        #A88B5A;
+      --color-bronze-soft:   #C4A87A;
+      --color-bronze-text:   #7A5F2F;
+      --color-text-secondary: #4A5752;
+      --color-text-on-papiro: #1A2826;
+      --font-serif: 'Newsreader', 'Source Serif 4', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --container: 760px;
+      --gutter: 32px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      background: var(--color-papiro);
+      color: var(--color-forest-deep);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--color-bronze); outline-offset: 3px; border-radius: 2px; }
+
+    .page-header {
+      background: var(--color-forest-deep);
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(245,241,232,0.08);
+    }
+    .page-header__inner {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .page-header__logo {
+      height: 56px; width: auto; display: block;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: var(--container); margin: 0 auto;
+      padding: 80px var(--gutter) 96px;
+    }
+    .err-eyebrow {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--color-bronze-text);
+      display: block;
+    }
+    .err-rule { display: block; width: 32px; height: 2px; background: var(--color-bronze); border: 0; margin: 16px 0 20px; }
+    .err-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 500; line-height: 1.1; letter-spacing: -0.01em;
+      margin: 0 0 16px;
+      text-wrap: balance;
+    }
+    .err-text { margin: 0 0 32px; color: var(--color-text-secondary); max-width: 52ch; }
+    .err-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
+    .err-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 12px 24px;
+      border-radius: 4px; border: 1px solid var(--color-forest-deep);
+      font-size: 15px; font-weight: 500;
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .err-btn--primary { background: var(--color-forest-deep); color: var(--color-papiro); }
+    .err-btn--primary:hover { background: var(--color-forest-medium); }
+    .err-btn--ghost { color: var(--color-forest-deep); }
+    .err-btn--ghost:hover { background: var(--color-papiro-deep); }
+    .err-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .err-links-title {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin: 0 0 8px;
+    }
+    .err-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 24px; }
+    .err-links a {
+      display: inline-flex; align-items: center; min-height: 44px;
+      color: var(--color-text-on-papiro);
+      border-bottom: 1px solid transparent;
+    }
+    .err-links a:hover { color: var(--color-bronze-text); }
+
+    footer {
+      background: var(--color-forest-darker);
+      padding: 28px 0 24px;
+    }
+    footer .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+    footer p { color: rgba(245,241,232,0.7); font-size: 13px; margin: 0; }
+    footer strong { color: var(--color-papiro); }
+
+    @media (max-width: 600px) {
+      :root { --gutter: 20px; }
+      main { padding: 48px var(--gutter) 64px; }
+      .err-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header__inner">
+      <a href="/" aria-label="Santa Branca Seguros, página inicial">
+        <img src="/assets/logo-santa-branca.png" width="250" height="120" alt="Santa Branca Seguros" class="page-header__logo" />
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <span class="err-eyebrow">Erro 404</span>
+    <hr class="err-rule" />
+    <h1 class="err-title">Página não encontrada</h1>
+    <p class="err-text">O endereço que você abriu não existe ou mudou de lugar. Volte para o início ou fale com a gente pelo WhatsApp.</p>
+
+    <div class="err-actions">
+      <a class="err-btn err-btn--primary" href="/">Voltar para o início</a>
+      <a class="err-btn err-btn--ghost" href="https://wa.me/5531987263411?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.88 11.9L4 20l4.21-1.1a7.93 7.93 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.39-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 12.23-3.5 6.59 6.59 0 0 1-6.63 6.59Z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+
+    <p class="err-links-title">Talvez você procure</p>
+    <ul class="err-links">
+      <li><a href="/#seguros">Seguros</a></li>
+      <li><a href="/#processo">Como funciona</a></li>
+      <li><a href="/#localizacao">Onde estamos</a></li>
+      <li><a href="/#contato">Contato</a></li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>Santa Branca Seguros</strong> · Atuando desde 1994 · SUSEP nº 10.0179680</p>
+    </div>
+  </footer>
+</body>
+</html>
