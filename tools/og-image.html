@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- Fonte da imagem de compartilhamento (assets/og-image-v2.jpg). Gerar: node tools/render-og.mjs assets/og-image-vN.jpg -->
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Newsreader'; font-weight: 300 600; src: url(../assets/fonts/newsreader-latin.woff2) format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 400 700; src: url(../assets/fonts/inter-latin.woff2) format('woff2'); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 80% at 50% 45%, #22594F 0%, #1B4D44 55%, #143B34 100%);
+    color: #F5F1E8;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* moldura fina em bronze, como os filetes do site */
+  body::before {
+    content: ''; position: absolute; inset: 28px;
+    border: 1px solid rgba(196,168,122,0.38); border-radius: 4px;
+  }
+  .logo { width: 304px; height: 152px; display: block; margin-bottom: 34px; }
+  h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 76px; line-height: 1.06; letter-spacing: -0.02em; font-weight: 400;
+    font-feature-settings: "ss01", "kern" 1, "liga" 1;
+  }
+  h1 em { font-style: normal; font-weight: 600; color: #A3B8B3; display: block; }
+  .rule { width: 56px; height: 2px; background: #A88B5A; margin: 30px 0 24px; }
+  .sub {
+    font-family: 'Inter', sans-serif; font-size: 29px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #C4A87A;
+  }
+</style></head>
+<body>
+  <img class="logo" src="../assets/logo-header.png" alt="">
+  <h1>Seguro feito por gente <em>que conhece você pelo nome.</em></h1>
+  <div class="rule"></div>
+  <p class="sub">Desde 1994 · Atendimento em todo o Brasil</p>
+</body></html>

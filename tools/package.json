@@ -1,0 +1,13 @@
+{
+  "name": "santa-branca-tools",
+  "private": true,
+  "description": "Ferramentas locais de checagem (não vão para o site publicado).",
+  "scripts": {
+    "precheck": "node precheck.mjs",
+    "og": "node render-og.mjs"
+  },
+  "devDependencies": {
+    "html-validate": "^11.17.0",
+    "playwright-core": "^1.58.2"
+  }
+}

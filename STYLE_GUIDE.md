@@ -121,11 +121,11 @@ Itens que dependem de input/decisão do cliente antes do site ir pra produção:
 - [ ] **Foto profissional do escritório** (vertical 3:4, ≥2400px) — substituir `assets/photo-office.{webp,jpg}`. Hoje a imagem provisória aparece no hero e no Sobre.
 - [ ] **Foto da família/equipe** (P&B preferencial, três gerações) — para o Sobre, recolocar no lugar da foto provisória.
 - [ ] **Validar nº SUSEP** (atualmente `10.0179680` — confirmar se está completo com dígito verificador)
-- [ ] **Confirmar marcos da timeline** (datas e descrições de 1998, 2012, 2019; nomes Washington e Rodrigo já confirmados)
-- [ ] **Substituir 10 depoimentos fictícios** por reais — pedir autorização LGPD de cada cliente para uso de nome real
-- [ ] **Validar especialidades das 11 seguradoras** nos tooltips (descrições atuais são genéricas baseadas em conhecimento público)
+- [ ] **Confirmar marcos da timeline**: Rodrigo em 2001 confirmado; a data de 2012 aguarda o Rodrigo (ver CLAUDE.md, "Estado atual e pendências")
+- [x] **Depoimentos reais**: 13 avaliações do Google, texto literal (regras no CLAUDE.md)
+- [x] ~~Validar especialidades das seguradoras nos tooltips~~: não se aplica mais, o grid com tooltips foi substituído (Onda 5)
 - [x] **Imagem de compartilhamento 1200×630**: `assets/og-image-v2.jpg` (paleta verde, logo, frase do hero e "Desde 1994 · Atendimento em todo o Brasil")
-- [ ] **Logos oficiais SVG das 11 seguradoras** (substituir nomes em texto pelos logos com `filter: grayscale` no estado base)
+- [x] **Logos das 12 seguradoras** em `assets/seguradoras/` (SVG; SulAmérica e Tokio Marine em WebP/PNG)
 - [ ] **Revisar `privacidade.html` e `termos.html`** com advogado antes do go-live
 - [ ] **GA4_ID, GADS_ID, META_PIXEL_ID** — colar IDs reais (atualmente placeholders `__GA4_ID__` etc.)
 - [ ] **Token Google Search Console** — colar em `<meta name="google-site-verification">` (atualmente comentado no head)
