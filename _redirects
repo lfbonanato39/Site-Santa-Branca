@@ -1,0 +1,8 @@
+# Redirecionamentos da Cloudflare Pages.
+# URLs limpas (/privacidade.html → /privacidade) já são automáticas na Pages.
+# www.santabranca.com.br → santabranca.com.br NÃO fica aqui: o _redirects só
+# enxerga o caminho, não o domínio. Essa regra é feita no painel (Redirect Rules).
+
+# Endereço do site antigo (Apache/PHP)
+/index.php   /   301
+/index.html  /   301

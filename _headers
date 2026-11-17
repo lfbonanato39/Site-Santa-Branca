@@ -1,0 +1,32 @@
+# Cabeçalhos da Cloudflare Pages (equivalente ao "headers" do vercel.json).
+# Ao mudar algo aqui, mudar também no vercel.json enquanto a Vercel estiver no ar.
+
+# Segurança: todas as respostas
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+# Endereço *.pages.dev fora do Google (o oficial é santabranca.com.br).
+# As prévias de outras branches já recebem noindex automático da Cloudflare.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+# Arquivos com versão no nome (fontes, JS, imagens, vídeos): 1 ano
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Páginas: sempre conferir se há versão nova
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/privacidade
+  Cache-Control: public, max-age=0, must-revalidate
+/termos
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
