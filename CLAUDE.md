@@ -22,7 +22,7 @@ Repositório `github.com/lfbonanato39/Site-Santa-Branca`, publicado na **Cloudfl
 5. Informar ao usuário o hash do commit, o nome da branch e a URL do Preview.
 6. O usuário revisa o Preview. Só depois da aprovação dele a branch entra na `main` (merge e push, com o precheck rodado de novo antes desse push).
 
-A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) não atende mais o domínio, mas ainda publica a cada push até ser apagada (ver "Estado atual e pendências"). Até lá, ela roda o mesmo `cloudflare-build.sh` e publica só a `dist/` (`buildCommand` e `outputDirectory` no `vercel.json`), e o `vercel.json` repete os cabeçalhos do `_headers` (menos as regras de `*.pages.dev`, que só existem na Cloudflare).
+A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) não atende mais o domínio, mas ainda publica a cada push até ser apagada (ver "Estado atual e pendências"). Até lá, ela roda o mesmo `cloudflare-build.sh` e publica só a `dist/` (`buildCommand` e `outputDirectory` no `vercel.json`), e o `vercel.json` repete os cabeçalhos do `_headers` (menos a regra de noindex do `pages.dev`, que só existe na Cloudflare).
 
 `tools/` guarda as ferramentas locais (checagem, teste da Cloudflare, fonte da imagem de compartilhamento). Não vai para o site publicado.
 
@@ -95,7 +95,7 @@ Configuração do projeto no painel (Settings → Build):
 | Root directory | vazio |
 
 - **`cloudflare-build.sh`** copia para `dist/` só o que é público (lista fechada). Página ou arquivo público novo na raiz precisa entrar na lista; `assets/` vai inteira. `CLAUDE.md`, `STYLE_GUIDE.md`, `vercel.json` e o próprio script ficam fora do ar. Na Vercel (variável `VERCEL=1`), o script tira também `_headers` e `_redirects`, que lá seriam servidos como arquivos comuns.
-- **`_headers`**: cabeçalhos de segurança em todas as respostas, cache de 1 ano em `/assets/*`, `max-age=0` nas páginas, 1 h no sitemap e no robots, noindex no `*.pages.dev`. Página nova: incluir a regra de cache aqui e no `vercel.json`.
+- **`_headers`**: cabeçalhos de segurança em todas as respostas, cache de 1 ano em `/assets/*`, `max-age=0` nas páginas, 1 h no sitemap e no robots, noindex em `site-santa-branca.pages.dev`. Os outros endereços `*.site-santa-branca.pages.dev` (Previews de branch e o endereço com hash de cada deploy, inclusive os de produção) já recebem noindex automático da Cloudflare, por isso não têm regra aqui. Conferido em 17/11/2026. Página nova: incluir a regra de cache aqui e no `vercel.json`.
 - **`_redirects`**: `/index.php` e `/index.html` → `/` (301), endereços do site antigo.
 - **URLs limpas** são automáticas: `/privacidade.html` → 308 `/privacidade` (a Vercel faz igual com `cleanUrls: true`). Links internos sempre sem `.html`: `/`, `/privacidade`, `/termos`.
 - **`404.html`** é servida em qualquer endereço inexistente, então usa caminhos absolutos (`/assets/...`).
@@ -120,6 +120,12 @@ Zona `santabranca.com.br`, plano Free, no ar desde 17/11/2026. Mudou algo no pai
   - `bash tools/cf-test.sh https://santabranca.com.br`
   - `https://www.santabranca.com.br/termos?v=1` → 301 para `https://santabranca.com.br/termos?v=1`, e `http://` → `https://`
   - e-mail chegando e saindo (MX) e prévia do link no WhatsApp
+
+**Em aberto (decisão do usuário, levantado em 17/11/2026):**
+
+- **Ofuscação de e-mail** (Email Address Obfuscation, do Scrape Shield; vem ligada por padrão na zona): em produção, a Cloudflare troca os links `mailto:` da home, da Privacidade e dos Termos por `/cdn-cgi/l/email-protection#…`, mostra `[email protected]` no lugar do endereço e injeta o script `email-decode.min.js`. Sem JS, o e-mail não aparece. Isso não acontece nos Previews nem no precheck, só no domínio.
+- **Browser Cache TTL** no padrão da zona (4 h): por isso o `robots.txt` sai com `max-age=14400`, e não com o 3600 do `_headers`. O sitemap não é afetado. Para valer o `_headers`: Caching → Configuration → Browser Cache TTL → Respect Existing Headers.
+- **Content-Security-Policy:** o site não tem. Avaliação entregue ao usuário, sem decisão ainda. Não ativar o rascunho comentado no `<head>` do `index.html`: está desatualizado (tem `frame-src` para um iframe do Google que não existe e não cobre os endereços que o GA4 e o Google Ads usam).
 
 ---
 
