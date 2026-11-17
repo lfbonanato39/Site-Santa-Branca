@@ -28,6 +28,7 @@ build/
 .nuxt/
 .output/
 .vercel/
+.wrangler/
 
 # Logs
 *.log
