@@ -11,7 +11,7 @@ Repositório `github.com/lfbonanato39/Site-Santa-Branca`, branch `main`, publica
 - push na `main` = deploy de **Produção** (`https://<projeto>.pages.dev` e, depois da troca do domínio, https://santabranca.com.br);
 - push em qualquer outra branch = deploy de **Preview** (`https://<branch>.<projeto>.pages.dev`, com noindex automático).
 
-A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) continua no ar até o domínio virar. Enquanto isso, o `vercel.json` fica igual ao `_headers`.
+A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) continua no ar até o domínio virar. Enquanto isso, ela roda o mesmo `cloudflare-build.sh` e publica só a `dist/` (`buildCommand` e `outputDirectory` no `vercel.json`), e o `vercel.json` fica igual ao `_headers`.
 
 - **Após concluir cada modificação:** commit com mensagem descritiva em português + push para a `main`.
 - **Nunca fazer push com erro no console ou HTML inválido.** Antes do push:
@@ -33,7 +33,7 @@ Configuração do projeto no painel (Settings → Build):
 | Build output directory | `dist` |
 | Root directory | vazio |
 
-- **`cloudflare-build.sh`** copia para `dist/` só o que é público (lista fechada). Página ou arquivo público novo na raiz precisa entrar na lista; `assets/` vai inteira. `CLAUDE.md`, `STYLE_GUIDE.md`, `vercel.json` e o próprio script ficam fora do ar.
+- **`cloudflare-build.sh`** copia para `dist/` só o que é público (lista fechada). Página ou arquivo público novo na raiz precisa entrar na lista; `assets/` vai inteira. `CLAUDE.md`, `STYLE_GUIDE.md`, `vercel.json` e o próprio script ficam fora do ar. Na Vercel (variável `VERCEL=1`), o script tira também `_headers` e `_redirects`, que lá seriam servidos como arquivos comuns.
 - **`_headers`**: cabeçalhos de segurança em todas as respostas, cache de 1 ano em `/assets/*`, `max-age=0` nas páginas, 1 h no sitemap e no robots, noindex no `*.pages.dev`. Página nova: incluir a regra de cache aqui e no `vercel.json`.
 - **`_redirects`**: `/index.php` e `/index.html` → `/` (301), endereços do site antigo.
 - **URLs limpas** são automáticas: `/privacidade.html` → 308 `/privacidade` (a Vercel faz igual com `cleanUrls: true`). Links internos sempre sem `.html`: `/`, `/privacidade`, `/termos`.
