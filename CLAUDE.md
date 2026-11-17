@@ -81,7 +81,7 @@ Todos abrem em nova aba (`target="_blank" rel="noopener noreferrer"`).
 
 ## Imagem de compartilhamento (Open Graph)
 
-`assets/og-image-v2.jpg`, 1200×630, JPEG de ~60 KB (WhatsApp ignora imagens grandes demais: manter abaixo de 300 KB). Usada em `og:image`, `twitter:image` e no `image` dos dados estruturados de `index.html`, com `og:image:alt` e `twitter:image:alt`.
+`assets/og-image-v2.jpg`, 1200×630, JPEG de ~70 KB (WhatsApp ignora imagens grandes demais: manter abaixo de 300 KB). Usada em `og:image`, `twitter:image` e no `image` dos dados estruturados de `index.html`, com `og:image:alt` e `twitter:image:alt`.
 
 - Ao refazer: salvar com **nome novo** (`og-image-v3.jpg`…), porque `/assets/` tem cache `immutable` de 1 ano, e trocar os três lugares.
 - WhatsApp e Facebook guardam a prévia do link por dias: depois da troca, forçar nova leitura no Depurador de Compartilhamento do Facebook (developers.facebook.com/tools/debug).
