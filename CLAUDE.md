@@ -48,7 +48,6 @@ Próximos passos, nesta ordem:
 
 **Outras pendências:**
 
-- A `description` dos dados estruturados (JSON-LD) ainda tem o texto antigo. Foi oferecido alinhar com a meta description nova; sem resposta ainda.
 - Itens que dependem do cliente: "TODOs pré-go-live" no STYLE_GUIDE.md (fotos, SUSEP, IDs de GA4/Google Ads/Meta Pixel, Search Console, revisão jurídica).
 
 **Decisões já tomadas:**
@@ -64,7 +63,7 @@ Próximos passos, nesta ordem:
 - Reescrita não acrescenta informação nova (cobertura, prazo, número, promessa). Na dúvida, perguntar.
 - Alcance: sede em Belo Horizonte, clientes em todo o Brasil. Não restringir a Minas Gerais.
 - Números: "+1.000 Clientes atendidos" (não "famílias") e 12 seguradoras. Mudou um número, mudar em todos os lugares (textos, Termos, Privacidade, meta description).
-- Título e descrição (`<title>`, meta description e as versões `og:` e `twitter:`): "Santa Branca Seguros | Corretora familiar desde 1994" e "Corretora familiar desde 1994, com clientes em todo o Brasil. Seguro auto, residencial, vida e empresarial com 12 seguradoras e atendimento humano." Manter até ~60 e ~160 caracteres.
+- Título e descrição (`<title>`, meta description, as versões `og:` e `twitter:` e, só a descrição, o `description` dos dados estruturados): "Santa Branca Seguros | Corretora familiar desde 1994" e "Corretora familiar desde 1994, com clientes em todo o Brasil. Seguro auto, residencial, vida e empresarial com 12 seguradoras e atendimento humano." Manter até ~60 e ~160 caracteres.
 
 ## Dados oficiais da empresa
 
