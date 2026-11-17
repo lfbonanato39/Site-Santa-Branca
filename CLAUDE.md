@@ -6,20 +6,23 @@ Fonte da verdade visual e técnica: [STYLE_GUIDE.md](STYLE_GUIDE.md).
 
 ## Fluxo de trabalho
 
-Repositório `github.com/lfbonanato39/Site-Santa-Branca`, branch `main`, publicado na **Cloudflare Pages** (plano gratuito):
+Repositório `github.com/lfbonanato39/Site-Santa-Branca`, publicado na **Cloudflare Pages** (projeto `site-santa-branca`, plano gratuito):
 
-- push na `main` = deploy de **Produção** (`https://<projeto>.pages.dev` e, depois da troca do domínio, https://santabranca.com.br);
-- push em qualquer outra branch = deploy de **Preview** (`https://<branch>.<projeto>.pages.dev`, com noindex automático).
+- push na `main` = deploy de **Produção**: https://santabranca.com.br (e `https://site-santa-branca.pages.dev`, com noindex);
+- push em qualquer outra branch = deploy de **Preview**: `https://<branch>.site-santa-branca.pages.dev`, com noindex.
 
-A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) continua no ar até o domínio virar. Enquanto isso, ela roda o mesmo `cloudflare-build.sh` e publica só a `dist/` (`buildCommand` e `outputDirectory` no `vercel.json`), e o `vercel.json` fica igual ao `_headers`.
+**Nada vai direto para a `main`.** Desde a troca do domínio (17/11/2026), toda mudança segue estes passos:
 
-- **Após concluir cada modificação:** commit com mensagem descritiva em português + push para a `main`.
-- **Nunca fazer push com erro no console ou HTML inválido.** Antes do push, rodar `node tools/precheck.mjs` (na primeira vez, `cd tools && npm install`; usa o Chrome instalado). Precisa terminar com `RESULTADO: OK PARA PUSH`. Ele faz as duas checagens:
-  - HTML: `html-validate` (preset standard) em `index.html`, `privacidade.html`, `termos.html` e `404.html`, sem erros.
-  - Console: abre as quatro páginas num servidor local próprio, em 390 px e 1440 px, rola até o fim e exige zero erros, zero avisos e nenhuma requisição falhando.
-- **Ao final, informar** o hash do commit e a URL para testar.
+1. Criar uma branch de teste a partir da `main` atualizada (`git fetch` e `git checkout -b <branch> origin/main`). O nome vira o endereço do Preview: curto, em minúsculas e com hífens (ex.: `ajuste-rodape`). A Cloudflare troca outros caracteres por hífen e corta o nome em 28 caracteres.
+2. Fazer a mudança e o commit, com mensagem descritiva em português.
+3. Rodar `node tools/precheck.mjs` (na primeira vez, `cd tools && npm install`; usa o Chrome instalado). Precisa terminar com `RESULTADO: OK PARA PUSH`. **Nunca fazer push, em nenhuma branch, com erro no console ou HTML inválido.** Ele faz as duas checagens:
+   - HTML: `html-validate` (preset standard) em `index.html`, `privacidade.html`, `termos.html` e `404.html`, sem erros.
+   - Console: abre as quatro páginas num servidor local próprio, em 390 px e 1440 px, rola até o fim e exige zero erros, zero avisos e nenhuma requisição falhando.
+4. Push da branch de teste.
+5. Informar ao usuário o hash do commit, o nome da branch e a URL do Preview.
+6. O usuário revisa o Preview. Só depois da aprovação dele a branch entra na `main` (merge e push, com o precheck rodado de novo antes desse push).
 
-> **Nota:** quando o domínio santabranca.com.br apontar para a Cloudflare Pages, essa regra muda: push em uma branch de teste (deploy de Preview) + revisão antes de ir para a `main`.
+A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) não atende mais o domínio, mas ainda publica a cada push até ser apagada (ver "Estado atual e pendências"). Até lá, ela roda o mesmo `cloudflare-build.sh` e publica só a `dist/` (`buildCommand` e `outputDirectory` no `vercel.json`), e o `vercel.json` repete os cabeçalhos do `_headers` (menos as regras de `*.pages.dev`, que só existem na Cloudflare).
 
 `tools/` guarda as ferramentas locais (checagem, teste da Cloudflare, fonte da imagem de compartilhamento). Não vai para o site publicado.
 
@@ -34,7 +37,14 @@ Site feito pela agência Foco 9 para a Santa Branca Seguros. O **Rodrigo** (Sant
 - **Data de 2012 na timeline.** A entrada do Rodrigo em 2001 já está confirmada.
 - **Card Seguro de Vida**: voltou ao texto anterior, sem citar "invalidez e doenças graves", até ele confirmar as coberturas.
 
-**Hospedagem:** tudo pronto para a Cloudflare Pages, mas o domínio ainda aponta para o site antigo (Apache/PHP, hospedagem da Task). Não desligar nada na Vercel até a troca. Passo a passo em "Troca do domínio".
+**Hospedagem:** desde 17/11/2026 (por volta das 19h40), https://santabranca.com.br está no ar pela Cloudflare Pages. Configuração em "Cloudflare (configuração atual)". Conferido depois da troca: home 200, www e http redirecionando, `/index.php` → `/`, 404 com noindex, canonical e imagem de compartilhamento certos, HSTS presente, sem X-Robots-Tag no domínio principal, e-mail funcionando e prévia do WhatsApp ok.
+
+Próximos passos, nesta ordem:
+
+1. **Vercel:** continua publicando, mas será apagada a partir de 01/12/2026. Só apagar quando o usuário avisar.
+2. **Cópia do site antigo:** depois que a Vercel for apagada, baixar pelo painel da Task a cópia do site antigo (Apache/PHP).
+3. **Task:** em seguida, o Rodrigo cancela os dois planos da Task.
+4. **DNS:** depois do cancelamento, apagar na Cloudflare os CNAMEs da Task e tirar o include da Task do SPF (ver "Cloudflare (configuração atual)").
 
 **Outras pendências:**
 
@@ -43,7 +53,7 @@ Site feito pela agência Foco 9 para a Santa Branca Seguros. O **Rodrigo** (Sant
 
 **Decisões já tomadas:**
 
-- HSTS com `includeSubDomains; preload` fica. Os subdomínios existentes (mail, smtp, imap, pop, webmail, stat) são da hospedagem antiga e não são usados no navegador; o e-mail é Google.
+- HSTS com `includeSubDomains; preload` fica, e vem só do `_headers`: o HSTS do painel da Cloudflare fica desligado. Os CNAMEs que sobraram da Task (imap, mail, pop, pop3, smtp, webmail) não são usados no navegador; o e-mail é Google.
 - URLs limpas nas duas hospedagens (`/privacidade`, `/termos`) e domínio oficial sem www.
 
 ## Textos (regras do cliente)
@@ -90,23 +100,27 @@ Configuração do projeto no painel (Settings → Build):
 - **`_redirects`**: `/index.php` e `/index.html` → `/` (301), endereços do site antigo.
 - **URLs limpas** são automáticas: `/privacidade.html` → 308 `/privacidade` (a Vercel faz igual com `cleanUrls: true`). Links internos sempre sem `.html`: `/`, `/privacidade`, `/termos`.
 - **`404.html`** é servida em qualquer endereço inexistente, então usa caminhos absolutos (`/assets/...`).
-- **www → sem www** não cabe no `_redirects` (ele só enxerga o caminho): é uma Redirect Rule no painel da zona santabranca.com.br. Domínio oficial, sem www: `https://santabranca.com.br` em canonical, sitemap, robots, Open Graph e dados estruturados.
+- **www → sem www** não cabe no `_redirects` (ele só enxerga o caminho): é uma Redirect Rule no painel da zona (ver "Cloudflare (configuração atual)"). Domínio oficial, sem www: `https://santabranca.com.br` em canonical, sitemap, robots, Open Graph e dados estruturados.
 - **Teste local fiel à Cloudflare:** `sh cloudflare-build.sh && npx wrangler@4 pages dev dist` (http://localhost:8788) e, em outro terminal, `bash tools/cf-test.sh` (tabela de status, redirecionamentos, cache, cabeçalhos e 404). O `python -m http.server` não faz URLs limpas nem lê `_headers`/`_redirects`: nele, `/privacidade` e `/termos` dão 404.
+- **Teste de um endereço publicado:** `bash tools/cf-test.sh https://santabranca.com.br` (produção) ou `bash tools/cf-test.sh https://<branch>.site-santa-branca.pages.dev` (Preview: a lista de cabeçalhos tem que mostrar `x-robots-tag: noindex`).
 
-## Troca do domínio (passo a passo)
+## Cloudflare (configuração atual)
 
-1. Conectar o repositório: Workers & Pages → Create → aba **Pages** → Connect to Git → `lfbonanato39/Site-Santa-Branca`, com os campos da tabela acima. Nome sugerido do projeto: `site-santa-branca` (vira `site-santa-branca.pages.dev`).
-2. Add a domain → `santabranca.com.br` → plano Free. Antes de trocar os nameservers no Registro.br, conferir se os registros MX e TXT do Google (e-mail) foram importados.
-3. Projeto Pages → Custom domains → `santabranca.com.br`.
-4. DNS → registro CNAME `www` → `santabranca.com.br`, Proxied (nuvem laranja).
-5. Rules → Redirect Rules: Hostname equals `www.santabranca.com.br` → URL redirect, tipo Dynamic, `concat("https://santabranca.com.br", http.request.uri.path)`, 301, Preserve query string ligado.
-6. SSL/TLS → Edge Certificates → Always Use HTTPS ligado.
-7. Conferir:
-   - `bash tools/cf-test.sh https://santabranca.com.br`
-   - `https://www.santabranca.com.br/termos` → 301 para `https://santabranca.com.br/termos`
-   - prévia do link no Hey Meta (heymeta.com) sem editar nada, e nova leitura no Depurador de Compartilhamento do Facebook
-   - PageSpeed no celular (meta na seção Performance)
-8. A partir daí vale a regra de branch de teste + revisão antes da `main`. Desligar a Vercel só quando o usuário decidir.
+Zona `santabranca.com.br`, plano Free, no ar desde 17/11/2026. Mudou algo no painel, atualizar aqui.
+
+- **Nameservers** (definidos no Registro.br): `ethan.ns.cloudflare.com` e `mallory.ns.cloudflare.com`.
+- **DNS:**
+  - `@` (santabranca.com.br): CNAME para `site-santa-branca.pages.dev`, Proxied. É o custom domain do projeto Pages.
+  - `www`: CNAME para `santabranca.com.br`, Proxied. Só existe para o redirecionamento abaixo.
+  - MX do Google (e-mail): intactos. Não mexer.
+  - CNAMEs da Task (imap, mail, pop, pop3, smtp, webmail) e o include da Task no SPF: ficam até o cancelamento da Task. Depois, apagar.
+  - O CNAME `ftp` foi apagado.
+- **Redirect Rule "www para o site principal":** `https://www.*` → `https://${1}`, 301, Preserve query string ligado. Ex.: `https://www.santabranca.com.br/termos?v=1` → `https://santabranca.com.br/termos?v=1`.
+- **SSL/TLS:** Always Use HTTPS e Automatic HTTPS Rewrites ligados. O HSTS vem do `_headers` (`max-age=63072000; includeSubDomains; preload`). **Não ligar o HSTS do painel.**
+- **Conferir depois de mexer no painel ou no `_headers`:**
+  - `bash tools/cf-test.sh https://santabranca.com.br`
+  - `https://www.santabranca.com.br/termos?v=1` → 301 para `https://santabranca.com.br/termos?v=1`, e `http://` → `https://`
+  - e-mail chegando e saindo (MX) e prévia do link no WhatsApp
 
 ---
 
@@ -152,8 +166,8 @@ Todos abrem em nova aba (`target="_blank" rel="noopener noreferrer"`).
 
 - Ao refazer: salvar com **nome novo** (`og-image-v3.jpg`…), porque `/assets/` tem cache `immutable` de 1 ano, e trocar os três lugares.
 - Fonte da imagem: `tools/og-image.html` (fontes, cores e logo do site). Gerar: `node tools/render-og.mjs assets/og-image-v3.jpg`. Conferir a leitura no tamanho da prévia do WhatsApp (~330 px de largura): textos menores que ~29 px na imagem somem.
-- Validar com o Hey Meta (heymeta.com, aba WhatsApp). Antes da troca do domínio a imagem dá 404 lá, porque o endereço aponta para santabranca.com.br. Para simular, trocar no próprio validador o campo da imagem pela cópia em `site-santa-branca.vercel.app`.
-- WhatsApp e Facebook guardam a prévia do link por dias: depois da troca, forçar nova leitura no Depurador de Compartilhamento do Facebook (developers.facebook.com/tools/debug).
+- Validar com o Hey Meta (heymeta.com, aba WhatsApp). Enquanto a imagem nova está só no Preview, o endereço de `og:image` (santabranca.com.br) dá 404 lá. Para simular, trocar no próprio validador o campo da imagem pela cópia em `https://<branch>.site-santa-branca.pages.dev/assets/...`.
+- WhatsApp e Facebook guardam a prévia do link por dias: depois que a imagem nova (ou um título ou descrição novos) entrar na `main`, forçar nova leitura no Depurador de Compartilhamento do Facebook (developers.facebook.com/tools/debug).
 
 ## Depoimentos (avaliações do Google)
 
