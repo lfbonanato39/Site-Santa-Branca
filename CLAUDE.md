@@ -6,15 +6,40 @@ Fonte da verdade visual e técnica: [STYLE_GUIDE.md](STYLE_GUIDE.md).
 
 ## Fluxo de trabalho
 
-Repositório `github.com/lfbonanato39/Site-Santa-Branca`, branch `main`, ligada ao projeto Vercel `site-santa-branca` (todo push na `main` vira deploy de Produção em https://site-santa-branca.vercel.app).
+Repositório `github.com/lfbonanato39/Site-Santa-Branca`, branch `main`, publicado na **Cloudflare Pages** (plano gratuito):
+
+- push na `main` = deploy de **Produção** (`https://<projeto>.pages.dev` e, depois da troca do domínio, https://santabranca.com.br);
+- push em qualquer outra branch = deploy de **Preview** (`https://<branch>.<projeto>.pages.dev`, com noindex automático).
+
+A Vercel (projeto `site-santa-branca`, https://site-santa-branca.vercel.app) continua no ar até o domínio virar. Enquanto isso, o `vercel.json` fica igual ao `_headers`.
 
 - **Após concluir cada modificação:** commit com mensagem descritiva em português + push para a `main`.
 - **Nunca fazer push com erro no console ou HTML inválido.** Antes do push:
-  - HTML: `npx html-validate@11 --preset standard index.html privacidade.html termos.html` precisa terminar sem erros.
-  - Console: abrir as três páginas num servidor local (`python -m http.server 8080`), rolar até o fim e confirmar zero erros e zero avisos.
+  - HTML: `npx html-validate@11 --preset standard index.html privacidade.html termos.html 404.html` precisa terminar sem erros.
+  - Console: abrir as quatro páginas num servidor local (`python -m http.server 8080`), rolar até o fim e confirmar zero erros e zero avisos.
 - **Ao final, informar** o hash do commit e a URL para testar.
 
-> **Nota:** quando o domínio santabranca.com.br apontar para a Vercel, essa regra muda: push em uma branch de teste (deploy de Preview) + revisão antes de ir para a `main`.
+> **Nota:** quando o domínio santabranca.com.br apontar para a Cloudflare Pages, essa regra muda: push em uma branch de teste (deploy de Preview) + revisão antes de ir para a `main`.
+
+## Deploy (Cloudflare Pages)
+
+Configuração do projeto no painel (Settings → Build):
+
+| Campo | Valor |
+|---|---|
+| Production branch | `main` |
+| Framework preset | `None` |
+| Build command | `sh cloudflare-build.sh` |
+| Build output directory | `dist` |
+| Root directory | vazio |
+
+- **`cloudflare-build.sh`** copia para `dist/` só o que é público (lista fechada). Página ou arquivo público novo na raiz precisa entrar na lista; `assets/` vai inteira. `CLAUDE.md`, `STYLE_GUIDE.md`, `vercel.json` e o próprio script ficam fora do ar.
+- **`_headers`**: cabeçalhos de segurança em todas as respostas, cache de 1 ano em `/assets/*`, `max-age=0` nas páginas, 1 h no sitemap e no robots, noindex no `*.pages.dev`. Página nova: incluir a regra de cache aqui e no `vercel.json`.
+- **`_redirects`**: `/index.php` e `/index.html` → `/` (301), endereços do site antigo.
+- **URLs limpas** são automáticas: `/privacidade.html` → 308 `/privacidade` (a Vercel faz igual com `cleanUrls: true`). Links internos sempre sem `.html`: `/`, `/privacidade`, `/termos`.
+- **`404.html`** é servida em qualquer endereço inexistente, então usa caminhos absolutos (`/assets/...`).
+- **www → sem www** não cabe no `_redirects` (ele só enxerga o caminho): é uma Redirect Rule no painel da zona santabranca.com.br. Domínio oficial, sem www: `https://santabranca.com.br` em canonical, sitemap, robots, Open Graph e dados estruturados.
+- **Teste local fiel à Cloudflare:** `sh cloudflare-build.sh && npx wrangler@4 pages dev dist` (http://localhost:8788). O `python -m http.server` não faz URLs limpas nem lê `_headers`/`_redirects`: nele, `/privacidade` e `/termos` dão 404.
 
 ---
 
@@ -70,7 +95,7 @@ Meta no celular: PageSpeed Performance ≥ 90, LCP < 2,5 s, página < 1,5 MB. Me
 
 - **Nada fica invisível esperando JS.** O hero (texto = LCP) aparece no primeiro quadro; com `html.js-on` ele nasce deslocado e o GSAP anima só o `y`. Títulos `[data-split-lines]`, a cortina do Sobre e o loader só se escondem com `.js-on`. Sem JS o site fica 100% legível.
 - **Loader:** só no desktop, 300 ms + 300 ms de fade, controlado por script inline logo após `#sb-loader`.
-- **Bibliotecas JS:** GSAP 3.12.5, ScrollTrigger 3.12.5 e Lenis 1.1.20 em `assets/js/vendor/`, com a versão no nome do arquivo (cache `immutable` de 1 ano pela regra `/assets/` do `vercel.json`). Nenhuma CDN. Ao atualizar, baixar o arquivo do npm, conferir o hash e trocar o nome.
+- **Bibliotecas JS:** GSAP 3.12.5, ScrollTrigger 3.12.5 e Lenis 1.1.20 em `assets/js/vendor/`, com a versão no nome do arquivo (cache `immutable` de 1 ano pela regra `/assets/*` do `_headers` e do `vercel.json`). Nenhuma CDN. Ao atualizar, baixar o arquivo do npm, conferir o hash e trocar o nome.
 - **Fontes:** `assets/fonts/` (woff2 variável, só latin); preload só da Newsreader. Sem Google Fonts.
 - **Ícones:** Phosphor Light em `<symbol>` no sprite do topo do `<body>` (`<i class="ph"><svg><use href="#ph-nome"/></svg></i>`). Ícone novo: copiar o SVG de `@phosphor-icons/core/assets/light/<nome>-light.svg` para o sprite.
 - **Vídeo do hero:** fontes entram depois do `load`; celular usa `hero-bg-mobile.{webm,mp4}` (≤ 800 KB); Save-Data ou 2g/3g fica só o pôster WebP.
