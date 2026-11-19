@@ -1,5 +1,5 @@
 // Gera a imagem de compartilhamento a partir de tools/og-image.html (1200×630, JPEG).
-// Uso (na raiz do repositório): node tools/render-og.mjs assets/og-image-v3.jpg
+// Uso (na raiz do repositório): node tools/render-og.mjs assets/og-image-v4.jpg
 // Arquivo novo = nome novo (cache de 1 ano em /assets/). Depois trocar og:image,
 // twitter:image e o "image" dos dados estruturados em index.html. Manter < 300 KB.
 import { chromium } from 'playwright-core';

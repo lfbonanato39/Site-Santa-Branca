@@ -16,7 +16,7 @@ row() { # caminho -> status, location, cache-control
 printf '%-40s %s  %-14s %s\n' CAMINHO ST LOCATION CACHE-CONTROL
 for p in / /index.html /index.php /privacidade /privacidade.html /privacidade/ /termos /termos.html \
          /404 /nao-existe /pasta/que/nao/existe /CLAUDE.md /vercel.json /cloudflare-build.sh /_headers /_redirects \
-         /sitemap.xml /robots.txt /assets/fonts/newsreader-latin.woff2 /assets/js/vendor/; do
+         /sitemap.xml /robots.txt /favicon.ico /site.webmanifest /assets/logo.svg /assets/fonts/newsreader-latin.woff2 /assets/js/vendor/; do
   row "$p"
 done
 echo; echo '--- cabeçalhos de segurança em / ---'

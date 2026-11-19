@@ -9,7 +9,7 @@ set -eu
 rm -rf dist
 mkdir dist
 cp -R index.html privacidade.html termos.html 404.html \
-      robots.txt sitemap.xml _headers _redirects \
+      robots.txt sitemap.xml favicon.ico site.webmanifest _headers _redirects \
       assets dist/
 
 # Na Vercel, _headers e _redirects seriam servidos como arquivos comuns

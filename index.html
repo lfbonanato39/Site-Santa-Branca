@@ -22,7 +22,7 @@
   <meta property="og:title" content="Santa Branca Seguros | Corretora familiar desde 1994" />
   <meta property="og:description" content="Corretora familiar desde 1994, com clientes em todo o Brasil. Seguro auto, residencial, vida e empresarial com 12 seguradoras e atendimento humano." />
   <meta property="og:url" content="https://santabranca.com.br/" />
-  <meta property="og:image" content="https://santabranca.com.br/assets/og-image-v2.jpg" />
+  <meta property="og:image" content="https://santabranca.com.br/assets/og-image-v3.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -34,15 +34,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Santa Branca Seguros | Corretora familiar desde 1994" />
   <meta name="twitter:description" content="Corretora familiar desde 1994, com clientes em todo o Brasil. Seguro auto, residencial, vida e empresarial com 12 seguradoras e atendimento humano." />
-  <meta name="twitter:image" content="https://santabranca.com.br/assets/og-image-v2.jpg" />
+  <meta name="twitter:image" content="https://santabranca.com.br/assets/og-image-v3.jpg" />
   <meta name="twitter:image:alt" content="Logo da Santa Branca Seguros sobre fundo verde, com a frase: Seguro feito por gente que conhece você pelo nome. Desde 1994, atendimento em todo o Brasil." />
 
   <!-- Google Search Console (cole o conteúdo de verificação aqui quando tiver) -->
   <!-- <meta name="google-site-verification" content="COLE_TOKEN_AQUI" /> -->
 
-  <!-- Favicon (gerar arquivos a partir do logo e colocar em /assets/) -->
-  <link rel="icon" type="image/png" href="assets/logo-santa-branca.png" />
-  <link rel="apple-touch-icon" href="assets/logo-santa-branca.png" />
+  <!-- Ícones do logo oficial (monograma). sizes="32x32" no .ico faz o Chrome
+       preferir o SVG. Manifest com os PNGs 192 e 512 (Android). -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Critical CSS inline: cor de fundo certa antes do CSS principal carregar.
        A página nunca fica invisível esperando JS (sem fade-in no <body>). -->
@@ -109,8 +112,8 @@
     "url": "https://santabranca.com.br/",
     "telephone": ["+55-31-3309-5558", "+55-31-98726-3411"],
     "email": "santabranca@santabranca.com.br",
-    "image": "https://santabranca.com.br/assets/og-image-v2.jpg",
-    "logo": "https://santabranca.com.br/assets/logo-santa-branca.png",
+    "image": "https://santabranca.com.br/assets/og-image-v3.jpg",
+    "logo": "https://santabranca.com.br/assets/logo.svg",
     "priceRange": "$$",
     "foundingDate": "1994",
     "founder": {
@@ -310,7 +313,7 @@
 
       --container: 1200px;
       --gutter: 32px;
-      --header-h: 84px;
+      --header-h: 96px;                 /* logo oficial com 84 px de altura (mínimo do guia: 140 px de largura) */
 
       /* Easings — cinematic */
       --ease:       cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -478,8 +481,8 @@
     }
     .sb-header.is-scrolled,
     html.sb-scrolled-init .sb-header {
-      /* Creme sólido = mesma cor da placa da logo (assets/logo-header), que
-         assim fica invisível no header rolado. Era 92% de opacidade. */
+      /* Creme sólido = mesmo creme que está dentro de assets/logo-cabecalho.svg,
+         que assim fica invisível no header rolado. Era 92% de opacidade. */
       background: var(--color-papiro);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -489,27 +492,29 @@
       display: flex; align-items: center; justify-content: space-between;
       height: var(--header-h); gap: 16px;
     }
-    /* A placa creme (fundo, padding 8/14 e raio 4px) está dentro de
-       assets/logo-header.{webp,png}; aqui fica só a sombra do topo. */
+    /* Logo oficial, sem placa. No topo o header é transparente sobre o hero
+       escuro: versão para fundo escuro. Rolado, o fundo fica creme: versão
+       principal (assets/logo-cabecalho.svg = logo.svg com o creme dentro da
+       imagem, para o modo escuro forçado do Samsung, que escurece o fundo do
+       header mas não as imagens). As duas trocam com fade no mesmo tempo do fundo.
+       Tamanho mínimo do guia da marca: 140 px de largura visível. O SVG tem
+       margem embutida (~6% da altura de cada lado), compensada no margin-left
+       para o logo alinhar com o texto do hero. */
     .sb-header__brand {
+      --logo-h: 84px;
+      position: relative;
       display: flex; align-items: center; text-decoration: none;
-      border-radius: var(--r-md);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-      transition: box-shadow var(--dur) var(--ease);
-    }
-    .sb-header.is-scrolled .sb-header__brand,
-    html.sb-scrolled-init .sb-header__brand {
-      box-shadow: none;
-      margin-left: calc(-14px * 44 / 48);              /* compensa o padding da placa: logo no mesmo x de antes */
+      margin-left: calc(var(--logo-h) * -0.061);
     }
     .sb-header__logo {
-      height: 64px; width: auto; max-width: none; display: block;   /* logo 48px + padding 8px */
-      transition: height var(--dur-slow) var(--ease), opacity var(--dur) var(--ease);
+      height: var(--logo-h); width: auto; max-width: none; display: block;
+      transition: opacity var(--dur) var(--ease);
     }
-    .sb-header.is-scrolled .sb-header__logo,
-    html.sb-scrolled-init .sb-header__logo {
-      height: calc(44px * 64 / 48);                    /* logo continua com 44px */
-    }
+    .sb-header__logo--claro { position: absolute; left: 0; top: 0; opacity: 0; }
+    .sb-header.is-scrolled .sb-header__logo--escuro,
+    html.sb-scrolled-init .sb-header__logo--escuro { opacity: 0; }
+    .sb-header.is-scrolled .sb-header__logo--claro,
+    html.sb-scrolled-init .sb-header__logo--claro { opacity: 1; }
     .sb-header__nav { display: flex; gap: 36px; align-items: center; }
     .sb-nav-link {
       font-size: var(--fs-sm); font-weight: 500;
@@ -561,13 +566,9 @@
       visibility: visible;
       transition: transform var(--dur-slow) var(--ease), visibility 0s linear 0s;
     }
-    .sb-mobile__top { display:flex; justify-content: space-between; align-items: center; height: 60px; }
-    .sb-mobile__logo {
-      height: 72px; width: auto; max-width: 65%;
-      object-fit: contain;
-      filter: brightness(0) invert(1);
-      opacity: 0.95;
-    }
+    .sb-mobile__top { display:flex; justify-content: space-between; align-items: center; min-height: 60px; }
+    /* Menu com fundo verde: versão para fundo escuro, no tamanho mínimo do guia (140 px de largura visível) */
+    .sb-mobile__logo { height: 82px; width: auto; display: block; margin-left: -5px; }
     .sb-mobile__close { background: transparent; border: 0; color: var(--cream); width: 44px; height: 44px; }
     .sb-mobile__nav {
       display: flex; flex-direction: column; gap: 4px;
@@ -595,12 +596,10 @@
       transition: opacity 300ms var(--ease-out), visibility 300ms;
     }
     .sb-loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+    /* Versão para fundo escuro do logo oficial, sem filtro nem sombra (o guia da marca não permite) */
     .sb-loader__mark {
-      width: 220px; height: auto; max-height: 240px;
-      object-fit: contain;
+      width: 240px; height: auto;
       animation: loaderFade 0.3s var(--ease-out) forwards;
-      filter: brightness(0) invert(1) drop-shadow(0 6px 20px rgba(0,0,0,0.35));
-      opacity: 0.95;
     }
     @keyframes loaderFade {
       0% { opacity: 0; transform: scale(0.92); }
@@ -3215,13 +3214,12 @@
       display: flex; align-items: center; gap: 16px;
       margin-bottom: 20px;
     }
-    /* Logo no footer (sobre fundo navy escuro) */
+    /* Logo no footer (fundo verde escuro): versão para fundo escuro, sem filtro.
+       margin-left compensa a margem embutida no SVG (alinha com o texto abaixo). */
     .sb-footer__logo {
-      height: 96px; width: auto; max-width: 100%;
-      object-fit: contain;
-      flex-shrink: 0;
-      filter: brightness(0) invert(1);
-      opacity: 0.92;
+      width: 220px; height: auto; max-width: 100%;
+      display: block; flex-shrink: 0;
+      margin-left: -7px;
     }
     /* Footer com mais respiro e estrutura.
        Onda A: colunas mais balanceadas para reduzir espaço vazio entre
@@ -3283,8 +3281,9 @@
         --sp-16: 56px;
         --sp-12: 40px;
         --gutter: 20px;
-        --header-h: 72px;
+        --header-h: 88px;
       }
+      .sb-header__brand { --logo-h: 82px; }   /* 140 px de largura visível: o mínimo do guia */
       .sb-header__nav { display: none; }
       .sb-header__cta { display: none; }
       .sb-burger { display: inline-flex; }
@@ -3388,10 +3387,10 @@
       }
       if (!window.matchMedia('(min-width: 768px)').matches ||
           window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
-      var img = new Image(250, 120);           /* logo só é baixada no desktop */
+      var img = new Image(240, 131);           /* logo só é baixada no desktop */
       img.className = 'sb-loader__mark';
       img.alt = '';
-      img.src = 'assets/logo-santa-branca.png';
+      img.src = 'assets/logo-fundo-escuro.svg';
       l.appendChild(img);
       setTimeout(done, 300);
     })();
@@ -3427,12 +3426,10 @@
   <header class="sb-header" id="site-header">
     <div class="container sb-header__inner">
       <a href="#" class="sb-header__brand" aria-label="Santa Branca Seguros, página inicial">
-        <!-- Logo com a placa creme e os cantos já embutidos na imagem: o modo
-             escuro do Samsung Internet escurecia o fundo creme feito em CSS. -->
-        <picture>
-          <source srcset="assets/logo-header.webp" type="image/webp" />
-          <img class="sb-header__logo" src="assets/logo-header.png" width="128" height="64" alt="Santa Branca Seguros" />
-        </picture>
+        <!-- Topo (hero escuro): versão para fundo escuro. Rolado (creme): versão
+             principal com o creme dentro da imagem (ver CSS .sb-header__brand). -->
+        <img class="sb-header__logo sb-header__logo--escuro" src="assets/logo-fundo-escuro.svg" width="154" height="84" alt="Santa Branca Seguros" />
+        <img class="sb-header__logo sb-header__logo--claro" src="assets/logo-cabecalho.svg" width="154" height="84" alt="" />
       </a>
       <nav class="sb-header__nav" aria-label="Navegação principal">
         <a class="sb-nav-link" href="#sobre">Sobre</a>
@@ -3454,7 +3451,7 @@
   <!-- Mobile drawer -->
   <div class="sb-mobile" id="mobile-menu" aria-hidden="true">
     <div class="sb-mobile__top">
-      <img src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" class="sb-mobile__logo" />
+      <img src="assets/logo-fundo-escuro.svg" width="150" height="82" alt="Santa Branca Seguros" class="sb-mobile__logo" loading="lazy" decoding="async" />
 
       <button class="sb-mobile__close" id="mobile-close" aria-label="Fechar menu">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
@@ -4366,7 +4363,7 @@
     <div class="sb-footer__top">
       <div class="sb-footer__col">
         <div class="sb-footer__brand">
-          <img class="sb-footer__logo" src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" />
+          <img class="sb-footer__logo" src="assets/logo-fundo-escuro.svg" width="220" height="120" alt="Santa Branca Seguros" loading="lazy" decoding="async" />
         </div>
         <p class="sb-footer__col-text">
           Corretora de seguros familiar desde 1994, com sede em Belo Horizonte e clientes em todo o Brasil. Cotação com 12 seguradoras parceiras.<br/><br/>

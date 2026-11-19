@@ -13,8 +13,10 @@
 
   <!-- Caminhos absolutos (/assets/...): esta página é servida em qualquer
        URL inexistente, inclusive em "subpastas" que não existem. -->
-  <link rel="icon" type="image/png" href="/assets/logo-santa-branca.png" />
-  <link rel="apple-touch-icon" href="/assets/logo-santa-branca.png" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <style>
@@ -68,7 +70,7 @@
 
     .page-header {
       background: var(--color-forest-deep);
-      padding: 28px 0;
+      padding: 20px 0;
       border-bottom: 1px solid rgba(245,241,232,0.08);
     }
     .page-header__inner {
@@ -76,10 +78,11 @@
       padding: 0 var(--gutter);
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
+    /* Fundo verde: versão para fundo escuro do logo oficial, sem filtro.
+       82 px de altura = 140 px de largura visível, o mínimo do guia da marca. */
     .page-header__logo {
-      height: 56px; width: auto; display: block;
-      filter: brightness(0) invert(1);
-      opacity: 0.95;
+      height: 82px; width: auto; display: block;
+      margin-left: -5px;           /* compensa a margem embutida no SVG */
     }
 
     main {
@@ -151,7 +154,7 @@
   <header class="page-header">
     <div class="page-header__inner">
       <a href="/" aria-label="Santa Branca Seguros, página inicial">
-        <img src="/assets/logo-santa-branca.png" width="250" height="120" alt="Santa Branca Seguros" class="page-header__logo" />
+        <img src="/assets/logo-fundo-escuro.svg" width="150" height="82" alt="Santa Branca Seguros" class="page-header__logo" />
       </a>
     </div>
   </header>

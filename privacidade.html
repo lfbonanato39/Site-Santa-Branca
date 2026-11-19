@@ -11,8 +11,10 @@
   <title>Política de Privacidade | Santa Branca Seguros</title>
   <meta name="description" content="Como a Santa Branca Seguros coleta, usa e protege seus dados pessoais. Política em conformidade com a LGPD (Lei 13.709/2018)." />
 
-  <link rel="icon" type="image/png" href="assets/logo-santa-branca.png" />
-  <link rel="apple-touch-icon" href="assets/logo-santa-branca.png" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
 
@@ -87,7 +89,7 @@
 
     .page-header {
       background: var(--ink); color: var(--cream);
-      padding: 28px 0;
+      padding: 20px 0;
       border-bottom: 1px solid rgba(245,241,232,0.08);
     }
     .page-header__inner {
@@ -101,11 +103,11 @@
       color: var(--cream); border: 0;
     }
     .page-header__brand:hover { opacity: 0.85; }
+    /* Fundo verde: versão para fundo escuro do logo oficial, sem filtro.
+       82 px de altura = 140 px de largura visível, o mínimo do guia da marca. */
     .page-header__logo {
-      height: 56px; width: auto; display: block;
-      object-fit: contain;
-      filter: brightness(0) invert(1);
-      opacity: 0.95;
+      height: 82px; width: auto; display: block;
+      margin-left: -5px;           /* compensa a margem embutida no SVG */
     }
     .page-header__back {
       font-size: 13px; font-weight: 500;
@@ -208,7 +210,7 @@
   <header class="page-header">
     <div class="page-header__inner">
       <a href="/" class="page-header__brand" aria-label="Santa Branca Seguros, voltar à página inicial">
-        <img src="assets/logo-santa-branca.png" alt="Santa Branca Seguros" class="page-header__logo" />
+        <img src="assets/logo-fundo-escuro.svg" width="150" height="82" alt="Santa Branca Seguros" class="page-header__logo" />
       </a>
       <a href="/" class="page-header__back">← Voltar ao site</a>
     </div>
