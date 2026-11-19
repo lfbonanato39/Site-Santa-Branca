@@ -124,7 +124,7 @@ Itens que dependem de input/decisão do cliente antes do site ir pra produção:
 - [ ] **Confirmar marcos da timeline**: Rodrigo em 2001 confirmado; a data de 2012 aguarda o Rodrigo (ver CLAUDE.md, "Estado atual e pendências")
 - [x] **Depoimentos reais**: 13 avaliações do Google, texto literal (regras no CLAUDE.md)
 - [x] ~~Validar especialidades das seguradoras nos tooltips~~: não se aplica mais, o grid com tooltips foi substituído (Onda 5)
-- [x] **Imagem de compartilhamento 1200×630**: `assets/og-image-v2.jpg` (paleta verde, logo, frase do hero e "Desde 1994 · Atendimento em todo o Brasil")
+- [x] **Imagem de compartilhamento 1200×630**: `assets/og-image-v3.jpg` (paleta verde, logo oficial, frase do hero e "Desde 1994 · Atendimento em todo o Brasil")
 - [x] **Logos das 12 seguradoras** em `assets/seguradoras/` (SVG; SulAmérica e Tokio Marine em WebP/PNG)
 - [ ] **Revisar `privacidade.html` e `termos.html`** com advogado antes do go-live
 - [ ] **GA4_ID, GADS_ID, META_PIXEL_ID** — colar IDs reais (atualmente placeholders `__GA4_ID__` etc.)

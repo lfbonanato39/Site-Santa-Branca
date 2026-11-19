@@ -165,12 +165,33 @@ Ao trocar um link, atualizar os dois lugares (card e contato) e esta tabela.
 
 Todos abrem em nova aba (`target="_blank" rel="noopener noreferrer"`).
 
+## Logo e ícones
+
+Logo oficial aprovado em 19/11/2026 (pacote "Santa Branca - Logo oficial", com o "Guia rápido do logo" em PDF). Os arquivos do pacote estão em `assets/` sem alteração:
+
+| Arquivo | Onde |
+|---|---|
+| `assets/logo-fundo-escuro.svg` | Fundo verde ou escuro: cabeçalho no topo (sobre o hero), menu do celular, loader, rodapé, cabeçalho de Privacidade, Termos e 404, imagem de compartilhamento |
+| `assets/logo.svg` | Fundo claro. É também o `logo` dos dados estruturados |
+| `assets/logo-cabecalho.svg` | Cabeçalho rolado (creme). É o `logo.svg` com o creme do site (`#F5F1E8`) dentro da imagem (ver "Modo escuro forçado") |
+| `favicon.ico` (raiz), `assets/favicon.svg`, `assets/apple-touch-icon.png` | `<head>` das quatro páginas |
+| `assets/icon-192.png`, `assets/icon-512.png` | `site.webmanifest` (raiz), criado junto com o logo |
+
+Regras do guia da marca:
+
+- Versão principal só em fundo claro. Em fundo verde ou escuro, `logo-fundo-escuro.svg`. Nunca filtro, sombra, contorno, opacidade ou troca de cor no logo.
+- Tamanho mínimo na tela: **140 px de largura visível** (monograma: 32 px). O SVG tem margem embutida de ~6% da altura de cada lado, então 140 px visíveis = 82 px de altura. Por isso o cabeçalho tem 96 px no desktop (logo com 84 px) e 88 px no celular (logo com 82 px), e o logo não encolhe ao rolar.
+- Respiro: em volta do logo, um espaço livre da altura das letras de SANTA BRANCA.
+- Logo novo no futuro: arquivos com **nome novo** (`/assets/` tem cache `immutable` de 1 ano) e trocar em todos os lugares da tabela.
+
+**Modo escuro forçado:** as páginas têm `color-scheme: only light`. O Chrome respeita (conferido em 19/11/2026 com o Auto Dark Mode ligado: nada muda). O Samsung Internet pode ignorar, segundo relatos de desenvolvedores, e escurece as cores de CSS, mas deixa as imagens como estão. Por isso o cabeçalho rolado usa `logo-cabecalho.svg`: em uso normal, o creme da imagem some no creme do cabeçalho; se o navegador escurecer o fundo do cabeçalho, o logo continua sobre creme e legível. Não trocar por `logo.svg` puro nem fazer esse fundo em CSS. Para refazer o arquivo: copiar o `logo.svg` e inserir, logo depois do `<title>`, `<rect x="-30.3" y="-473.82" width="1079.21" height="589.82" rx="29" fill="#F5F1E8"/>` (o mesmo retângulo do `viewBox`). Simulação usada no teste: Chrome com `--enable-features=WebContentsForceDark:image_behavior/none` e o `only light` retirado do HTML.
+
 ## Imagem de compartilhamento (Open Graph)
 
-`assets/og-image-v2.jpg`, 1200×630, JPEG de ~70 KB (WhatsApp ignora imagens grandes demais: manter abaixo de 300 KB). Usada em `og:image`, `twitter:image` e no `image` dos dados estruturados de `index.html`, com `og:image:alt` e `twitter:image:alt`.
+`assets/og-image-v3.jpg` (logo oficial desde 19/11/2026), 1200×630, JPEG de ~70 KB (WhatsApp ignora imagens grandes demais: manter abaixo de 300 KB). Usada em `og:image`, `twitter:image` e no `image` dos dados estruturados de `index.html`, com `og:image:alt` e `twitter:image:alt`.
 
-- Ao refazer: salvar com **nome novo** (`og-image-v3.jpg`…), porque `/assets/` tem cache `immutable` de 1 ano, e trocar os três lugares.
-- Fonte da imagem: `tools/og-image.html` (fontes, cores e logo do site). Gerar: `node tools/render-og.mjs assets/og-image-v3.jpg`. Conferir a leitura no tamanho da prévia do WhatsApp (~330 px de largura): textos menores que ~29 px na imagem somem.
+- Ao refazer: salvar com **nome novo** (`og-image-v4.jpg`…), porque `/assets/` tem cache `immutable` de 1 ano, e trocar os três lugares.
+- Fonte da imagem: `tools/og-image.html` (fontes, cores e logo do site). Gerar: `node tools/render-og.mjs assets/og-image-v4.jpg`. Conferir a leitura no tamanho da prévia do WhatsApp (~330 px de largura): textos menores que ~29 px na imagem somem.
 - Validar com o Hey Meta (heymeta.com, aba WhatsApp). Enquanto a imagem nova está só no Preview, o endereço de `og:image` (santabranca.com.br) dá 404 lá. Para simular, trocar no próprio validador o campo da imagem pela cópia em `https://<branch>.site-santa-branca.pages.dev/assets/...`.
 - WhatsApp e Facebook guardam a prévia do link por dias: depois que a imagem nova (ou um título ou descrição novos) entrar na `main`, forçar nova leitura no Depurador de Compartilhamento do Facebook (developers.facebook.com/tools/debug).
 
