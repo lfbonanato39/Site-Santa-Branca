@@ -116,6 +116,7 @@ Zona `santabranca.com.br`, plano Free, no ar desde 17/11/2026. Mudou algo no pai
   - O CNAME `ftp` foi apagado.
 - **Redirect Rule "www para o site principal":** `https://www.*` → `https://${1}`, 301, Preserve query string ligado. Ex.: `https://www.santabranca.com.br/termos?v=1` → `https://santabranca.com.br/termos?v=1`.
 - **SSL/TLS:** Always Use HTTPS e Automatic HTTPS Rewrites ligados. O HSTS vem do `_headers` (`max-age=63072000; includeSubDomains; preload`). **Não ligar o HSTS do painel.**
+- **Browser Cache TTL** (Caching → Configuration): Respect Existing Headers desde 20/11/2026, então o cache do navegador segue o `_headers`. Conferido em produção no mesmo dia: `robots.txt` com `max-age=3600` e `favicon.ico` com `max-age=0, must-revalidate`. No padrão da zona (4 h), os dois saíam com `max-age=14400`.
 - **Conferir depois de mexer no painel ou no `_headers`:**
   - `bash tools/cf-test.sh https://santabranca.com.br`
   - `https://www.santabranca.com.br/termos?v=1` → 301 para `https://santabranca.com.br/termos?v=1`, e `http://` → `https://`
@@ -124,7 +125,6 @@ Zona `santabranca.com.br`, plano Free, no ar desde 17/11/2026. Mudou algo no pai
 **Em aberto (decisão do usuário, levantado em 17/11/2026):**
 
 - **Ofuscação de e-mail** (Email Address Obfuscation, do Scrape Shield; vem ligada por padrão na zona): em produção, a Cloudflare troca os links `mailto:` da home, da Privacidade e dos Termos por `/cdn-cgi/l/email-protection#…`, mostra `[email protected]` no lugar do endereço e injeta o script `email-decode.min.js`. Sem JS, o e-mail não aparece. Isso não acontece nos Previews nem no precheck, só no domínio.
-- **Browser Cache TTL** no padrão da zona (4 h): por isso o `robots.txt` sai com `max-age=14400`, e não com o 3600 do `_headers`. O sitemap não é afetado. Para valer o `_headers`: Caching → Configuration → Browser Cache TTL → Respect Existing Headers.
 - **Content-Security-Policy:** o site não tem. Avaliação entregue ao usuário, sem decisão ainda. Não ativar o rascunho comentado no `<head>` do `index.html`: está desatualizado (tem `frame-src` para um iframe do Google que não existe e não cobre os endereços que o GA4 e o Google Ads usam).
 
 ---
